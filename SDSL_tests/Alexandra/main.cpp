@@ -28,24 +28,39 @@ bit_vector bitVectorCreator(int size){
     }
     return myCustomB;
 }
-/*try to create concatenation operator for sd_vector
- * We can't add an element at the end of a sd_vector directly, ex : sd_b[3] = 0
- * To add, we use a temporary bit_vector, it can be a problem because of size
- * It needs improvements
+/* Update of the function : 04/06
+ * New version of the concatenation operator
+ * Use of sd_vector_builder to create an sd_vector without a bit_vector
+ * No needs to count ones of sd_vector a and b because of rank operations
+ * Higher performances than previous version
 */
  sd_vector<> operator+(sd_vector<> const& a, sd_vector<> const& b){
-    int myCustomLen = a.size() + b.size();
-    bit_vector myCustomBitVec(myCustomLen,0);   //temporary bit_vector
+    int myCustomLen = a.size() + b.size();  //length of the future concatenate sd_vector
     int j(0);
+    int aLenForOnes = sd_vector<>::rank_1_type (&a)(a.size()); //count the number of ones in a
+    int bLenForOnes = sd_vector<>::rank_1_type (&b)(b.size()); //same with b
+    /* sd_vector_builder allows us to create a sd_vector without depending on a bit_vector
+     * It needs the len of the final sd_vector, and the number of ones in it
+     */
+    sd_vector_builder svb(myCustomLen, (aLenForOnes + bLenForOnes));
     for(int i = 0 ; i < myCustomLen ; i++){
         if(i >= a.size()){
-            myCustomBitVec[i] = b[j];
+            if(b[j] == 1){  //If the element is ones, we set the ith case to one
+                svb.set(i);
+            }
             j++;
         }else{
-            myCustomBitVec[i] = a[i];
+            if(a[i] == 1){
+                svb.set(i);
+            }
         }
     }
-    sd_vector<>myCustomSdVec(myCustomBitVec);   //final sd_vector we will return
+    cout << "svb study : " << endl;
+    sd_vector<>myCustomSdVec(svb);  //Creation of the final sd_vector thanks to the sd_vector_builder svb
+    for(int i = 0 ; i < myCustomSdVec.size() ; i++){
+        cout << myCustomSdVec[i] << " ";
+    }
+    cout << endl << "End of svb study" << endl;
     return myCustomSdVec;
 }
 
