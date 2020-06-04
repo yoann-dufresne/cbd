@@ -25,7 +25,7 @@ std::tuple<int, sd_vector<>> concatenate (const sd_vector<> &a, const sd_vector<
         if(a[i]) //==1
             s.set(i); //affect 1 to the indice in argument
     for(; i < len; i++)
-        if(b[i-b.size()])
+        if(b[i-a.size()])
             s.set(i);
     //creation of the sd_vector
     sd_vector<> concat(s);
