@@ -1,3 +1,0 @@
-/home/alexa/Bureau/sdslTest/ConwayBromageLib/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/alexa/Bureau/sdslTest/ConwayBromageLib/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/alexa/Bureau/sdslTest/ConwayBromageLib/cmake-build-debug/CMakeFiles/ConwayBromageLib.dir

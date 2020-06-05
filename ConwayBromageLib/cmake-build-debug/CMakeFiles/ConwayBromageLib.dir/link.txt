@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/ConwayBromageLib.dir/main.cpp.o CMakeFiles/ConwayBromageLib.dir/ConwayBromageLib.cpp.o  -o ConwayBromageLib   -L/home/alexa/lib 
