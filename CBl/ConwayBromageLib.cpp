@@ -37,6 +37,27 @@ uint64_t encode(string word, uint64_t size){
     return hash;    //return the final hash of the sequence
 }
 
+/**
+ * Returns a k-mer which corresponds to the value of seq.
+ * @param seq - the value.
+ * @param size - the size of the k-mer.
+ * @return a string representing the value seq
+ */
+string decode(uint64_t seq, uint64_t size){
+    string res(size, ' ');
+    uint64_t lastIndex = res.size()-1;
+    for(int i(0); i < size; i++){
+        switch(seq & 0x3){ //compares the decimal value of the first two bits
+            case 0: res[lastIndex-i] = 'A'; break;
+            case 1: res[lastIndex-i] = 'C'; break;
+            case 2: res[lastIndex-i] = 'G'; break;
+            case 3: res[lastIndex-i] = 'T'; break;
+        }
+        seq >>= 2;
+    }
+    return res;
+}
+
 /* Transform sequences which are contain in a file in a sd_vector
  * Need a string which is the path to the file
  * Return a sd_vector which contains encoding version of sequences of the file
@@ -119,10 +140,10 @@ bool isThisKMerHere(std::string nonCompressedKMer, sdsl::sd_vector<> const& curr
  * (isThisKMerHere is true) and its size is equal to the size of sequence k-mers (isTheSameSize is true)
  * returns a vector which contains all the previous k-mers which are present in the generated sequence
  */
-vector<string> previous(std::string nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq){
+vector<string> previous(string nonCompressedKMer, sd_vector<> const& currentCompressedSeq){
     string potentialPrevious [4] = {"", "", "", ""};    //At most 4 potential previous k-mers
-    int potentialCompressed [4] = {0, 0, 0, 0};         //Compressed version of the above array
     vector<string> prev;
+    int compressedKMer = encode(nonCompressedKMer, nonCompressedKMer.size());   // to forbid the case when TTTT is a previous of TTTT
     //verify same size and existence in the sequence
     if(isTheSameSize(nonCompressedKMer.size(), currentCompressedSeq.size()) && isThisKMerHere(nonCompressedKMer, currentCompressedSeq)) {
         for(int i = 0 ; i < 4 ; i++){
@@ -133,13 +154,45 @@ vector<string> previous(std::string nonCompressedKMer, sdsl::sd_vector<> const& 
             }
         }
         for(int i = 0 ; i < 4 ; i++){
-            potentialCompressed[i] = encode(potentialPrevious[i], nonCompressedKMer.size());    //compressed version of the potential previous
             //If it is set to one in the compressed sequence, push it in the final vector
-            if(currentCompressedSeq[potentialCompressed[i]] == 1){
+            if((currentCompressedSeq[encode(potentialPrevious[i], nonCompressedKMer.size())] == 1) && (encode(potentialPrevious[i], nonCompressedKMer.size()) != compressedKMer)){
                 prev.push_back(potentialPrevious[i]);
             }
         }
     }
     return prev;
 }
+
+string successorOfOnes(string nonCompressedKMer, sd_vector<> const& currentCompressedSeq){
+    if(isTheSameSize(nonCompressedKMer.size(), currentCompressedSeq.size()) && isThisKMerHere(nonCompressedKMer, currentCompressedSeq)){
+        size_t lenOfOnes = sd_vector<>::rank_1_type (&currentCompressedSeq)(currentCompressedSeq.size());
+        int compressedKMer = encode(nonCompressedKMer, nonCompressedKMer.size());
+        sd_vector<>::rank_1_type  ranker(&currentCompressedSeq);
+        for(int i = compressedKMer ; i < currentCompressedSeq.size()-1 ; i++){
+            if(ranker(i+1) != ranker(i+2)){
+                string succ = decode(i+1, nonCompressedKMer.size());
+                cout << "successor of "<< nonCompressedKMer << " is : " << succ << endl;
+                return succ;
+            }
+        }
+    }
+    return "no succ";
+}
+
+string predecessorOfOnes(string nonCompressedKMer, sd_vector<> const& currentCompressedSeq){
+    if(isTheSameSize(nonCompressedKMer.size(), currentCompressedSeq.size())  && isThisKMerHere(nonCompressedKMer, currentCompressedSeq)){
+        size_t lenOfOnes = sd_vector<>::rank_1_type (&currentCompressedSeq)(currentCompressedSeq.size());
+        int compressedKMer = encode(nonCompressedKMer, nonCompressedKMer.size());
+        sd_vector<>::rank_1_type  ranker(&currentCompressedSeq);
+        for(int i = compressedKMer ; i > 1 ; i--){
+            if(ranker(i) != ranker(i-1)){
+                string pred = decode(i-1, nonCompressedKMer.size());
+                cout << "predecessor of "<< nonCompressedKMer << " is : " << pred << endl;
+                return pred;
+            }
+        }
+    }
+    return "no pred";
+}
+
 
