@@ -68,3 +68,19 @@ void test_next(){
     
 }
 
+//Test for previous function, also work to test isThisKMerHere
+void test_previous(){
+    sd_vector<>res = fromFileToSdVector("../sorted_kmers.txt");
+    int currentKMerLen = log(res.size()) / log(ALPHABET);
+    for(int i = 0 ; i < res.size() ; i++){
+        string decoder = decode(i, currentKMerLen);
+        vector<string> prevDecode = previous(decoder, res);
+        cout << "previous of " << decoder << " is : { ";
+        for(int j = 0 ; j < prevDecode.size() ; j++){
+            cout << prevDecode[j] << " ";
+        }
+        cout << "} " << endl;
+    }
+    previous("RRRR", res);
+}
+
