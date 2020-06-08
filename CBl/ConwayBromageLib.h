@@ -18,4 +18,8 @@ bool isThisKMerHere(std::string nonCompressedKMer, sdsl::sd_vector<> const& curr
 std::vector<std::string> next(std::string nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);   //Murat
 std::vector<std::string> previous(std::string nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);    //Alexandra
 
+//Can be usefull ?
+std::string successorOfOnes(std::string nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);
+std::string predecessorOfOnes(std::string nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);
+
 #endif //CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
