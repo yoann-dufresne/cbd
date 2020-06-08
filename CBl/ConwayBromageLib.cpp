@@ -164,7 +164,7 @@ vector<string> next(string nonCompressedKMer, sd_vector<> const& currentCompress
 bool isTheSameSize(int KMerLen, int currentCompressedSeqLen){
     int currentKMerLen = log(currentCompressedSeqLen) / log(ALPHABET);  //Original size of k-mers of the compressed sequence
     if(KMerLen != currentKMerLen){
-        //cout << "Invalidated : Your sequence is a " << KMerLen << "-mers, we need a " << currentKMerLen << "-mers" << endl;
+        cout << "Invalidated : Your sequence is a " << KMerLen << "-mers, we need a " << currentKMerLen << "-mers" << endl;
         return false;
     }else{
         return true;
@@ -177,10 +177,10 @@ bool isTheSameSize(int KMerLen, int currentCompressedSeqLen){
  * (isThisKMerHere is true) and its size is equal to the size of sequence k-mers (isTheSameSize is true)
  * returns a vector which contains all the previous k-mers which are present in the generated sequence
  */
-vector<string> previous(std::string nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq){
+vector<string> previous(string nonCompressedKMer, sd_vector<> const& currentCompressedSeq){
     string potentialPrevious [4] = {"", "", "", ""};    //At most 4 potential previous k-mers
-    int potentialCompressed [4] = {0, 0, 0, 0};         //Compressed version of the above array
     vector<string> prev;
+    int compressedKMer = encode(nonCompressedKMer, nonCompressedKMer.size());   // to forbid the case when TTTT is a previous of TTTT
     //verify same size and existence in the sequence
     if(isTheSameSize(nonCompressedKMer.size(), currentCompressedSeq.size()) && isThisKMerHere(nonCompressedKMer, currentCompressedSeq)) {
         for(int i = 0 ; i < 4 ; i++){
@@ -191,9 +191,8 @@ vector<string> previous(std::string nonCompressedKMer, sdsl::sd_vector<> const& 
             }
         }
         for(int i = 0 ; i < 4 ; i++){
-            potentialCompressed[i] = encode(potentialPrevious[i], nonCompressedKMer.size());    //compressed version of the potential previous
             //If it is set to one in the compressed sequence, push it in the final vector
-            if(currentCompressedSeq[potentialCompressed[i]] == 1){
+            if((currentCompressedSeq[encode(potentialPrevious[i], nonCompressedKMer.size())] == 1) && (encode(potentialPrevious[i], nonCompressedKMer.size()) != compressedKMer)){
                 prev.push_back(potentialPrevious[i]);
             }
         }
@@ -247,13 +246,45 @@ bool isThisKMerHere(std::string nonCompressedKMer, sdsl::sd_vector<> const& curr
     if(isTheSameSize(nonCompressedKMer.size(), currentCompressedSeq.size())){   //call of isTheSameSize to verify the size
         uint64_t myEncodingKMer = encode(nonCompressedKMer, nonCompressedKMer.size());  //encoding version of the K-mer
         if(currentCompressedSeq[myEncodingKMer] == 1){  //verify if the case is set to one
-            //cout << nonCompressedKMer << " is present" << endl;
+            cout << nonCompressedKMer << " is present" << endl;
             return true;
         }else{
-            //cout << nonCompressedKMer << " is absent" << endl;
+            cout << nonCompressedKMer << " is absent" << endl;
             return false;
         }
     }
-    //cout << "Sequence size problem" << endl;
+    cout << "Sequence size problem" << endl;
     return false;
+}
+
+string successorOfOnes(string nonCompressedKMer, sd_vector<> const& currentCompressedSeq){
+    if(isTheSameSize(nonCompressedKMer.size(), currentCompressedSeq.size()) && isThisKMerHere(nonCompressedKMer, currentCompressedSeq)){
+        size_t lenOfOnes = sd_vector<>::rank_1_type (&currentCompressedSeq)(currentCompressedSeq.size());
+        int compressedKMer = encode(nonCompressedKMer, nonCompressedKMer.size());
+        sd_vector<>::rank_1_type  ranker(&currentCompressedSeq);
+        for(int i = compressedKMer ; i < currentCompressedSeq.size()-1 ; i++){
+            if(ranker(i+1) != ranker(i+2)){
+                string succ = decode(i+1, nonCompressedKMer.size());
+                cout << "successor of "<< nonCompressedKMer << " is : " << succ << endl;
+                return succ;
+            }
+        }
+    }
+    return "no succ";
+}
+
+string predecessorOfOnes(string nonCompressedKMer, sd_vector<> const& currentCompressedSeq){
+    if(isTheSameSize(nonCompressedKMer.size(), currentCompressedSeq.size())  && isThisKMerHere(nonCompressedKMer, currentCompressedSeq)){
+        size_t lenOfOnes = sd_vector<>::rank_1_type (&currentCompressedSeq)(currentCompressedSeq.size());
+        int compressedKMer = encode(nonCompressedKMer, nonCompressedKMer.size());
+        sd_vector<>::rank_1_type  ranker(&currentCompressedSeq);
+        for(int i = compressedKMer ; i > 1 ; i--){
+            if(ranker(i) != ranker(i-1)){
+                string pred = decode(i-1, nonCompressedKMer.size());
+                cout << "predecessor of "<< nonCompressedKMer << " is : " << pred << endl;
+                return pred;
+            }
+        }
+    }
+    return "no pred";
 }
