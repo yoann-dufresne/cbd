@@ -10,10 +10,43 @@ G = 2
 T = 3
 We use an hash to create and return unique int. This will help us to complete the sd_vector
 The function returns an int that matches with the location of a one in the future sd_vector
+Example of code : <br>
 
+### decode function
+Returns the string representation of a value representing a k-mer.<br>
+Example of code : <br>
+int value = 0; <br>
+int size = 4; //the size of the kmer <br>
+string kmer1 = decode(value, size); // kmer = "AAAA"
+string kmer2 = decode(100, 4); //kmer = "CGCA"
 
-###fromFileToSdVector function
+### fromFileToSdVector function
 The goal of this function is to get sort nucleotide sequences which are store in a tubular file to transcribe them
 into a sd_vector (from the sdsl library).
 We call **encode** in **fromFileToSdVector** and we create the sd_vector from the location of ones information
 At the end, we return an sd_vector which contain 0 and 1. Ones correspond to the location of elements which are in the file (after encode to understand where the location is).
+Example of code : <br>
+sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt"); // the size of sdv is 4^k
+
+### next function
+Returns the successors of a k-mer. A k-mer has at maximum 4 successors and minimum 0 successors.<br> 
+/!\ The initial kmer given to the function cannot be among the successors.<br> 
+Example of code : <br> 
+//We supposed that the text file is filled with 4-mers.<br> 
+sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt");<br> 
+vector<string> successorsOfCATC = next("CATC", sdv);<br> 
+//next of CATC -> { ATCA ATCC ATCG ATCT }<br> 
+vector<string> successorsOfTTTT = next("TTTT", sdv);<br> 
+//next of TTTT -> { TTTA TTTC TTTG }<br> 
+
+### previous function
+Returns the predecessors of a k-mer. A k-mer has at maximum 4 predecessors and minimum 0 predecessors.<br> 
+/!\ The initial kmer given to the function cannot be among the predecessors.<br>
+Example of code : <br>
+//We supposed that the text file is filled with 4-mers.<br>
+sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt");<br>
+vector<string> successorsOfCATC = previous("CATC", sdv);<br>
+//previous of CATC : { ACAT CCAT GCAT TCAT } <br>
+vector<string> successorsOfTTTT = previous("TTTT", sdv);<br>
+//previous of TTTT : { ATTT CTTT GTTT TTTT }<br>
+
