@@ -47,7 +47,7 @@ void test_next(){
     };
     printf("Test of the function next : \n");
     //test for k=4 => size = 256 (4^4)
-    sd_vector<> res = fromFileToSdVector("../sorted_kmers.txt");
+    sd_vector<> res = fromFileToSdVector("./sorted_kmers.txt");
     int k = (int)(log(res.size())/log(4));
     int sd_vector_size = 256;
     for(int i = 0; i < sd_vector_size; i++){
@@ -66,21 +66,5 @@ void test_next(){
     cout << "next of AAT -> "; //has to return {} because AATTA has a size inferior to 4
     print_vec(successors);
     
-}
-
-//Test for previous function, also work to test isThisKMerHere
-void test_previous(){
-    sd_vector<>res = fromFileToSdVector("../sorted_kmers.txt");
-    int currentKMerLen = log(res.size()) / log(ALPHABET);
-    for(int i = 0 ; i < res.size() ; i++){
-        string decoder = decode(i, currentKMerLen);
-        vector<string> prevDecode = previous(decoder, res);
-        cout << "previous of " << decoder << " is : { ";
-        for(int j = 0 ; j < prevDecode.size() ; j++){
-            cout << prevDecode[j] << " ";
-        }
-        cout << "} " << endl;
-    }
-    previous("RRRR", res);
 }
 

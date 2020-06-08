@@ -5,7 +5,6 @@
 void test_decode(); 
 void test_next();
 
-void test_previous();
 
 #endif /* TESTS_H */
 
