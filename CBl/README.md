@@ -10,7 +10,6 @@ G = 2
 T = 3
 We use an hash to create and return unique int. This will help us to complete the sd_vector
 The function returns an int that matches with the location of a one in the future sd_vector
-Example of code : <br>
 
 ### decode function
 Returns the string representation of a value representing a k-mer.<br>
