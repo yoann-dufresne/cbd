@@ -13,12 +13,21 @@ using namespace sdsl;
 int main() {
     sd_vector<>res = fromFileToSdVector("../sorted_kmers.txt");
     sd_vector<>::iterator itRes;
-    cout << "Print of the sd_vector : " << endl;
+    //test
+    /*cout << "Print of the sd_vector : " << endl;
     for(itRes = res.begin() ; itRes != res.end() ; itRes++){
         cout << *itRes << " ";
     }
-    cout << endl;
+    cout << endl;*/
     cout << "Size of res : " << size_in_mega_bytes(res) << " MB" << endl;
     cout << "Size of res in bytes : " << size_in_bytes(res) << " B" << endl;
+
+    isThisKMerHere("TGTTGATAAC", res);  //test of isThisKmerHere
+    vector<string> prevRes = previous("TTATATAACC", res);   //test of previous
+    vector<string>::iterator prevIt;
+    cout << "Previous elements which are in the sequence : " << endl;
+    for(prevIt = prevRes.begin() ; prevIt != prevRes.end() ; prevIt++){
+        cout << *prevIt << endl;
+    }
     return 0;
 }

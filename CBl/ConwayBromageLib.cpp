@@ -33,7 +33,7 @@ uint64_t encode(string word, uint64_t size){
         }
         hash += charval;    //creation of the hash for the given sequence
     }
-    cout << hash << endl;   // print of verification : hash building
+    //cout << hash << endl;   // print of verification : hash building
     return hash;    //return the final hash of the sequence
 }
 
@@ -62,7 +62,7 @@ sd_vector<>fromFileToSdVector(string path){
         sd_vector_builder constructSparse(myTotalLen, myOneLen);    //A size of myTotalLen, contains myOneLen ones
         while(file >> word){
             if(word != "1"){
-                cout << "The seq is : " << word << endl;
+                //cout << "The seq is : " << word << endl;  //test
                 constructSparse.set(encode(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
             }
         }
@@ -74,10 +74,72 @@ sd_vector<>fromFileToSdVector(string path){
           cout << *itSparse << " ";
         }*/
         cout << endl;
-        return finalSparse;
         file.close();
+        return finalSparse;
     }else{
         cout << "Error while opening" << endl;
     }
+}
+
+/* Verifiy the size of 2 k-mer
+ * if size is equal, return true, else return false
+ */
+bool isTheSameSize(int KMerLen, int currentCompressedSeqLen){
+    int currentKMerLen = log(currentCompressedSeqLen) / log(ALPHABET);  //Original size of k-mers of the compressed sequence
+    if(KMerLen != currentKMerLen){
+        cout << "Invalidated : Your sequence is a " << KMerLen << "-mers, we need a " << currentKMerLen << "-mers" << endl;
+        return false;
+    }else{
+        return true;
+    }
+}
+
+/* Verify if a given k-mer is present in the generated sequence
+ * If the given k-mer and generated sequence members have not the same size, comparison is impossible
+ * it returns true if the given k-mer is present, false if it is absent
+ */
+bool isThisKMerHere(std::string nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq){
+    if(isTheSameSize(nonCompressedKMer.size(), currentCompressedSeq.size())){   //call of isTheSameSize to verify the size
+        uint64_t myEncodingKMer = encode(nonCompressedKMer, nonCompressedKMer.size());  //encoding version of the K-mer
+        if(currentCompressedSeq[myEncodingKMer] == 1){  //verify if the case is set to one
+            cout << nonCompressedKMer << " is present" << endl;
+            return true;
+        }else{
+            cout << nonCompressedKMer << " is absent" << endl;
+            return false;
+        }
+    }
+    cout << "Sequence size problem" << endl;
+    return false;
+}
+
+/* Look for the previous k-mer for a given k-mer in the generated sequence
+ * We can have at most 4 different previous k-mers
+ * We can use previous only if the given k-mer (the one for we search for previous elements) is present in the sequence
+ * (isThisKMerHere is true) and its size is equal to the size of sequence k-mers (isTheSameSize is true)
+ * returns a vector which contains all the previous k-mers which are present in the generated sequence
+ */
+vector<string> previous(std::string nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq){
+    string potentialPrevious [4] = {"", "", "", ""};    //At most 4 potential previous k-mers
+    int potentialCompressed [4] = {0, 0, 0, 0};         //Compressed version of the above array
+    vector<string> prev;
+    //verify same size and existence in the sequence
+    if(isTheSameSize(nonCompressedKMer.size(), currentCompressedSeq.size()) && isThisKMerHere(nonCompressedKMer, currentCompressedSeq)) {
+        for(int i = 0 ; i < 4 ; i++){
+            //building of the 4 potential previous k-mers
+            potentialPrevious[i] = NUCLEOTIDES[i];
+            for(int j = 0 ; j < nonCompressedKMer.size()-1 ; j++){
+                potentialPrevious[i] = potentialPrevious[i] + nonCompressedKMer[j];
+            }
+        }
+        for(int i = 0 ; i < 4 ; i++){
+            potentialCompressed[i] = encode(potentialPrevious[i], nonCompressedKMer.size());    //compressed version of the potential previous
+            //If it is set to one in the compressed sequence, push it in the final vector
+            if(currentCompressedSeq[potentialCompressed[i]] == 1){
+                prev.push_back(potentialPrevious[i]);
+            }
+        }
+    }
+    return prev;
 }
 
