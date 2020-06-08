@@ -49,8 +49,8 @@ Returns the predecessors of a k-mer. A k-mer has at maximum 4 predecessors and m
 Example of code : <br>
 //We supposed that the text file is filled with 4-mers.<br>
 sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt");<br>
-vector<string> successorsOfCATC = previous("CATC", sdv);<br>
+vector<string> predecessorsOfCATC = previous("CATC", sdv);<br>
 //previous of CATC : { ACAT CCAT GCAT TCAT } <br>
-vector<string> successorsOfTTTT = previous("TTTT", sdv);<br>
+vector<string> predecessorsOfTTTT = previous("TTTT", sdv);<br>
 //previous of TTTT : { ATTT CTTT GTTT TTTT }<br>
 
