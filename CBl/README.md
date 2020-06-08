@@ -1,6 +1,6 @@
-#Conway and Bromage succint data structures for assembling large genomnes
+# Conway and Bromage succint data structures for assembling large genomnes
 
-##Current content
+## Current content
 
 ### encode function
 **encode** allow us to translate a nucleotide sequence into an int thanks to a given code :
