@@ -51,5 +51,5 @@ sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt");<br>
 vector<string> predecessorsOfCATC = previous("CATC", sdv);<br>
 //previous of CATC : { ACAT CCAT GCAT TCAT } <br>
 vector<string> predecessorsOfTTTT = previous("TTTT", sdv);<br>
-//previous of TTTT : { ATTT CTTT GTTT TTTT }<br>
+//previous of TTTT : { ATTT CTTT GTTT }<br>
 
