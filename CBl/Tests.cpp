@@ -68,33 +68,16 @@ void test_next(){
     
 }
 
-//Test for previous function, also work to test isThisKMerHere
+//Test for previous function
 void test_previous(){
-    sd_vector<>res = fromFileToSdVector("../sorted_kmers.txt");
+    sd_vector<>res = fromFileToSdVector("../sorted_kmers.txt")[0];
     int currentKMerLen = log(res.size()) / log(ALPHABET);
     for(int i = 0 ; i < res.size() ; i++){
-        string decoder = decode(i, currentKMerLen);
-        vector<string> prevDecode = previous(decoder, res);
-        cout << "previous of " << decoder << " is : { ";
+        vector<uint64_t> prevDecode = previous(i, res);
+        cout << "previous of " << decode(i, currentKMerLen) << " is : { ";
         for(int j = 0 ; j < prevDecode.size() ; j++){
-            cout << prevDecode[j] << " ";
-        }
-        cout << "} " << endl;
-    }
-    previous("RRRR", res);
-}
-
-//Test for previousCompressed function
-void test_previousCompressed(){
-    sd_vector<>res = fromFileToSdVector("../sorted_kmers.txt");
-    int currentKMerLen = log(res.size()) / log(ALPHABET);
-    for(int i = 0 ; i < res.size() ; i++){
-        vector<uint64_t> prevDecode = previousCompressed(i, res);
-        cout << "previous of " << i << " is : { ";
-        for(int j = 0 ; j < prevDecode.size() ; j++){
-            cout << prevDecode[j] << " ";
+            cout << decode(prevDecode[j], currentKMerLen) << " ";
         }
         cout << "} " << endl;
     }
 }
-
