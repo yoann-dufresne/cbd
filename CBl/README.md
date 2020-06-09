@@ -16,10 +16,10 @@ Returns the string representation of a value representing a k-mer.<br>
 <br>
 Example of code :
 ```
-int value = 0; <br>
-int size = 4; //the size of the kmer <br>
-string kmer1 = decode(value, size); // kmer = "AAAA" <br>
-string kmer2 = decode(100, 4); //kmer = "CGCA"
+int value = 0;
+int size = 4; //the size of the kmer
+string kmer1 = decode(value, size); // kmer = "AAAA"
+string kmer2 = decode(100, 4);      // kmer = "CGCA"
 ```
 
 ### fromFileToSdVector function
@@ -29,7 +29,9 @@ We call **encode** in **fromFileToSdVector** and we create the sd_vector from th
 At the end, we return an sd_vector which contain 0 and 1. Ones correspond to the location of elements which are in the file (after encode to understand where the location is). <br>
 <br>
 Example of code : <br>
-sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt"); // the size of sdv is 4^k <br>
+```
+sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt"); // the size of sdv is 4^k
+```
 
 ### next function
 Returns the successors of a k-mer. A k-mer has at maximum 4 successors and minimum 0 successors.<br> 
@@ -48,10 +50,12 @@ vector<string> successorsOfTTTT = next("TTTT", sdv);
 Returns the predecessors of a k-mer. A k-mer has at maximum 4 predecessors and minimum 0 predecessors.<br> 
 <br>
 Example of code : <br>
+```
 //We supposed that the text file is filled with 4-mers.<br>
-sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt");<br>
-vector<string> predecessorsOfCATC = previous("CATC", sdv);<br>
-//previous of CATC : { ACAT CCAT GCAT TCAT } <br>
-vector<string> predecessorsOfTTTT = previous("TTTT", sdv);<br>
-//previous of TTTT : { ATTT CTTT GTTT TTTT }<br>
+sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt");
+vector<string> predecessorsOfCATC = previous("CATC", sdv);
+//previous of CATC : { ACAT CCAT GCAT TCAT }
+vector<string> predecessorsOfTTTT = previous("TTTT", sdv);
+//previous of TTTT : { ATTT CTTT GTTT TTTT }
+```
 
