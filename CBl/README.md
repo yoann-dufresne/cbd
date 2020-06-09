@@ -1,4 +1,4 @@
-# Conway and Bromage succint data structures for assembling large genomnes
+# Conway and Bromage succinct data structures for assembling large genomnes
 
 ## Current content
 
