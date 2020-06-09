@@ -14,11 +14,13 @@ The function returns an int that matches with the location of a one in the futur
 ### decode function
 Returns the string representation of a value representing a k-mer.<br>
 <br>
-Example of code : <br>
+Example of code :
+```
 int value = 0; <br>
 int size = 4; //the size of the kmer <br>
 string kmer1 = decode(value, size); // kmer = "AAAA" <br>
-string kmer2 = decode(100, 4); //kmer = "CGCA" <br>
+string kmer2 = decode(100, 4); //kmer = "CGCA"
+```
 
 ### fromFileToSdVector function
 The goal of this function is to get sort nucleotide sequences which are store in a tubular file to transcribe them
