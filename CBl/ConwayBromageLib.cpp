@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <bitset>
 #include <sdsl/sd_vector.hpp>
 #include <sdsl/vectors.hpp>
 #include "ConwayBromageLib.h"
@@ -194,6 +195,32 @@ vector<string> previous(string nonCompressedKMer, sd_vector<> const& currentComp
             //If it is set to one in the compressed sequence, push it in the final vector
             if((currentCompressedSeq[encode(potentialPrevious[i], nonCompressedKMer.size())] == 1) && (encode(potentialPrevious[i], nonCompressedKMer.size()) != compressedKMer)){
                 prev.push_back(potentialPrevious[i]);
+            }
+        }
+    }
+    return prev;
+}
+
+/* previous version for already compressed KMer
+ * Instead of using a string, we use the compressed version of the KMer that wa can find in the generated sequence
+ */
+vector<uint64_t> previousCompressed(uint64_t nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq){
+    string potentialPrevious [4] = {"", "", "", ""};    //At most 4 potential previous k-mers
+    vector<uint64_t> prev;
+    string compressedKMer = decode(nonCompressedKMer, log(currentCompressedSeq.size()) / log(ALPHABET));
+    //verify same size and existence in the sequence
+    if(isTheSameSize(compressedKMer.size(), currentCompressedSeq.size()) && isThisKMerHere(compressedKMer, currentCompressedSeq)) {
+        for(int i = 0 ; i < 4 ; i++){
+            //building of the 4 potential previous k-mers
+            potentialPrevious[i] = NUCLEOTIDES[i];
+            for(int j = 0 ; j < compressedKMer.size()-1 ; j++){
+                potentialPrevious[i] = potentialPrevious[i] + compressedKMer[j];
+            }
+        }
+        for(int i = 0 ; i < 4 ; i++){
+            //If it is set to one in the compressed sequence, encode and push it in the final vector
+            if((currentCompressedSeq[encode(potentialPrevious[i], compressedKMer.size())] == 1) && (encode(potentialPrevious[i], compressedKMer.size()) != nonCompressedKMer)){
+                prev.push_back(encode(potentialPrevious[i], compressedKMer.size()));
             }
         }
     }
