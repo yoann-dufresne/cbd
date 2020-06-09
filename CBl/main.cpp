@@ -21,21 +21,14 @@ int main() {
     cout << "Size of res : " << size_in_mega_bytes(res) << " MB" << endl;
     cout << "Size of res in bytes : " << size_in_bytes(res) << " B" << endl;
 
-    isThisKMerHere("TGTTGATAAC", res);  //test of isThisKmerHere
-   //tests of previous
-    int currentKMerLen = log(res.size()) / log(ALPHABET);
-    for(int i = 0 ; i < res.size() ; i++){
-        string decoder = decode(i, currentKMerLen);
-        vector<string> prevDecode = previous(decoder, res);
-        cout << "previous of " << decoder << " is : { ";
-        for(int j = 0 ; j < prevDecode.size() ; j++){
-            cout << prevDecode[j] << " ";
-        }
-        cout << "} " << endl;
-    }
-    vector<string> prevRes = previous("TTATACC", res);   //test of previous
+
 
     successorOfOnes("ACGA", res);
     predecessorOfOnes("ACGA", res);
+
+    test_next();
+    test_decode();
+    test_previous();
+    test_previousCompressed();
     return 0;
 }
