@@ -185,7 +185,9 @@ vector<string> next(string nonCompressedKMer, sd_vector<> const& currentCompress
 }
 
 /* Verifiy the size of 2 k-mer
- * if size is equal, return true, else return false
+ * @param KMerLen - The size of the current K-mer (the one we study)
+ * @param currentCompressedSeqLen - The size of the generated sequence
+ * @retrurn true if the size of the current K-mer and K-mers of the sequence is equal, else false
  */
 bool isTheSameSize(int KMerLen, int currentCompressedSeqLen){
     int currentKMerLen = log(currentCompressedSeqLen) / log(ALPHABET);  //Original size of k-mers of the compressed sequence
@@ -197,55 +199,22 @@ bool isTheSameSize(int KMerLen, int currentCompressedSeqLen){
     }
 }
 
-/* Look for the previous k-mer for a given k-mer in the generated sequence
- * We can have at most 4 different previous k-mers
- * We can use previous only if the given k-mer (the one for we search for previous elements) is present in the sequence
- * (isThisKMerHere is true) and its size is equal to the size of sequence k-mers (isTheSameSize is true)
- * returns a vector which contains all the previous k-mers which are present in the generated sequence
- */
-vector<string> previous(string nonCompressedKMer, sd_vector<> const& currentCompressedSeq){
-    string potentialPrevious [4] = {"", "", "", ""};    //At most 4 potential previous k-mers
-    vector<string> prev;
-    int compressedKMer = encode(nonCompressedKMer, nonCompressedKMer.size());   // to forbid the case when TTTT is a previous of TTTT
-    //verify same size and existence in the sequence
-    if(isTheSameSize(nonCompressedKMer.size(), currentCompressedSeq.size()) && isThisKMerHere(nonCompressedKMer, currentCompressedSeq)) {
-        for(int i = 0 ; i < 4 ; i++){
-            //building of the 4 potential previous k-mers
-            potentialPrevious[i] = NUCLEOTIDES[i];
-            for(int j = 0 ; j < nonCompressedKMer.size()-1 ; j++){
-                potentialPrevious[i] = potentialPrevious[i] + nonCompressedKMer[j];
-            }
-        }
-        for(int i = 0 ; i < 4 ; i++){
-            //If it is set to one in the compressed sequence, push it in the final vector
-            if((currentCompressedSeq[encode(potentialPrevious[i], nonCompressedKMer.size())] == 1) && (encode(potentialPrevious[i], nonCompressedKMer.size()) != compressedKMer)){
-                prev.push_back(potentialPrevious[i]);
-            }
-        }
-    }
-    return prev;
-}
-
 /* previous version for already compressed KMer
- * Instead of using a string, we use the compressed version of the KMer that wa can find in the generated sequence
+ * @param compressedKMer - a uint64_t which represent a compressed k-mer. We can find it in the generated sequence
+ * @param currentCompressedSeq - the generated sequence which have to contains nonCompressedKMer and its potantial previous K-mers
+ * @return a vector of uint64_t which contains all the previous k-mers which are present in the generated sequence, compressed form
  */
-vector<uint64_t> previousCompressed(uint64_t nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq){
-    string potentialPrevious [4] = {"", "", "", ""};    //At most 4 potential previous k-mers
-    vector<uint64_t> prev;
-    string compressedKMer = decode(nonCompressedKMer, log(currentCompressedSeq.size()) / log(ALPHABET));
-    //verify same size and existence in the sequence
-    if(isTheSameSize(compressedKMer.size(), currentCompressedSeq.size()) && isThisKMerHere(compressedKMer, currentCompressedSeq)) {
-        for(int i = 0 ; i < 4 ; i++){
-            //building of the 4 potential previous k-mers
-            potentialPrevious[i] = NUCLEOTIDES[i];
-            for(int j = 0 ; j < compressedKMer.size()-1 ; j++){
-                potentialPrevious[i] = potentialPrevious[i] + compressedKMer[j];
-            }
+vector<uint64_t> previous(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq){
+    vector<uint64_t>prev;
+    if(compressedKMer < currentCompressedSeq.size()){
+        uint64_t potentialPrevious[4];
+        potentialPrevious[0] = (compressedKMer >> 2)%currentCompressedSeq.size();
+        for(int i = 1 ; i < 4 ; i++){
+            potentialPrevious[i] = potentialPrevious[i-1] + (currentCompressedSeq.size() / 4);
         }
         for(int i = 0 ; i < 4 ; i++){
-            //If it is set to one in the compressed sequence, encode and push it in the final vector
-            if((currentCompressedSeq[encode(potentialPrevious[i], compressedKMer.size())] == 1) && (encode(potentialPrevious[i], compressedKMer.size()) != nonCompressedKMer)){
-                prev.push_back(encode(potentialPrevious[i], compressedKMer.size()));
+            if(currentCompressedSeq[potentialPrevious[i]]){
+                prev.push_back(potentialPrevious[i]);
             }
         }
     }
@@ -330,16 +299,18 @@ sd_vector<>fromFileToSdVector(string path){
 
 /* Verify if a given k-mer is present in the generated sequence
  * If the given k-mer and generated sequence members have not the same size, comparison is impossible
- * it returns true if the given k-mer is present, false if it is absent
+ * @param nonCompressedKMer - a string which represents the k-mer we study
+ * @param currentCompressedSeq - the generated sequence where we want to verify if nonCompressedKMer is in
+ * @return true if the givenl-mer is present, else false
  */
-bool isThisKMerHere(std::string nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq){
-    if(isTheSameSize(nonCompressedKMer.size(), currentCompressedSeq.size())){   //call of isTheSameSize to verify the size
-        uint64_t myEncodingKMer = encode(nonCompressedKMer, nonCompressedKMer.size());  //encoding version of the K-mer
-        if(currentCompressedSeq[myEncodingKMer] == 1){  //verify if the case is set to one
-            cout << nonCompressedKMer << " is present" << endl;
+bool isThisKMerHere(uint64_t compressedKMer, sd_vector<> const& currentCompressedSeq){
+    if(compressedKMer < currentCompressedSeq.size()){   //call of isTheSameSize to verify the size
+        int currentKMerLen = log(currentCompressedSeq.size()) / log(ALPHABET);
+        if(currentCompressedSeq[compressedKMer]){  //verify if the case is set to one
+            cout << decode(compressedKMer, currentKMerLen) << " is present" << endl;
             return true;
         }else{
-            cout << nonCompressedKMer << " is absent" << endl;
+            cout << decode(compressedKMer, currentKMerLen) << " is absent" << endl;
             return false;
         }
     }
@@ -347,34 +318,72 @@ bool isThisKMerHere(std::string nonCompressedKMer, sdsl::sd_vector<> const& curr
     return false;
 }
 
-string successorOfOnes(string nonCompressedKMer, sd_vector<> const& currentCompressedSeq){
-    if(isTheSameSize(nonCompressedKMer.size(), currentCompressedSeq.size()) && isThisKMerHere(nonCompressedKMer, currentCompressedSeq)){
-        size_t lenOfOnes = sd_vector<>::rank_1_type (&currentCompressedSeq)(currentCompressedSeq.size());
-        int compressedKMer = encode(nonCompressedKMer, nonCompressedKMer.size());
-        sd_vector<>::rank_1_type  ranker(&currentCompressedSeq);
-        for(int i = compressedKMer ; i < currentCompressedSeq.size()-1 ; i++){
-            if(ranker(i+1) != ranker(i+2)){
-                string succ = decode(i+1, nonCompressedKMer.size());
-                cout << "successor of "<< nonCompressedKMer << " is : " << succ << endl;
-                return succ;
-            }
-        }
+/* Calculate the reverse complement compressed version of a given k-mer
+ * @param seq - the k-mer we want to know the reverse complement
+ * @param len - the length of the total sequence of the given k-mer
+ * @return a uint64_t which is the compressed version of the reverse complement
+ */
+uint64_t reverseComplement(string seq, uint64_t len){
+    int sizeOfSeq = log(len) / log(ALPHABET);
+    reverse(begin(seq), end(seq));  //Reverse of string
+    uint64_t complem = encode(seq, sizeOfSeq);  //encoding the reverse
+    uint64_t final;
+    if(complem > len/2){    //Position for complement
+        int position(len-complem);
+        final = position;
+    }else{
+        int position(complem);
+        final = len-position-1;
     }
-    return "no succ";
+    return final;
 }
 
-string predecessorOfOnes(string nonCompressedKMer, sd_vector<> const& currentCompressedSeq){
-    if(isTheSameSize(nonCompressedKMer.size(), currentCompressedSeq.size())  && isThisKMerHere(nonCompressedKMer, currentCompressedSeq)){
-        size_t lenOfOnes = sd_vector<>::rank_1_type (&currentCompressedSeq)(currentCompressedSeq.size());
-        int compressedKMer = encode(nonCompressedKMer, nonCompressedKMer.size());
-        sd_vector<>::rank_1_type  ranker(&currentCompressedSeq);
-        for(int i = compressedKMer ; i > 1 ; i--){
-            if(ranker(i) != ranker(i-1)){
-                string pred = decode(i-1, nonCompressedKMer.size());
-                cout << "predecessor of "<< nonCompressedKMer << " is : " << pred << endl;
-                return pred;
-            }
+/* Transform sequences which are contain in a file in a sd_vector
+ * Also give the reverse complement in an other sd_vector, for ecoli only
+ * @param path - a string which is the path to the file which contains the generated sequence
+ * @return a vector of sd_vector which contains encoding version of the sequence of the file and of the reverse complement of the sequence
+ */
+vector<sd_vector<>>fromFileToSdVectorWithReverseEcoli(string path){
+    ifstream file(path, ios::in);  // Reading of the file which contains k-mers sequences
+    if(file){   // File is now open
+        string word;
+        string line("");
+        file >> word;   //Take the first word to analyze size of one k-mer
+        file.seekg(0, ios::beg);    //Return to the beginning of the file
+        int myWordLen(word.size()); //Size of k_mer, it is the 'k'
+        int myOneLen(0);
+        while(getline(file, line)){ //Counts the number of ones in the file
+            myOneLen++;
         }
+        file.clear();
+        file.seekg(0, ios::beg);    //Return to the beginning of the file
+        cout << "length of ones : " << myOneLen << endl;
+        cout << "length of a seq : " << myWordLen << endl;
+        uint64_t myTotalLen(pow(ALPHABET,myWordLen));   //Creation of the total length to create sd_vector_builders
+        int_vector<> reverser(myOneLen, 0); //to simplify the reverse complement build
+        cout << "Total length : " << myTotalLen << endl;
+        int i = 0;
+        sd_vector_builder constructSparse(myTotalLen, myOneLen);    //A size of myTotalLen, contains myOneLen ones, right version
+        sd_vector_builder constructReverse(myTotalLen, myOneLen);   //same total size and ones size, reverse version
+        while(file >> word){
+                constructSparse.set(encodeEcoli(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
+                reverser[i] = reverseComplement(word, myTotalLen);  //each reverses of each words, compressed version
+                i++;
+                file >> word;
+        }
+        sort(reverser.begin(), reverser.end()); //sorting of the reverse otherwise it will be impossible to use sd_vector_builder
+        for(int i = 0 ; i < myOneLen ; i++){
+            constructReverse.set(reverser[i]);  //filled for the reverse version
+        }
+        vector<sd_vector<>> seq;
+        sd_vector<>finalSparseRight(constructSparse);    //Construction of the final sd_vector for the right sequence
+        sd_vector<>finalSparseReverse(constructReverse);   //Construction of the final sd_vector for the reverse sequence
+        seq.push_back(finalSparseRight);
+        seq.push_back(finalSparseReverse);
+        file.close();
+        return seq;
+    }else{
+        cout << "Error while opening" << endl;
     }
-    return "no pred";
+    //return bit_vector{0}; //need an other return here
 }
