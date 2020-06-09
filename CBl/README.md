@@ -31,19 +31,19 @@ sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt"); // the size of sdv i
 
 ### next function
 Returns the successors of a k-mer. A k-mer has at maximum 4 successors and minimum 0 successors.<br> 
-/!\ The initial kmer given to the function cannot be among the successors.<br> 
 <br>
 Example of code : <br> 
-//We supposed that the text file is filled with 4-mers.<br> 
-sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt");<br> 
-vector<string> successorsOfCATC = next("CATC", sdv);<br> 
-//next of CATC -> { ATCA ATCC ATCG ATCT }<br> 
-vector<string> successorsOfTTTT = next("TTTT", sdv);<br> 
-//next of TTTT -> { TTTA TTTC TTTG }<br> 
+```
+//We supposed that the text file is filled with 4-mers. 
+sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt");
+vector<string> successorsOfCATC = next("CATC", sdv);
+//next of CATC -> { ATCA ATCC ATCG ATCT }
+vector<string> successorsOfTTTT = next("TTTT", sdv);
+//next of TTTT -> { TTTA TTTC TTTG TTTT }
+```
 
 ### previous function
 Returns the predecessors of a k-mer. A k-mer has at maximum 4 predecessors and minimum 0 predecessors.<br> 
-/!\ The initial kmer given to the function cannot be among the predecessors.<br>
 <br>
 Example of code : <br>
 //We supposed that the text file is filled with 4-mers.<br>
@@ -51,5 +51,5 @@ sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt");<br>
 vector<string> predecessorsOfCATC = previous("CATC", sdv);<br>
 //previous of CATC : { ACAT CCAT GCAT TCAT } <br>
 vector<string> predecessorsOfTTTT = previous("TTTT", sdv);<br>
-//previous of TTTT : { ATTT CTTT GTTT }<br>
+//previous of TTTT : { ATTT CTTT GTTT TTTT }<br>
 
