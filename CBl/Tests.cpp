@@ -84,3 +84,17 @@ void test_previous(){
     previous("RRRR", res);
 }
 
+//Test for previousCompressed function
+void test_previousCompressed(){
+    sd_vector<>res = fromFileToSdVector("../sorted_kmers.txt");
+    int currentKMerLen = log(res.size()) / log(ALPHABET);
+    for(int i = 0 ; i < res.size() ; i++){
+        vector<uint64_t> prevDecode = previousCompressed(i, res);
+        cout << "previous of " << i << " is : { ";
+        for(int j = 0 ; j < prevDecode.size() ; j++){
+            cout << prevDecode[j] << " ";
+        }
+        cout << "} " << endl;
+    }
+}
+
