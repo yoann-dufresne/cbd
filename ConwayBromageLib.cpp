@@ -327,11 +327,15 @@ uint64_t reverseComplement(string seq, uint64_t len){
     uint64_t complem = encode(seq, sizeOfSeq);  //encoding the reverse
     uint64_t final;
     if(complem > len/2){    //Position for complement
+        cout << "IF : " << endl;
         int position(len-complem);
-        final = position;
+        final = position-1;
+        cout << final << endl;
     }else{
+        cout << "ELSE : " << endl;
         int position(complem);
         final = len-position-1;
+        cout << final << endl;
     }
     return final;
 }
