@@ -11,13 +11,12 @@ uint64_t select1bit(uint64_t index, const sdsl::sd_vector<> &v);
 uint64_t select0bit(uint64_t index, const sdsl::sd_vector<> &v);
 
 uint64_t encode(std::string word, uint64_t size);
-std::string decode(uint64_t seq, uint64_t size);    //Proto //Murat
+std::string decode(uint64_t seq, uint64_t size);
 sdsl::sd_vector<>fromFileToSdVector(std::string path);
 //Prototype of others functions
 bool isThisKMerHere(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);
-std::vector<std::string> next(std::string nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);   //Murat
-std::vector<uint64_t> previous(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq); 
-std::vector<uint64_t> nextCompressed(uint64_t nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq); //Murat
+std::vector<uint64_t> next(uint64_t nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);
+std::vector<uint64_t> previous(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);  
 
 uint64_t reverseComplement(std::string seq, uint64_t len);
 std::vector<sdsl::sd_vector<>>fromFileToSdVectorWithReverseEcoli(std::string path);
