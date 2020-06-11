@@ -13,7 +13,7 @@ uint64_t select0bit(uint64_t index, const sdsl::sd_vector<> &v);
 
 //Encode/Decode lexicographical version
 uint64_t encode(std::string word, uint64_t size);
-std::string decode(uint64_t seq, uint64_t size);    //Proto //Murat
+std::string decode(uint64_t seq, uint64_t size);
 //Encode/decode fastest ASCII version
 std::string decodeEcoli(uint64_t seq, uint64_t size);
 uint64_t encodeEcoli(std::string word, uint64_t size);
@@ -28,7 +28,7 @@ sdsl::sd_vector<>fromFileToSdVectorWithReverseEcoli(std::string path);  //fastes
 bool isThisKMerHere(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);
 
 //next and previous, insensitive to the encoding version ?
-std::vector<std::string> next(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);   //Murat
+std::vector<uint64_t> next(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq); 
 std::vector<uint64_t> previous(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);
 
 //reverseComplement variations
