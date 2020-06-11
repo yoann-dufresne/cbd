@@ -81,6 +81,34 @@ static const uint64_t  totalLen = 4611686018427387904;
             }
         }
 
+        //Test of next
+        CASE("next : test upon sorted_kmers.txt "){
+            sd_vector<>res = fromFileToSdVector("./sorted_kmers.txt");
+            int currentKMerLen = log(res.size()) / log(ALPHABET);
+            for(int i = 0 ; i < sdv_size ; i++){
+                //generation of the true results
+                string kmer_initial = decode(i, currentKMerLen);
+                string kmer1 = kmer_initial.substr(1, currentKMerLen-1) + "A";
+                string kmer2 = kmer_initial.substr(1, currentKMerLen-1) + "C";
+                string kmer3 = kmer_initial.substr(1, currentKMerLen-1) + "G";
+                string kmer4 = kmer_initial.substr(1, currentKMerLen-1) + "T";
+                uint64_t next_kmer1 = encode(kmer1, currentKMerLen);
+                uint64_t next_kmer2 = encode(kmer2, currentKMerLen);
+                uint64_t next_kmer3 = encode(kmer3, currentKMerLen);
+                uint64_t next_kmer4 = encode(kmer4, currentKMerLen);
+                //comparison with expected results
+                vector<uint64_t> successors = next(i, res);
+                bool result = false;
+                if(successors.size() == 4
+                && successors[0] == next_kmer1
+                && successors[1] == next_kmer2
+                && successors[2] == next_kmer3
+                && successors[3] == next_kmer4){
+                    result = true;
+                }
+                EXPECT(result);
+            }
+        }
 
 int main(int argc, char* argv[]){
     if(int failures = run(specification, argc, argv)){  //run all the test cases
