@@ -27,7 +27,7 @@ install:
   - ./install.sh
   - cd ../
   - cp -r ./sdsl-lite/include/sdsl ./include
-  - cp -r ./lest-master/include/lest ./include
+  - cp -r ./lest/include/lest ./include
 
 script:
   - cd $TRAVIS_BUILD_DIR #là où est contenu notre code ( pas  sdsl-lite )
