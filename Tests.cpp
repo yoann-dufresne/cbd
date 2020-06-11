@@ -27,41 +27,60 @@ using namespace lest;
 
 
 static  tests specification;    //specification : use it to call all the CASE in run in main at the end
-static const sd_vector<>res = fromFileToSdVector("./sorted_kmers.txt");    //global constant for tests, not ecoli_count now because of a bug
-
+static const uint64_t  totalLen = 4611686018427387904;
 /*
- * Compilation line : g++ -Wall -Wextra -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o Tests.exe Tests.cpp ConwayBromageLib.cpp -lsdsl -ldivsufsort -ldivsufsort64
+ * Compilation line : g++ -Wall -Wextra -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o Tests.exe Tests.cpp ConwayBromageLib.cpp -lsdsl -ldivsufsort -ldivsufsort64
  */
 
-//Tests of fromFileToSdVector :
-CASE("fromFileToSdVector : reading from a file : "){ //verify os fromFileToSdVector can read a file correctly
-    EXPECT_NOT((res.size() == 1 && res[0] == 0));   //if res.size() == 1 and res[0] == 0, the file read has failed
-}
+        //Tests of fromFileToSdVector :
+        CASE("fromFileToSdVector : reading from a file : "){ //verify os fromFileToSdVector can read a file correctly
+                sd_vector<>res = fromFileToSdVector("../sorted_kmers.txt");
+                EXPECT_NOT((res.size() == 1 && res[0] == 0));   //if res.size() == 1 and res[0] == 0, the file read has failed
+        }
 
-//Tests of decode :
-CASE("decode : the 1000000 firsts : "){ //decode the 1000000 firsts elements of the generated sequence res (with fromFileToSdVector)
-    uint64_t len = log(res.size()) / log(ALPHABET);
-    for(uint64_t i = 0 ; i < 1000000 ; i++){
-        EXPECT(i == encode(decode(i, len), len));   //expect to find i with a encode-decode combination
-        // cout << decode(i, len) << " : " << i << endl;
+        CASE("fromFileToSdVector : reading from a file : improved version"){
+            sd_vector<>res = fromFileToSdVectorEcoli("./ecoli_count.txt");
+            EXPECT_NOT((res.size() == 1 && res[0] == 0));
+        }
 
-    }
-}
+        //Tests of decode :
+        CASE("decode case A = 0 ; C = 1 ; G = 2 ; T = 3 : "){ //decode the 1000000 firsts elements of the generated sequence res (with fromFileToSdVector)
+                uint64_t len = log(totalLen) / log(ALPHABET);
+                for(uint64_t i = 0 ; i < 1000000 ; i++){
+                            EXPECT(i == encode(decode(i, len), len));   //expect to find i with a encode-decode combination
+                    // cout << decode(i, len) << " : " << i << endl;
 
-//Tests of previous :
-CASE("previous : perfect use expected for the 1000000 firsts : "){  //Test with a perfect use of previous + a perfect generated sequence
-    int currentKMerLen = log(res.size()) / log(ALPHABET);
-    for(int i = 0 ; i < 1000000 ; i++){ //for the firsts 1000000
-        vector<uint64_t> prev = previous(i, res);
-        uint64_t beg = (prev[0] << 2)%res.size();
-        EXPECT(( beg == i || beg+1 == i || beg+2 == i || beg+3 == i )); //expect that the orignal kmer is one of the next kmer of each of its previous
-    }
-}
+                }
+        }
 
-CASE("previous : unexpected use : a non existant k-mer : "){    //Test with an example of bad use : try to find a non existing k-mer
-    vector<uint64_t> prev = previous(-404, res);    //a compressed k-mer can't have a negative number
-    EXPECT(prev.size() == 0);   //In this case, they is no possible previous
-}
+        CASE("decode case A = 0 ; C = 1 ; T = 2 ; G = 3 (ecoli file) : "){ //decode the 1000000 firsts elements of the generated sequence res (with fromFileToSdVector)
+            uint64_t len = log(totalLen) / log(ALPHABET);
+            for(uint64_t i = 0 ; i < 1000000 ; i++){
+                EXPECT(i == encodeEcoli(decodeEcoli(i, len), len));   //expect to find i with a encode-decode combination
+            }
+        }
+
+        //Tests of previous :
+        CASE("previous : perfect use expected for the 1000000 firsts : "){  //Test with a perfect use of previous + a perfect generated sequence
+            uint64_t currentKMerLen = log(totalLen) / log(ALPHABET);
+            for(int i = 0 ; i < 1000000 ; i++){ //for the firsts 1000000
+                vector<uint64_t> prev = previous(i, totalLen);
+                uint64_t beg = (prev[0] << 2)%totalLen;
+                        EXPECT(( beg == i || beg+1 == i || beg+2 == i || beg+3 == i )); //expect that the orignal kmer is one of the next kmer of each of its previous
+            }
+        }
+        CASE("previous : unexpected use : a non existant k-mer : "){    //Test with an example of bad use : try to find a non existing k-mer
+            vector<uint64_t> prev = previous(-404, totalLen);    //a compressed k-mer can't have a negative number
+                    EXPECT(prev.size() == 0);   //In this case, they is no possible previous
+        }
+
+        CASE("reverse complement : "){
+            uint64_t len = log(totalLen) / log(ALPHABET);
+            for(int i = 0 ; i < 1000000 ; i++){
+                EXPECT(i == reverseComplement(decode(reverseComplement(decode(i, len), totalLen), len), totalLen));
+            }
+        }
+
 
 int main(int argc, char* argv[]){
     if(int failures = run(specification, argc, argv)){  //run all the test cases
@@ -122,4 +141,3 @@ void test_next(){
     }
     printf("Number of successful test : %d/%d\n", cpt_success, sd_vector_size);
 }*/
-
