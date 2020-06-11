@@ -6,7 +6,7 @@ cpp: c++11
 
 python: "3.6"
 
-compiler: g++
+compiler: g++ 
 
 #before_install: |
 #  if ! [ -f sdsl-lite/ ]; then
@@ -15,7 +15,7 @@ compiler: g++
 #    ./install.sh;
 #  fi
 
-#cache:
+# cache:
 #  directories:
 #    - sdsl-lite/
 
