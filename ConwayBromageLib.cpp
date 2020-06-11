@@ -82,6 +82,22 @@ uint64_t encodeEcoli(string word, uint64_t size){
     return hash;    //return the final hash of the sequence
 }
 
+
+string decodeEcoli(uint64_t seq, uint64_t size){
+    string res(size, ' ');
+    uint64_t lastIndex = res.size()-1;
+    for(int i(0); i < size; i++){
+        switch(seq & 0x3){ //compares the decimal value of the first two bits
+            case 0: res[lastIndex-i] = 'A'; break;
+            case 1: res[lastIndex-i] = 'C'; break;
+            case 2: res[lastIndex-i] = 'T'; break;
+            case 3: res[lastIndex-i] = 'G'; break;
+        }
+        seq >>= 2;
+    }
+    return res;
+}
+
 /* function to encode k-mer sequences
  * Need a string (the sequence) and a uint64_t which is the size of the sequence
  * return a uint64_t which is the encoding version of the sequence
@@ -127,6 +143,63 @@ string decode(uint64_t seq, uint64_t size){
     return res;
 }
 
+/**
+ * Returns the successors of a kmer.
+ * @param nonCompressedKMer.
+ * @param currentCompressedSeq.
+ * @return a vector<string> representing the (at most 4) successors of the kmer.
+ */
+vector<string> next(string nonCompressedKMer, sd_vector<> const& currentCompressedSeq){
+    vector<string> res;
+    //We check if the nonCompressedKMer exists (i.e set to 1) in the currentCompressedSeq.
+    //It exists if it has a proper size and if his index is set to 1 in the sd_vector.
+    uint64_t K = (int)(log(currentCompressedSeq.size())/log(4));
+    if(nonCompressedKMer.size() != K)
+        return res;
+    uint64_t index = encode(nonCompressedKMer, nonCompressedKMer.size());
+    if(!currentCompressedSeq[index]) //if set to 0, there are no successors
+        return res;
+    
+    int method = 1;
+    if(method == 1){ //METHOD1 for k = 9 and n = 262144, the function returns the successors of all kmer in txt-file in 45993 ms
+        uint64_t lastIndexInString = K-1;
+        string kmer = nonCompressedKMer.substr(1, lastIndexInString) + "A";
+        //next(n) = {4n%size, (4n+1)%size, (4n+2)%size, (4n+3)%size}
+        uint64_t i_kmer1 = (index << 2)%currentCompressedSeq.size();
+        uint64_t i_kmer2 = i_kmer1+1;
+        uint64_t i_kmer3 = i_kmer1+2;
+        uint64_t i_kmer4 = i_kmer1+3;
+        if(index != i_kmer1 && currentCompressedSeq[i_kmer1]) res.push_back(kmer);
+        kmer[lastIndexInString] = 'C';
+        if(index != i_kmer2 && currentCompressedSeq[i_kmer2]) res.push_back(kmer);
+        kmer[lastIndexInString] = 'G';
+        if(index != i_kmer3 && currentCompressedSeq[i_kmer3]) res.push_back(kmer);
+        kmer[lastIndexInString] = 'T';
+        if(index != i_kmer4 && currentCompressedSeq[i_kmer4]) res.push_back(kmer);
+    } else if(method == 2) { //METHOD2 for k = 9 and n = 262144, the function returns the successors of all kmer in txt-file in 43726 ms
+        uint64_t i_kmer1 = (index << 2)%currentCompressedSeq.size();
+        uint64_t i_kmer2 = i_kmer1+1;
+        uint64_t i_kmer3 = i_kmer1+2;
+        uint64_t i_kmer4 = i_kmer1+3;
+        if(index != i_kmer1 && currentCompressedSeq[i_kmer1]) res.push_back(decode(i_kmer1, K));
+        if(index != i_kmer2 && currentCompressedSeq[i_kmer2]) res.push_back(decode(i_kmer2, K));
+        if(index != i_kmer3 && currentCompressedSeq[i_kmer3]) res.push_back(decode(i_kmer3, K));
+        if(index != i_kmer4 && currentCompressedSeq[i_kmer4]) res.push_back(decode(i_kmer4, K));
+    } else { //METHOD 3 for k = 9 and n = 262144, the function returns the successors of all kmer in txt-file in 45807 ms
+        std::bitset<64> i = encode(nonCompressedKMer.substr(1, K-1), K-1);
+        std::bitset<66> kmer1(i.to_string()+"00");
+        uint64_t i_kmer1 = static_cast<uint64_t>(kmer1.to_ulong());
+        uint64_t i_kmer2 = i_kmer1+1;
+        uint64_t i_kmer3 = i_kmer1+2;
+        uint64_t i_kmer4 = i_kmer1+3;
+        if(index != i_kmer1 && currentCompressedSeq[i_kmer1]) res.push_back(decode(i_kmer1, K));
+        if(index != i_kmer2 && currentCompressedSeq[i_kmer2]) res.push_back(decode(i_kmer2, K));
+        if(index != i_kmer3 && currentCompressedSeq[i_kmer3]) res.push_back(decode(i_kmer3, K));
+        if(index != i_kmer4 && currentCompressedSeq[i_kmer4]) res.push_back(decode(i_kmer4, K));
+    }
+    return res;
+}
+
 /* Verifiy the size of 2 k-mer
  * @param KMerLen - The size of the current K-mer (the one we study)
  * @param currentCompressedSeqLen - The size of the generated sequence
@@ -156,37 +229,15 @@ vector<uint64_t> previous(uint64_t compressedKMer, sdsl::sd_vector<> const& curr
             potentialPrevious[i] = potentialPrevious[i-1] + (currentCompressedSeq.size() / 4);
         }
         for(int i = 0 ; i < 4 ; i++){
-            prev.push_back(potentialPrevious[i]);
+            if(currentCompressedSeq[potentialPrevious[i]]){
+                prev.push_back(potentialPrevious[i]);
+            }
         }
     }
     return prev;
 }
 
-/**
- * Returns the successors of a kmer.
- * @param nonCompressedKMer.
- * @param currentCompressedSeq.
- * @return a vector<uint64_t> representing the (at most 4) successors of the kmer.
- */
-std::vector<uint64_t> next(uint64_t nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq){
-    vector<uint64_t> res;
-    //We check if the nonCompressedKMer exists (i.e set to 1) in the currentCompressedSeq.
-    //It exists if it has a proper size and if his index is set to 1 in the sd_vector.
-    uint64_t K = (int)(log(currentCompressedSeq.size())/log(4));
-    if(nonCompressedKMer >= currentCompressedSeq.size() || !currentCompressedSeq[nonCompressedKMer]) //if set to 0, there are no successors
-        return res;
-    
-    uint64_t i_kmer1 = (nonCompressedKMer << 2)%currentCompressedSeq.size();
-    uint64_t i_kmer2 = i_kmer1+1;
-    uint64_t i_kmer3 = i_kmer1+2;
-    uint64_t i_kmer4 = i_kmer1+3;
-    if(currentCompressedSeq[i_kmer1]) res.push_back(i_kmer1);
-    if(currentCompressedSeq[i_kmer2]) res.push_back(i_kmer2);
-    if(currentCompressedSeq[i_kmer3]) res.push_back(i_kmer3);
-    if(currentCompressedSeq[i_kmer4]) res.push_back(i_kmer4);
 
-    return res;
-}
 
 /* Transform sequences which are contain in a file in a sd_vector
  * Need a string which is the path to the file
@@ -208,11 +259,11 @@ sd_vector<>fromFileToSdVectorEcoli(string path){
         file.seekg(0, ios::beg);    //Return to he beginning of the file
         cout << "length of ones : " << myOneLen << endl;
         cout << "length of a seq : " << myWordLen << endl;
-        long int myTotalLen(pow(ALPHABET,myWordLen));   //Creation of the total length to create the sd_vector_builder
+        uint64_t myTotalLen(pow(ALPHABET,myWordLen));   //Creation of the total length to create the sd_vector_builder
         cout << "Total length : " << myTotalLen << endl;
         sd_vector_builder constructSparse(myTotalLen, myOneLen);    //A size of myTotalLen, contains myOneLen ones
         while(file >> word){
-            cout << "The seq is : " << word << endl;
+            //cout << "The seq is : " << word << endl;
             constructSparse.set(encodeEcoli(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
             file >> word;
         }
@@ -296,33 +347,100 @@ uint64_t reverseComplement(string seq, uint64_t len){
     uint64_t complem = encode(seq, sizeOfSeq);  //encoding the reverse
     uint64_t final;
     if(complem > len/2){    //Position for complement
-        cout << "IF : " << endl;
-        int position(len-complem);
+        uint64_t position(len-complem);
         final = position-1;
-        cout << final << endl;
     }else{
-        cout << "ELSE : " << endl;
-        int position(complem);
+        uint64_t position(complem);
         final = len-position-1;
-        cout << final << endl;
     }
     return final;
 }
 
-/* Transform sequences which are contain in a file in a sd_vector
- * Also give the reverse complement in an other sd_vector, for ecoli only
- * @param path - a string which is the path to the file which contains the generated sequence
- * @return a vector of sd_vector which contains encoding version of the sequence of the file and of the reverse complement of the sequence
+/* Calculate the reverse complement
+ * Come from the wev page : https://www.biostars.org/p/113640/
+ * Version for the lexicographical order : A = 00 ; C = 01 ; G = 10 ; T = 11
+ * !!!!! Not the fastest version according to the webpage !!!!!
+ * @param mer - a uin64_t which represent the compressed version of a k-mer
+ * @param kmerSize - a uint64_t which represent the size of the given k-mer
+ * @return a uin64_t which represent the compressed version of the reverse complement of the given k-mer (lexicographicalorder)
  */
-vector<sd_vector<>>fromFileToSdVectorWithReverseEcoli(string path){
+uint64_t reverseComplementLexico (const uint64_t mer, uint64_t kmerSize)   //same with A = 00 ; C = 01 ; G = 10 ; T = 11
+{
+    uint64_t res = ~mer;
+
+    res = ((res >> 2 & 0x3333333333333333) | (res & 0x3333333333333333) << 2);
+    res = ((res >> 4 & 0x0F0F0F0F0F0F0F0F) | (res & 0x0F0F0F0F0F0F0F0F) << 4);
+    res = ((res >> 8 & 0x00FF00FF00FF00FF) | (res & 0x00FF00FF00FF00FF) << 8);
+    res = ((res >> 16 & 0x0000FFFF0000FFFF) | (res & 0x0000FFFF0000FFFF) << 16);
+    res = ((res >> 32 & 0x00000000FFFFFFFF) | (res & 0x00000000FFFFFFFF) << 32);
+
+    return (res >> (2 * (32 - kmerSize)));
+}
+
+
+/* Calculate the reverse complement
+ * Come from the wev page : https://www.biostars.org/p/113640/
+ * Version for the fastest ASCII order : A = 00 ; C = 01 ; T = 10 ; G = 11
+ * @param x - a uin64_t which represent the compressed version of a k-mer
+ * @param sizeKmer - a uint64_t which represent the size of the given k-mer
+ * @return a uin64_t which represent the compressed version of the reverse complement of the given k-mer (lexicographicalorder)
+ */
+u_int64_t reverseComplementGATBLibEcoli (const u_int64_t x, uint64_t sizeKmer)      //GATB library edrezen  case A = 00 ; C = 01 ; G = 11 ; T = 10
+{
+    u_int64_t res = x;
+
+    res = ((res>> 2 & 0x3333333333333333) | (res & 0x3333333333333333) <<  2);
+    res = ((res>> 4 & 0x0F0F0F0F0F0F0F0F) | (res & 0x0F0F0F0F0F0F0F0F) <<  4);
+    res = ((res>> 8 & 0x00FF00FF00FF00FF) | (res & 0x00FF00FF00FF00FF) <<  8);
+    res = ((res>>16 & 0x0000FFFF0000FFFF) | (res & 0x0000FFFF0000FFFF) << 16);
+    res = ((res>>32 & 0x00000000FFFFFFFF) | (res & 0x00000000FFFFFFFF) << 32);
+    res = res ^ 0xAAAAAAAAAAAAAAAA;
+
+    return (res >> (2*( 32 - sizeKmer))) ;
+}
+
+/*
+ * Return the merging version of 2 sd_vector
+ * @param a an sd_vector of the same size as b
+ * @param b an sd_vector
+ * @param nb_of_1_in_A the number of 1-bit in the sd_vector a
+ * @param nb_of_1_in_B the number of 1-bit in the sd_vector b
+ * @return a sd_vector which is the merging version of the 2 sd_vector params
+ */
+sd_vector<> merge (const sd_vector<> &a, const sd_vector<> &b, int nb_of_1_in_A, int nb_of_1_in_B){
+    int len = a.size();
+    int nb_of_1 = nb_of_1_in_A + nb_of_1_in_B;
+    int nb_of_1_in_merged = 0;
+    sd_vector_builder s(len, nb_of_1);
+    //filling builder
+    for(int i = 0; i < len; i++) {
+        if (a[i] == 1 && b[i] == 1)
+            s.set(i);
+        if (a[i] == 1 || b[i] == 1) {
+            s.set(i);
+            nb_of_1_in_merged++;
+        }
+    }
+    //creation of the sd_vector
+    sd_vector<> merger(s);
+    return merger;
+}
+
+
+/* Transform sequences which are contain in a file in a sd_vector
+ * Merge with the reverse complement
+ * @param path - a string which is the path to the file which contains the generated sequence
+ * @return a sd_vector which contains an encoding merging version of the sequence of the file and of the reverse complement of the sequence
+ */
+sd_vector<>fromFileToSdVectorWithReverse(string path){
     ifstream file(path, ios::in);  // Reading of the file which contains k-mers sequences
     if(file){   // File is now open
         string word;
         string line("");
         file >> word;   //Take the first word to analyze size of one k-mer
         file.seekg(0, ios::beg);    //Return to the beginning of the file
-        int myWordLen(word.size()); //Size of k_mer, it is the 'k'
-        int myOneLen(0);
+        uint64_t myWordLen(word.size()); //Size of k_mer, it is the 'k'
+        uint64_t myOneLen(0);
         while(getline(file, line)){ //Counts the number of ones in the file
             myOneLen++;
         }
@@ -337,10 +455,11 @@ vector<sd_vector<>>fromFileToSdVectorWithReverseEcoli(string path){
         sd_vector_builder constructSparse(myTotalLen, myOneLen);    //A size of myTotalLen, contains myOneLen ones, right version
         sd_vector_builder constructReverse(myTotalLen, myOneLen);   //same total size and ones size, reverse version
         while(file >> word){
-                constructSparse.set(encodeEcoli(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
-                reverser[i] = reverseComplement(word, myTotalLen);  //each reverses of each words, compressed version
+            if(word != "1"){
+                constructSparse.set(encode(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
+                reverser[i] = reverseComplementLexico(encode(word, myWordLen), myWordLen);  //each reverses of each words, compressed version
                 i++;
-                file >> word;
+            }
         }
         sort(reverser.begin(), reverser.end()); //sorting of the reverse otherwise it will be impossible to use sd_vector_builder
         for(int i = 0 ; i < myOneLen ; i++){
@@ -349,12 +468,60 @@ vector<sd_vector<>>fromFileToSdVectorWithReverseEcoli(string path){
         vector<sd_vector<>> seq;
         sd_vector<>finalSparseRight(constructSparse);    //Construction of the final sd_vector for the right sequence
         sd_vector<>finalSparseReverse(constructReverse);   //Construction of the final sd_vector for the reverse sequence
-        seq.push_back(finalSparseRight);
-        seq.push_back(finalSparseReverse);
+        sd_vector<>finalAll = merge(finalSparseRight, finalSparseReverse, finalSparseRight.size(), finalSparseReverse.size());  //merging
         file.close();
-        return seq;
+        return finalAll;
     }else{
         cout << "Error while opening" << endl;
     }
-    //return bit_vector{0}; //need an other return here
+    return bit_vector{0};
+}
+
+/* Transform sequences which are contain in a file in a sd_vector
+ * Merge the reverse complement, fastest ASCII version for reverse complement and encode/decode
+ * @param path - a string which is the path to the file which contains the generated sequence
+ * @return a sd_vector which contains an encoding merging version of the sequence of the file and of the reverse complement of the sequence
+ */
+sd_vector<>fromFileToSdVectorWithReverseEcoli(string path){
+    ifstream file(path, ios::in);  // Reading of the file which contains k-mers sequences
+    if(file){   // File is now open
+        string word;
+        string line("");
+        file >> word;   //Take the first word to analyze size of one k-mer
+        file.seekg(0, ios::beg);    //Return to the beginning of the file
+        uint64_t myWordLen(word.size()); //Size of k_mer, it is the 'k'
+        uint64_t myOneLen(0);
+        while(getline(file, line)){ //Counts the number of ones in the file
+            myOneLen++;
+        }
+        file.clear();
+        file.seekg(0, ios::beg);    //Return to the beginning of the file
+        cout << "length of ones : " << myOneLen << endl;
+        cout << "length of a seq : " << myWordLen << endl;
+        uint64_t myTotalLen(pow(ALPHABET,myWordLen));   //Creation of the total length to create sd_vector_builders
+        int_vector<> reverser(myOneLen, 0); //to simplify the reverse complement build                                                              //SLOW DOWN
+        cout << "Total length : " << myTotalLen << endl;
+        int i = 0;
+        sd_vector_builder constructSparse(myTotalLen, myOneLen);    //A size of myTotalLen, contains myOneLen ones, right version
+        sd_vector_builder constructReverse(myTotalLen, myOneLen);   //same total size and ones size, reverse version
+        while(file >> word){
+                constructSparse.set(encodeEcoli(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
+                reverser[i] = reverseComplementGATBLibEcoli(encodeEcoli(word, myWordLen), myWordLen);  //each reverses of each words, compressed version                                           //SLOW DOWN
+                i++;
+                file >> word;
+        }
+        sort(reverser.begin(), reverser.end()); //sorting of the reverse otherwise it will be impossible to use sd_vector_builder                               //SLOW DOWN
+        for(int i = 0 ; i < myOneLen ; i++){
+            constructReverse.set(reverser[i]);  //filled for the reverse version                                                                                //SLOW DOWN
+        }
+        vector<sd_vector<>> seq;
+        sd_vector<>finalSparseRight(constructSparse);    //Construction of the final sd_vector for the right sequence
+        sd_vector<>finalSparseReverse(constructReverse);   //Construction of the final sd_vector for the reverse sequence
+        sd_vector<>finalAll = merge(finalSparseRight, finalSparseReverse, finalSparseRight.size(), finalSparseReverse.size());
+        file.close();
+        return finalAll;
+    }else{
+        cout << "Error while opening" << endl;
+    }
+    return bit_vector{0};
 }
