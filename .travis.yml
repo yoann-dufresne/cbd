@@ -21,10 +21,10 @@ compiler: g++
 
 install:
   - git clone https://github.com/simongog/sdsl-lite.git
+  - git clone https://github.com/martinmoene/lest.git
   - cd sdsl-lite
   - ./install.sh
   - cd ../
-  - git clone https://github.com/martinmoene/lest.git
 
 script:
   - cd $TRAVIS_BUILD_DIR #là où est contenu notre code ( pas  sdsl-lite )
