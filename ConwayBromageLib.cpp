@@ -147,56 +147,26 @@ string decode(uint64_t seq, uint64_t size){
  * Returns the successors of a kmer.
  * @param nonCompressedKMer.
  * @param currentCompressedSeq.
- * @return a vector<string> representing the (at most 4) successors of the kmer.
+ * @return a vector<uint64_t> representing the (at most 4) successors of the kmer.
  */
-vector<string> next(string nonCompressedKMer, sd_vector<> const& currentCompressedSeq){
-    vector<string> res;
+std::vector<uint64_t> next(uint64_t nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq){
+    vector<uint64_t> res;
     //We check if the nonCompressedKMer exists (i.e set to 1) in the currentCompressedSeq.
     //It exists if it has a proper size and if his index is set to 1 in the sd_vector.
     uint64_t K = (int)(log(currentCompressedSeq.size())/log(4));
-    if(nonCompressedKMer.size() != K)
-        return res;
-    uint64_t index = encode(nonCompressedKMer, nonCompressedKMer.size());
-    if(!currentCompressedSeq[index]) //if set to 0, there are no successors
+    if(nonCompressedKMer >= currentCompressedSeq.size() || !currentCompressedSeq[nonCompressedKMer]) //if set to 0, there are no successors
         return res;
     
-    int method = 1;
-    if(method == 1){ //METHOD1 for k = 9 and n = 262144, the function returns the successors of all kmer in txt-file in 45993 ms
-        uint64_t lastIndexInString = K-1;
-        string kmer = nonCompressedKMer.substr(1, lastIndexInString) + "A";
-        //next(n) = {4n%size, (4n+1)%size, (4n+2)%size, (4n+3)%size}
-        uint64_t i_kmer1 = (index << 2)%currentCompressedSeq.size();
-        uint64_t i_kmer2 = i_kmer1+1;
-        uint64_t i_kmer3 = i_kmer1+2;
-        uint64_t i_kmer4 = i_kmer1+3;
-        if(index != i_kmer1 && currentCompressedSeq[i_kmer1]) res.push_back(kmer);
-        kmer[lastIndexInString] = 'C';
-        if(index != i_kmer2 && currentCompressedSeq[i_kmer2]) res.push_back(kmer);
-        kmer[lastIndexInString] = 'G';
-        if(index != i_kmer3 && currentCompressedSeq[i_kmer3]) res.push_back(kmer);
-        kmer[lastIndexInString] = 'T';
-        if(index != i_kmer4 && currentCompressedSeq[i_kmer4]) res.push_back(kmer);
-    } else if(method == 2) { //METHOD2 for k = 9 and n = 262144, the function returns the successors of all kmer in txt-file in 43726 ms
-        uint64_t i_kmer1 = (index << 2)%currentCompressedSeq.size();
-        uint64_t i_kmer2 = i_kmer1+1;
-        uint64_t i_kmer3 = i_kmer1+2;
-        uint64_t i_kmer4 = i_kmer1+3;
-        if(index != i_kmer1 && currentCompressedSeq[i_kmer1]) res.push_back(decode(i_kmer1, K));
-        if(index != i_kmer2 && currentCompressedSeq[i_kmer2]) res.push_back(decode(i_kmer2, K));
-        if(index != i_kmer3 && currentCompressedSeq[i_kmer3]) res.push_back(decode(i_kmer3, K));
-        if(index != i_kmer4 && currentCompressedSeq[i_kmer4]) res.push_back(decode(i_kmer4, K));
-    } else { //METHOD 3 for k = 9 and n = 262144, the function returns the successors of all kmer in txt-file in 45807 ms
-        std::bitset<64> i = encode(nonCompressedKMer.substr(1, K-1), K-1);
-        std::bitset<66> kmer1(i.to_string()+"00");
-        uint64_t i_kmer1 = static_cast<uint64_t>(kmer1.to_ulong());
-        uint64_t i_kmer2 = i_kmer1+1;
-        uint64_t i_kmer3 = i_kmer1+2;
-        uint64_t i_kmer4 = i_kmer1+3;
-        if(index != i_kmer1 && currentCompressedSeq[i_kmer1]) res.push_back(decode(i_kmer1, K));
-        if(index != i_kmer2 && currentCompressedSeq[i_kmer2]) res.push_back(decode(i_kmer2, K));
-        if(index != i_kmer3 && currentCompressedSeq[i_kmer3]) res.push_back(decode(i_kmer3, K));
-        if(index != i_kmer4 && currentCompressedSeq[i_kmer4]) res.push_back(decode(i_kmer4, K));
-    }
+    //for k = 9 and n = 262144, the function returns the successors of all kmer in txt-file in 43726 ms
+    uint64_t i_kmer1 = (nonCompressedKMer << 2)%currentCompressedSeq.size();
+    uint64_t i_kmer2 = i_kmer1+1;
+    uint64_t i_kmer3 = i_kmer1+2;
+    uint64_t i_kmer4 = i_kmer1+3;
+    if(currentCompressedSeq[i_kmer1]) res.push_back(i_kmer1);
+    if(currentCompressedSeq[i_kmer2]) res.push_back(i_kmer2);
+    if(currentCompressedSeq[i_kmer3]) res.push_back(i_kmer3);
+    if(currentCompressedSeq[i_kmer4]) res.push_back(i_kmer4);
+
     return res;
 }
 
