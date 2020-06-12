@@ -192,7 +192,7 @@ bool isTheSameSize(int KMerLen, int currentCompressedSeqLen){
  */
 vector<uint64_t> previous(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq){
     vector<uint64_t>prev;
-    if(compressedKMer < currentCompressedSeq.size() && compressedKMer >= 0){
+    if(compressedKMer < currentCompressedSeq.size() && compressedKMer >= 0 && currentCompressedSeq[compressedKMer]){
         uint64_t potentialPrevious[4];
         potentialPrevious[0] = (compressedKMer >> 2)%currentCompressedSeq.size();
         for(int i = 1 ; i < 4 ; i++){

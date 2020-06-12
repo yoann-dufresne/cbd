@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   Tests.cpp
  * Author: muratokutucu
  *
@@ -26,6 +26,7 @@ using namespace lest;
 
 
 static const uint64_t  totalLen = 4611686018427387904;
+static const sd_vector<>littleTestPrev = bit_vector{0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1};
 
 /*
  * Compilation line : g++ -Wall -Wextra -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o Tests.exe Tests.cpp ConwayBromageLib.cpp -lsdsl -ldivsufsort -ldivsufsort64
@@ -34,29 +35,29 @@ static const uint64_t  totalLen = 4611686018427387904;
 //Appears to other tests, need to be verify in first
 const test critical[] = {
         CASE("merge : "){
-                bit_vector ba = {0, 1, 1, 1, 0, 1};
-                bit_vector bb = {1, 0, 0, 0};
-                sd_vector<>a(ba);
-                sd_vector<>b(bb);
-                sd_vector<> res = merge(a, b, 4, 1);
-                uint64_t finalSize(0);
-                if(a.size() > b.size()){
-                    finalSize = a.size();
-                }else{
-                    finalSize = b.size();
+            bit_vector ba = {0, 1, 1, 1, 0, 1};
+            bit_vector bb = {1, 0, 0, 0};
+            sd_vector<>a(ba);
+            sd_vector<>b(bb);
+            sd_vector<> res = merge(a, b, 4, 1);
+            uint64_t finalSize(0);
+            if(a.size() > b.size()){
+                finalSize = a.size();
+            }else{
+                finalSize = b.size();
+            }
+            EXPECT(res.size() == finalSize);
+            for(int i = 0 ; i < finalSize ; i++){
+                if(a[i] || b[i]){
+                    EXPECT(res[i] == 1);
                 }
-                EXPECT(res.size() == finalSize);
-                for(int i = 0 ; i < finalSize ; i++){
-                    if(a[i] || b[i]){
-                                EXPECT(res[i] == 1);
-                    }
-                }
+            }
         },
         //Tests of decode :
         CASE("decode case A = 0 ; C = 1 ; G = 2 ; T = 3 : original "){ //decode the 1000000 firsts elements of the generated sequence res (with fromFileToSdVector)
             uint64_t len = log(totalLen) / log(ALPHABET);
             for(uint64_t i = 0 ; i < 1000000 ; i++){
-                        EXPECT(i == encode(decode(i, len), len));   //expect to find i with a encode-decode combination
+                EXPECT(i == encode(decode(i, len), len));   //expect to find i with a encode-decode combination
                 // cout << decode(i, len) << " : " << i << endl;
 
             }
@@ -64,8 +65,27 @@ const test critical[] = {
         CASE("decode case A = 0 ; C = 1 ; T = 2 ; G = 3 (ecoli file) : original for ecoli"){ //decode the 1000000 firsts elements of the generated sequence res (with fromFileToSdVector)
             uint64_t len = log(totalLen) / log(ALPHABET);
             for(uint64_t i = 0 ; i < 1000000 ; i++){
-                        EXPECT(i == encodeEcoli(decodeEcoli(i, len), len));   //expect to find i with a encode-decode combination
+                EXPECT(i == encodeEcoli(decodeEcoli(i, len), len));   //expect to find i with a encode-decode combination
             }
+        },
+        //Tests of previous :
+        CASE("previous : perfect use expected for the 1000000 firsts : "){  //Test with a perfect use of previous + a perfect generated sequence
+            vector<vector<uint64_t>> prevOfLittlePrev(16);
+            prevOfLittlePrev[1] = {4, 8};
+            prevOfLittlePrev[3] = {4, 8};
+            prevOfLittlePrev[4] = {1, 5, 13};
+            prevOfLittlePrev[5] = {1, 5, 13};
+            prevOfLittlePrev[13] = {3, 15};
+            prevOfLittlePrev[15] = {3, 15};
+            uint64_t currentKMerLen = log(littleTestPrev.size()) / log(ALPHABET);
+            for(int i = 0 ; i < littleTestPrev.size() ; i++){ //for the firsts 1000000
+                vector<uint64_t> prev = previous(i, littleTestPrev);
+                EXPECT(prevOfLittlePrev[i] == prev);
+            }
+        },
+        CASE("previous : unexpected use : a non existant k-mer : "){    //Test with an example of bad use : try to find a non existing k-mer
+            vector<uint64_t> prev = previous(-404, littleTestPrev);    //a compressed k-mer can't have a negative number
+            EXPECT(prev.size() == 0);   //In this case, they is no possible previous
         },
 };
 
@@ -73,86 +93,61 @@ const test lessCritical[] = {
         CASE("reverse complement : original"){
             uint64_t len = log(totalLen) / log(ALPHABET);
             for(int i = 0 ; i < 1000000 ; i++){
-                        EXPECT(i == reverseComplement(decode(reverseComplement(decode(i, len), totalLen), len), totalLen));
+                EXPECT(i == reverseComplement(decode(reverseComplement(decode(i, len), totalLen), len), totalLen));
             }
         },
         CASE("reverse complement : faster lexicographical order"){
             uint64_t len = log(totalLen) / log(ALPHABET);
             for(int i = 0 ; i < 1000000 ; i++){
-                        EXPECT(i == reverseComplementLexico(reverseComplementLexico(i, len), len));
+                EXPECT(i == reverseComplementLexico(reverseComplementLexico(i, len), len));
             }
         },
         CASE("reverse complement : fastest for ASCII version"){
             uint64_t len = log(totalLen) / log(ALPHABET);
             for(int i = 0 ; i < 1000000 ; i++){
-                        EXPECT(i == reverseComplementGATBLibEcoli(reverseComplementGATBLibEcoli(i, len), len));
+                EXPECT(i == reverseComplementGATBLibEcoli(reverseComplementGATBLibEcoli(i, len), len));
             }
         },
 };
 
-const test lessLessCrit[] = {
+const test atTheEnd[] = {
         //Tests of fromFileToSdVector :
         CASE("fromFileToSdVector : reading from a file : original "){ //verify os fromFileToSdVector can read a file correctly
-                sd_vector<>res = fromFileToSdVector("../sorted_kmers.txt");
-                EXPECT_NOT((res.size() == 1 && res[0] == 0));   //if res.size() == 1 and res[0] == 0, the file read has failed
+            sd_vector<>res = fromFileToSdVector("../sorted_kmers.txt");
+            EXPECT_NOT((res.size() == 1 && res[0] == 0));   //if res.size() == 1 and res[0] == 0, the file read has failed
         },
         CASE("fromFileToSdVector : reading from a file : original with reverse "){ //verify os fromFileToSdVector can read a file correctly
             sd_vector<>res = fromFileToSdVectorWithReverse("../sorted_kmers.txt");
-                    EXPECT_NOT((res.size() == 1 && res[0] == 0));   //if res.size() == 1 and res[0] == 0, the file read has failed
+            EXPECT_NOT((res.size() == 1 && res[0] == 0));   //if res.size() == 1 and res[0] == 0, the file read has failed
         },
         CASE("fromFileToSdVector : reading from a file : Fastest ASCII reading version"){
             sd_vector<>res = fromFileToSdVectorEcoli("./ecoli_count.txt");
-                    EXPECT_NOT((res.size() == 1 && res[0] == 0));
+            EXPECT_NOT((res.size() == 1 && res[0] == 0));
         },
         CASE("fromFileToSdVector : reading from a file : Fastest ASCII reading version reverse complement included"){
             sd_vector<>res = fromFileToSdVectorWithReverseEcoli("./ecoli_count.txt");
-                    EXPECT_NOT((res.size() == 1 && res[0] == 0));
-        },
-};
-
-const test atTheEnd[] = {
-        //Tests of previous :
-        CASE("previous : perfect use expected for the 1000000 firsts : "){  //Test with a perfect use of previous + a perfect generated sequence
-                sd_vector<> ret = fromFileToSdVector("../sorted_kmers.txt");
-                uint64_t currentKMerLen = log(ret.size()) / log(ALPHABET);
-                for(int i = 0 ; i < 10 ; i++){ //for the firsts 1000000
-                    vector<uint64_t>proof;
-                    string current = decode(i, currentKMerLen);
-                    current.erase(current.size()-1, 1);
-                    uint64_t potentialKMer[4];
-                    for(int j = 0 ; j < 4 ; j++){
-                        string concat = NUCLEOTIDES[j] + current;
-                        potentialKMer[j] = encode(concat, currentKMerLen);
-                        if(ret[potentialKMer[j]]){
-                            proof.push_back(potentialKMer[j]);
-                        }
-                    }
-                    vector<uint64_t> prev = previous(i, ret);
-                            EXPECT(prev == proof);
-                }
-        },
-        CASE("previous : unexpected use : a non existant k-mer : "){    //Test with an example of bad use : try to find a non existing k-mer
-                sd_vector<> ret = fromFileToSdVector("./sorted_kmers.txt");
-                vector<uint64_t> prev = previous(-404, ret);    //a compressed k-mer can't have a negative number
-                EXPECT(prev.size() == 0);   //In this case, they is no possible previous
+            EXPECT_NOT((res.size() == 1 && res[0] == 0));
         },
 };
 
 int main(){
     int failures(0);
+    cout << "*** First tests : merge, decode and previous ***" << endl;
     if(failures = run(critical)){  //run all the test cases
         return failures;
     }
+    cout << "*** First tests passed ! ***" << endl;
+    cout << "*** Second tests : reverse complement ***" << endl;
     if (failures = run(lessCritical)){
         return failures;
     }
-    if(failures = run(lessLessCrit)){
-        return failures;
-    }
+    cout << "*** Second tests passed ! ***" << endl;
+    cout << "*** Third tests : fromFileToSdVector ***" << endl;
     if (failures = run(atTheEnd)){
         return failures;
     }
-    return cout << "All tests passed\n", EXIT_SUCCESS;
+    cout << "*** Third tests passed ! ***" << endl;
+    return cout << "ALL TESTS PASSED !!!\n", EXIT_SUCCESS;
 }
 
 //Ancient tests next and decode : need to implement next with lest library
