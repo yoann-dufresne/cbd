@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/yoann-dufresne/ConwayBromageLib.svg?branch=master)](https://travis-ci.com/yoann-dufresne/ConwayBromageLib)
+
 # Conway and Bromage succinct data structures for assembling large genomnes
 
 ## Current content
