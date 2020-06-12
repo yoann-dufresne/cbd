@@ -69,7 +69,7 @@ const test critical[] = {
             }
         },
         //Tests of previous :
-        CASE("previous : perfect use expected for the 1000000 firsts : "){  //Test with a perfect use of previous + a perfect generated sequence
+        CASE("previous : perfect use expected for a manual sd_vector : "){  //Test with a perfect use of previous + a perfect generated sequence
             vector<vector<uint64_t>> prevOfLittlePrev(16);
             prevOfLittlePrev[1] = {4, 8};
             prevOfLittlePrev[3] = {4, 8};
