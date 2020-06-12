@@ -87,6 +87,71 @@ const test critical[] = {
             vector<uint64_t> prev = previous(-404, littleTestPrev);    //a compressed k-mer can't have a negative number
             EXPECT(prev.size() == 0);   //In this case, they is no possible previous
         },
+        //Test of next upon sorted_kmers.txt
+        CASE("next : test upon sorted_kmers.txt "){
+            sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt");
+            int currentKMerLen = log(sdv.size()) / log(ALPHABET);
+            for(int i = 0 ; i < sdv.size() ; i++){
+                //generation of the true results
+                string kmer_initial = decode(i, currentKMerLen);
+                string sub = kmer_initial.substr(1, currentKMerLen-1);
+                string kmer1 = sub + "A";
+                uint64_t next_kmer1 = encode(sub + "A", currentKMerLen);
+                uint64_t next_kmer2 = encode(sub + "C", currentKMerLen);
+                uint64_t next_kmer3 = encode(sub + "G", currentKMerLen);
+                uint64_t next_kmer4 = encode(sub + "T", currentKMerLen);
+                //tests if exists
+                vector<uint64_t> TrueAnswer;
+                if(sdv[next_kmer1]) TrueAnswer.push_back(next_kmer1);
+                if(sdv[next_kmer2]) TrueAnswer.push_back(next_kmer2);
+                if(sdv[next_kmer3]) TrueAnswer.push_back(next_kmer3);
+                if(sdv[next_kmer4]) TrueAnswer.push_back(next_kmer4);
+
+                //comparison with expected results
+                vector<uint64_t> successors = next(i, sdv);
+                bool result = true;
+                if(TrueAnswer.size() == successors.size()){
+                    for(int j = 0; j < successors.size(); j++){
+                        if(successors[j] != TrueAnswer[j]){
+                            result = false;
+                        }
+                    }
+                } else {
+                    result = false;
+                }
+                EXPECT(result);
+            }
+        },
+
+        //Test of next on a small sd_vector
+        CASE("next : small sd_vector"){
+            sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,1,0,1};
+            vector<vector<uint64_t>> TrueNext(16);
+            TrueNext[1]  = {4,   5};
+            TrueNext[3]  = {13, 15};
+            TrueNext[4]  = {1,   3};
+            TrueNext[5]  = {4,   5};
+            TrueNext[8]  = {1,   3};
+            TrueNext[13] = {4,   5};
+            TrueNext[15] = {13, 15};
+            bool result = true;
+            for(int i(0); i < sdv.size(); i++){
+                vector<uint64_t> successors = next(i, sdv);
+                //check if same
+                for(int j(0); j < successors.size(); j++){
+                    if(TrueNext[i].size() == successors.size()){
+                        for(int j = 0; j < successors.size(); j++){
+                            if(successors[j] != TrueNext[i][j]){
+                                result = false;
+                            }
+                        }
+                    } else {
+                        result = false;
+                    }
+                }
+            }
+            EXPECT(result);
+        }
 };
 
 const test lessCritical[] = {
@@ -149,57 +214,4 @@ int main(){
     cout << "*** Third tests passed ! ***" << endl;
     return cout << "ALL TESTS PASSED !!!\n", EXIT_SUCCESS;
 }
-
-//Ancient tests next and decode : need to implement next with lest library
-
-/*
-void test_next(){
-    //lambda to print a vector<string>
-    auto print_vec = [&](vector<string> successors){
-        cout << "{ ";
-        for(int i = 0; i < successors.size(); i++)
-            cout << successors[i] << " ";
-        cout << "}" << endl;
-    };
-    printf("Test of the function next : \n");
-    //test for k=4 => size = 256 (4^4)
-    sd_vector<> res = fromFileToSdVector("./sorted_kmers.txt");
-    int k = (int)(log(res.size())/log(4));
-    int sd_vector_size = 256;
-    for(int i = 0; i < sd_vector_size; i++){
-        vector<string> successors = next(decode(i, k),res);
-        cout << "next of " << decode(i, k) << " -> "; 
-        print_vec(successors);
-    }
-    //test of nexts : what happens if the user give a non existing kmer in the sd_vector
-    // for example, what happens if we give "AAAAA" or "AAA" in a sd_vector of 4-mer
-    vector<string> successors;
-    successors = next("AATTA",res);
-    cout << "next of AATTA -> "; 
-    print_vec(successors); //has to return {} because AATTA has a size superior to 4
-
-    successors = next("AAT",res);
-    cout << "next of AAT -> "; //has to return {} because AATTA has a size inferior to 4
-    print_vec(successors);
-    
-}*/
-
-
-/*void test_decode(){
-    printf("Test of the function decode : \n");
-    //test for k=4 => size = 256 (4^4)
-    int k = 4;
-    int sd_vector_size = 256;
-    int cpt_success = 0;
-    for(int i = 0; i < sd_vector_size; i++){
-        string dec = decode(i, k);
-        if(encode(dec, k) == i){
-            cpt_success++;
-            printf("%d <-> %s SUCCESS \n",i, dec.c_str());
-        } else {
-            printf("%d <-> %s FAIL    \n",i, dec.c_str());
-        }
-    }
-    printf("Number of successful test : %d/%d\n", cpt_success, sd_vector_size);
-}*/
 
