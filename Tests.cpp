@@ -62,12 +62,6 @@ const test critical[] = {
 
             }
         },
-        CASE("decode case A = 0 ; C = 1 ; T = 2 ; G = 3 (ecoli file) : original for ecoli"){ //decode the 1000000 firsts elements of the generated sequence res (with fromFileToSdVector)
-            uint64_t len = log(totalLen) / log(ALPHABET);
-            for(uint64_t i = 0 ; i < 1000000 ; i++){
-                EXPECT(i == encodeEcoli(decodeEcoli(i, len), len));   //expect to find i with a encode-decode combination
-            }
-        },
         //Tests of previous :
         CASE("previous : perfect use expected for a manual sd_vector : "){  //Test with a perfect use of previous + a perfect generated sequence
             vector<vector<uint64_t>> prevOfLittlePrev(16);
@@ -166,33 +160,15 @@ const test lessCritical[] = {
             for(int i = 0 ; i < 1000000 ; i++){
                 EXPECT(i == reverseComplementLexico(reverseComplementLexico(i, len), len));
             }
-        },
-        CASE("reverse complement : fastest for ASCII version"){
-            uint64_t len = log(totalLen) / log(ALPHABET);
-            for(int i = 0 ; i < 1000000 ; i++){
-                EXPECT(i == reverseComplementGATBLibEcoli(reverseComplementGATBLibEcoli(i, len), len));
-            }
-        },
+        }
 };
 
 const test atTheEnd[] = {
         //Tests of fromFileToSdVector :
         CASE("fromFileToSdVector : reading from a file : original "){ //verify os fromFileToSdVector can read a file correctly
-            sd_vector<>res = fromFileToSdVector("../sorted_kmers.txt");
+            sd_vector<>res = fromFileToSdVector("./sorted_kmers.txt");
             EXPECT_NOT((res.size() == 1 && res[0] == 0));   //if res.size() == 1 and res[0] == 0, the file read has failed
-        },
-        CASE("fromFileToSdVector : reading from a file : original with reverse "){ //verify os fromFileToSdVector can read a file correctly
-            sd_vector<>res = fromFileToSdVectorWithReverse("../sorted_kmers.txt");
-            EXPECT_NOT((res.size() == 1 && res[0] == 0));   //if res.size() == 1 and res[0] == 0, the file read has failed
-        },
-        CASE("fromFileToSdVector : reading from a file : Fastest ASCII reading version"){
-            sd_vector<>res = fromFileToSdVectorEcoli("./ecoli_count.txt");
-            EXPECT_NOT((res.size() == 1 && res[0] == 0));
-        },
-        CASE("fromFileToSdVector : reading from a file : Fastest ASCII reading version reverse complement included"){
-            sd_vector<>res = fromFileToSdVectorWithReverseEcoli("./ecoli_count.txt");
-            EXPECT_NOT((res.size() == 1 && res[0] == 0));
-        },
+        }
 };
 
 int main(){
