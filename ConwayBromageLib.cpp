@@ -185,22 +185,27 @@ bool isTheSameSize(int KMerLen, int currentCompressedSeqLen){
     }
 }
 
-/* previous version for already compressed KMer
- * @param compressedKMer - a uint64_t which represent a compressed k-mer. We can find it in the generated sequence
- * @param currentCompressedSeq - the generated sequence which have to contains nonCompressedKMer and its potantial previous K-mers
- * @return a vector of uint64_t which contains all the previous k-mers which are present in the generated sequence, compressed form
+/* Look for previous version of a given (k-1)-mer in a generated sequence
+ * @param compressedKMer - a uint64_t which represent a compressed (k-1)-mer. We can find it in the generated sequence
+ * @param currentCompressedSeq - the generated sequence which have to contains compressedKMer and its potantial previous (k-1)-mers
+ * @return a vector of uint64_t which contains all the previous (k-1)-mers which are present in the generated sequence, compressed form
  */
 vector<uint64_t> previous(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq){
     vector<uint64_t>prev;
-    if(compressedKMer < currentCompressedSeq.size() && compressedKMer >= 0 && currentCompressedSeq[compressedKMer]){
+    if(compressedKMer < currentCompressedSeq.size()/4 && compressedKMer >= 0){
+        int currentKMerLen = log(currentCompressedSeq.size()) / log(ALPHABET);
+        string sub = decode(compressedKMer, currentKMerLen-1);
+        cout << "sub : " << sub << endl;
         uint64_t potentialPrevious[4];
-        potentialPrevious[0] = (compressedKMer >> 2)%currentCompressedSeq.size();
+        potentialPrevious[0] = compressedKMer % currentCompressedSeq.size();
         for(int i = 1 ; i < 4 ; i++){
-            potentialPrevious[i] = potentialPrevious[i-1] + (currentCompressedSeq.size() / 4);
+            potentialPrevious[i] = encode((NUCLEOTIDES[i] + sub), currentKMerLen);
         }
         for(int i = 0 ; i < 4 ; i++){
             if(currentCompressedSeq[potentialPrevious[i]]){
-                prev.push_back(potentialPrevious[i]);
+                uint64_t subPrev = encode(decode(potentialPrevious[i], currentKMerLen).erase(currentKMerLen-1, 1), currentKMerLen-1);
+                cout << "subPrev : " << decode(subPrev, currentKMerLen-1) << endl;
+                prev.push_back(subPrev);
             }
         }
     }
@@ -285,24 +290,27 @@ sd_vector<>fromFileToSdVector(string path){
     return bit_vector{0};
 }
 
-/* Verify if a given k-mer is present in the generated sequence
- * If the given k-mer and generated sequence members have not the same size, comparison is impossible
- * @param nonCompressedKMer - a string which represents the k-mer we study
- * @param currentCompressedSeq - the generated sequence where we want to verify if nonCompressedKMer is in
- * @return true if the givenl-mer is present, else false
+/* Verify if a given (k-1)-mer is present in the generated sequence
+ * If the given (k-1)-mer is bigger than the generated seuquence size /4, research is impossible
+ * @param compressedKMer - a string which represents the (k-1)-mer we study
+ * @param currentCompressedSeq - the generated sequence where we want to verify if compressedKMer is in
+ * @return true if the given (k-1)-mer is present, else false
  */
 bool isThisKMerHere(uint64_t compressedKMer, sd_vector<> const& currentCompressedSeq){
-    if(compressedKMer < currentCompressedSeq.size()){   //call of isTheSameSize to verify the size
+    cout << "isThisKMerHere : " << endl;
+    if(compressedKMer < currentCompressedSeq.size() / 4 && compressedKMer >= 0) {
         int currentKMerLen = log(currentCompressedSeq.size()) / log(ALPHABET);
-        if(currentCompressedSeq[compressedKMer]){  //verify if the case is set to one
-            cout << decode(compressedKMer, currentKMerLen) << " is present" << endl;
-            return true;
-        }else{
-            cout << decode(compressedKMer, currentKMerLen) << " is absent" << endl;
-            return false;
+        string sub = decode(compressedKMer, currentKMerLen - 1);
+        cout << "sub : " << sub << endl;
+        for (int i = 0; i < currentCompressedSeq.size(); i++) {
+            if (currentCompressedSeq[i]) {
+                if (decode(i, currentKMerLen).find(sub) != string::npos) {
+                    cout << "exist in : " << decode(i, currentKMerLen) << endl;
+                    return true;
+                }
+            }
         }
     }
-    cout << "Sequence size problem" << endl;
     return false;
 }
 
