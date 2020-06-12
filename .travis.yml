@@ -32,6 +32,7 @@ install:
 
 script:
   - cd $TRAVIS_BUILD_DIR #là où est contenu notre code ( pas  sdsl-lite )
-  - python3 sample_generation/generate_counts.py -k 2 -n 16 | sort > ./sorted_kmers.txt
+  - cp sample_generation/generate_counts.py ./
+  - python3 generate_counts.py -k 2 -n 16 | sort > sorted_kmers.txt
   - g++ -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o Tests.exe Tests.cpp ConwayBromageLib.cpp -lsdsl -ldivsufsort -ldivsufsort64
   - ./Tests.exe 
