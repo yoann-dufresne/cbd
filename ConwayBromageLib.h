@@ -17,12 +17,16 @@ std::string decode(uint64_t seq, uint64_t size);
 //Encode/decode fastest ASCII version
 std::string decodeEcoli(uint64_t seq, uint64_t size);
 uint64_t encodeEcoli(std::string word, uint64_t size);
+//Base64<->Base10
+std::string convertToBase64(uint64_t valueInBase10);
+uint64_t convertFromBase64ToBase10(std::string valueInBase64);
 
 //fromFileToSdVector variations
 sdsl::sd_vector<>fromFileToSdVector(std::string path);  //original, lexicographical order
 sdsl::sd_vector<>fromFileToSdVectorWithReverse(std::string path); //original with reverse
 sdsl::sd_vector<>fromFileToSdVectorEcoli(std::string path); //fastest ASCII version
 sdsl::sd_vector<>fromFileToSdVectorWithReverseEcoli(std::string path);  //fastest ASCII version with reverse merging
+sdsl::sd_vector<> fromFileToSdVector_TXTversion(std::string path);
 
 //isThisKMerHere
 bool isThisKMerHere(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);
