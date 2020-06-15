@@ -503,3 +503,168 @@ sd_vector<>fromFileToSdVectorWithReverseEcoli(string path){
     }
     return bit_vector{0};
 }
+
+/**
+ * Transform a number in base 10 in base 64.
+ * @param valueInBase10
+ * @return a string representing the number in base 64
+ */
+string convertToBase64(uint64_t valueInBase10){
+    string res("");
+    uint64_t biggest_divider = 1;
+    while((uint64_t)(valueInBase10/biggest_divider) > 63) biggest_divider <<= 6;
+    uint64_t remainder = valueInBase10;
+    uint64_t quotient = valueInBase10;
+    biggest_divider <<= 6; //*= 64 <-> 
+    while(remainder != 0){
+        biggest_divider >>= 6;
+        quotient = remainder/biggest_divider;
+        remainder = remainder % biggest_divider;
+        res += (char)(';'+quotient);
+    }
+    if(biggest_divider > 1){
+        string rest((int)(log(biggest_divider)/log(64)), ';');
+        res += rest;
+    }
+    return res;
+}
+
+/**
+ * Transform a number in base 10 in base 64.
+ * @param valueInBase64
+ * @return a number in base 10
+ */
+uint64_t convertFromBase64ToBase10(string valueInBase64){
+    uint64_t res = 0;
+    uint64_t pow = 1;
+    for(int i = valueInBase64.size()-1; i >= 0; i--){
+        res += (valueInBase64[i]-';') * pow;
+        pow *= 64;
+    }
+    return res;
+}
+
+/**
+ * Transform a file which contains k-mers in an sd_vector.
+ * This version, generates a txt file which contains the values of reverse complement.
+ * @param path of the file
+ * @return an sd_vector of size 4^(P-1)
+ */
+sd_vector<> fromFileToSdVector_TXTversion(string path){
+    ifstream file(path, ios::in);  // Reading of the file which contains k-mers sequences
+    if(!file) {
+        cout << "Error while opening" << endl;
+        return bit_vector{0};
+    }
+
+    //obtention of the k-mers' size
+    string kmer("");
+    file >> kmer;
+    file.seekg(0, ios::beg);
+    int K = kmer.size();
+    
+    //counting the number of k-mer in the file
+    uint64_t nb_of_kmer = 0;
+    string line("");
+    while(getline(file, line)) nb_of_kmer++;
+    cout << "nb_of_kmer : " << nb_of_kmer << endl;
+    file.clear();
+    file.seekg(0, ios::beg);
+    sd_vector_builder sdv_builder_classic(pow(ALPHABET,K), nb_of_kmer);
+    
+    //first parsing to get the classic read
+    while(file >> kmer){
+        sdv_builder_classic.set(encode(kmer, K));//reverseComplementLexico(i_classic, K);
+        file >> kmer;
+    }
+    file.clear();
+    file.seekg(0, ios::beg);
+    sd_vector<> classic(sdv_builder_classic);
+    cout << "Length of classic : " << classic.size() << endl;
+    cout << "size of classic (MB) : " << size_in_mega_bytes(classic) << endl;
+    
+    cout << "Completion of distinct_rev_comp.txt." << endl;
+    auto b1 = std::chrono::high_resolution_clock::now();
+    //second parsing to get the reverse complement
+    ofstream output;
+    output.open("distinct_rev_comp.txt");
+    uint64_t nb_of_distinct_rev_comp = 0;
+    while(file >> kmer){
+        uint64_t i_classic = encode(kmer, K);
+        uint64_t i_rc = reverseComplementLexico(i_classic, K);
+        if(classic[i_rc]==0){ //if the reverse complement is not present in the classical reads then add it in the output
+            output << i_rc;
+            output << '\n';
+            nb_of_distinct_rev_comp++;
+        }
+        file >> kmer;
+    }
+    output.close();
+    auto e1 = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed1 = e1 - b1;
+    cout << "--> Time (s): " << elapsed1.count() << endl;
+    
+    //sort the output
+    cout << "distinct_rev_comp.txt completed. Now we sort." << endl;
+    auto b2 = std::chrono::high_resolution_clock::now();
+    string command = "sort -n distinct_rev_comp.txt -o distinct_rev_comp.txt";
+    system(command.c_str());
+    cout << "Sort finished. " << endl;
+    auto e2 = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed2 = e2 - b2;
+    cout << "--> Time (s): " << elapsed2.count() << endl;
+    cout << "Now we build the final sd_vector." << endl;
+    
+    //now we build the sd_vector
+    auto b3 = std::chrono::high_resolution_clock::now();
+    ifstream input;
+    input.open("distinct_rev_comp.txt");  // Reading of the file which contains k-mers sequences
+    if(!input) {
+        cout << "Error while opening distinct_rev_comp.txt" << endl;
+        return bit_vector{0};
+    };
+    sd_vector_builder sdvB(pow(ALPHABET,K), nb_of_kmer + nb_of_distinct_rev_comp);
+    uint64_t i = 0, i_classic = 1, i_rc = 0, last_rc = 0;
+    
+    sd_vector<>::select_1_type sdb_sel(&classic);
+    uint64_t a = sdb_sel(i_classic);
+    uint64_t b;
+    input >> b;//get first value for b
+    while(i_classic <= nb_of_kmer && i_rc < nb_of_distinct_rev_comp){
+        if(a < b){
+            sdvB.set(a);
+            i_classic++;
+            a = sdb_sel(i_classic);
+        } else if (b < a){
+            sdvB.set(b);
+            i_rc++;
+            if(i_rc < nb_of_distinct_rev_comp) input >> b;//update value
+        } else { // a = b
+            cout << "Should not happen because we have removed the duplicate precedently" << endl;
+        }
+    }
+    cout << "i_classic after while loop: " << i_classic << endl;
+    cout << "i_rc after while loop: " << i_rc << endl;
+    //at this point, either i_classic = classic.size() or i_rc = rc.size()
+    if(i_classic <= nb_of_kmer){
+        while(i_classic <= nb_of_kmer){
+            sdvB.set(sdb_sel(i_classic));
+            i_classic++;
+        }
+    } else { //i_rc < rc.size()
+        while(i_rc < nb_of_distinct_rev_comp){
+            sdvB.set(b);
+            i_rc++;
+            input >> b;
+        }
+    }
+    auto e3 = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed3 = e3 - b3;
+    cout << "--> Time (s): " << elapsed3.count() << endl;
+    
+    cout << "i_classic at the end: " << i_classic << endl;
+    cout << "i_rc at the end: " << i_rc << endl;
+    input.close();
+    sd_vector<> sdv(sdvB);
+    return sdv;
+}
