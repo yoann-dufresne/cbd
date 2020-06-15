@@ -151,22 +151,22 @@ string decode(uint64_t seq, uint64_t size){
  */
 std::vector<uint64_t> next(uint64_t nonCompressedKMer, sdsl::sd_vector<> const& currentCompressedSeq){
     vector<uint64_t> res;
-    //We check if the nonCompressedKMer exists (i.e set to 1) in the currentCompressedSeq.
-    //It exists if it has a proper size and if his index is set to 1 in the sd_vector.
-    uint64_t K = (int)(log(currentCompressedSeq.size())/log(4));
-    if(nonCompressedKMer >= currentCompressedSeq.size() || !currentCompressedSeq[nonCompressedKMer]) //if set to 0, there are no successors
+    uint64_t Pmer_size_in_sdvector = (int)(log(currentCompressedSeq.size())/log(4));
+    //we must have nonCompressedKmer < 4^(P-1)
+    uint64_t limit = pow(4,Pmer_size_in_sdvector-1);
+    if(nonCompressedKMer >= limit) {
+        cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << limit << endl;
         return res;
-    
-    //for k = 9 and n = 262144, the function returns the successors of all kmer in txt-file in 43726 ms
-    uint64_t i_kmer1 = (nonCompressedKMer << 2)%currentCompressedSeq.size();
-    uint64_t i_kmer2 = i_kmer1+1;
-    uint64_t i_kmer3 = i_kmer1+2;
-    uint64_t i_kmer4 = i_kmer1+3;
-    if(currentCompressedSeq[i_kmer1]) res.push_back(i_kmer1);
-    if(currentCompressedSeq[i_kmer2]) res.push_back(i_kmer2);
-    if(currentCompressedSeq[i_kmer3]) res.push_back(i_kmer3);
-    if(currentCompressedSeq[i_kmer4]) res.push_back(i_kmer4);
+    }
 
+    uint64_t i_pmer1 = nonCompressedKMer << 2; //<==> AAC << 2 ==> AACA
+    uint64_t i_kmer1 = i_pmer1%(currentCompressedSeq.size() >> 2);
+    //if currentCompressedSeq.size() = 256 (P=4) then currentCompressedSeq.size() >> 2 = 64
+    //<==> AACA%64 ==> ACA (i_kmer1)
+    if(currentCompressedSeq[i_pmer1])   res.push_back(i_kmer1);
+    if(currentCompressedSeq[i_pmer1+1]) res.push_back(i_kmer1+1);
+    if(currentCompressedSeq[i_pmer1+2]) res.push_back(i_kmer1+2);
+    if(currentCompressedSeq[i_pmer1+3]) res.push_back(i_kmer1+3);
     return res;
 }
 
