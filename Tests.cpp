@@ -186,6 +186,16 @@ const test atTheEnd[] = {
                 EXPECT(result);
             }
         },
+        CASE("isThisKMerHere"){
+            cout << "\t--> isThisKMerHere : existant K-mer : example without fromFileToSdVector calling :  " << endl;
+            bool val = isThisKMerHere(0, littleTestPrev);
+            EXPECT(val == true);
+        },
+        CASE("isThisKMerHere"){
+            cout << "\t--> isThisKMerHere : non-existant K-mer : example without fromFileToSdVector calling :  " << endl;
+            bool val = isThisKMerHere(-1, littleTestPrev);
+                    EXPECT(val == false);
+        }
 };
 
 int main(){
@@ -205,7 +215,7 @@ int main(){
         return failures;
     }
     cout << "*** Third tests passed ! ***\n" << endl;
-    cout << "*** Fourth tests : previous with fromFileToSdVector call ***" << endl;
+    cout << "*** Fourth tests : previous/next with fromFileToSdVector call and isThisKMerHere ***" << endl;
     if (failures = run(atTheEnd)){
         return failures;
     }
