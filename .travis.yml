@@ -4,7 +4,7 @@ language:
 
 cpp: c++11
 
-python: "3.6"
+python: "3.8"
 
 compiler: g++ 
 
@@ -33,7 +33,8 @@ install:
 script:
   - cd $TRAVIS_BUILD_DIR #là où est contenu notre code ( pas  sdsl-lite )
   - cd sample_generation/
-  - python3 generate_counts.py -k 2 -n 16 | sort > sorted_kmers.txt
+  - python3 generate_counts.py -k 3 -n 64 > sorted_kmers.txt
+  - sort sorted_kmers.txt -o sorted_kmers.txt
   - cp sorted_kmers.txt ../sorted_kmers.txt
   - cd ../
   - cat sorted_kmers.txt
