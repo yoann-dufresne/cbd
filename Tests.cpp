@@ -148,41 +148,6 @@ const test atTheEnd[] = {
                 }
             }
         },
-                //Test of next upon sorted_kmers.txt
-        CASE("next : test upon sorted_kmers.txt "){
-            sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt");
-            int currentKMerLen = log(sdv.size()) / log(ALPHABET);
-            for(int i = 0 ; i < sdv.size() ; i++){
-                //generation of the true results
-                string kmer_initial = decode(i, currentKMerLen);
-                string sub = kmer_initial.substr(1, currentKMerLen-1);
-                string kmer1 = sub + "A";
-                uint64_t next_kmer1 = encode(sub + "A", currentKMerLen);
-                uint64_t next_kmer2 = encode(sub + "C", currentKMerLen);
-                uint64_t next_kmer3 = encode(sub + "G", currentKMerLen);
-                uint64_t next_kmer4 = encode(sub + "T", currentKMerLen);
-                //tests if exists
-                vector<uint64_t> TrueAnswer;
-                if(sdv[next_kmer1]) TrueAnswer.push_back(next_kmer1);
-                if(sdv[next_kmer2]) TrueAnswer.push_back(next_kmer2);
-                if(sdv[next_kmer3]) TrueAnswer.push_back(next_kmer3);
-                if(sdv[next_kmer4]) TrueAnswer.push_back(next_kmer4);
-
-                //comparison with expected results
-                vector<uint64_t> successors = next(i, sdv);
-                bool result = true;
-                if(TrueAnswer.size() == successors.size()){
-                    for(int j = 0; j < successors.size(); j++){
-                        if(successors[j] != TrueAnswer[j]){
-                            result = false;
-                        }
-                    }
-                } else {
-                    result = false;
-                }
-                EXPECT(result);
-            }
-        },
         CASE("isThisKMerHere"){
             cout << "\t--> isThisKMerHere : existant K-mer : example without fromFileToSdVector calling :  " << endl;
             bool val = isThisKMerHere(0, littleTestPrev);
