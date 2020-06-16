@@ -19,7 +19,7 @@ compiler: g++
 #  directories:
 #    - sdsl-lite/
 
-#install:
+install:
 #  - cd ~/
 #  - mkdir include
 #  - git clone https://github.com/simongog/sdsl-lite.git
