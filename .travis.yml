@@ -42,4 +42,3 @@ script:
   - cmake CMakeLists.txt
   - make
   - ./ConwayBromageLib
-  #- ./Tests.exe 
