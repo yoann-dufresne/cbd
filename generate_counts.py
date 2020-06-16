@@ -40,7 +40,8 @@ def integer_to_kmer(i, k):
 
 def generate_kmers(k, num_kmers):
     for i in sample(range(pow(4, k)), num_kmers):
-        print(f"{integer_to_kmer(i, k)}\t1")
+        chaine = integer_to_kmer(i, k)
+        print(chaine)
 
 
 def main():
