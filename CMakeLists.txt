@@ -12,10 +12,10 @@ set(SRCS
 #One for .h
 set(HEADERS
         ConwayBromageLib.h)
-link_directories(ConwayBromageLib ./sdsl-lite/lib ./sdsl-lite/external/libdivsufsort/lib)    #Where we put .cpp from sdsl library : can change according to users
+link_directories(ConwayBromageLib ./sdsl-lite/lib ./sdsl-lite/external/libdivsufsort/lib)    #Where we put .cpp from sdsl library
 add_executable(ConwayBromageLib ${SRCS} ${HEADERS}) #Create executable ConwayBromageLib
-add_subdirectory(external)
-target_include_directories(ConwayBromageLib PUBLIC ./external/lest/include)   #Where we put .h from sdsl and lest libraries : It needs to be after add_executable !!!
+add_subdirectory(external)      #Add subdirectories like sdsl and lest, call the CMakeLists.txt from external directory
+target_include_directories(ConwayBromageLib PUBLIC ./external/lest/include)   #Where we put .h from lest libraries : It needs to be after add_executable !!!
 target_link_libraries(ConwayBromageLib sdsl divsufsort divsufsort64)    #Specific flags from sdsl library
 
 #Original compilation line without using CMake :
