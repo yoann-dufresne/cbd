@@ -195,24 +195,20 @@ vector<uint64_t> previous(uint64_t compressedKMer, sdsl::sd_vector<> const& curr
     if(compressedKMer < currentCompressedSeq.size()/4 && compressedKMer >= 0){
         int currentKMerLen = log(currentCompressedSeq.size()) / log(ALPHABET);
         string sub = decode(compressedKMer, currentKMerLen-1);
-        cout << "sub : " << sub << endl;
         uint64_t potentialPrevious[4];
         potentialPrevious[0] = compressedKMer % currentCompressedSeq.size();
         for(int i = 1 ; i < 4 ; i++){
-            potentialPrevious[i] = encode((NUCLEOTIDES[i] + sub), currentKMerLen);
+            potentialPrevious[i] = potentialPrevious[i-1] + (currentCompressedSeq.size() / 4);
         }
         for(int i = 0 ; i < 4 ; i++){
             if(currentCompressedSeq[potentialPrevious[i]]){
                 uint64_t subPrev = encode(decode(potentialPrevious[i], currentKMerLen).erase(currentKMerLen-1, 1), currentKMerLen-1);
-                cout << "subPrev : " << decode(subPrev, currentKMerLen-1) << endl;
                 prev.push_back(subPrev);
             }
         }
     }
     return prev;
 }
-
-
 
 /* Transform sequences which are contain in a file in a sd_vector
  * Need a string which is the path to the file
@@ -297,15 +293,12 @@ sd_vector<>fromFileToSdVector(string path){
  * @return true if the given (k-1)-mer is present, else false
  */
 bool isThisKMerHere(uint64_t compressedKMer, sd_vector<> const& currentCompressedSeq){
-    cout << "isThisKMerHere : " << endl;
     if(compressedKMer < currentCompressedSeq.size() / 4 && compressedKMer >= 0) {
         int currentKMerLen = log(currentCompressedSeq.size()) / log(ALPHABET);
         string sub = decode(compressedKMer, currentKMerLen - 1);
-        cout << "sub : " << sub << endl;
         for (int i = 0; i < currentCompressedSeq.size(); i++) {
             if (currentCompressedSeq[i]) {
                 if (decode(i, currentKMerLen).find(sub) != string::npos) {
-                    cout << "exist in : " << decode(i, currentKMerLen) << endl;
                     return true;
                 }
             }
