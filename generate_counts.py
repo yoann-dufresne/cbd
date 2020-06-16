@@ -8,10 +8,10 @@ def restricted_float(x):
     try:
         x = float(x)
     except ValueError:
-        raise argparse.ArgumentTypeError(f"{x} not a floating-point literal")
+        raise argparse.ArgumentTypeError("Not a floating-point literal")
 
     if x < 0.0 or x > 1.0:
-        raise argparse.ArgumentTypeError(f"{x} not in range [0.0, 1.0]")
+        raise argparse.ArgumentTypeError("Not in range [0.0, 1.0]")
     return x
 
 
