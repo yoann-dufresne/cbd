@@ -19,17 +19,18 @@ compiler: g++
 #  directories:
 #    - sdsl-lite/
 
-install:
-  - cd ~/
-  - mkdir include
-  - git clone https://github.com/simongog/sdsl-lite.git
-  - git clone https://github.com/martinmoene/lest.git
-  - cd sdsl-lite
-  - ./install.sh
-  - cd ../
-  - cp -r ./sdsl-lite/include/sdsl ./include
-  - cp -r ./lest/include/lest ./include
-
+#install:
+#  - cd ~/
+#  - mkdir include
+#  - git clone https://github.com/simongog/sdsl-lite.git
+#  - git clone https://github.com/martinmoene/lest.git
+#  - cd sdsl-lite
+#  - ./install.sh
+#  - cd ../
+#  - cp -r ./sdsl-lite/include/sdsl ./include
+#  - cp -r ./lest/include/lest ./include
+   - git clone --recurse-submodules https://github.com/yoann-dufresne/ConwayBromageLib.git
+   
 script:
   - cd $TRAVIS_BUILD_DIR #là où est contenu notre code ( pas  sdsl-lite )
   #- cd sample_generation/
@@ -38,5 +39,7 @@ script:
   #- cp sorted_kmers.txt ../sorted_kmers.txt
   #- cd ../
   - cat sorted_kmers.txt
-  - g++ -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o Tests.exe Tests.cpp ConwayBromageLib.cpp -lsdsl -ldivsufsort -ldivsufsort64
-  - ./Tests.exe 
+  - cmake CMakeLists.txt
+  - make
+  - ./ConwayBromageLib
+  #- ./Tests.exe 
