@@ -34,6 +34,7 @@ install:
 script:
   - cd $TRAVIS_BUILD_DIR #là où est contenu notre code ( pas  sdsl-lite )
   #- cd sample_generation/
+  - ls
   - python3 generate_counts.py -k 3 -n 64 > sorted_kmers.txt
   - sort sorted_kmers.txt -o sorted_kmers.txt
   #- cp sorted_kmers.txt ../sorted_kmers.txt
