@@ -40,5 +40,6 @@ script:
   #- cd ../
   - cat sorted_kmers.txt
   - cmake CMakeLists.txt
+  - ls
   - make
   #- ./ConwayBromageLib
