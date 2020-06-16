@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)    #The minimal version of cmake we need
+cmake_minimum_required(VERSION 3.12)    #The minimal version of cmake we need
 #Here we need 3.16 or higher version
 project(ConwayBromageLib)               #The name of the projet, it will be the executable name
 
