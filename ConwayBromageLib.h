@@ -22,7 +22,7 @@ std::string convertToBase64(uint64_t valueInBase10);
 uint64_t convertFromBase64ToBase10(std::string valueInBase64);
 
 //fromFileToSdVector variations
-sdsl::sd_vector<>fromFileToSdVector(std::string path);  //original, lexicographical order
+sdsl::sd_vector<>fromFileToSdVector(std::string path, std::string format); //can now choose the encoding format, canonical k-mer
 sdsl::sd_vector<>fromFileToSdVectorWithReverse(std::string path); //original with reverse
 sdsl::sd_vector<>fromFileToSdVectorEcoli(std::string path); //fastest ASCII version
 sdsl::sd_vector<>fromFileToSdVectorWithReverseEcoli(std::string path);  //fastest ASCII version with reverse merging
