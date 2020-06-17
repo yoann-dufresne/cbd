@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12)    #The minimal version of cmake we need
 #Here we need 3.16 or higher version
-project(CBL)               #The name of the projet, it will be the executable name
+project(ConwayBromageLib)               #The name of the projet, it will be the executable name
 
 add_compile_options(-Wall -Wextra)      #basic compiler options
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG") #Compilation flag
