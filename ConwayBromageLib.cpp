@@ -247,14 +247,14 @@ sd_vector<>fromFileToSdVectorEcoli(string path){
     return bit_vector{0};
 }
 
-
 /* Transform sequences which are contain in a file in a sd_vector
- * Need a string which is the path to the file
- * Return a sd_vector which contains encoding version of sequences of the file
+ * @param path - The path to the file which contains info
+ * @param format - The format we want for the transformation : ACGT or ACTG
+ * @return a sd_vector which contains elements of the file transformed according to the format
  */
-sd_vector<>fromFileToSdVector(string path){
+sd_vector<>fromFileToSdVector(string path, string format){
     ifstream file(path, ios::in);  // Reading of the file which contains k-mers sequences
-    if(file){   // File is now open
+    if(file && (format == "ACGT" || format == "ACTG")){   // File is now open
         string word;
         string line("");
         file >> word;   //Take the first word to analyze size of one k-mer
@@ -268,20 +268,27 @@ sd_vector<>fromFileToSdVector(string path){
         file.seekg(0, ios::beg);    //Return to he beginning of the file
         cout << "length of ones : " << myOneLen << endl;
         cout << "length of a seq : " << myWordLen << endl;
-        long int myTotalLen(pow(ALPHABET,myWordLen));   //Creation of the total length to create the sd_vector_builder
+        uint64_t myTotalLen(pow(ALPHABET,myWordLen));   //Creation of the total length to create the sd_vector_builder
         cout << "Total length : " << myTotalLen << endl;
         sd_vector_builder constructSparse(myTotalLen, myOneLen);    //A size of myTotalLen, contains myOneLen ones
-        while(file >> word){
-            if(word != "1"){
-                //cout << "The seq is : " << word << endl;
+        if(format == "ACGT"){
+            cout << "encoding in ACGT format... " << endl;
+            while(file >> word){
                 constructSparse.set(encode(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
+                file >> word;
+            }
+        }else{
+            cout << "encoding in ACTG format... " << endl;
+            while(file >> word){
+                constructSparse.set(encodeEcoli(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
+                file >> word;
             }
         }
         sd_vector<>finalSparse(constructSparse);    //Construction of the final sd_vector
         file.close();
         return finalSparse;
     }else{
-        cout << "Error while opening" << endl;
+        cout << "Error while opening or bad format : need ACGT or ACTG" << endl;
     }
     return bit_vector{0};
 }
