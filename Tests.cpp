@@ -81,6 +81,7 @@ const test critical[] = {
         },
         //Test of next on a small sd_vector
         CASE("next : small sd_vector"){
+            cout << "\t--> next with little sd_vector" << endl;
             sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,1,0,1};
             vector<vector<uint64_t>> TrueNext(16);
             TrueNext[0]  = {1,  3};
@@ -135,7 +136,7 @@ const test atTheEnd[] = {
             uint64_t currentKMerLen = log(ret.size()) / log(ALPHABET);
             for (int i = 0; i < ret.size() / 4; i++) { //for the firsts 1000000
                 string current = decode(i, currentKMerLen-1);
-                cout << "current : " << i << endl;
+                //cout << "current : " << i << endl;
                 vector<uint64_t> prev = previous(i, ret);
                 for(int j = 0 ; j < prev.size() ; j++){
                     vector<uint64_t> proof;
@@ -143,7 +144,7 @@ const test atTheEnd[] = {
                     proof.push_back(encode((decode(prev[j], currentKMerLen-1).erase(0, 1)) + "C", currentKMerLen-1));
                     proof.push_back(encode((decode(prev[j], currentKMerLen-1).erase(0, 1)) + "G", currentKMerLen-1));
                     proof.push_back(encode((decode(prev[j], currentKMerLen-1).erase(0, 1)) + "T", currentKMerLen-1));
-                    cout << "proof : " << proof << endl;
+                  //  cout << "proof : " << proof << endl;
                     EXPECT(i == proof[0] || i == proof[1] || i == proof[2] || i == proof[3]);
                 }
             }
@@ -160,9 +161,10 @@ const test atTheEnd[] = {
         },
         //Test of next upon sorted_kmers.txt
         CASE("next : test upon sorted_kmers.txt "){
+            cout << "\t--> next with fromFileToSdVector call" << endl;
             sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt");
             int currentKMerLen = log(sdv.size()) / log(ALPHABET)-1;
-            cout << "currentKMerLen " << currentKMerLen << endl;
+            //cout << "currentKMerLen " << currentKMerLen << endl;
             uint64_t sdv_size = sdv.size()/4;
             for(int i = 0 ; i < sdv_size; i++){
                 //generation of the true results
