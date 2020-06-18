@@ -274,7 +274,7 @@ sd_vector<>fromFileToSdVector(string path, string format){
         //if(format == "ACGT"){
             cout << "encoding in ACGT format... " << endl;
             while(file >> word){
-                if(word != '1'){
+                if(word != "1"){
                     constructSparse.set(encode(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
                 }
                  //   file >> word;
