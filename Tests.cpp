@@ -182,7 +182,7 @@ const test atTheEnd[] = {
         //Test of next upon sorted_kmers.txt
         CASE("next : test upon sorted_kmers.txt "){
             cout << "\t--> next with fromFileToSdVector call" << endl;
-            sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt");
+            sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt", "ACGT");
             int currentKMerLen = log(sdv.size()) / log(ALPHABET)-1;
             //cout << "currentKMerLen " << currentKMerLen << endl;
             uint64_t sdv_size = sdv.size()/4;
