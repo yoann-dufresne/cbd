@@ -254,7 +254,7 @@ sd_vector<>fromFileToSdVectorEcoli(string path){
  */
 sd_vector<>fromFileToSdVector(string path, string format){
     ifstream file(path, ios::in);  // Reading of the file which contains k-mers sequences
-    if(file /*&& (format == "ACGT" || format == "ACTG")*/){   // File is now open
+    if(file && (format == "ACGT" || format == "ACTG")){   // File is now open
         string word;
         string line("");
         file >> word;   //Take the first word to analyze size of one k-mer
@@ -271,21 +271,19 @@ sd_vector<>fromFileToSdVector(string path, string format){
         uint64_t myTotalLen(pow(ALPHABET,myWordLen));   //Creation of the total length to create the sd_vector_builder
         cout << "Total length : " << myTotalLen << endl;
         sd_vector_builder constructSparse(myTotalLen, myOneLen);    //A size of myTotalLen, contains myOneLen ones
-        //if(format == "ACGT"){
+        if(format == "ACGT"){
             cout << "encoding in ACGT format... " << endl;
             while(file >> word){
-                if(word != "1"){
-                    constructSparse.set(encode(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
-                }
-                 //   file >> word;
+                constructSparse.set(encode(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
+                file >> word;
             }
-        /*}else{
+        }else{
             cout << "encoding in ACTG format... " << endl;
             while(file >> word){
                 constructSparse.set(encodeEcoli(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
                 file >> word;
             }
-        }*/
+        }
         sd_vector<>finalSparse(constructSparse);    //Construction of the final sd_vector
         file.close();
         return finalSparse;
