@@ -149,7 +149,7 @@ const test lessLessCrit[] = {
             for(int i = 0 ; i < lastRet.size() ; i++){
                         EXPECT(lastRet[i] == 'G');
             }
-        },*/
+        },
 };
 
 const test atTheEnd[] = {
