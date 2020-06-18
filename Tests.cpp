@@ -27,7 +27,7 @@ using namespace lest;
 
 static const uint64_t  totalLen = 4611686018427387904;
 static const sd_vector<>littleTestPrev = bit_vector{0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1};
-static const sd_vector<> ret = fromFileToSdVector("./sorted_kmers.txt" /*,"ACGT"*/);
+static const sd_vector<> ret = fromFileToSdVectorChooser("./sorted_kmers.txt","ACGT");
 /*
  * Compilation line : g++ -Wall -Wextra -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o Tests.exe Tests.cpp ConwayBromageLib.cpp -lsdsl -ldivsufsort -ldivsufsort64
  */
@@ -124,17 +124,17 @@ const test lessLessCrit[] = {
         //Tests of fromFileToSdVector :
         CASE("fromFileToSdVector : reading from a file : original with normal use "){ //verify os fromFileToSdVector can read a file correctly
             cout << "\t--> fromFileToSdVector with normal use" << endl;
-            sd_vector<> res = fromFileToSdVector("./sorted_kmers.txt" /*, "ACGT"*/);
+            sd_vector<> res = fromFileToSdVectorChooser("./sorted_kmers.txt", "ACGT");
             EXPECT_NOT((res.size() == 1 && res[0] == 0));   //if res.size() == 1 and res[0] == 0, the file read has failed
         },
-       /* CASE("fromFileToSdVector : unexpected format "){ //verify reaction to an unexpected format
+       CASE("fromFileToSdVector : unexpected format "){ //verify reaction to an unexpected format
             cout << "\t--> fromFileToSdVector with unexpected format" << endl;
-            sd_vector<> res = fromFileToSdVector("./sorted_kmers.txt", "RRRR");
+            sd_vector<> res = fromFileToSdVectorChooser("./sorted_kmers.txt", "RRRR");
                     EXPECT((res.size() == 1 && res[0] == 0));
         },
         CASE("fromFileToSdVector : ACGT format : last element "){
             cout << "\t--> Last element of ACGT" << endl;
-            sd_vector<> ret = fromFileToSdVector("./sorted_kmers.txt", "ACGT");
+            sd_vector<> ret = fromFileToSdVectorChooser("./sorted_kmers.txt", "ACGT");
             int currentKMerLen = log(ret.size()) / log(ALPHABET);
             string lastRet = decode(ret.size()-1, currentKMerLen);
             for(int i = 0 ; i < lastRet.size() ; i++){
@@ -143,7 +143,7 @@ const test lessLessCrit[] = {
         },
         CASE("fromFileToSdVector : ACTG format : last element "){
             cout << "\t--> Last element of ACTG format" << endl;
-            sd_vector<> ret = fromFileToSdVector("./ecoli_count.txt", "ACTG");
+            sd_vector<> ret = fromFileToSdVectorChooser("./ecoli_count.txt", "ACTG");
             int currentKMerLen = log(ret.size()) / log(ALPHABET);
             string lastRet = decodeEcoli(ret.size()-1, currentKMerLen);
             for(int i = 0 ; i < lastRet.size() ; i++){
@@ -182,7 +182,7 @@ const test atTheEnd[] = {
          //Test of next upon sorted_kmers.txt
         CASE("next : test upon sorted_kmers.txt "){
             cout << "\t--> next with fromFileToSdVector call" << endl;
-            sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt"/*, "ACGT"*/);
+            sd_vector<> sdv = fromFileToSdVectorChooser("./sorted_kmers.txt", "ACGT");
             int currentKMerLen = log(sdv.size()) / log(ALPHABET)-1;
             //cout << "currentKMerLen " << currentKMerLen << endl;
             uint64_t sdv_size = sdv.size()/4;
