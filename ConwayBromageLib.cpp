@@ -274,8 +274,10 @@ sd_vector<>fromFileToSdVector(string path, string format){
         //if(format == "ACGT"){
             cout << "encoding in ACGT format... " << endl;
             while(file >> word){
-                constructSparse.set(encode(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
-                file >> word;
+                if(word != '1'){
+                    constructSparse.set(encode(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
+                }
+                 //   file >> word;
             }
         /*}else{
             cout << "encoding in ACTG format... " << endl;
