@@ -27,7 +27,7 @@ using namespace lest;
 
 static const uint64_t  totalLen = 4611686018427387904;
 static const sd_vector<>littleTestPrev = bit_vector{0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1};
-//static const sd_vector<> ret = fromFileToSdVector("./sorted_kmers.txt", "ACGT");
+static const sd_vector<> ret = fromFileToSdVector("./sorted_kmers.txt", "ACGT");
 /*
  * Compilation line : g++ -Wall -Wextra -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o Tests.exe Tests.cpp ConwayBromageLib.cpp -lsdsl -ldivsufsort -ldivsufsort64
  */
@@ -79,33 +79,6 @@ const test critical[] = {
             vector<uint64_t> prev = previous(-404, littleTestPrev);    //a compressed k-mer can't have a negative number
                     EXPECT(prev.size() == 0);   //In this case, they is no possible previous
         },
-        //Test of next on a small sd_vector
-        CASE("next : small sd_vector"){
-            cout << "\t--> next with little sd_vector" << endl;
-            sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,1,0,1};
-            vector<vector<uint64_t>> TrueNext(16);
-            TrueNext[0]  = {1,  3};
-            TrueNext[1]  = {0, 1};
-            TrueNext[2]  = {0};
-            TrueNext[3]  = {1, 3};
-            bool result = true;
-            for(int i(0); i < sdv.size(); i++){
-                vector<uint64_t> successors = next(i, sdv);
-                //check if same
-                for(int j(0); j < successors.size(); j++){
-                    if(TrueNext[i].size() == successors.size()){
-                        for(int j = 0; j < successors.size(); j++){
-                            if(successors[j] != TrueNext[i][j]){
-                                result = false;
-                            }
-                        }
-                    } else {
-                        result = false;
-                    }
-                }
-            }
-            EXPECT(result);
-        }
 };
 
 const test lessCritical[] = {
@@ -153,11 +126,9 @@ const test lessLessCrit[] = {
 const test atTheEnd[] = {
         CASE("previous : perfect use expected with file fromFileToSdVectorCall : "){  //Test with a perfect use of previous + a perfect generated sequence
             cout << "\t--> previous with fromFileToSdVector call" << endl;
-            sd_vector<> ret = fromFileToSdVector("./sorted_kmers.txt", "ACGT");
             uint64_t currentKMerLen = log(ret.size()) / log(ALPHABET);
             for (int i = 0; i < ret.size() / 4; i++) { //for the firsts 1000000
                 string current = decode(i, currentKMerLen-1);
-                //cout << "current : " << i << endl;
                 vector<uint64_t> prev = previous(i, ret);
                 for(int j = 0 ; j < prev.size() ; j++){
                     vector<uint64_t> proof;
@@ -165,7 +136,6 @@ const test atTheEnd[] = {
                     proof.push_back(encode((decode(prev[j], currentKMerLen-1).erase(0, 1)) + "C", currentKMerLen-1));
                     proof.push_back(encode((decode(prev[j], currentKMerLen-1).erase(0, 1)) + "G", currentKMerLen-1));
                     proof.push_back(encode((decode(prev[j], currentKMerLen-1).erase(0, 1)) + "T", currentKMerLen-1));
-                  //  cout << "proof : " << proof << endl;
                     EXPECT(i == proof[0] || i == proof[1] || i == proof[2] || i == proof[3]);
                 }
             }
@@ -179,45 +149,6 @@ const test atTheEnd[] = {
             cout << "\t--> isThisKMerHere : non-existant K-mer : example without fromFileToSdVector calling :  " << endl;
             bool val = isThisKMerHere(-1, littleTestPrev);
                     EXPECT(val == false);
-        },
-        //Test of next upon sorted_kmers.txt
-        CASE("next : test upon sorted_kmers.txt "){
-            cout << "\t--> next with fromFileToSdVector call" << endl;
-            sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt", "ACGT");
-            int currentKMerLen = log(sdv.size()) / log(ALPHABET)-1;
-            //cout << "currentKMerLen " << currentKMerLen << endl;
-            uint64_t sdv_size = sdv.size()/4;
-            for(int i = 0 ; i < sdv_size; i++){
-                //generation of the true results
-                string kmer_initial = decode(i, currentKMerLen);
-                uint64_t next_pmer1 = encode(kmer_initial + "A", currentKMerLen+1);
-                uint64_t next_pmer2 = encode(kmer_initial + "C", currentKMerLen+1);
-                uint64_t next_pmer3 = encode(kmer_initial + "G", currentKMerLen+1);
-                uint64_t next_pmer4 = encode(kmer_initial + "T", currentKMerLen+1);
-                string str_kmer1 = decode(next_pmer1, currentKMerLen+1).substr(1, currentKMerLen);
-                string str_kmer2 = decode(next_pmer2, currentKMerLen+1).substr(1, currentKMerLen);
-                string str_kmer3 = decode(next_pmer3, currentKMerLen+1).substr(1, currentKMerLen);
-                string str_kmer4 = decode(next_pmer4, currentKMerLen+1).substr(1, currentKMerLen);
-                //tests if exists
-                vector<uint64_t> TrueAnswer;
-                if(sdv[next_pmer1]) TrueAnswer.push_back(encode(str_kmer1, currentKMerLen));
-                if(sdv[next_pmer2]) TrueAnswer.push_back(encode(str_kmer2, currentKMerLen));
-                if(sdv[next_pmer3]) TrueAnswer.push_back(encode(str_kmer3, currentKMerLen));
-                if(sdv[next_pmer4]) TrueAnswer.push_back(encode(str_kmer4, currentKMerLen));
-
-                //comparison with expected results
-                vector<uint64_t> successors = next(i, sdv);
-                bool result = true;
-                if(TrueAnswer.size() == successors.size()){
-                    for(int j = 0; j < successors.size(); j++){
-                        if(successors[j] != TrueAnswer[j])
-                            result = false;
-                    }
-                } else {
-                    result = false;
-                }
-                EXPECT(result);
-            }
         }
 };
 
