@@ -32,6 +32,10 @@ sdsl::sd_vector<> fromFileToSdVector_TXTversion(std::string path);
 //isThisKMerHere
 bool isThisKMerHere(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);
 
+//Successors of a canonical Kmer
+uint64_t getCanonical (uint64_t kmer, uint64_t kmerSize, bool encodingIsACGT);
+std::vector<uint64_t> successors(uint64_t Kmer, sdsl::sd_vector<> const& compressedSeq, bool encodingIsACGT);
+
 //next and previous, insensitive to the encoding version ?
 std::vector<uint64_t> next(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq); 
 std::vector<uint64_t> previous(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);
