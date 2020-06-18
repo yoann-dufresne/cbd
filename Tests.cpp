@@ -121,34 +121,10 @@ const test lessCritical[] = {
 };
 
 const test lessLessCrit[] = {
-        //Tests of fromFileToSdVector :
-        CASE("fromFileToSdVector : reading from a file : original with normal use "){ //verify os fromFileToSdVector can read a file correctly
-            cout << "\t--> fromFileToSdVector with normal use" << endl;
-            sd_vector<> res = fromFileToSdVectorChooser("./sorted_kmers.txt", "ACGT");
-            EXPECT_NOT((res.size() == 1 && res[0] == 0));   //if res.size() == 1 and res[0] == 0, the file read has failed
-        },
        CASE("fromFileToSdVector : unexpected format "){ //verify reaction to an unexpected format
             cout << "\t--> fromFileToSdVector with unexpected format" << endl;
             sd_vector<> res = fromFileToSdVectorChooser("./sorted_kmers.txt", "RRRR");
                     EXPECT((res.size() == 1 && res[0] == 0));
-        },
-        CASE("fromFileToSdVector : ACGT format : last element "){
-            cout << "\t--> Last element of ACGT" << endl;
-            sd_vector<> ret = fromFileToSdVectorChooser("./sorted_kmers.txt", "ACGT");
-            int currentKMerLen = log(ret.size()) / log(ALPHABET);
-            string lastRet = decode(ret.size()-1, currentKMerLen);
-            for(int i = 0 ; i < lastRet.size() ; i++){
-                EXPECT(lastRet[i] == 'T');
-            }
-        },
-        CASE("fromFileToSdVector : ACTG format : last element "){
-            cout << "\t--> Last element of ACTG format" << endl;
-            sd_vector<> ret = fromFileToSdVectorChooser("./ecoli_count.txt", "ACTG");
-            int currentKMerLen = log(ret.size()) / log(ALPHABET);
-            string lastRet = decodeEcoli(ret.size()-1, currentKMerLen);
-            for(int i = 0 ; i < lastRet.size() ; i++){
-                        EXPECT(lastRet[i] == 'G');
-            }
         },
 };
 
