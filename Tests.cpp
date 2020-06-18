@@ -130,7 +130,7 @@ const test lessLessCrit[] = {
             sd_vector<> res = fromFileToSdVector("./sorted_kmers.txt", "RRRR");
                     EXPECT((res.size() == 1 && res[0] == 0));
         },
-        CASE("fromFileToSdVector : ACGT format : last element "){ 
+        CASE("fromFileToSdVector : ACGT format : last element "){
             cout << "\t--> Last element of ACGT" << endl;
             sd_vector<> ret = fromFileToSdVector("./sorted_kmers.txt", "ACGT");
             int currentKMerLen = log(ret.size()) / log(ALPHABET);
@@ -139,11 +139,11 @@ const test lessLessCrit[] = {
                 EXPECT(lastRet[i] == 'T');
             }
         },
-        CASE("fromFileToSdVector : ACTG format : last element "){ 
+        CASE("fromFileToSdVector : ACTG format : last element "){
             cout << "\t--> Last element of ACTG format" << endl;
             sd_vector<> ret = fromFileToSdVector("./ecoli_count.txt", "ACTG");
             int currentKMerLen = log(ret.size()) / log(ALPHABET);
-            string lastRet = decode(ret.size()-1, currentKMerLen);
+            string lastRet = decodeEcoli(ret.size()-1, currentKMerLen);
             for(int i = 0 ; i < lastRet.size() ; i++){
                         EXPECT(lastRet[i] == 'G');
             }
