@@ -27,7 +27,7 @@ using namespace lest;
 
 static const uint64_t  totalLen = 4611686018427387904;
 static const sd_vector<>littleTestPrev = bit_vector{0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1};
-static const sd_vector<> ret = fromFileToSdVector("./sorted_kmers.txt");
+static const sd_vector<> ret = fromFileToSdVector("./sorted_kmers.txt"? "ACGT");
 /*
  * Compilation line : g++ -Wall -Wextra -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o Tests.exe Tests.cpp ConwayBromageLib.cpp -lsdsl -ldivsufsort -ldivsufsort64
  */
