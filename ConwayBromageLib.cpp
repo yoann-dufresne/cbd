@@ -293,46 +293,55 @@ sd_vector<>fromFileToSdVector(string path){
  * @param format - The format we want for the transformation : ACGT or ACTG
  * @return a sd_vector which contains elements of the file transformed according to the format
  */
-/*sd_vector<>fromFileToSdVector(string path, string format){
+sd_vector<>fromFileToSdVectorChooser(string path, string format){
     ifstream file(path, ios::in);  // Reading of the file which contains k-mers sequences
-    if(file && (format == "ACGT" || format == "ACTG")){   // File is now open
-        string word;
-        string line("");
-        file >> word;   //Take the first word to analyze size of one k-mer
-        file.seekg(0, ios::beg);    //Return to the beginning of the file
-        int myWordLen(word.size()); //Size of k_mer, it is the 'k'
-        int myOneLen(0);
-        while(getline(file, line)){ //Counts the number of ones in the file
-            myOneLen++;
-        }
-        file.clear();
-        file.seekg(0, ios::beg);    //Return to he beginning of the file
-        cout << "length of ones : " << myOneLen << endl;
-        cout << "length of a seq : " << myWordLen << endl;
-        uint64_t myTotalLen(pow(ALPHABET,myWordLen));   //Creation of the total length to create the sd_vector_builder
-        cout << "Total length : " << myTotalLen << endl;
-        sd_vector_builder constructSparse(myTotalLen, myOneLen);    //A size of myTotalLen, contains myOneLen ones
-        if(format == "ACGT"){
-            cout << "encoding in ACGT format... " << endl;
-            while(file >> word){
-                constructSparse.set(encode(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
-                file >> word;
+    if(file){   // File is now open
+        if(format == "ACGT" || format == "ACTG"){
+            string word;
+            string line("");
+            file >> word;   //Take the first word to analyze size of one k-mer
+            file.seekg(0, ios::beg);    //Return to the beginning of the file
+            int myWordLen(word.size()); //Size of k_mer, it is the 'k'
+            int myOneLen(0);
+            while(getline(file, line)){ //Counts the number of ones in the file
+                myOneLen++;
             }
-        }else{
-            cout << "encoding in ACTG format... " << endl;
-            while(file >> word){
-                constructSparse.set(encodeEcoli(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
-                file >> word;
+            file.clear();
+            file.seekg(0, ios::beg);    //Return to he beginning of the file
+            cout << "length of ones : " << myOneLen << endl;
+            cout << "length of a seq : " << myWordLen << endl;
+            long int myTotalLen(pow(ALPHABET,myWordLen));   //Creation of the total length to create the sd_vector_builder
+            cout << "Total length : " << myTotalLen << endl;
+            if(format == "ACGT"){
+                cout << "encoding in ACGT format... " << endl;
+                sd_vector_builder constructACGT(myTotalLen, myOneLen);
+                while(file >> word){
+                    if(word != "1") {
+                        constructACGT.set(encode(word,myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
+                    }
+                }
+                sd_vector<>finalACGT(constructACGT);
+                file.close();
+                return finalACGT;
+            }else{
+                cout << "encoding in ACTG format... " << endl;
+                sd_vector_builder constructACTG(myTotalLen, myOneLen);
+                while(file >> word){
+                    constructACTG.set(encodeEcoli(word, myWordLen));
+                    file >> word;
+                }
+                sd_vector<>finalACTG(constructACTG);
+                file.close();
+                return finalACTG;
             }
+        }else {
+            cout << "invalide format : need ACGT or ACTG" << endl;
         }
-        sd_vector<>finalSparse(constructSparse);    //Construction of the final sd_vector
-        file.close();
-        return finalSparse;
     }else{
-        cout << "Error while opening or bad format : need ACGT or ACTG" << endl;
+        cout << "Error while opening" << endl;
     }
     return bit_vector{0};
-}*/
+}
 
 /* Verify if a given (k-1)-mer is present in the generated sequence
  * If the given (k-1)-mer is bigger than the generated seuquence size /4, research is impossible
