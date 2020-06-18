@@ -270,27 +270,23 @@ sd_vector<>fromFileToSdVector(string path, string format){
         cout << "length of a seq : " << myWordLen << endl;
         uint64_t myTotalLen(pow(ALPHABET,myWordLen));   //Creation of the total length to create the sd_vector_builder
         cout << "Total length : " << myTotalLen << endl;
+        sd_vector_builder constructSparse(myTotalLen, myOneLen);    //A size of myTotalLen, contains myOneLen ones
         if(format == "ACGT"){
             cout << "encoding in ACGT format... " << endl;
-            sd_vector_builder constructSparse(myTotalLen, myOneLen);    //A size of myTotalLen, contains myOneLen ones
             while(file >> word){
                 constructSparse.set(encode(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
                 file >> word;
             }
-            sd_vector<>finalSparse(constructSparse);    //Construction of the final sd_vector
-            file.close();
-            return finalSparse;
         }else{
             cout << "encoding in ACTG format... " << endl;
-            sd_vector_builder constructSparse(myTotalLen, myOneLen);
             while(file >> word){
                 constructSparse.set(encodeEcoli(word, myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
                 file >> word;
             }
-            sd_vector<>finalSparse(constructSparse);
-            file.close();
-            return finalSparse;
         }
+        sd_vector<>finalSparse(constructSparse);    //Construction of the final sd_vector
+        file.close();
+        return finalSparse;
     }else{
         cout << "Error while opening or bad format : need ACGT or ACTG" << endl;
     }
