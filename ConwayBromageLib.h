@@ -24,14 +24,10 @@ bool isThisKMerHere(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCom
 //Successors of a canonical Kmer
 uint64_t getCanonical (uint64_t kmer, uint64_t kmerSize, bool encodingIsACGT);
 std::vector<uint64_t> successors(uint64_t Kmer, sdsl::sd_vector<> const& compressedSeq, bool encodingIsACGT);
-std::vector<uint64_t> alternativeSuccessor(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);
 //reverseComplement variations
 uint64_t reverseComplementLexico (const uint64_t mer, uint64_t kmerSize); //faster for lexicographical order
 u_int64_t reverseComplementGATBLibEcoli (const u_int64_t x, uint64_t sizeKmer); //the fastest : fastest ASCII version
 
-//next and previous for alternative successor function
-std::vector<uint64_t> previousForSucc(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);
-std::vector<uint64_t> nextForSucc(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);
 
 
 #endif //CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
