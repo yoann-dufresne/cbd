@@ -20,7 +20,7 @@ uint64_t encodeEcoli(std::string word, uint64_t size);
 sdsl::sd_vector<>fromFileToSdVector(std::string path); //can now choose the encoding format, canonical k-mer
 sdsl::sd_vector<>fromFileToSdVectorChooser(std::string path, std::string format);
 //isThisKMerHere
-bool isThisKMerHere(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq);
+bool isThisKMerHere(uint64_t compressedKMer, sdsl::sd_vector<> const& currentCompressedSeq, bool format);
 //Successors of a canonical Kmer
 uint64_t getCanonical (uint64_t kmer, uint64_t kmerSize, bool encodingIsACGT);
 std::vector<uint64_t> successors(uint64_t Kmer, sdsl::sd_vector<> const& compressedSeq, bool encodingIsACGT);
