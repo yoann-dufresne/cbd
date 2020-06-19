@@ -379,3 +379,86 @@ u_int64_t reverseComplementGATBLibEcoli (const u_int64_t x, uint64_t sizeKmer)  
 
     return (res >> (2*( 32 - sizeKmer))) ;
 }
+
+/* New version of next to calculate successors
+ * @param compressedKMer - a uint64_t which represents a compressed p-mer
+ * @param currentCompressedSeq - the generated sequence of k-mer
+ * @return a vector which contains all the possible next of compressedKMer
+ */
+vector<uint64_t> nextForSucc(uint64_t compressedKMer, sd_vector<> const& currentCompressedSeq){
+    vector<uint64_t> res;
+    if(compressedKMer < currentCompressedSeq.size()/4 && compressedKMer >= 0){
+        uint64_t currentKMerLen = log(currentCompressedSeq.size()) / log(ALPHABET);
+        uint64_t potentialKMer[4];
+        potentialKMer[0] = compressedKMer << 2;
+        for(int i = 1 ; i < 4 ; i++){
+            potentialKMer[i] = potentialKMer[i-1] + 1;
+        }
+        for(int i = 0 ; i < 4 ; i++){
+            res.push_back(potentialKMer[i]);
+        }
+    }
+    return res;
+}
+
+/* New version of previous to calculate successors
+ * @param compressedKMer - a uint64_t which represents a compressed p-mer
+ * @param currentCompressedSeq - the generated sequence of k-mer
+ * @return a vector which contains all the possible previous of compressedKMer
+ */
+vector<uint64_t> previousForSucc(uint64_t compressedKMer, sd_vector<> const& currentCompressedSeq){
+    vector<uint64_t> res;
+    if(compressedKMer < currentCompressedSeq.size()/4 && compressedKMer >= 0){
+        uint64_t currentKMerLen = log(currentCompressedSeq.size()) / log(ALPHABET);
+        uint64_t potentialKMer[4];
+        potentialKMer[0] = compressedKMer;
+        for(int i = 1 ; i < 4 ; i++){
+            potentialKMer[i] = potentialKMer[i-1] + (currentCompressedSeq.size() / 4);
+            //cout << decode(potentialKMer[i], currentKMerLen) << endl;
+        }
+        for(int i = 0 ; i < 4 ; i++){
+            res.push_back(potentialKMer[i] >> 2);
+        }
+    }
+    return res;
+}
+
+/* Alternative version of successor function
+ * @param compressedKMer - a uint64_t which represent a compressedKMer
+ * @param currentCompressedSeq - the generated sequence
+ * @param format - if format is set at 1, it is ACGT format, else it is ACTG
+ * @return a vector which contains all the successors of compressedKMer which exists in currentCompressedSeq
+ */
+vector<uint64_t> alternativeSuccessor(uint64_t compressedKMer, sd_vector<> const& currentCompressedSeq, bool format){
+    vector<uint64_t> succ;
+    int currentKMerLen = log(currentCompressedSeq.size()) / log(ALPHABET);
+    if(compressedKMer < currentCompressedSeq.size() / 4 && compressedKMer >= 0){
+        vector<uint64_t> potentialSucc;
+        vector<uint64_t> inter;
+        potentialSucc = previousForSucc(compressedKMer, currentCompressedSeq);
+        inter = nextForSucc(compressedKMer, currentCompressedSeq);
+        potentialSucc.insert(potentialSucc.end(), inter.begin(), inter.end());
+        if(format){
+            for(int i = 0 ; i < potentialSucc.size() ; i++){
+                uint64_t reverseSucc = reverseComplementLexico(potentialSucc[i], currentKMerLen-1);
+                if(potentialSucc[i] <= reverseSucc && isThisKMerHere(potentialSucc[i], currentCompressedSeq, format)){
+                    succ.push_back(potentialSucc[i]);
+                }else if (potentialSucc[i] > reverseSucc && isThisKMerHere(reverseSucc, currentCompressedSeq, format)){
+                    succ.push_back(reverseSucc);
+                }
+            }
+        }else{
+            for(int i = 0 ; i < potentialSucc.size() ; i++){
+                uint64_t reverseSucc = reverseComplementGATBLibEcoli(potentialSucc[i], currentKMerLen-1);
+                if(potentialSucc[i] <= reverseSucc && isThisKMerHere(potentialSucc[i], currentCompressedSeq, format)){
+                    succ.push_back(potentialSucc[i]);
+                }else if (potentialSucc[i] > reverseSucc && isThisKMerHere(reverseSucc, currentCompressedSeq, format)){
+                    succ.push_back(reverseSucc);
+                }
+            }
+        }
+        
+    }
+    return succ;
+}
+
