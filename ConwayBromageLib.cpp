@@ -289,9 +289,8 @@ sd_vector<>fromFileToSdVectorChooser(string path, string format){
                 cout << "encoding in ACGT format... " << endl;
                 sd_vector_builder constructACGT(myTotalLen, myOneLen);
                 while(file >> word){
-                    if(word != "1") {
-                        constructACGT.set(encode(word,myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
-                    }
+                    constructACGT.set(encode(word,myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
+                    file >> word;
                 }
                 sd_vector<>finalACGT(constructACGT);
                 file.close();
