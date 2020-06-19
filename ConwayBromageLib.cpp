@@ -321,17 +321,30 @@ sd_vector<>fromFileToSdVectorChooser(string path, string format){
  * @param currentCompressedSeq - the generated sequence where we want to verify if compressedKMer is in
  * @return true if the given (k-1)-mer is present, else false
  */
-bool isThisKMerHere(uint64_t compressedKMer, sd_vector<> const& currentCompressedSeq){
+bool isThisKMerHere(uint64_t compressedKMer, sd_vector<> const& currentCompressedSeq, bool format){
     if(compressedKMer < currentCompressedSeq.size() / 4 && compressedKMer >= 0) {
         int currentKMerLen = log(currentCompressedSeq.size()) / log(ALPHABET);
-        string sub = decode(compressedKMer, currentKMerLen - 1);
-        for (int i = 0; i < currentCompressedSeq.size(); i++) {
-            if (currentCompressedSeq[i]) {
-                if (decode(i, currentKMerLen).find(sub) != string::npos) {
-                    return true;
+        string sub;
+        if(format){
+             sub = decode(compressedKMer, currentKMerLen - 1);
+            for (int i = 0; i < currentCompressedSeq.size(); i++) {
+                if (currentCompressedSeq[i]) {
+                    if (decode(i, currentKMerLen).find(sub) != string::npos) {
+                        return true;
+                    }
+                }
+            }
+        }else{
+            sub = decodeEcoli(compressedKMer, currentKMerLen - 1);
+            for (int i = 0; i < currentCompressedSeq.size(); i++) {
+                if (currentCompressedSeq[i]) {
+                    if (decodeEcoli(i, currentKMerLen).find(sub) != string::npos) {
+                        return true;
+                    }
                 }
             }
         }
+
     }
     return false;
 }
