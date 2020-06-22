@@ -302,7 +302,7 @@ sd_vector<>fromFileToSdVectorChooser(string path, string format){
                 sd_vector_builder constructACTG(myTotalLen, myOneLen);
                 while(file >> word){
                     uint64_t pmer = encodeEcoli(word,myWordLen);
-                    if(getCanonical(pmer, word.size(), true) != pmer){
+                    if(getCanonical(pmer, word.size(), false) != pmer){
                         cout << "The file is not completely canonical" << endl;
                         exit(1); //EXIT_FAILURE
                     }
