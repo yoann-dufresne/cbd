@@ -162,30 +162,29 @@ uint64_t getCanonical (uint64_t kmer, uint64_t kmerSize, bool encodingIsACGT){
 
 /**
  * Returns the successors of a canonical kmer.
- * @param Kmer : the Kmer that we want to find its successors.
+ * @param Kmer : the Kmer that we want to find its successors. Can either be canonical or not.
  * @param compressedSeq : the sd_vector which stores all the canonical kmers.
  * @param encodingIsACGT : true if the wanted encoding is ACGT. If it's false, then the encoding ACTG will be considered.
- * @return a vector<uint64_t> representing the (at most 8) successors of the kmer.
+ * @return a vector<uint64_t> representing the (at most 8) successors of the kmer. The successors can be NON CANONICAL.
  */
 vector<uint64_t> successors(uint64_t Kmer, sd_vector<> const& compressedSeq, bool encodingIsACGT){
     vector<uint64_t> res;
     int PmerSize = (int)(log(compressedSeq.size())/log(4));
     int KmerSize = PmerSize-1;
-    //we must have nonCompressedKmer < 4^(P-1)
-    uint64_t limit = pow(4, KmerSize);
-    if(Kmer >= limit) {
+    uint64_t limit = compressedSeq.size() >> 2;
+    if(Kmer >= limit) { //we must have nonCompressedKmer < 4^(P-1)
         cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << limit << endl;
         return res; //empty
     }
-    //if Kmer is not canonical, we change it to its canonical form
-    Kmer = getCanonical(Kmer, KmerSize, encodingIsACGT);
+    //We retrieve the canonical form of the kmer in entry
+    //CHANGEMENT Kmer = getCanonical(Kmer, KmerSize, encodingIsACGT);
     //we build the eight possible successors    
     //next
     uint64_t Pmer = Kmer << 2; //<-> XA where X is the Kmer
     for(int i = 0; i < 4; i++){
         uint64_t canonicalPmer = getCanonical(Pmer, PmerSize, encodingIsACGT);
         if(compressedSeq[canonicalPmer]){ 
-            uint64_t successorKmer = canonicalPmer%(compressedSeq.size() >> 2);
+            uint64_t successorKmer = Pmer%limit;//CHANGEMENT canonicalPmer%limit;
             //if compressedSeq.size() = 256 (P=4) then compressedSeq.size() >> 2 = 64 ==> AACA%64 ==> ACA (i_next_kmer)
             if(find(res.begin(), res.end(), successorKmer) == res.end()) //check if vector doesn't contain i_previous_pmer
                 res.push_back(successorKmer);
@@ -193,13 +192,12 @@ vector<uint64_t> successors(uint64_t Kmer, sd_vector<> const& compressedSeq, boo
         Pmer++; //equals to XA then XC then XG then XT
     }
     //predecessors
-    int numberOfBitsToShift = 2*KmerSize;
-    Pmer = Kmer; //X become AX where X is the Kmer
+    int numberOfBitsToShift = KmerSize << 1;
     for(int i = 0; i < 4; i++){
         Pmer = Kmer + (i << numberOfBitsToShift); //equals to AX then CX then GX then TX where X is the Kmer
         uint64_t canonicalPmer = getCanonical(Pmer, PmerSize, encodingIsACGT);
         if(compressedSeq[canonicalPmer]){
-            uint64_t successorKmer = canonicalPmer >> 2;
+            uint64_t successorKmer = Pmer >> 2;//canonicalPmer >> 2;
             if(find(res.begin(), res.end(), successorKmer) == res.end()) //check if vector doesn't contain i_previous_pmer
                 res.push_back(successorKmer);
         }
