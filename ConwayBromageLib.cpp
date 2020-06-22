@@ -258,7 +258,6 @@ sd_vector<>fromFileToSdVector(string path){
     return bit_vector{0};
 }
 
-
 /* Transform sequences which are contain in a file in a sd_vector
  * @param path - The path to the file which contains info
  * @param format - The format we want for the transformation : ACGT or ACTG
@@ -287,7 +286,12 @@ sd_vector<>fromFileToSdVectorChooser(string path, string format){
                 cout << "encoding in ACGT format... " << endl;
                 sd_vector_builder constructACGT(myTotalLen, myOneLen);
                 while(file >> word){
-                    constructACGT.set(encode(word,myWordLen)); //filled to one each element which is represent by the encoding version of the sequence
+                    uint64_t pmer = encode(word,myWordLen);
+                    if(getCanonical(pmer, word.size(), true) != pmer){
+                        cout << "The file is not completely canonical" << endl;
+                        exit(1); //EXIT_FAILURE
+                    }
+                    constructACGT.set(pmer); //filled to one each element which is represent by the encoding version of the sequence
                     file >> word;
                 }
                 sd_vector<>finalACGT(constructACGT);
@@ -297,7 +301,12 @@ sd_vector<>fromFileToSdVectorChooser(string path, string format){
                 cout << "encoding in ACTG format... " << endl;
                 sd_vector_builder constructACTG(myTotalLen, myOneLen);
                 while(file >> word){
-                    constructACTG.set(encodeEcoli(word, myWordLen));
+                    uint64_t pmer = encodeEcoli(word,myWordLen);
+                    if(getCanonical(pmer, word.size(), true) != pmer){
+                        cout << "The file is not completely canonical" << endl;
+                        exit(1); //EXIT_FAILURE
+                    }
+                    constructACTG.set(pmer);
                     file >> word;
                 }
                 sd_vector<>finalACTG(constructACTG);
