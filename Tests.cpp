@@ -110,12 +110,12 @@ const test critical[] = {
         },
         //Test of successors on a small sd_vectors
         CASE("successors with ACGT encoding"){
-            sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,1,0,1};
+            sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
             vector<vector<uint64_t>> TrueNext(16);
             TrueNext[0]  = {1, 3, 2};
-            TrueNext[1]  = {0, 1, 2};
-            TrueNext[2]  = {0, 1, 2};
-            TrueNext[3]  = {1, 3, 2};
+            TrueNext[1]  = {0, 1, 3};
+            TrueNext[2]  = {0, 2, 3};
+            TrueNext[3]  = {1, 2, 0};
             bool result = true;
             for(int i(0); i < sdv.size()/4; i++){
                 vector<uint64_t> succ = successors(i, sdv, true);
@@ -135,15 +135,15 @@ const test critical[] = {
             EXPECT(result);
         },
         CASE("successors with ACTG encoding"){
-            sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,1,0,1};
+            sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
             vector<vector<uint64_t>> TrueNext(16);
             TrueNext[0]  = {1, 3, 2};
-            TrueNext[1]  = {0, 1, 3};
-            TrueNext[2]  = {1, 3, 2};
-            TrueNext[3]  = {0, 1, 3};
+            TrueNext[1]  = {0, 1, 2};
+            TrueNext[2]  = {0, 3, 1};
+            TrueNext[3]  = {2, 3, 0};
             bool result = true;
             for(int i(0); i < sdv.size()/4; i++){
-                vector<uint64_t> succ = successors(i, sdv, false);
+                vector<uint64_t> succ = successors(i, sdv, false);//alternativeSuccessor(i, sdv, false);//successors(i, sdv, false);
                 //check if same
                 for(int j(0); j < succ.size(); j++){
                     if(TrueNext[i].size() == succ.size()){
