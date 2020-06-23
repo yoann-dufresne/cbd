@@ -40,7 +40,7 @@ Returns the successors of a k-mer. A k-mer has at maximum 8 successors and minim
 <br>
 Example of code : <br>
 ```
-//Let's say that the file in entry (in ACGT encoding) contains the following canonical p-mers : AAG and TAA
+//Let's say that the file in entry (in ACGT encoding) contains the following canonical, and sorted, p-mers : AAG and TAA
 sd_vector<> sdv = fromFileToSdVectorChooser("./sorted_kmers.txt", "ACGT");
 int Kmer = 0; // representation of AA
 vector<uint64_t> successorsOfAA = successors(Kmer, sdv, true); //true = ACGT encoding
