@@ -106,12 +106,18 @@ const test atTheEnd[] = {
             ifstream file("./sortACTG.txt", ios::in);
             string line;
             string unCompressedKMer;
+            string reverseComplement;
             bool isHere;
             for(int i = 0 ; i < 64 ; i++){
                 isHere = false;
                 unCompressedKMer = decodeEcoli(i, 3);
+                reverseComplement = decodeEcoli(reverseComplementGATBLibEcoli(i, 3), 3);
                 while(getline(file,line)){
                     if(line.find(unCompressedKMer) != string::npos){
+                        isHere = true;
+                        break;
+                    }
+                    if(line.find(reverseComplement) != string::npos){ //if reverse complement is present
                         isHere = true;
                         break;
                     }
@@ -127,12 +133,18 @@ const test atTheEnd[] = {
             ifstream file("./sortACGT.txt", ios::in);
             string line;
             string unCompressedKMer;
+            string reverseComplement;
             bool isHere;
             for(int i = 0 ; i < 64 ; i++){
                 isHere = false;
                 unCompressedKMer = decode(i, 3);
+                reverseComplement = decode(reverseComplementLexico(i, 3), 3);
                 while(getline(file,line)){
-                    if(line.find(unCompressedKMer) != string::npos){
+                    if(line.find(unCompressedKMer) != string::npos){ //if forward is present
+                        isHere = true;
+                        break;
+                    }
+                    if(line.find(reverseComplement) != string::npos){ //if reverse complement is present
                         isHere = true;
                         break;
                     }
