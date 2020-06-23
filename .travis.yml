@@ -1,4 +1,4 @@
-language: 
+language:
   - cpp
   - python
 
@@ -6,7 +6,7 @@ cpp: c++11
 
 python: "3.8"
 
-compiler: g++ 
+compiler: g++
 
 #before_install: |
 #  if ! [ -f sdsl-lite/ ]; then
@@ -20,28 +20,31 @@ compiler: g++
 #    - sdsl-lite/
 
 install:
-#- cd ~/
-#- mkdir include
-#- git clone https://github.com/simongog/sdsl-lite.git
-#- git clone https://github.com/martinmoene/lest.git
-#- cd sdsl-lite
-#- ./install.sh
-#- cd ../
-#- cp -r ./sdsl-lite/include/sdsl ./include
-#- cp -r ./lest/include/lest ./include
-- git clone --recurse-submodules https://github.com/yoann-dufresne/ConwayBromageLib.git
-   
+  #  - cd ~/
+  #  - mkdir include
+  #  - git clone https://github.com/simongog/sdsl-lite.git
+  #  - git clone https://github.com/martinmoene/lest.git
+  #  - cd sdsl-lite
+  #  - ./install.sh
+  #  - cd ../
+  #  - cp -r ./sdsl-lite/include/sdsl ./include
+  #  - cp -r ./lest/include/lest ./include
+  - git clone --recurse-submodules https://github.com/AkumalexTheExalted/submodTest.git
+
 script:
   - cd $TRAVIS_BUILD_DIR #là où est contenu notre code ( pas  sdsl-lite )
   #- cd sample_generation/
-  - cd ConwayBromageLib
-  - python3 generate_counts.py -k 4 -n 200 > sorted_kmers.txt
-  - sort sorted_kmers.txt -o sorted_kmers.txt
-  #- cp sorted_kmers.txt ../sorted_kmers.txt
-  #- cd ../
+  - ls
+  - cd submodTest
+  - ls
+  - python3 involveGenerate_counts.py -k 4 -n 100 -f ACTG > unsortACTG.txt
+  - python3 involveGenerate_counts.py -k 4 -n 100 -f ACGT > unsortACGT.txt
+  - sort unsortACGT.txt > sortACGT.txt
+  - python3 mySort.py unsortACTG.txt > sortACTG.txt
+  - ls
   - cmake CMakeLists.txt
+  - ls
   - make
+  - ls
   - ./ConwayBromageLib
-  #- g++ -Wall -Wextra -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o Tests.exe Tests.cpp ConwayBromageLib.cpp -lsdsl -ldivsufsort -ldivsufsort64
-  #- ./Tests.exe
   
