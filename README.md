@@ -44,7 +44,7 @@ Example of code : <br>
 sd_vector<> sdv = fromFileToSdVectorChooser("./sorted_kmers.txt", "ACGT");
 int Kmer = 0; // representation of AA
 vector<uint64_t> successorsOfAA = successors(Kmer, sdv, true); //true = ACGT encoding
-//contains {2, 3} which correspond to {AG, AT}
+//contains {2, 12} which correspond to {AG, TA}
 ```
 
 ### previous function
