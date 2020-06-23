@@ -35,17 +35,16 @@ Example of code : <br>
 sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt"); // the size of sdv is 4^k
 ```
 
-### next function
-Returns the successors of a k-mer. A k-mer has at maximum 4 successors and minimum 0 successors.<br> 
+### successors function
+Returns the successors of a k-mer. A k-mer has at maximum 8 successors and minimum 0 successors. <br>
 <br>
-Example of code : <br> 
+Example of code : <br>
 ```
-//We supposed that the text file is filled with 4-mers. 
-sd_vector<> sdv = fromFileToSdVector("./sorted_kmers.txt");
-vector<string> successorsOfCATC = next("CATC", sdv);
-//next of CATC -> { ATCA ATCC ATCG ATCT }
-vector<string> successorsOfTTTT = next("TTTT", sdv);
-//next of TTTT -> { TTTA TTTC TTTG TTTT }
+//Let's say that the file in entry (in ACGT encoding) contains the following canonical p-mers : AAG and TAA
+sd_vector<> sdv = fromFileToSdVectorChooser("./sorted_kmers.txt", "ACGT");
+int Kmer = 0; // representation of AA
+vector<uint64_t> successorsOfAA = successors(Kmer, sdv, true); //true = ACGT encoding
+//contains {2, 3} which correspond to {AG, AT}
 ```
 
 ### previous function
