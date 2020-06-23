@@ -2,6 +2,7 @@
 import argparse
 from random import sample
 
+#Remake of yoann's generate_counts.py : now able to manage canonical nucleotides in ACGT and ACTG format
 
 def restricted_float(x):
     """ Verify if an argument is a float and is in between 0. and 1. included """
@@ -20,7 +21,7 @@ def parse_args():
     parser.add_argument('--kmer-size', '-k', type=int, default=31, help='Size of the kmers.')
     parser.add_argument('--filling-ratio', '-r', type=restricted_float, help='The ratio of kmer present in the output.')
     parser.add_argument('--kmer-number', '-n', type=int, default=10, help='The number of kmers in the output. This argument is not used if the ratio is set.')
-    parser.add_argument('--format-encode', '-f', type=str, default="ACGT", help='Encoding format of the sequence, need ACGT or ACTG')
+    parser.add_argument('--format-encode', '-f', type=str, default="ACGT", help='Encoding format of the sequence, need ACGT or ACTG')   #format choice : ACGT or ACTG
     
     args = parser.parse_args()
 
@@ -34,11 +35,11 @@ def integer_to_kmer(i, k, format_encode):
     str_repr = ""
     if format_encode == "ACGT":
         for _ in range(k):
-            str_repr += "ACGT"[i%4]
+            str_repr += "ACGT"[i%4] #creation of k-mers, ACGT format
             i = i // 4
     else:
         for _ in range(k):
-            str_repr += "ACTG"[i%4] 
+            str_repr += "ACTG"[i%4] #creation of k-mers, ACTG format
             i = i // 4
         str_repr = "".join(reversed(str_repr))
         #print("str_repr : {}".format(str_repr))
@@ -46,13 +47,13 @@ def integer_to_kmer(i, k, format_encode):
 
 
 def generate_kmers(k, num_kmers, format_encode):
-    for i in sample(range(pow(4, k)), num_kmers):
+    for i in sample(range(pow(4, k)), num_kmers):   #generate num_kmers randomlu between 0 and 4**k excluded
         #randomer = randint(0, pow(4, k)-1)
        # print("randomer : {}".format(randomer))
         cano = getCanonical(i, k, format_encode) 
         print("{}\t1".format(integer_to_kmer(cano, k, format_encode)))
 
-def reverseACGT(mer, kmerSize):
+def reverseACGT(mer, kmerSize): #same ACGT reverse as in the library, python version
     res = ~mer
 
     res = ((res >> 2 & 0x3333333333333333) | (res & 0x3333333333333333) << 2);
@@ -63,7 +64,7 @@ def reverseACGT(mer, kmerSize):
 
     return (res >> (2 * (32 - kmerSize)))
 
-def reverseACTG(x, sizeKmer):
+def reverseACTG(x, sizeKmer):   #same ACTG reverse as in the library, python version
     res = x
 
     res = ((res>> 2 & 0x3333333333333333) | (res & 0x3333333333333333) <<  2);
@@ -75,7 +76,7 @@ def reverseACTG(x, sizeKmer):
 
     return (res >> (2*( 32 - sizeKmer))) ;
 
-def getCanonical(i, k, format_encode):
+def getCanonical(i, k, format_encode):  #return the canonical version of the k-mers, return itself if it is canonical already
     if format_encode == "ACGT":
         rev = reverseACGT(i, k)
         if rev < i :
