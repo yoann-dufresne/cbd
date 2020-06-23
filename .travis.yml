@@ -29,7 +29,7 @@ install:
   #  - cd ../
   #  - cp -r ./sdsl-lite/include/sdsl ./include
   #  - cp -r ./lest/include/lest ./include
-  - git clone --recurse-submodules https://github.com/AkumalexTheExalted/submodTest.git
+  - git clone --recurse-submodules https://github.com/yoann-dufresne/ConwayBromageLib.git
 
 script:
   - cd $TRAVIS_BUILD_DIR #là où est contenu notre code ( pas  sdsl-lite )
