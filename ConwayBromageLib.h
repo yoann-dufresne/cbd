@@ -28,6 +28,8 @@ std::vector<uint64_t> successors(uint64_t Kmer, sdsl::sd_vector<> const& compres
 uint64_t reverseComplementLexico (const uint64_t mer, uint64_t kmerSize); //faster for lexicographical order
 u_int64_t reverseComplementGATBLibEcoli (const u_int64_t x, uint64_t sizeKmer); //the fastest : fastest ASCII version
 
-
+//Functions for tests only
+bool isCanonical (uint64_t kmer, uint64_t kmerSize, bool encodingIsACGT);
+std::vector<uint64_t> successorCounter(uint64_t compressedKMer, sdsl::sd_vector<>currentCompressedSeq, bool format);
 
 #endif //CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
