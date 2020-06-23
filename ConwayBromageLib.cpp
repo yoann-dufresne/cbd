@@ -322,37 +322,34 @@ sd_vector<>fromFileToSdVectorChooser(string path, string format){
     return bit_vector{0};
 }
 
-/* Verify if a given (k-1)-mer is present in the generated sequence
- * If the given (k-1)-mer is bigger than the generated seuquence size /4, research is impossible
- * @param compressedKMer - a string which represents the (k-1)-mer we study
- * @param currentCompressedSeq - the generated sequence where we want to verify if compressedKMer is in
- * @return true if the given (k-1)-mer is present, else false
+/**
+ * Check if the given Kmer is present in the sequence.
+ * @param Kmer - An integer representing the k-mer.
+ * @param compressedSeq - The compressed p-mer sequence.
+ * @param encodingIsAGCT - true if the encoding is AGCT and false if it's ACTG.
+ * @return true if the k-mer is present.
  */
-bool isThisKMerHere(uint64_t compressedKMer, sd_vector<> const& currentCompressedSeq, bool format){
-    if(compressedKMer < currentCompressedSeq.size() / 4 && compressedKMer >= 0) {
-        int currentKMerLen = log(currentCompressedSeq.size()) / log(ALPHABET);
-        string sub;
-        if(format){
-             sub = decode(compressedKMer, currentKMerLen - 1);
-            for (int i = 0; i < currentCompressedSeq.size(); i++) {
-                if (currentCompressedSeq[i]) {
-                    if (decode(i, currentKMerLen).find(sub) != string::npos) {
-                        return true;
-                    }
-                }
-            }
-        }else{
-            sub = decodeEcoli(compressedKMer, currentKMerLen - 1);
-            for (int i = 0; i < currentCompressedSeq.size(); i++) {
-                if (currentCompressedSeq[i]) {
-                    if (decodeEcoli(i, currentKMerLen).find(sub) != string::npos) {
-                        return true;
-                    }
-                }
-            }
-        }
-
-    }
+bool isThisKMerHere(uint64_t Kmer, sd_vector<> const& compressedSeq, bool encodingIsAGCT){
+    int PmerSize = (int)(log(compressedSeq.size())/log(4));
+    int KmerSize = PmerSize-1;
+    uint64_t limit = compressedSeq.size() >> 2;
+    if(Kmer >= limit) { //we must have nonCompressedKmer < 4^(P-1)
+        cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << limit << endl;
+        return false; 
+    }  
+    
+    uint64_t next = Kmer << 2; //next contains XA where X is the Kmer
+    if(compressedSeq[getCanonical(next, PmerSize, encodingIsAGCT)])   return true; //getCanonical(XA) where X is the Kmer
+    if(compressedSeq[getCanonical(next+1, PmerSize, encodingIsAGCT)]) return true; //getCanonical(XC)
+    if(compressedSeq[getCanonical(next+2, PmerSize, encodingIsAGCT)]) return true; //getCanonical(XG)
+    if(compressedSeq[getCanonical(next+3, PmerSize, encodingIsAGCT)]) return true; //getCanonical(XT)
+    
+    int numberOfBitsToShift = KmerSize << 1; // AX  X + 1 
+    if(compressedSeq[getCanonical(Kmer, PmerSize, encodingIsAGCT)])   return true; //getCanonical(AX) where X is the Kmer
+    if(compressedSeq[getCanonical(Kmer + (1 << numberOfBitsToShift), PmerSize, encodingIsAGCT)]) return true; //getCanonical(CX)
+    if(compressedSeq[getCanonical(Kmer + (2 << numberOfBitsToShift), PmerSize, encodingIsAGCT)]) return true; //getCanonical(GX)
+    if(compressedSeq[getCanonical(Kmer + (3 << numberOfBitsToShift), PmerSize, encodingIsAGCT)]) return true; //getCanonical(TX)
+    
     return false;
 }
 
