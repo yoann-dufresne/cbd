@@ -186,7 +186,7 @@ vector<uint64_t> successors(uint64_t Kmer, sd_vector<> const& compressedSeq, boo
         if(compressedSeq[canonicalPmer]){ 
             uint64_t successorKmer = Pmer%limit;//CHANGEMENT canonicalPmer%limit;
             //if compressedSeq.size() = 256 (P=4) then compressedSeq.size() >> 2 = 64 ==> AACA%64 ==> ACA (i_next_kmer)
-            if(find(res.begin(), res.end(), successorKmer) == res.end()) //check if vector doesn't contain i_previous_pmer
+            if(find(res.begin(), res.end(), successorKmer) == res.end()) //check if vector doesn't contain successorKmer
                 res.push_back(successorKmer);
         }
         Pmer++; //equals to XA then XC then XG then XT
@@ -198,7 +198,7 @@ vector<uint64_t> successors(uint64_t Kmer, sd_vector<> const& compressedSeq, boo
         uint64_t canonicalPmer = getCanonical(Pmer, PmerSize, encodingIsACGT);
         if(compressedSeq[canonicalPmer]){
             uint64_t successorKmer = Pmer >> 2;//canonicalPmer >> 2;
-            if(find(res.begin(), res.end(), successorKmer) == res.end()) //check if vector doesn't contain i_previous_pmer
+            if(find(res.begin(), res.end(), successorKmer) == res.end()) //check if vector doesn't contain successorKmer
                 res.push_back(successorKmer);
         }
     }
