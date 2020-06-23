@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   Tests.cpp
  * Author: muratokutucu
  *
@@ -27,60 +27,124 @@ using namespace lest;
 
 static const uint64_t  totalLen = 4611686018427387904;
 static const sd_vector<>littleTestPrev = bit_vector{0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1};
-static const sd_vector<> ret = fromFileToSdVectorChooser("./sorted_kmers.txt","ACGT");
+//static const sd_vector<> ret = fromFileToSdVectorChooser("./sorted_kmers.txt","ACGT");
 /*
  * Compilation line : g++ -Wall -Wextra -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o Tests.exe Tests.cpp ConwayBromageLib.cpp -lsdsl -ldivsufsort -ldivsufsort64
  */
 
 //Appears to other tests, need to be verify in first
 const test critical[] = {
-        CASE("merge : "){
-            cout << "\t--> merge" << endl;
-                bit_vector ba = {0, 1, 1, 1, 0, 1};
-                bit_vector bb = {1, 0, 0, 0};
-                sd_vector<>a(ba);
-                sd_vector<>b(bb);
-                sd_vector<> res = merge(a, b, 4, 1);
-                uint64_t finalSize(0);
-                if(a.size() > b.size()){
-                    finalSize = a.size();
-                }else{
-                    finalSize = b.size();
-                }
-                EXPECT(res.size() == finalSize);
-                for(int i = 0 ; i < finalSize ; i++){
-                    if(a[i] || b[i]){
-                                EXPECT(res[i] == 1);
+        //Tests of decode :
+        CASE("encode lexicographical order : "){
+            cout << "\t--> encode lexicographical order" << endl;
+            EXPECT(encode("GGTA", 4) == 172);
+        },
+        CASE("encode ASCII order "){
+            cout << "\t--> encode ASCII order" << endl;
+            EXPECT(encodeEcoli("GGTA", 4) == 248);
+        },
+        CASE("decode lexicographical order : "){
+            cout << "\t--> decode lexicographical order" << endl;
+            EXPECT(decode(172, 4) == "GGTA");
+        },
+        CASE("decode lexicographical order : "){
+            cout << "\t--> decode ASCII order" << endl;
+            EXPECT(decodeEcoli(248, 4) == "GGTA");
+        }
+};
+
+const test lessCritical[] = {
+        CASE("reverse complement : faster lexicographical order"){
+            cout << "\t--> faster lexicographical order" << endl;
+            uint64_t len = log(totalLen) / log(ALPHABET);
+            for(int i = 0 ; i < 1000000 ; i++){
+                EXPECT(i == reverseComplementLexico(reverseComplementLexico(i, len), len));
+            }
+        },
+        CASE("reverse complement : faster ASCII order"){
+            cout << "\t--> faster ASCII order" << endl;
+            uint64_t len = log(totalLen) / log(ALPHABET);
+            for(int i = 0 ; i < 1000000 ; i++){
+                EXPECT(i == reverseComplementGATBLibEcoli(reverseComplementGATBLibEcoli(i, len), len));
+            }
+        },
+};
+
+const test lessLessCrit[] = {
+        CASE("getCanonical"){
+            cout << "\t--> canonical k-mer ACGT format : " << endl;
+            EXPECT(getCanonical(172, 4, 1) == 172);
+        },
+        CASE("getCanonical"){
+            cout << "\t--> uncanonical k-mer ACGT format : " << endl;
+            EXPECT(getCanonical(138, 4, 1) == 93);
+        },
+        CASE("getCanonical"){
+            cout << "\t--> canonical k-mer ACTG format : " << endl;
+            EXPECT(getCanonical(8, 4, 1) == 8);
+        },
+        CASE("getCanonical"){
+            cout << "\t--> uncanonical k-mer ACTG format : " << endl;
+            EXPECT(getCanonical(172, 4, 0) == 144);
+        },
+};
+
+const test atTheEnd[] = {
+        CASE("isThisKMerHere"){
+            cout << "\t--> isThisKMerHere : existant K-mer : example without fromFileToSdVector calling :  " << endl;
+            bool val = isThisKMerHere(0, littleTestPrev, 1);
+            EXPECT(val == true);
+        },
+        CASE("isThisKMerHere"){
+            cout << "\t--> isThisKMerHere : non-existant K-mer : example without fromFileToSdVector calling :  " << endl;
+            bool val = isThisKMerHere(-1, littleTestPrev, 1);
+            EXPECT(val == false);
+        },
+        CASE("isThisKMerHere"){
+            cout << "\t--> isThisKMerHere : 100 4-mers ACTG encode : " << endl;
+            sd_vector<>ret = fromFileToSdVectorChooser("./sortACTG.txt", "ACTG");
+            ifstream file("./sortACTG.txt", ios::in);
+            string line;
+            string unCompressedKMer;
+            bool isHere;
+            for(int i = 0 ; i < 64 ; i++){
+                isHere = false;
+                unCompressedKMer = decodeEcoli(i, 3);
+                while(getline(file,line)){
+                    if(line.find(unCompressedKMer) != string::npos){
+                        isHere = true;
+                        break;
                     }
                 }
-        },
-        //Tests of decode :
-        CASE("decode case A = 0 ; C = 1 ; G = 2 ; T = 3 : original "){ //decode the 1000000 firsts elements of the generated sequence res (with fromFileToSdVector)
-            cout << "\t--> original decode" << endl;
-            uint64_t len = log(totalLen) / log(ALPHABET);
-            for(uint64_t i = 0 ; i < 1000000 ; i++){
-                        EXPECT(i == encode(decode(i, len), len));   //expect to find i with a encode-decode combination
+                EXPECT(isThisKMerHere(i, ret, 0) == isHere);
+                file.clear();
+                file.seekg(0, ios::beg);
             }
         },
-        //Tests of previous :
-        CASE("previous : perfect use expected without fromFileToSdVector call : "){  //Test with a perfect use of previous + a perfect generated sequence
-            cout << "\t--> previous with little sd_vector" << endl;
-            vector<vector<uint64_t>> prevOfLittlePrev(4);
-            prevOfLittlePrev[0] = { 1, 2 };
-            prevOfLittlePrev[1] = { 0, 1, 3 };
-            prevOfLittlePrev[3] = { 0, 3 };
-            for(int i = 0 ; i < 4 ; i++){
-                vector<uint64_t> prev = previous(i, littleTestPrev);
-                EXPECT(prevOfLittlePrev[i] == prev);
+        CASE("isThisKMerHere"){
+            cout << "\t--> isThisKMerHere : 100 4-mers ACGT encode : " << endl;
+            sd_vector<>ret = fromFileToSdVectorChooser("./sortACGT.txt", "ACGT");
+            ifstream file("./sortACGT.txt", ios::in);
+            string line;
+            string unCompressedKMer;
+            bool isHere;
+            for(int i = 0 ; i < 64 ; i++){
+                isHere = false;
+                unCompressedKMer = decode(i, 3);
+                while(getline(file,line)){
+                    if(line.find(unCompressedKMer) != string::npos){
+                        isHere = true;
+                        break;
+                    }
+                }
+                EXPECT(isThisKMerHere(i, ret, 0) == isHere);
+                file.clear();
+                file.seekg(0, ios::beg);
             }
-        },
-        CASE("previous : unexpected use : a non existant k-mer : "){    //Test with an example of bad use : try to find a non existing k-mer
-            cout << "\t--> previous for a non existant k-mer" << endl;
-            vector<uint64_t> prev = previous(-404, littleTestPrev);    //a compressed k-mer can't have a negative number
-                    EXPECT(prev.size() == 0);   //In this case, they is no possible previous
         },
         //Test of successors on a small sd_vectors
-        CASE("successors with ACGT encoding"){
+        CASE("successors"){
+            cout << "\t--> successors with ACGT encoding : " << endl;
             sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
             vector<vector<uint64_t>> TrueNext(16);
             TrueNext[0]  = {1, 3, 2};
@@ -105,7 +169,8 @@ const test critical[] = {
             }
             EXPECT(result);
         },
-        CASE("successors with ACTG encoding"){
+        CASE("successors"){
+            cout << "\t--> successors with ACTG encoding : " << endl;
             sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
             vector<vector<uint64_t>> TrueNext(16);
             TrueNext[0]  = {1, 3, 2};
@@ -129,96 +194,16 @@ const test critical[] = {
                 }
             }
             EXPECT(result);
-        }
-};
-
-const test lessCritical[] = {
-        CASE("reverse complement : faster lexicographical order"){
-            cout << "\t--> faster lexicographical order" << endl;
-            uint64_t len = log(totalLen) / log(ALPHABET);
-            for(int i = 0 ; i < 1000000 ; i++){
-                        EXPECT(i == reverseComplementLexico(reverseComplementLexico(i, len), len));
-            }
         },
-};
-
-const test lessLessCrit[] = {
-       CASE("fromFileToSdVector : unexpected format "){ //verify reaction to an unexpected format
-            cout << "\t--> fromFileToSdVector with unexpected format" << endl;
-            sd_vector<> res = fromFileToSdVectorChooser("./sorted_kmers.txt", "RRRR");
-                    EXPECT((res.size() == 1 && res[0] == 0));
-        },
-};
-
-const test atTheEnd[] = {
-        CASE("previous : perfect use expected with file fromFileToSdVectorCall : "){  //Test with a perfect use of previous + a perfect generated sequence
-            cout << "\t--> previous with fromFileToSdVector call" << endl;
-            uint64_t currentKMerLen = log(ret.size()) / log(ALPHABET);
-            for (int i = 0; i < ret.size() / 4; i++) { //for the firsts 1000000
-                string current = decode(i, currentKMerLen-1);
-                vector<uint64_t> prev = previous(i, ret);
-                for(int j = 0 ; j < prev.size() ; j++){
-                    vector<uint64_t> proof;
-                    proof.push_back(encode((decode(prev[j], currentKMerLen-1).erase(0, 1)) + "A", currentKMerLen-1));
-                    proof.push_back(encode((decode(prev[j], currentKMerLen-1).erase(0, 1)) + "C", currentKMerLen-1));
-                    proof.push_back(encode((decode(prev[j], currentKMerLen-1).erase(0, 1)) + "G", currentKMerLen-1));
-                    proof.push_back(encode((decode(prev[j], currentKMerLen-1).erase(0, 1)) + "T", currentKMerLen-1));
-                    EXPECT(i == proof[0] || i == proof[1] || i == proof[2] || i == proof[3]);
-                }
-            }
-        },
-      CASE("isThisKMerHere"){
-            cout << "\t--> isThisKMerHere : existant K-mer : example without fromFileToSdVector calling :  " << endl;
-            bool val = isThisKMerHere(0, littleTestPrev, 1);
-                    EXPECT(val == true);
-        },
-        CASE("isThisKMerHere"){
-            cout << "\t--> isThisKMerHere : non-existant K-mer : example without fromFileToSdVector calling :  " << endl;
-            bool val = isThisKMerHere(-1, littleTestPrev, 1);
-                    EXPECT(val == false);
-        },
-        CASE("isThisKMerHere"){
-            cout << "\t--> isThisKMerHere : 100 4-mers ACTG encode : " << endl;
+        /*CASE("successors"){
+            cout << "\t--> successors with the successor counter : " << endl;
             sd_vector<>ret = fromFileToSdVectorChooser("./sortACTG.txt", "ACTG");
-            ifstream file("./sortACTG.txt", ios::in);
-            string line;
-            string unCompressedKMer;
-            bool isHere;
             for(int i = 0 ; i < 64 ; i++){
-                isHere = false;
-                unCompressedKMer = decodeEcoli(i, 3);
-                while(getline(file,line)){
-                    if(line.find(unCompressedKMer) != string::npos){
-                        isHere = true;
-                        break;
-                    }
-                }
-                        EXPECT(isThisKMerHere(i, ret, 0) == isHere);
-                file.clear();
-                file.seekg(0, ios::beg);
+                vector<uint64_t> counter = successorCounter(i, ret, 0);
+                vector<uint64_t> succ = successors(i, ret, 0);
+                EXPECT(succ == counter);
             }
-        },
-        CASE("isThisKMerHere"){
-            cout << "\t--> isThisKMerHere : 100 4-mers ACGT encode : " << endl;
-            sd_vector<>ret = fromFileToSdVectorChooser("./sortACGT.txt", "ACGT");
-            ifstream file("./sortACGT.txt", ios::in);
-            string line;
-            string unCompressedKMer;
-            bool isHere;
-            for(int i = 0 ; i < 64 ; i++){
-                isHere = false;
-                unCompressedKMer = decode(i, 3);
-                while(getline(file,line)){
-                    if(line.find(unCompressedKMer) != string::npos){
-                        isHere = true;
-                        break;
-                    }
-                }
-                        EXPECT(isThisKMerHere(i, ret, 0) == isHere);
-                file.clear();
-                file.seekg(0, ios::beg);
-            }
-        },
+        },*/
 };
 
 int main(){
