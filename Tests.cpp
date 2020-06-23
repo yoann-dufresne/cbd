@@ -167,16 +167,58 @@ const test atTheEnd[] = {
                 }
             }
         },
-        CASE("isThisKMerHere"){
+      CASE("isThisKMerHere"){
             cout << "\t--> isThisKMerHere : existant K-mer : example without fromFileToSdVector calling :  " << endl;
-            bool val = isThisKMerHere(0, littleTestPrev);
-            EXPECT(val == true);
+            bool val = isThisKMerHere(0, littleTestPrev, 1);
+                    EXPECT(val == true);
         },
         CASE("isThisKMerHere"){
             cout << "\t--> isThisKMerHere : non-existant K-mer : example without fromFileToSdVector calling :  " << endl;
-            bool val = isThisKMerHere(-1, littleTestPrev);
+            bool val = isThisKMerHere(-1, littleTestPrev, 1);
                     EXPECT(val == false);
-        }
+        },
+        CASE("isThisKMerHere"){
+            cout << "\t--> isThisKMerHere : 100 4-mers ACTG encode : " << endl;
+            sd_vector<>ret = fromFileToSdVectorChooser("./sortACTG.txt", "ACTG");
+            ifstream file("./sortACTG.txt", ios::in);
+            string line;
+            string unCompressedKMer;
+            bool isHere;
+            for(int i = 0 ; i < 64 ; i++){
+                isHere = false;
+                unCompressedKMer = decodeEcoli(i, 3);
+                while(getline(file,line)){
+                    if(line.find(unCompressedKMer) != string::npos){
+                        isHere = true;
+                        break;
+                    }
+                }
+                        EXPECT(isThisKMerHere(i, ret, 0) == isHere);
+                file.clear();
+                file.seekg(0, ios::beg);
+            }
+        },
+        CASE("isThisKMerHere"){
+            cout << "\t--> isThisKMerHere : 100 4-mers ACGT encode : " << endl;
+            sd_vector<>ret = fromFileToSdVectorChooser("./sortACGT.txt", "ACGT");
+            ifstream file("./sortACGT.txt", ios::in);
+            string line;
+            string unCompressedKMer;
+            bool isHere;
+            for(int i = 0 ; i < 64 ; i++){
+                isHere = false;
+                unCompressedKMer = decode(i, 3);
+                while(getline(file,line)){
+                    if(line.find(unCompressedKMer) != string::npos){
+                        isHere = true;
+                        break;
+                    }
+                }
+                        EXPECT(isThisKMerHere(i, ret, 0) == isHere);
+                file.clear();
+                file.seekg(0, ios::beg);
+            }
+        },
 };
 
 int main(){
