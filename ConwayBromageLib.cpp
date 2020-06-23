@@ -455,7 +455,9 @@ vector<uint64_t> successorCounter(uint64_t compressedKMer, sd_vector<>currentCom
                     }
                 }
                 //cout << "lecteur : " << lecteur << endl;
-                reader.push_back(lecteur);
+                if(find(reader.begin(), reader.end(), lecteur) == reader.end()){
+                   reader.push_back(lecteur);
+               }
             }
         }else{
             if(currentCompressedSeq[list[i]]){
@@ -473,7 +475,9 @@ vector<uint64_t> successorCounter(uint64_t compressedKMer, sd_vector<>currentCom
                     }
                 }
                 //cout << "lecteur : "<< lecteur << endl;
-                reader.push_back(lecteur);
+                if(find(reader.begin(), reader.end(), lecteur) == reader.end()){
+                   reader.push_back(lecteur);
+               }
             }
         }
     }
