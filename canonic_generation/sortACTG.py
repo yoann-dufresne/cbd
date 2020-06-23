@@ -1,20 +1,20 @@
 import sys
-
+#sort element of ACTG format
 def sortForACTG(path):
     file = open(path, "r")
     list = []
     size = 0
-    for line in file:
+    for line in file:   #reading line by line
         for word in line.split():
             if word != "1":
                 size = len(word)
-                list.append(encode(word))
-    list.sort()
+                list.append(encode(word))   #collect each k-mers in compressed version (uint64_t)
+    list.sort() #We can sort numbers no matter what the format is
     for i in list:
-        print("{}\t1".format(decode(i, size)))
+        print("{}\t1".format(decode(i, size)))  #print of uncompressed version (str)
     file.close()
 
-def encode(word):
+def encode(word):   #Code to compress a str k-mer (from str to uint64_t)
     hash = 0
     for letter in word:
         hash <<= 2
@@ -30,7 +30,7 @@ def encode(word):
  
     return hash
 
-def decode(seq, size):
+def decode(seq, size):  #COde to uncompress a uint64_t k-mer (from uint64_t to str)
     res = ""
     lastIndex = size-1
     for i in range(size):
