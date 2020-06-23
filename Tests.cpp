@@ -195,15 +195,17 @@ const test atTheEnd[] = {
             }
             EXPECT(result);
         },
-        /*CASE("successors"){
+        CASE("successors"){
             cout << "\t--> successors with the successor counter : " << endl;
             sd_vector<>ret = fromFileToSdVectorChooser("./sortACTG.txt", "ACTG");
             for(int i = 0 ; i < 64 ; i++){
                 vector<uint64_t> counter = successorCounter(i, ret, 0);
                 vector<uint64_t> succ = successors(i, ret, 0);
+                sort(counter.begin(), counter.end());
+                sort(succ.begin(), succ..end());
                 EXPECT(succ == counter);
             }
-        },*/
+        },
 };
 
 int main(){
