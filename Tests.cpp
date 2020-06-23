@@ -202,7 +202,7 @@ const test atTheEnd[] = {
                 vector<uint64_t> counter = successorCounter(i, ret, 0);
                 vector<uint64_t> succ = successors(i, ret, 0);
                 sort(counter.begin(), counter.end());
-                sort(succ.begin(), succ..end());
+                sort(succ.begin(), succ.end());
                 EXPECT(succ == counter);
             }
         },
