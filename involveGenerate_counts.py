@@ -8,10 +8,10 @@ def restricted_float(x):
     try:
         x = float(x)
     except ValueError:
-        raise argparse.ArgumentTypeError(f"{x} not a floating-point literal")
+        raise argparse.ArgumentTypeError("Not a floating-point literal")
 
     if x < 0.0 or x > 1.0:
-        raise argparse.ArgumentTypeError(f"{x} not in range [0.0, 1.0]")
+        raise argparse.ArgumentTypeError("Not in range [0.0, 1.0]")
     return x
 
 
@@ -50,7 +50,7 @@ def generate_kmers(k, num_kmers, format_encode):
         #randomer = randint(0, pow(4, k)-1)
        # print("randomer : {}".format(randomer))
         cano = getCanonical(i, k, format_encode) 
-        print(f"{integer_to_kmer(cano, k, format_encode)}\t1")
+        print("{}\t1".format(integer_to_kmer(cano, k, format_encode)))
 
 def reverseACGT(mer, kmerSize):
     res = ~mer
