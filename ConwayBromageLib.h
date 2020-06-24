@@ -32,4 +32,8 @@ u_int64_t reverseComplementGATBLibEcoli (const u_int64_t x, uint64_t sizeKmer); 
 bool isCanonical (uint64_t kmer, uint64_t kmerSize, bool encodingIsACGT);
 std::vector<uint64_t> successorCounter(uint64_t compressedKMer, sdsl::sd_vector<>currentCompressedSeq, bool format);
 
+//For perf tests
+uint64_t encodeEcoliSwitchVers(std::string word, uint64_t size);
+std::string decodeEcoliIfVers(uint64_t seq, uint64_t size);
+
 #endif //CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
