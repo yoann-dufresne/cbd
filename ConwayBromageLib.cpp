@@ -99,8 +99,6 @@ uint64_t encodeEcoliSwitchVers(string word, uint64_t size){
     return hash;    //return the final hash of the sequence
 }
 
-
-//Switch version
 string decodeEcoli(uint64_t seq, uint64_t size){
     string res(size, ' ');
     uint64_t lastIndex = res.size()-1;
