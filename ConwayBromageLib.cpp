@@ -359,7 +359,7 @@ bool isThisKMerHere(uint64_t Kmer, sd_vector<> const& compressedSeq, bool encodi
     if(compressedSeq[(nextForward < nextRevComp)?nextForward:nextRevComp]) return true;
     
     nextForward++;
-    nextRevComp += KmerRevComp + (((encodingIsACGT)?2:3) << numberOfBitsToShift);
+    nextRevComp = KmerRevComp + (((encodingIsACGT)?2:3) << numberOfBitsToShift);
     if(compressedSeq[(nextForward < nextRevComp)?nextForward:nextRevComp]) return true;
     
     nextForward++;
