@@ -105,8 +105,8 @@ string decodeEcoli(uint64_t seq, uint64_t size){
     string res(size, ' ');
     uint64_t lastIndex = res.size()-1;
     for(int i(0); i < size; i++){
-        res[lastIndex-i] = 'A';
         switch(seq & 0x3){ //compares the decimal value of the first two bits
+            case 0: res[lastIndex-i] = 'A'; break;
             case 1: res[lastIndex-i] = 'C'; break;
             case 2: res[lastIndex-i] = 'T'; break;
             case 3: res[lastIndex-i] = 'G'; break;
