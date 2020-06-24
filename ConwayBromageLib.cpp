@@ -326,7 +326,7 @@ sd_vector<>fromFileToSdVectorChooser(string path, string format){
  * Check if the given Kmer is present in the sequence.
  * @param Kmer - An integer representing the k-mer.
  * @param compressedSeq - The compressed p-mer sequence.
- * @param encodingIsAGCT - true if the encoding is AGCT and false if it's ACTG.
+ * @param encodingIsACGT - true if the encoding is ACGT and false if it's ACTG.
  * @return true if the k-mer is present.
  */
 bool isThisKMerHere(uint64_t Kmer, sd_vector<> const& compressedSeq, bool encodingIsACGT){
@@ -336,28 +336,19 @@ bool isThisKMerHere(uint64_t Kmer, sd_vector<> const& compressedSeq, bool encodi
     if(Kmer >= limit) { //we must have nonCompressedKmer < 4^(P-1)
         cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << limit << endl;
         return false; 
-    }
-    //generation of the four next and their reverse complement
-    uint64_t KmerRevComp = (encodingIsACGT)?reverseComplementLexico(Kmer, KmerSize):reverseComplementGATBLibEcoli(Kmer, KmerSize);
-    int numberOfBitsToShift = KmerSize << 1;
-    uint64_t one = 1 << numberOfBitsToShift; //the reverse complement of the first "next" edge is always A, C, G, or T followed by the reverse complement of the Kmer
-    uint64_t nextForward = Kmer << 2;
-    uint64_t nextRevComp = KmerRevComp + (3 << numberOfBitsToShift);
-    for(int i = 0; i < 4; i++){
-        uint64_t canonical = (nextForward < nextRevComp)?nextForward:nextRevComp; //take the canonical version between the forward and the reverse complement
-        if(compressedSeq[canonical]) return true; //if the canonical version of the Pmer is present thus the Kmer is present
-        nextForward++;      //equals to XA, XC, XG then XT where X is the Kmer
-        nextRevComp -= one; //equals to AR, CR, GR, then TR where R is the reverse complement of the Kmer
-    }
-    //generation of the four previous and their reverse complement
-    uint64_t prevForward = Kmer;
-    uint64_t prevRevComp = (KmerRevComp << 2) + 3;
-    for(int i = 0; i < 4; i++){
-        uint64_t canonical = (prevForward < prevRevComp)?prevForward:prevRevComp;
-        if(compressedSeq[canonical]) return true;
-        prevForward += one; //equals to AX, CX, GX, then TX where X is the Kmer
-        prevRevComp--;      //equals to RT, RG, RC, then RA where R is the reverse complement of the Kmer
-    }
+    }  
+    
+    uint64_t next = Kmer << 2; //next contains XA where X is the Kmer
+    if(compressedSeq[getCanonical(next, PmerSize, encodingIsACGT)])   return true; //getCanonical(XA) where X is the Kmer
+    if(compressedSeq[getCanonical(next+1, PmerSize, encodingIsACGT)]) return true; //getCanonical(XC)
+    if(compressedSeq[getCanonical(next+2, PmerSize, encodingIsACGT)]) return true; //getCanonical(XG)
+    if(compressedSeq[getCanonical(next+3, PmerSize, encodingIsACGT)]) return true; //getCanonical(XT)
+    
+    int numberOfBitsToShift = KmerSize << 1;  
+    if(compressedSeq[getCanonical(Kmer, PmerSize, encodingIsACGT)])   return true; //getCanonical(AX) where X is the Kmer
+    if(compressedSeq[getCanonical(Kmer + (1 << numberOfBitsToShift), PmerSize, encodingIsACGT)]) return true; //getCanonical(CX)
+    if(compressedSeq[getCanonical(Kmer + (2 << numberOfBitsToShift), PmerSize, encodingIsACGT)]) return true; //getCanonical(GX)
+    if(compressedSeq[getCanonical(Kmer + (3 << numberOfBitsToShift), PmerSize, encodingIsACGT)]) return true; //getCanonical(TX)
     
     return false;
 }
