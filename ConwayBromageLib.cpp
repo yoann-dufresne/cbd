@@ -175,32 +175,43 @@ vector<uint64_t> successors(uint64_t Kmer, sd_vector<> const& compressedSeq, boo
     if(Kmer >= limit) { //we must have nonCompressedKmer < 4^(P-1)
         cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << limit << endl;
         return res; //empty
-    }
-    //We retrieve the canonical form of the kmer in entry
-    //CHANGEMENT Kmer = getCanonical(Kmer, KmerSize, encodingIsACGT);
-    //we build the eight possible successors    
-    //next
-    uint64_t Pmer = Kmer << 2; //<-> XA where X is the Kmer
+    }  
+    
+    //we retrieve the reverse complement of the Kmer
+    uint64_t KmerRevComp = (encodingIsACGT)?reverseComplementLexico(Kmer, KmerSize):reverseComplementGATBLibEcoli(Kmer, KmerSize);
+    
+    int numberOfBitsToShift = KmerSize << 1; //<-> 2*KmerSize
+    uint64_t one = 1 << numberOfBitsToShift;
+    uint64_t nextForward = Kmer << 2; //the forward version of the current pmer that we are interested in
+    uint64_t nextRevComp = KmerRevComp + (3 << numberOfBitsToShift); //the reverse complement of the current pmer that we are interested in
     for(int i = 0; i < 4; i++){
-        uint64_t canonicalPmer = getCanonical(Pmer, PmerSize, encodingIsACGT);
-        if(compressedSeq[canonicalPmer]){ 
-            uint64_t successorKmer = Pmer%limit;//CHANGEMENT canonicalPmer%limit;
-            //if compressedSeq.size() = 256 (P=4) then compressedSeq.size() >> 2 = 64 ==> AACA%64 ==> ACA (i_next_kmer)
+        if(!encodingIsACGT) nextRevComp = KmerRevComp + (((i<2)?i+2:i%2) << numberOfBitsToShift);
+        
+        uint64_t canonical = (nextForward < nextRevComp)?nextForward:nextRevComp; 
+        if(compressedSeq[canonical]){ //we look if the canonical version of the pmer is present
+            uint64_t successorKmer = nextForward%limit;
             if(find(res.begin(), res.end(), successorKmer) == res.end()) //check if vector doesn't contain successorKmer
                 res.push_back(successorKmer);
         }
-        Pmer++; //equals to XA then XC then XG then XT
+        
+        if(encodingIsACGT) nextRevComp -= one;
+        nextForward++;
     }
+    
     //predecessors
-    int numberOfBitsToShift = KmerSize << 1;
+    uint64_t prevForward = Kmer; //the forward version of the current pmer that we are interested in
+    uint64_t prevRevComp = (KmerRevComp << 2) + 3; //the reverse complement of the current pmer that we are interested in
     for(int i = 0; i < 4; i++){
-        Pmer = Kmer + (i << numberOfBitsToShift); //equals to AX then CX then GX then TX where X is the Kmer
-        uint64_t canonicalPmer = getCanonical(Pmer, PmerSize, encodingIsACGT);
-        if(compressedSeq[canonicalPmer]){
-            uint64_t successorKmer = Pmer >> 2;//canonicalPmer >> 2;
+        if(!encodingIsACGT) prevRevComp = (KmerRevComp << 2) + ((i<2)?i+2:i%2);
+
+        uint64_t canonical = (prevForward < prevRevComp)?prevForward:prevRevComp;
+        if(compressedSeq[canonical]){ //we look if the canonical version of the pmer is present
+            uint64_t successorKmer = prevForward >> 2;
             if(find(res.begin(), res.end(), successorKmer) == res.end()) //check if vector doesn't contain successorKmer
                 res.push_back(successorKmer);
         }
+        prevForward += one; //equals to AX, CX, GX, then TX where X is the Kmer
+        if(encodingIsACGT) prevRevComp--;
     }
     return res;
 }
