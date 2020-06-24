@@ -81,14 +81,32 @@ uint64_t encodeEcoli(string word, uint64_t size){
     }
     return hash;    //return the final hash of the sequence
 }
+//Switch version
+uint64_t encodeEcoliSwitchVers(string word, uint64_t size){
+    uint64_t hash = 0;
+    char c;
+    for(uint i = 0 ; i < size ; i++){   //We go through the sequence to encode each nucleotides
+        hash <<= 2; // We shift 2 bits to the right
+        c = word[i];    //Take each nucleotides to encode them
+        uint64_t charval = 0; // 'A' = 0
+        switch(c){
+            case 'C': charval = 1; break;
+            case 'T': charval = 2; break;
+            case 'G': charval = 3; break;
+        }
+        hash += charval;    //creation of the hash for the given sequence
+    }
+    return hash;    //return the final hash of the sequence
+}
 
 
+//Switch version
 string decodeEcoli(uint64_t seq, uint64_t size){
     string res(size, ' ');
     uint64_t lastIndex = res.size()-1;
     for(int i(0); i < size; i++){
+        res[lastIndex-i] = 'A';
         switch(seq & 0x3){ //compares the decimal value of the first two bits
-            case 0: res[lastIndex-i] = 'A'; break;
             case 1: res[lastIndex-i] = 'C'; break;
             case 2: res[lastIndex-i] = 'T'; break;
             case 3: res[lastIndex-i] = 'G'; break;
@@ -97,7 +115,23 @@ string decodeEcoli(uint64_t seq, uint64_t size){
     }
     return res;
 }
-
+//If version
+string decodeEcoliIfVers(uint64_t seq, uint64_t size){
+    string res(size, ' ');
+    uint64_t lastIndex = res.size()-1;
+    for(int i(0) ; i < size ; i++){
+        res[lastIndex-i] = 'A';
+        if((seq & 0x3) == 1){
+            res[lastIndex-i] = 'C';
+        }else if ((seq & 0x3) == 2){
+            res[lastIndex-i] = 'T';
+        }else if ((seq & 0x3) == 3){
+            res[lastIndex-i] = 'G';
+        }
+        seq >>= 2;
+    }
+    return res;
+}
 /* function to encode k-mer sequences
  * Need a string (the sequence) and a uint64_t which is the size of the sequence
  * return a uint64_t which is the encoding version of the sequence
