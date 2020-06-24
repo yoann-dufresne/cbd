@@ -338,17 +338,44 @@ bool isThisKMerHere(uint64_t Kmer, sd_vector<> const& compressedSeq, bool encodi
         return false; 
     }  
     
-    uint64_t next = Kmer << 2; //next contains XA where X is the Kmer
-    if(compressedSeq[getCanonical(next, PmerSize, encodingIsACGT)])   return true; //getCanonical(XA) where X is the Kmer
-    if(compressedSeq[getCanonical(next+1, PmerSize, encodingIsACGT)]) return true; //getCanonical(XC)
-    if(compressedSeq[getCanonical(next+2, PmerSize, encodingIsACGT)]) return true; //getCanonical(XG)
-    if(compressedSeq[getCanonical(next+3, PmerSize, encodingIsACGT)]) return true; //getCanonical(XT)
+    uint64_t KmerRevComp = (encodingIsACGT)?reverseComplementLexico(Kmer, KmerSize):reverseComplementGATBLibEcoli(Kmer, KmerSize);
+    int numberOfBitsToShift = KmerSize << 1;
+    uint64_t one = 1 << numberOfBitsToShift;
+    uint64_t nextForward = Kmer << 2;
+    uint64_t nextRevComp;
     
-    int numberOfBitsToShift = KmerSize << 1;  
-    if(compressedSeq[getCanonical(Kmer, PmerSize, encodingIsACGT)])   return true; //getCanonical(AX) where X is the Kmer
-    if(compressedSeq[getCanonical(Kmer + (1 << numberOfBitsToShift), PmerSize, encodingIsACGT)]) return true; //getCanonical(CX)
-    if(compressedSeq[getCanonical(Kmer + (2 << numberOfBitsToShift), PmerSize, encodingIsACGT)]) return true; //getCanonical(GX)
-    if(compressedSeq[getCanonical(Kmer + (3 << numberOfBitsToShift), PmerSize, encodingIsACGT)]) return true; //getCanonical(TX)
+    nextRevComp = KmerRevComp + (((encodingIsACGT)?3:2) << numberOfBitsToShift);
+    if(compressedSeq[(nextForward < nextRevComp)?nextForward:nextRevComp]) return true;
+    
+    nextForward++;
+    nextRevComp += KmerRevComp + (((encodingIsACGT)?2:3) << numberOfBitsToShift);
+    if(compressedSeq[(nextForward < nextRevComp)?nextForward:nextRevComp]) return true;
+    
+    nextForward++;
+    nextRevComp = KmerRevComp + (((encodingIsACGT)?1:0) << numberOfBitsToShift);
+    if(compressedSeq[(nextForward < nextRevComp)?nextForward:nextRevComp]) return true;
+    
+    nextForward++;
+    nextRevComp = KmerRevComp + (((encodingIsACGT)?0:1) << numberOfBitsToShift);
+    if(compressedSeq[(nextForward < nextRevComp)?nextForward:nextRevComp]) return true;
+    
+    uint64_t prevForward = Kmer;
+    uint64_t prevRevComp = KmerRevComp << 2;
+    
+    prevRevComp = KmerRevComp + ((encodingIsACGT)?3:2);
+    if(compressedSeq[(prevForward < prevRevComp)?prevForward:prevRevComp]) return true;
+    
+    prevForward += one; 
+    prevRevComp = KmerRevComp + ((encodingIsACGT)?2:3);
+    if(compressedSeq[(prevForward < prevRevComp)?prevForward:prevRevComp]) return true;
+    
+    prevForward += one;
+    prevRevComp = KmerRevComp + ((encodingIsACGT)?1:0);
+    if(compressedSeq[(prevForward < prevRevComp)?prevForward:prevRevComp]) return true;
+    
+    prevForward += one;
+    prevRevComp = KmerRevComp + ((encodingIsACGT)?0:1);
+    if(compressedSeq[(prevForward < prevRevComp)?prevForward:prevRevComp]) return true;
     
     return false;
 }
