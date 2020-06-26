@@ -8,32 +8,11 @@ python: "3.8"
 
 compiler: g++
 
-#before_install: |
-#  if ! [ -f sdsl-lite/ ]; then
-#    git clone https://github.com/simongog/sdsl-lite.git;
-#    cd sdsl-lite/;
-#    ./install.sh;
-#  fi
-
-# cache:
-#  directories:
-#    - sdsl-lite/
-
 install:
-  #  - cd ~/
-  #  - mkdir include
-  #  - git clone https://github.com/simongog/sdsl-lite.git
-  #  - git clone https://github.com/martinmoene/lest.git
-  #  - cd sdsl-lite
-  #  - ./install.sh
-  #  - cd ../
-  #  - cp -r ./sdsl-lite/include/sdsl ./include
-  #  - cp -r ./lest/include/lest ./include
   - git clone --recurse-submodules https://github.com/yoann-dufresne/ConwayBromageLib.git
 
 script:
-  - cd $TRAVIS_BUILD_DIR #là où est contenu notre code ( pas  sdsl-lite )
-  #- cd sample_generation/
+  - cd $TRAVIS_BUILD_DIR #là où est contenu notre code
   - ls
   - cd ConwayBromageLib
   - ls
