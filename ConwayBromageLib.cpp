@@ -593,6 +593,16 @@ uint64_t KmerManipulatorACGT::reverseComplement(const uint64_t kmer) {
     return (res >> (2 * (32 - m_size)));
 }
 
+/**
+ * Construct the ConwayBromage object based on the sd_vector in parameter and the KmerManipulator.
+ * @param sdv - An sd_vector which represents the sequence.
+ * @param km - A KmerManipulator.
+ */
+ConwayBromage::ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km){
+    m_kmerSize = (int)(log(sdv.size())/log(4));
+    m_sequence = sdv; //copy of the sd_vector
+    m_kmerManipulator = km;
+}
 
 /**
  * Transform sequences which are contain in a file in a sd_vector
@@ -601,7 +611,7 @@ uint64_t KmerManipulatorACGT::reverseComplement(const uint64_t kmer) {
  */
 ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     m_kmerManipulator = km;
-    string word;
+    string word("");
     string line("");
     kmerFlux >> word;   //Take the first word to analyze size of one k-mer
     kmerFlux.seekg(0, ios::beg);    //Return to the beginning of the file
