@@ -122,36 +122,54 @@ const test atTheEnd[] = {
             bool val = isThisKMerHere(-1, littleTestPrev, 1);
             EXPECT(val == false);
         },
-        CASE("isThisKMerHere : 100 4-mers ACTG encode : "){
-            cout << "\t--> isThisKMerHere : 100 4-mers ACTG encode" << endl;
-            sd_vector<>ret = fromFileToSdVectorChooser("./sortACTG.txt", "ACTG");
-            ifstream file("./sortACTG.txt", ios::in);
-            string line;
-            string unCompressedKMer;
-            string reverseComplement;
-            bool isHere;
-            for(int i = 0 ; i < 64 ; i++){
-                isHere = false;
-                unCompressedKMer = decodeEcoli(i, 3);
-                reverseComplement = decodeEcoli(reverseComplementGATBLibEcoli(i, 3), 3);
-                while(getline(file,line)){
-                    if(line.find(unCompressedKMer) != string::npos){
-                        isHere = true;
-                        break;
-                    }
-                    if(line.find(reverseComplement) != string::npos){ //if reverse complement is present
-                        isHere = true;
-                        break;
-                    }
+        //Test of successors on a small sd_vectors
+        CASE("successors with ACGT encoding"){
+            sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
+            KmerManipulatorACGT km(2);
+            ConwayBromage cb(sdv, &km);
+            
+            vector<uint8_t> TrueNext(4);
+            TrueNext[0]  = 82;  //01010010
+            TrueNext[1]  = 193; //11000001
+            TrueNext[2]  = 176; //10110000
+            TrueNext[3]  = 104; //01101000
+            bool result = true;
+            for(int i(0); i < sdv.size()/4; i++){
+                uint8_t succ = cb.successors(i);
+                //check if same
+                if(TrueNext[i] != succ){
+                    result = false;
                 }
-                EXPECT(isThisKMerHere(i, ret, false) == isHere);
-                file.clear();
-                file.seekg(0, ios::beg);
+
             }
+            EXPECT(result);
         },
-        CASE("isThisKMerHere : 100 4-mers ACGT encode : "){
-            cout << "\t--> isThisKMerHere : 100 4-mers ACGT encode" << endl;
-            sd_vector<>ret = fromFileToSdVectorChooser("./sortACGT.txt", "ACGT");
+        CASE("successors with ACTG encoding"){
+            sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
+            KmerManipulatorACTG km(2);
+            ConwayBromage cb(sdv, &km);
+            
+            vector<uint8_t> TrueNext(4);
+            TrueNext[0]  = 97;  //01100001
+            TrueNext[1]  = 208;  //11010000
+            TrueNext[2]  = 164;  //10100100
+            TrueNext[3]  = 56;   //00111000
+            bool result = true;
+            for(int i(0); i < sdv.size()/4; i++){
+                uint8_t succ = cb.successors(i);
+                //check if same
+                if(TrueNext[i] != succ){
+                    result = false;
+                }
+
+            }
+            EXPECT(result);
+        },
+        CASE("isThisKMerHere : 100 4-mers with ACGT encoding"){
+            ifstream f("./sortACGT.txt", ios::in);
+            KmerManipulatorACGT km(4);
+            ConwayBromage cb(f, &km);
+            f.close();
             ifstream file("./sortACGT.txt", ios::in);
             string line;
             string unCompressedKMer;
@@ -171,63 +189,41 @@ const test atTheEnd[] = {
                         break;
                     }
                 }
-                EXPECT(isThisKMerHere(i, ret, true) == isHere);
+                EXPECT(cb.isPresent(i) == isHere);
                 file.clear();
                 file.seekg(0, ios::beg);
             }
+            file.close();
         },
-        //Test of successors on a small sd_vectors
-        CASE("successors with ACGT encoding : "){
-            cout << "\t--> successors with ACGT encoding" << endl;
-            sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
-            vector<vector<uint64_t>> TrueNext(16);
-            TrueNext[0]  = {1, 3, 2};
-            TrueNext[1]  = {0, 1, 3};
-            TrueNext[2]  = {0, 2, 3};
-            TrueNext[3]  = {1, 2, 0};
-            bool result = true;
-            for(int i(0); i < sdv.size()/4; i++){
-                vector<uint64_t> succ = successors(i, sdv, true);
-                //check if same
-                for(int j(0); j < succ.size(); j++){
-                    if(TrueNext[i].size() == succ.size()){
-                        for(int j = 0; j < succ.size(); j++){
-                            if(succ[j] != TrueNext[i][j]){
-                                result = false;
-                            }
-                        }
-                    } else {
-                        result = false;
+        CASE("isThisKMerHere : 100 4-mers with ACTG encoding"){
+            ifstream f("./sortACTG.txt", ios::in);
+            KmerManipulatorACTG km(4);
+            ConwayBromage cb(f, &km);
+            f.close();
+            ifstream file("./sortACTG.txt", ios::in);
+            string line;
+            string unCompressedKMer;
+            string reverseComplement;
+            bool isHere;
+            for(int i = 0 ; i < 64 ; i++){
+                isHere = false;
+                unCompressedKMer = decodeEcoli(i, 3);
+                reverseComplement = decodeEcoli(reverseComplementGATBLibEcoli(i, 3), 3);
+                while(getline(file,line)){
+                    if(line.find(unCompressedKMer) != string::npos){
+                        isHere = true;
+                        break;
+                    }
+                    if(line.find(reverseComplement) != string::npos){ //if reverse complement is present
+                        isHere = true;
+                        break;
                     }
                 }
+                EXPECT(cb.isPresent(i) == isHere);
+                file.clear();
+                file.seekg(0, ios::beg);
             }
-            EXPECT(result);
-        },
-        CASE("successors with ACTG encoding"){
-            cout << "\t--> successors with ACTG encoding" << endl;
-            sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
-            vector<vector<uint64_t>> TrueNext(16);
-            TrueNext[0]  = {1, 3, 2};
-            TrueNext[1]  = {0, 1, 2};
-            TrueNext[2]  = {0, 3, 1};
-            TrueNext[3]  = {2, 3, 0};
-            bool result = true;
-            for(int i(0); i < sdv.size()/4; i++){
-                vector<uint64_t> succ = successors(i, sdv, false);//alternativeSuccessor(i, sdv, false);//successors(i, sdv, false);
-                //check if same
-                for(int j(0); j < succ.size(); j++){
-                    if(TrueNext[i].size() == succ.size()){
-                        for(int j = 0; j < succ.size(); j++){
-                            if(succ[j] != TrueNext[i][j]){
-                                result = false;
-                            }
-                        }
-                    } else {
-                        result = false;
-                    }
-                }
-            }
-            EXPECT(result);
+            file.close();
         },
         CASE("successors with the successors counter : "){
             cout << "\t--> successors with the successor counter" << endl;
@@ -239,7 +235,7 @@ const test atTheEnd[] = {
                 sort(succ.begin(), succ.end());
                 EXPECT(succ == counter);
             }
-        },
+        }
 };
 
 int main(){
