@@ -36,4 +36,41 @@ std::vector<uint64_t> successorCounter(uint64_t compressedKMer, sdsl::sd_vector<
 uint64_t encodeEcoliSwitchVers(std::string word, uint64_t size);
 std::string decodeEcoliIfVers(uint64_t seq, uint64_t size);
 
+//POO for KmerManipulator
+class KmerManipulator{  //abstract class
+public:
+    KmerManipulator(uint64_t size); //Constructor
+    //abstract function
+    virtual uint64_t encode(const std::string word) = 0;
+    virtual std::string decode(uint64_t kmer) = 0;
+    virtual uint64_t getCanonical(const uint64_t kmer) = 0;
+    virtual uint64_t reverseComplement(const  uint64_t kmer) = 0;
+    virtual ~KmerManipulator();     //Desctructor
+protected:
+    uint64_t m_size;
+};
+
+class KmerManipulatorACGT : public KmerManipulator{
+public:
+    KmerManipulatorACGT(uint64_t size);
+    uint64_t encode(const std::string word);
+    std::string decode(uint64_t kmer);
+    uint64_t getCanonical(const uint64_t kmer);
+    uint64_t reverseComplement(const uint64_t kmer);
+    ~KmerManipulatorACGT();
+private:
+    std::string m_format;
+};
+
+class KmerManipulatorACTG : public KmerManipulator{
+public:
+    KmerManipulatorACTG(uint64_t size);
+    uint64_t encode(const std::string word);
+    std::string decode(uint64_t kmer);
+    uint64_t getCanonical(const uint64_t kmer);
+    uint64_t reverseComplement(const u_int64_t kmer);
+    ~KmerManipulatorACTG();
+private:
+    std::string m_format;
+};
 #endif //CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
