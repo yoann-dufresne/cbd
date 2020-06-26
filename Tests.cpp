@@ -214,7 +214,7 @@ const test atTheEnd[] = {
                 file.seekg(0, ios::beg);
             }
             file.close();
-        },
+        }/*,
         CASE("successors with the successors counter : "){
             cout << "\t--> successors with the successor counter" << endl;
             sd_vector<>ret = fromFileToSdVectorChooser("./sortACTG.txt", "ACTG");
@@ -225,7 +225,7 @@ const test atTheEnd[] = {
                 sort(succ.begin(), succ.end());
                 EXPECT(succ == counter);
             }
-        }
+        }*/
 };
 
 int main(){
