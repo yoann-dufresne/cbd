@@ -14,50 +14,6 @@ using namespace std;
 using namespace sdsl;
 
 /**
- * Returns the number of 1-bit to the left of position index
- * @param index the position
- * @param v an sd_vector
- * @return a count
- */
-uint64_t rank1bit(uint64_t index, const sd_vector<> &v){
-    sd_vector<>::rank_1_type sdb_rank(&v);
-    return sdb_rank(index);
-}
-
-/**
- * Returns the number of 0-bit to the left of position index
- * @param index the position 
- * @param v an sd_vector
- * @return a count
- */
-uint64_t rank0bit(uint64_t index, const sd_vector<> &v){
-    sd_vector<>::rank_0_type sdb_rank(&v);
-    return sdb_rank(index);
-}
-
-/**
- * Returns the position of the index-th 1-bit.
- * @param index the position 
- * @param v an sd_vector
- * @return an index
- */
-uint64_t select1bit(uint64_t index, const sd_vector<> &v){
-    sd_vector<>::select_1_type sdb_sel(&v);
-    return sdb_sel(index);
-}
-
-/**
- * Returns the position of the index-th 0-bit.
- * @param index the position 
- * @param v an sd_vector
- * @return an index
- */
-uint64_t select0bit(uint64_t index, const sd_vector<> &v){
-    sd_vector<>::select_0_type sdb_sel(&v);
-    return sdb_sel(index);
-}
-
-/**
  * The ecoli_count.txt file. Sort the k-mers with this order : A > C > T > G.
  * @param word the k-mer
  * @param size the size of the k-mer
@@ -171,79 +127,6 @@ string decode(uint64_t seq, uint64_t size){
             case 3: res[lastIndex-i] = 'T'; break;
         }
         seq >>= 2;
-    }
-    return res;
-}
-
-/**
- * Return the canonical form of a kmer according to a specified encoding.
- * @param kmer
- * @param kmerSize - Size of the kmer
- * @param encodingIsACGT - true if the wanted encoding is ACGT. If it's false, then the encoding ACTG will be considered.
- * @return canonical version of the kmer
- */
-uint64_t getCanonical (uint64_t kmer, uint64_t kmerSize, bool encodingIsACGT){
-    if(encodingIsACGT){ //ACGT encoding
-        uint64_t reverseComplement = reverseComplementLexico(kmer, kmerSize);
-        return (kmer < reverseComplement)?kmer:reverseComplement;
-    }
-    //ACTG encoding
-    uint64_t reverseComplement = reverseComplementGATBLibEcoli(kmer, kmerSize);
-    return (kmer < reverseComplement)?kmer:reverseComplement;
-}
-
-/**
- * Returns the successors of a canonical kmer.
- * @param Kmer : the Kmer that we want to find its successors. Can either be canonical or not.
- * @param compressedSeq : the sd_vector which stores all the canonical kmers.
- * @param encodingIsACGT : true if the wanted encoding is ACGT. If it's false, then the encoding ACTG will be considered.
- * @return a vector<uint64_t> representing the (at most 8) successors of the kmer. The successors can be NON CANONICAL.
- */
-vector<uint64_t> successors(uint64_t Kmer, sd_vector<> const& compressedSeq, bool encodingIsACGT){
-    vector<uint64_t> res;
-    int PmerSize = (int)(log(compressedSeq.size())/log(4));
-    int KmerSize = PmerSize-1;
-    uint64_t limit = compressedSeq.size() >> 2;
-    if(Kmer >= limit) { //we must have nonCompressedKmer < 4^(P-1)
-        cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << limit << endl;
-        return res; //empty
-    }  
-    
-    //we retrieve the reverse complement of the Kmer
-    uint64_t KmerRevComp = (encodingIsACGT)?reverseComplementLexico(Kmer, KmerSize):reverseComplementGATBLibEcoli(Kmer, KmerSize);
-    
-    int numberOfBitsToShift = KmerSize << 1; //<-> 2*KmerSize
-    uint64_t one = 1 << numberOfBitsToShift;
-    uint64_t nextForward = Kmer << 2; //the forward version of the current pmer that we are interested in
-    uint64_t nextRevComp = KmerRevComp + (3 << numberOfBitsToShift); //the reverse complement of the current pmer that we are interested in
-    for(int i = 0; i < 4; i++){
-        if(!encodingIsACGT) nextRevComp = KmerRevComp + (((i<2)?i+2:i%2) << numberOfBitsToShift);
-        
-        uint64_t canonical = (nextForward < nextRevComp)?nextForward:nextRevComp; 
-        if(compressedSeq[canonical]){ //we look if the canonical version of the pmer is present
-            uint64_t successorKmer = nextForward%limit;
-            if(find(res.begin(), res.end(), successorKmer) == res.end()) //check if vector doesn't contain successorKmer
-                res.push_back(successorKmer);
-        }
-        
-        if(encodingIsACGT) nextRevComp -= one;
-        nextForward++;
-    }
-    
-    //predecessors
-    uint64_t prevForward = Kmer; //the forward version of the current pmer that we are interested in
-    uint64_t prevRevComp = (KmerRevComp << 2) + 3; //the reverse complement of the current pmer that we are interested in
-    for(int i = 0; i < 4; i++){
-        if(!encodingIsACGT) prevRevComp = (KmerRevComp << 2) + ((i<2)?i+2:i%2);
-
-        uint64_t canonical = (prevForward < prevRevComp)?prevForward:prevRevComp;
-        if(compressedSeq[canonical]){ //we look if the canonical version of the pmer is present
-            uint64_t successorKmer = prevForward >> 2;
-            if(find(res.begin(), res.end(), successorKmer) == res.end()) //check if vector doesn't contain successorKmer
-                res.push_back(successorKmer);
-        }
-        prevForward += one; //equals to AX, CX, GX, then TX where X is the Kmer
-        if(encodingIsACGT) prevRevComp--;
     }
     return res;
 }
@@ -363,64 +246,6 @@ sd_vector<>fromFileToSdVectorChooser(string path, string format){
         cout << "Error while opening" << endl;
     }
     return bit_vector{0};
-}
-
-/**
- * Check if the given Kmer is present in the sequence.
- * @param Kmer - An integer representing the k-mer.
- * @param compressedSeq - The compressed p-mer sequence.
- * @param encodingIsACGT - true if the encoding is ACGT and false if it's ACTG.
- * @return true if the k-mer is present.
- */
-bool isThisKMerHere(uint64_t Kmer, sd_vector<> const& compressedSeq, bool encodingIsACGT){
-    int PmerSize = (int)(log(compressedSeq.size())/log(4));
-    int KmerSize = PmerSize-1;
-    uint64_t limit = compressedSeq.size() >> 2;
-    if(Kmer >= limit) { //we must have nonCompressedKmer < 4^(P-1)
-        cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << limit << endl;
-        return false; 
-    }  
-    
-    uint64_t KmerRevComp = (encodingIsACGT)?reverseComplementLexico(Kmer, KmerSize):reverseComplementGATBLibEcoli(Kmer, KmerSize);
-    int numberOfBitsToShift = KmerSize << 1;
-    uint64_t one = 1 << numberOfBitsToShift;
-    uint64_t nextForward = Kmer << 2;
-    uint64_t nextRevComp;
-    
-    nextRevComp = KmerRevComp + (((encodingIsACGT)?3:2) << numberOfBitsToShift);
-    if(compressedSeq[(nextForward < nextRevComp)?nextForward:nextRevComp]) return true;
-    
-    nextForward++;
-    nextRevComp = KmerRevComp + (((encodingIsACGT)?2:3) << numberOfBitsToShift);
-    if(compressedSeq[(nextForward < nextRevComp)?nextForward:nextRevComp]) return true;
-    
-    nextForward++;
-    nextRevComp = KmerRevComp + (((encodingIsACGT)?1:0) << numberOfBitsToShift);
-    if(compressedSeq[(nextForward < nextRevComp)?nextForward:nextRevComp]) return true;
-    
-    nextForward++;
-    nextRevComp = KmerRevComp + (((encodingIsACGT)?0:1) << numberOfBitsToShift);
-    if(compressedSeq[(nextForward < nextRevComp)?nextForward:nextRevComp]) return true;
-    
-    uint64_t prevForward = Kmer;
-    uint64_t prevRevComp = KmerRevComp << 2;
-    
-    prevRevComp = KmerRevComp + ((encodingIsACGT)?3:2);
-    if(compressedSeq[(prevForward < prevRevComp)?prevForward:prevRevComp]) return true;
-    
-    prevForward += one; 
-    prevRevComp = KmerRevComp + ((encodingIsACGT)?2:3);
-    if(compressedSeq[(prevForward < prevRevComp)?prevForward:prevRevComp]) return true;
-    
-    prevForward += one;
-    prevRevComp = KmerRevComp + ((encodingIsACGT)?1:0);
-    if(compressedSeq[(prevForward < prevRevComp)?prevForward:prevRevComp]) return true;
-    
-    prevForward += one;
-    prevRevComp = KmerRevComp + ((encodingIsACGT)?0:1);
-    if(compressedSeq[(prevForward < prevRevComp)?prevForward:prevRevComp]) return true;
-    
-    return false;
 }
 
 /* Calculate the reverse complement
@@ -561,11 +386,11 @@ vector<uint64_t> successorCounter(uint64_t compressedKMer, sd_vector<>currentCom
 bool isCanonical (uint64_t kmer, uint64_t kmerSize, bool encodingIsACGT){
     if(encodingIsACGT){ //ACGT encoding
         uint64_t reverseComplement = reverseComplementLexico(kmer, kmerSize);
-        return (kmer < reverseComplement)?true:false;
+        return (kmer <= reverseComplement)?true:false;
     }
     //ACTG encoding
     uint64_t reverseComplement = reverseComplementGATBLibEcoli(kmer, kmerSize);
-    return (kmer < reverseComplement)?true:false;
+    return (kmer <= reverseComplement)?true:false;
 }
 
 /* Translate an 8 bits number into a succession of uint64_t which represent compressed successors of the compressed K-mer
