@@ -112,16 +112,6 @@ const test lessLessCrit[] = {
 };
 
 const test atTheEnd[] = {
-        CASE("isThisKMerHere : existant K-mer : example without fromFileToSdVector calling : "){
-            cout << "\t--> isThisKMerHere : existant K-mer : example without fromFileToSdVector calling" << endl;
-            bool val = isThisKMerHere(0, littleTestPrev, 1);
-            EXPECT(val == true);
-        },
-        CASE("isThisKMerHere : non-existant K-mer : example without fromFileToSdVector calling : "){
-            cout << "\t--> isThisKMerHere : non-existant K-mer : example without fromFileToSdVector calling" << endl;
-            bool val = isThisKMerHere(-1, littleTestPrev, 1);
-            EXPECT(val == false);
-        },
         //Test of successors on a small sd_vectors
         CASE("successors with ACGT encoding"){
             sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
