@@ -72,6 +72,20 @@ const test lessCritical[] = {
                 EXPECT(i == reverser.reverseComplement(reverser.reverseComplement(i)));
             }
         },
+        CASE("successorTranslator : ACTG encoding : "){
+            cout << "\t--> successorTranslator : ACTG encoding" << endl;
+            vector<uint64_t> succ = successorTranslator(34, 18, 4, 0);
+            vector<uint64_t> res{74, 132};
+            sort(succ.begin(), succ.end());
+            EXPECT(succ == res);
+        },
+        CASE("successorTranslator : ACGT encoding : "){
+            cout << "\t--> successorTranslator : ACGT encoding" << endl;
+            vector<uint64_t> succ = successorTranslator(34, 18, 4, 1);
+            vector<uint64_t> res{75, 196};
+            sort(succ.begin(), succ.end());
+                    EXPECT(succ == res);
+        },
 };
 
 const test lessLessCrit[] = {
