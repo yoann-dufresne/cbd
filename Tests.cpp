@@ -34,74 +34,82 @@ static const sd_vector<>littleTestPrev = bit_vector{0, 1, 0, 1, 1, 1, 0, 0, 1, 0
 
 //Appears to other tests, need to be verify in first
 const test critical[] = {
-        //Tests of decode :
-        CASE("encode lexicographical order : "){
-            cout << "\t--> encode lexicographical order" << endl;
-            EXPECT(encode("GGTA", 4) == 172);
+                //Tests of decode :
+        CASE("encode : ACGT encoding : "){    //Up to KmerManipulatorACGT class
+            cout << "\t--> encode ACGT encoding" << endl;
+                    KmerManipulatorACGT encoder(4);
+                    EXPECT(encoder.encode("GGTA") == 172);
         },
-        CASE("encode ASCII order "){
-            cout << "\t--> encode ASCII order" << endl;
-            EXPECT(encodeEcoli("GGTA", 4) == 248);
+        CASE("encode : ACTG encoding : "){           //Up to KmerManipulatorACTG class
+            cout << "\t--> encode ACTG encoding" << endl;
+                    KmerManipulatorACTG encoder(4);
+                    EXPECT(encoder.encode("GGTA") == 248);
         },
-        CASE("decode lexicographical order : "){
-            cout << "\t--> decode lexicographical order" << endl;
-            EXPECT(decode(172, 4) == "GGTA");
+        CASE("decode : ACGT encoding : "){    //Up to KmerManipulatorACGT class
+            cout << "\t--> decode ACGT encoding" << endl;
+                    KmerManipulatorACGT decoder(4);
+                    EXPECT(decoder.decode(172) == "GGTA");
         },
-        CASE("decode lexicographical order : "){
-            cout << "\t--> decode ASCII order" << endl;
-            EXPECT(decodeEcoli(248, 4) == "GGTA");
-        }
+        CASE("decode : ACTG encoding : "){        //Up to KmerManipulatorACTG class
+            cout << "\t--> decode ACTG encoding" << endl;
+                    KmerManipulatorACTG decoder(4);
+                    EXPECT(decoder.decode(248) == "GGTA");
+        },
 };
 
 const test lessCritical[] = {
-        CASE("reverse complement : faster lexicographical order"){
-            cout << "\t--> faster lexicographical order" << endl;
-            uint64_t len = log(totalLen) / log(ALPHABET);
+        CASE("reverse complement : ACGT encoding : "){  //Up to KmerManipulatorACGT class
+            cout << "\t--> ACGT encoding" << endl;
+            KmerManipulatorACGT reverser(31);
             for(int i = 0 ; i < 1000000 ; i++){
-                EXPECT(i == reverseComplementLexico(reverseComplementLexico(i, len), len));
+                        EXPECT(i == reverser.reverseComplement(reverser.reverseComplement(i)));
             }
         },
-        CASE("reverse complement : faster ASCII order"){
-            cout << "\t--> faster ASCII order" << endl;
-            uint64_t len = log(totalLen) / log(ALPHABET);
+        CASE("reverse complement : ACTG encoding : "){    //Up to KmerManipulatorACTG class
+            cout << "\t--> ACTG encoding" << endl;
+            KmerManipulatorACTG reverser(31);
             for(int i = 0 ; i < 1000000 ; i++){
-                EXPECT(i == reverseComplementGATBLibEcoli(reverseComplementGATBLibEcoli(i, len), len));
+                EXPECT(i == reverser.reverseComplement(reverser.reverseComplement(i)));
             }
         },
 };
 
 const test lessLessCrit[] = {
-        CASE("getCanonical"){
-            cout << "\t--> canonical k-mer ACGT format : " << endl;
-            EXPECT(getCanonical(172, 4, 1) == 172);
+        CASE("getCanonical : canonical k-mer ACGT format : "){                           //Up to KmerManipulatorACGT class
+            cout << "\t--> canonical k-mer ACGT format" << endl;
+                    KmerManipulatorACGT canonicaler(4);
+                    EXPECT(canonicaler.getCanonical(172) == 172);
         },
-        CASE("getCanonical"){
-            cout << "\t--> uncanonical k-mer ACGT format : " << endl;
-            EXPECT(getCanonical(138, 4, 1) == 93);
+        CASE("getCanonical : uncanonical k-mer ACGT format : "){                           //Up to KmerManipulatorACGT class
+            cout << "\t--> uncanonical k-mer ACGT format" << endl;
+                    KmerManipulatorACGT canonicaler(4);
+                    EXPECT(canonicaler.getCanonical(138) == 93);
         },
-        CASE("getCanonical"){
-            cout << "\t--> canonical k-mer ACTG format : " << endl;
-            EXPECT(getCanonical(8, 4, 1) == 8);
+        CASE("getCanonical : canonical k-mer ACTG format : "){                           //Up to KmerManipulationACTG class
+            cout << "\t--> canonical k-mer ACTG format" << endl;
+                    KmerManipulatorACTG canonicaler(4);
+                    EXPECT(canonicaler.getCanonical(8) == 8);
         },
-        CASE("getCanonical"){
-            cout << "\t--> uncanonical k-mer ACTG format : " << endl;
-            EXPECT(getCanonical(172, 4, 0) == 144);
+        CASE("getCanonical : uncanonical k-mer ACTG format :"){                           //Up to KmerManipulatorACTG class
+            cout << "\t--> uncanonical k-mer ACTG format" << endl;
+                    KmerManipulatorACTG canonicaler(4);
+                    EXPECT(canonicaler.getCanonical(172) == 144);
         },
 };
 
 const test atTheEnd[] = {
-        CASE("isThisKMerHere"){
-            cout << "\t--> isThisKMerHere : existant K-mer : example without fromFileToSdVector calling :  " << endl;
+        CASE("isThisKMerHere : existant K-mer : example without fromFileToSdVector calling : "){
+            cout << "\t--> isThisKMerHere : existant K-mer : example without fromFileToSdVector calling" << endl;
             bool val = isThisKMerHere(0, littleTestPrev, 1);
             EXPECT(val == true);
         },
-        CASE("isThisKMerHere"){
-            cout << "\t--> isThisKMerHere : non-existant K-mer : example without fromFileToSdVector calling :  " << endl;
+        CASE("isThisKMerHere : non-existant K-mer : example without fromFileToSdVector calling : "){
+            cout << "\t--> isThisKMerHere : non-existant K-mer : example without fromFileToSdVector calling" << endl;
             bool val = isThisKMerHere(-1, littleTestPrev, 1);
             EXPECT(val == false);
         },
-        CASE("isThisKMerHere"){
-            cout << "\t--> isThisKMerHere : 100 4-mers ACTG encode : " << endl;
+        CASE("isThisKMerHere : 100 4-mers ACTG encode : "){
+            cout << "\t--> isThisKMerHere : 100 4-mers ACTG encode" << endl;
             sd_vector<>ret = fromFileToSdVectorChooser("./sortACTG.txt", "ACTG");
             ifstream file("./sortACTG.txt", ios::in);
             string line;
@@ -127,8 +135,8 @@ const test atTheEnd[] = {
                 file.seekg(0, ios::beg);
             }
         },
-        CASE("isThisKMerHere"){
-            cout << "\t--> isThisKMerHere : 100 4-mers ACGT encode : " << endl;
+        CASE("isThisKMerHere : 100 4-mers ACGT encode : "){
+            cout << "\t--> isThisKMerHere : 100 4-mers ACGT encode" << endl;
             sd_vector<>ret = fromFileToSdVectorChooser("./sortACGT.txt", "ACGT");
             ifstream file("./sortACGT.txt", ios::in);
             string line;
@@ -155,8 +163,8 @@ const test atTheEnd[] = {
             }
         },
         //Test of successors on a small sd_vectors
-        CASE("successors"){
-            cout << "\t--> successors with ACGT encoding : " << endl;
+        CASE("successors with ACGT encoding : "){
+            cout << "\t--> successors with ACGT encoding" << endl;
             sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
             vector<vector<uint64_t>> TrueNext(16);
             TrueNext[0]  = {1, 3, 2};
@@ -181,8 +189,8 @@ const test atTheEnd[] = {
             }
             EXPECT(result);
         },
-        CASE("successors"){
-            cout << "\t--> successors with ACTG encoding : " << endl;
+        CASE("successors with ACTG encoding"){
+            cout << "\t--> successors with ACTG encoding" << endl;
             sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
             vector<vector<uint64_t>> TrueNext(16);
             TrueNext[0]  = {1, 3, 2};
@@ -207,8 +215,8 @@ const test atTheEnd[] = {
             }
             EXPECT(result);
         },
-        CASE("successors"){
-            cout << "\t--> successors with the successor counter : " << endl;
+        CASE("successors with the successors counter : "){
+            cout << "\t--> successors with the successor counter" << endl;
             sd_vector<>ret = fromFileToSdVectorChooser("./sortACTG.txt", "ACTG");
             for(int i = 0 ; i < 64 ; i++){
                 vector<uint64_t> counter = successorCounter(i, ret, 0);
