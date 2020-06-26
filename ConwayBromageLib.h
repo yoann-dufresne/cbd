@@ -92,4 +92,28 @@ public:
 private:
     std::string m_format;
 };
+
+class ConwayBromage{
+private:
+    int m_kmerSize;                     //PmerSize actually
+    sdsl::sd_vector<> m_sequence;       //the compressed k-mer sequence
+    KmerManipulator* m_kmerManipulator; //stores information about encode/decode
+    
+public:
+    //constructors
+    ConwayBromage(std::istream& kmerFlux, KmerManipulator* km);
+    ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km);
+    //principal functions
+    bool isPresent (uint64_t Kmer) const;
+    uint8_t successors(uint64_t Kmer) const;
+    //operators on the sequence
+    bool operator[](uint64_t i) const;
+    uint64_t size() const;
+    //rank and select operators
+    uint64_t rank1bit  (uint64_t index);
+    uint64_t rank0bit  (uint64_t index);
+    uint64_t select1bit(uint64_t index);
+    uint64_t select0bit(uint64_t index);
+};
+
 #endif //CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
