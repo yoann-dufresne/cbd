@@ -124,7 +124,7 @@ const test atTheEnd[] = {
                         break;
                     }
                 }
-                EXPECT(isThisKMerHere(i, ret, 0) == isHere);
+                EXPECT(isThisKMerHere(i, ret, false) == isHere);
                 file.clear();
                 file.seekg(0, ios::beg);
             }
@@ -145,7 +145,7 @@ const test atTheEnd[] = {
                         break;
                     }
                 }
-                EXPECT(isThisKMerHere(i, ret, 0) == isHere);
+                EXPECT(isThisKMerHere(i, ret, true) == isHere);
                 file.clear();
                 file.seekg(0, ios::beg);
             }
