@@ -291,6 +291,23 @@ u_int64_t reverseComplementGATBLibEcoli (const u_int64_t x, uint64_t sizeKmer)  
     return (res >> (2*( 32 - sizeKmer))) ;
 }
 
+/**
+ * Return the canonical form of a kmer according to a specified encoding.
+ * @param kmer
+ * @param kmerSize - Size of the kmer
+ * @param encodingIsACGT - true if the wanted encoding is ACGT. If it's false, then the encoding ACTG will be considered.
+ * @return canonical version of the kmer
+ */
+uint64_t getCanonical (uint64_t kmer, uint64_t kmerSize, bool encodingIsACGT){
+    if(encodingIsACGT){ //ACGT encoding
+        uint64_t reverseComplement = reverseComplementLexico(kmer, kmerSize);
+        return (kmer < reverseComplement)?kmer:reverseComplement;
+    }
+    //ACTG encoding
+    uint64_t reverseComplement = reverseComplementGATBLibEcoli(kmer, kmerSize);
+    return (kmer < reverseComplement)?kmer:reverseComplement;
+}
+
 /* Successor counter to verify veracity of successors function
  * It is a non optimized function (slow), we use it for tests exclusively
  * @param compressedKmer - The k-mer for which we want to know successors
