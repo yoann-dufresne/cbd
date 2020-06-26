@@ -568,6 +568,87 @@ bool isCanonical (uint64_t kmer, uint64_t kmerSize, bool encodingIsACGT){
     return (kmer < reverseComplement)?true:false;
 }
 
+/* Translate an 8 bits number into a succession of uint64_t which represent compressed successors of the compressed K-mer
+ * @param successors - a int which is a number between 0 and 255 and represent successors   -> maybe take uint8_t ?
+ * @param compressedKMer - A compress version of the k-mer for which we have calculate successors
+ * @param size - The size of the compressed k-mer
+ * @param format - Give the encoding format : true = ACGT, false = ACTG
+ * @return a vector of uint64_t which represent compressed successors of the compressed kmer
+ */
+vector<uint64_t> successorTranslator(int successors, uint64_t compressedKMer, uint64_t size, bool format){
+    vector<uint64_t>compressedSucc; //for the return
+    if(successors > 256){
+        cout << "bad 8 bits numbers" << endl;
+    }else{
+        int binaryList[8]{0};   // successors is on 8 bits, each cases will contain a bit of successors
+        uint64_t binaryForm(1); //element for the int to binary transformation
+        //cout << successors << endl;
+        int succVal(successors); //copy of successors
+        while(succVal > 0){ //from int to binary transformation begining
+            for(int i = 0 ; i <= 8 ; i++){  //8 bits -> from 0 to 255 <=> 0 to (2^8)-1
+                //binaryForm is like : 2^0, 2^1 till 2^8
+                if(binaryForm > succVal){   // successors is not a 2^n form, with n in[0, 8]
+                    //if 2^n > succVal then succVal > 2^(n-1) (case equal below)
+                    succVal -= (binaryForm >> 1);   //The new succVal   binary >> 1 <=> 2^(n-1)
+                                                    //example : 16 >> 1 = 8 -> 2^4 >> 1 = 2^3
+                    binaryList[8-i] = 1;    //The case is set at 1
+                    break;  //incrementation of i and begin again until succVal = 0
+                }else if(binaryForm == succVal){    //case equal
+                    succVal -= binaryForm;      //if it is equal, succVal will be zero
+                    binaryList[8-i-1] = 1;      //Start from 0
+                    break;  //succVal is 0, we will quit the for loop
+                }
+                binaryForm = binaryForm << 1;   // <=> 2^n << 1 = 2^(n+1) then i incrementation
+            }
+            binaryForm = 1; //we have quit the for loop, if succVal != O we need to restart it until it is set at 0
+        }
+        /*cout << "binary form :" << endl;
+        for(int i = 0 ; i < 8 ; i++){
+            cout << binaryList[i] << " ";
+        }
+        cout << endl;*/
+        uint64_t limit = pow(ALPHABET, size);   //The limit we can't be taller than. Example : 3-mer limit is 64
+        uint64_t numberOfBitToShift((size-1) << 1); //The number of bits we want to shift if there is previous among successors
+        /* Explanation :
+         * if we have AACA, previous successors will have a XAAC form and X can be A, C; T or G.
+         * Each letters cost 2 bits. So X <- +2bits -- A <- +2bits -- A <- +2bits -- C (C is at zero position, don't need to count)
+         * So, I need to shift 6 bits to go to X and modify it. Here AACA is a 4-mers, so I need (4-1) * 2 = 6 bits.
+         * A faster writing is : (4-1) << 1 = 3 << 1 <=> 3*2 = 6
+         */
+        /*cout << "number of bit to shift : " << numberOfBitToShift << endl;
+        cout << "limit : " << limit << endl;*/
+        for(int i = 0 ; i < 8 ; i++){   //one case per bit
+            if(binaryList[i] == 1){ //The successor is present
+                if(i < 4){  //First fourth (from 0 to 3) are next
+                    compressedSucc.push_back(((compressedKMer << 2)%limit) + ((!format)?i:((i%2 == 0)?i+1:i-1)));
+                    /* Same explanation but we want ACAX form
+                    * AACA << 2 <=> AACAA and we quit the limit of a 4-mers.
+                    * In this case, we have to take care of the limit (256 for 4-mers) and have to stay in it
+                    * That is why we use the rest of the divide by limit
+                    * Finally we obtain ACAA which is the first form
+                    * We don't need to shit to the left because we just have to add the letter at the end (place 0)
+                    */
+                }else{ // from 4 to 7 are previous
+                    int nexI = i-4;
+                    compressedSucc.push_back((compressedKMer >> 2) + (((!format)?nexI:((nexI%2 == 0)?nexI+1:nexI-1)) << numberOfBitToShift));
+                    /* Explanation : 2 steps, AACA example
+                     * I know it is previous, I need a XAAC form and each letters cost 2 bits
+                     * So AACA >> 2 <=> AAAC, we have the first form, let's check the others 3 with addition
+                     * Depends on format = ACGT : A=0, C=1, G=2, T=3 ; ACTG : A=1, C=0, T=3, G=2 (according to decoders)
+                     * When we have the correct number, we shift it at the begin (where the
+                     * X is) thanks to numberOfBitToShift (see it above)
+                     */
+                }
+            }
+        }
+        /*cout << "final :"  << compressedSucc << endl;
+        for(int i = 0 ; i < compressedSucc.size() ; i++){
+            cout << compressedSucc[i] << " : " << decodeEcoli(compressedSucc[i], size) << endl;
+        }*/
+    }
+    return compressedSucc;
+}
+
 //POO for KmerManipulator
 //abstract class KmerManipulator
 KmerManipulator::KmerManipulator(uint64_t size): m_size(size) {}
