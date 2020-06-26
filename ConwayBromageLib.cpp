@@ -150,7 +150,7 @@ bool isTheSameSize(int KMerLen, int currentCompressedSeqLen){
  * @param format - The format we want for the transformation : ACGT or ACTG
  * @return a sd_vector which contains elements of the file transformed according to the format
  */
-sd_vector<>fromFileToSdVector(string path){
+/*sd_vector<>fromFileToSdVector(string path){
     ifstream file(path, ios::in);  // Reading of the file which contains k-mers sequences
     if(file){   // File is now open
         string word;
@@ -182,14 +182,14 @@ sd_vector<>fromFileToSdVector(string path){
         cout << "Error while opening or bad format : need ACGT or ACTG" << endl;
     }
     return bit_vector{0};
-}
+}*/
 
 /* Transform sequences which are contain in a file in a sd_vector
  * @param path - The path to the file which contains info
  * @param format - The format we want for the transformation : ACGT or ACTG
  * @return a sd_vector which contains elements of the file transformed according to the format
  */
-sd_vector<>fromFileToSdVectorChooser(string path, string format){
+/*sd_vector<>fromFileToSdVectorChooser(string path, string format){
     ifstream file(path, ios::in);  // Reading of the file which contains k-mers sequences
     if(file){   // File is now open
         if(format == "ACGT" || format == "ACTG"){
@@ -246,7 +246,7 @@ sd_vector<>fromFileToSdVectorChooser(string path, string format){
         cout << "Error while opening" << endl;
     }
     return bit_vector{0};
-}
+}*/
 
 /* Calculate the reverse complement
  * Come from the wev page : https://www.biostars.org/p/113640/
