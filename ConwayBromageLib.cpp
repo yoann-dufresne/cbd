@@ -568,3 +568,105 @@ bool isCanonical (uint64_t kmer, uint64_t kmerSize, bool encodingIsACGT){
     return (kmer < reverseComplement)?true:false;
 }
 
+//POO for KmerManipulator
+//abstract class KmerManipulator
+KmerManipulator::KmerManipulator(uint64_t size): m_size(size) {}
+KmerManipulator::~KmerManipulator() noexcept {}
+//class KmerManipulatorACTG
+KmerManipulatorACTG::KmerManipulatorACTG(uint64_t size): KmerManipulator(size), m_format("ACTG"){}
+KmerManipulatorACTG::~KmerManipulatorACTG() noexcept {}
+uint64_t KmerManipulatorACTG::encode(const string word) {
+    uint64_t hash = 0;
+    char c;
+    for(uint i = 0 ; i < m_size ; i++){   //We go through the sequence to encode each nucleotides
+        hash <<= 2; // We shift 2 bits to the right
+        c = word[i];    //Take each nucleotides to encode them
+        uint64_t charval = 0; // 'A' = 0
+        if(c == 'C'){
+            charval = 1;    // 'C' = 1
+        }else if(c == 'T'){
+            charval = 2;    // 'T' = 2
+        }else if(c == 'G'){
+            charval = 3;    // 'G' = 3
+        }
+        hash += charval;    //creation of the hash for the given sequence
+    }
+    return hash;    //return the final hash of the sequence
+}
+string KmerManipulatorACTG::decode(uint64_t kmer) {
+    string res(m_size, ' ');
+    uint64_t lastIndex = res.size()-1;
+    for(int i(0); i < m_size; i++){
+        switch(kmer & 0x3){ //compares the decimal value of the first two bits
+            case 0: res[lastIndex-i] = 'A'; break;
+            case 1: res[lastIndex-i] = 'C'; break;
+            case 2: res[lastIndex-i] = 'T'; break;
+            case 3: res[lastIndex-i] = 'G'; break;
+        }
+        kmer >>= 2;
+    }
+    return res;
+}
+uint64_t KmerManipulatorACTG::getCanonical(const uint64_t kmer) {
+    uint64_t reverseCompl = reverseComplement(kmer);
+    return((kmer < reverseCompl)?kmer:reverseCompl);
+}
+uint64_t KmerManipulatorACTG::reverseComplement(const u_int64_t kmer) {
+    u_int64_t res = kmer;
+    res = ((res>> 2 & 0x3333333333333333) | (res & 0x3333333333333333) <<  2);
+    res = ((res>> 4 & 0x0F0F0F0F0F0F0F0F) | (res & 0x0F0F0F0F0F0F0F0F) <<  4);
+    res = ((res>> 8 & 0x00FF00FF00FF00FF) | (res & 0x00FF00FF00FF00FF) <<  8);
+    res = ((res>>16 & 0x0000FFFF0000FFFF) | (res & 0x0000FFFF0000FFFF) << 16);
+    res = ((res>>32 & 0x00000000FFFFFFFF) | (res & 0x00000000FFFFFFFF) << 32);
+    res = res ^ 0xAAAAAAAAAAAAAAAA;
+    return (res >> (2*( 32 - m_size))) ;
+}
+//class KmerManipulatorACGT
+KmerManipulatorACGT::KmerManipulatorACGT(uint64_t size): KmerManipulator(size), m_format("ACGT") {}
+KmerManipulatorACGT::~KmerManipulatorACGT() noexcept {}
+uint64_t KmerManipulatorACGT::encode(const std::string word) {
+    uint64_t hash = 0;
+    char c;
+    for(uint i = 0 ; i < m_size ; i++){   //We go through the sequence to encode each nucleotides
+        hash <<= 2; // We shift 2 bits to the right
+        c = word[i];    //Take each nucleotides to encode them
+        uint64_t charval = 0; // 'A' = 0
+        if(c == 'C'){
+            charval = 1;    // 'C' = 1
+        }else if(c == 'G'){
+            charval = 2;    // 'G' = 2
+        }else if(c == 'T'){
+            charval = 3;    // 'T' = 3
+        }
+        hash += charval;    //creation of the hash for the given sequence
+    }
+    return hash;    //return the final hash of the sequence
+}
+std::string KmerManipulatorACGT::decode(uint64_t kmer) {
+    string res(m_size, ' ');
+    uint64_t lastIndex = res.size()-1;
+    for(int i(0); i < m_size; i++){
+        switch(kmer & 0x3){ //compares the decimal value of the first two bits
+            case 0: res[lastIndex-i] = 'A'; break;
+            case 1: res[lastIndex-i] = 'C'; break;
+            case 2: res[lastIndex-i] = 'G'; break;
+            case 3: res[lastIndex-i] = 'T'; break;
+        }
+        kmer >>= 2;
+    }
+    return res;
+}
+uint64_t KmerManipulatorACGT::getCanonical(const uint64_t kmer) {
+    uint64_t reverseCompl = reverseComplement(kmer);
+    return((kmer < reverseCompl)?kmer:reverseCompl);
+}
+uint64_t KmerManipulatorACGT::reverseComplement(const uint64_t kmer) {
+    uint64_t res = ~kmer;
+    res = ((res >> 2 & 0x3333333333333333) | (res & 0x3333333333333333) << 2);
+    res = ((res >> 4 & 0x0F0F0F0F0F0F0F0F) | (res & 0x0F0F0F0F0F0F0F0F) << 4);
+    res = ((res >> 8 & 0x00FF00FF00FF00FF) | (res & 0x00FF00FF00FF00FF) << 8);
+    res = ((res >> 16 & 0x0000FFFF0000FFFF) | (res & 0x0000FFFF0000FFFF) << 16);
+    res = ((res >> 32 & 0x00000000FFFFFFFF) | (res & 0x00000000FFFFFFFF) << 32);
+    return (res >> (2 * (32 - m_size)));
+}
+
