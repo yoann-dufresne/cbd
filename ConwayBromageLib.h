@@ -24,6 +24,7 @@ bool isThisKMerHere(uint64_t Kmer, sdsl::sd_vector<> const& compressedSeq, bool 
 //Successors of a canonical Kmer
 uint64_t getCanonical (uint64_t kmer, uint64_t kmerSize, bool encodingIsACGT);
 std::vector<uint64_t> successors(uint64_t Kmer, sdsl::sd_vector<> const& compressedSeq, bool encodingIsACGT);
+std::vector<uint64_t> successorTranslator(int successors, uint64_t compressedKMer, uint64_t size, bool format);
 //reverseComplement variations
 uint64_t reverseComplementLexico (const uint64_t mer, uint64_t kmerSize); //faster for lexicographical order
 u_int64_t reverseComplementGATBLibEcoli (const u_int64_t x, uint64_t sizeKmer); //the fastest : fastest ASCII version
@@ -41,15 +42,33 @@ class KmerManipulator{  //abstract class
 public:
     KmerManipulator(uint64_t size); //Constructor
     //abstract function
+    /* function to encode k-mer sequences, depends on encoding : see daughter classes
+    *@param word - the string we want to encode into a uint64_t
+    *@return a uint64_t which represent the encoding version of the word
+    */
     virtual uint64_t encode(const std::string word) = 0;
+    /*
+    * Returns a string which is the word which corresponds to the uint64_t value, depends on encoding : see daughter classes
+    * @param kmer - the value.
+    * @return a string representing the decoding version of the uint64_t.
+    */
     virtual std::string decode(uint64_t kmer) = 0;
+    /*
+    *calculate the canonical version of a compressed k-mer, depends on encoding : see daughter classes
+    *@param kmer - a uint64_t which represents the compressed kmer we want to study
+    *@return a uint64_t which is the compressed kmer itself if it is already canonical, or its canonical version
+    */
     virtual uint64_t getCanonical(const uint64_t kmer) = 0;
+    /* Calculate the reverse complement, depends on encoding : see daughter classes
+    * @param kmer - a uin64_t which represent the compressed version of a k-mer
+    * @return a uin64_t which represent the compressed version of the reverse complement of the given k-mer
+    */
     virtual uint64_t reverseComplement(const  uint64_t kmer) = 0;
     virtual ~KmerManipulator();     //Desctructor
 protected:
     uint64_t m_size;
 };
-
+//KmerManipulator for ACGT encoding
 class KmerManipulatorACGT : public KmerManipulator{
 public:
     KmerManipulatorACGT(uint64_t size);
@@ -61,7 +80,7 @@ public:
 private:
     std::string m_format;
 };
-
+//KmerManipulator for ACTG encoding
 class KmerManipulatorACTG : public KmerManipulator{
 public:
     KmerManipulatorACTG(uint64_t size);
