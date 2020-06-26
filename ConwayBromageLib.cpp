@@ -751,3 +751,192 @@ uint64_t KmerManipulatorACGT::reverseComplement(const uint64_t kmer) {
     return (res >> (2 * (32 - m_size)));
 }
 
+
+/**
+ * Transform sequences which are contain in a file in a sd_vector
+ * @param kmerFlux - An istream of kmer. For example a file represented by an ifstream.
+ * @param km - Object which contains all the information about encoding and decoding.
+ */
+ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
+    m_kmerManipulator = km;
+    string word;
+    string line("");
+    kmerFlux >> word;   //Take the first word to analyze size of one k-mer
+    kmerFlux.seekg(0, ios::beg);    //Return to the beginning of the file
+    int KmerSize(word.size()); //Size of k_mer, it is the 'k'
+    int numberOfKmer = 0;
+    while(getline(kmerFlux, line)) //Counts the number of k-mer in the file
+        numberOfKmer++;
+ 
+    kmerFlux.clear();
+    kmerFlux.seekg(0, ios::beg);    //Return to the beginning of the file
+    //cout << "K-MER SIZE      : " << KmerSize << endl;
+    //cout << "NUMBER OF K-MER : " << numberOfKmer << endl;
+    uint64_t sdvSize(pow(4,KmerSize));//1 << (2*KmerSize));//pow(4,KmerSize);   //Creation of the total length to create the sd_vector_builder
+    //cout << "SD VECTOR SIZE  : " << sdvSize << endl;
+    
+    sd_vector_builder builder(sdvSize, numberOfKmer);
+    while(kmerFlux >> word){
+        uint64_t kmer = m_kmerManipulator->encode(word);
+        if(m_kmerManipulator->getCanonical(kmer) != kmer){
+            cout << "The file is not completely canonical" << endl;
+            exit(1); //EXIT_FAILURE
+        }
+        builder.set(kmer);
+        kmerFlux >> word;
+    }
+    m_sequence = builder;
+    m_kmerSize = KmerSize;
+}
+/**
+ * Return the value stored at the block of index i.
+ * @param i - the index.
+ * @return true if the block of index i is set to one.
+ */
+bool ConwayBromage::operator[](uint64_t i) const{
+    return m_sequence[i];
+}
+
+/**
+ * Return the size of the compressed sequence. It's always 4^K with K the size of the K-mers 
+ * @return the size
+ */
+uint64_t ConwayBromage::size() const{
+    return m_sequence.size();
+}
+
+/**
+ * Check if the given Kmer is present in the sequence.
+ * @param Kmer - An integer representing the k-mer.
+ * @return true if the k-mer is present.
+ */
+bool ConwayBromage::isPresent(uint64_t Kmer) const{
+    int KmerSize = m_kmerSize-1;
+    uint64_t limit = m_sequence.size() >> 2;
+    if(Kmer >= limit) { //we must have nonCompressedKmer < 4^(P-1)
+        cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << limit << endl;
+        return false; 
+    }  
+    
+    uint64_t next = Kmer << 2; //next contains XA where X is the Kmer
+    if(m_sequence[m_kmerManipulator->getCanonical(next)])   return true; //getCanonical(XA) where X is the Kmer
+    if(m_sequence[m_kmerManipulator->getCanonical(next+1)]) return true; //getCanonical(XC)
+    if(m_sequence[m_kmerManipulator->getCanonical(next+2)]) return true; //getCanonical(XG)
+    if(m_sequence[m_kmerManipulator->getCanonical(next+3)]) return true; //getCanonical(XT)
+    
+    int numberOfBitsToShift = KmerSize << 1;  
+    if(m_sequence[m_kmerManipulator->getCanonical(Kmer)])   return true; //getCanonical(AX) where X is the Kmer
+    if(m_sequence[m_kmerManipulator->getCanonical(Kmer + (1 << numberOfBitsToShift))]) return true; //getCanonical(CX)
+    if(m_sequence[m_kmerManipulator->getCanonical(Kmer + (2 << numberOfBitsToShift))]) return true; //getCanonical(GX)
+    if(m_sequence[m_kmerManipulator->getCanonical(Kmer + (3 << numberOfBitsToShift))]) return true; //getCanonical(TX)
+    
+    return false;
+}
+
+/**
+ * Returns the successors of a canonical kmer. Duplicate successors are removed.
+ * @param Kmer : the Kmer that we want to find its successors. Can either be canonical or not.
+ * @return a uint8_t representing the (at most 8) successors of the kmer.
+ */
+uint8_t ConwayBromage::successors(uint64_t Kmer) const{
+    uint8_t res = 0;
+    int KmerSize = m_kmerSize-1;
+    uint64_t limit = m_sequence.size() >> 2;
+    if(Kmer >= limit) { //we must have nonCompressedKmer < 4^(P-1)
+        cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << limit << endl;
+        return res; //empty
+    }  
+    vector<uint64_t> nextSuccessors;
+    //we build the eight possible successors    
+    //4 next pmers
+    uint64_t Pmer = Kmer << 2; //<-> XA where X is the Kmer
+    for(int i = 0; i < 4; i++){
+        if(m_sequence[m_kmerManipulator->getCanonical(Pmer)]){ 
+            uint64_t successorKmer = Pmer%limit; //get the last KmerSize caracters
+            nextSuccessors.push_back(successorKmer);
+            //if compressedSeq.size() = 256 (P=4) then compressedSeq.size() >> 2 = 64 ==> AACA%64 ==> ACA (i_next_kmer)
+            string PmerStr = m_kmerManipulator->decode(Pmer);
+            char lastLetter = PmerStr[PmerStr.size()-1];
+            //we set the concerned bit to 1
+            if(lastLetter == 'A') 
+                res = res ^ 128; 
+            else if(lastLetter == 'C')      
+                res = res ^ 64;
+            else if(lastLetter == 'G') 
+                res = res ^ 32;
+            else if(lastLetter == 'T')
+                res = res ^ 16;
+        }
+        Pmer++; //equals to XA then XC then XG then XT
+    }
+    //4 predecessors
+    int numberOfBitsToShift = KmerSize << 1;
+    for(int i = 0; i < 4; i++){
+        Pmer = Kmer + (i << numberOfBitsToShift); //equals to AX then CX then GX then TX where X is the Kmer
+        if(m_sequence[m_kmerManipulator->getCanonical(Pmer)]){
+            uint64_t successorKmer = Pmer >> 2;
+            //check if vector doesn't contain successorKmer
+            if(find(nextSuccessors.begin(), nextSuccessors.end(), successorKmer) == nextSuccessors.end()){
+                string PmerStr = m_kmerManipulator->decode(Pmer);
+                char lastLetter = PmerStr[0];
+                //we set the concerned bit to 1
+                if(lastLetter == 'A')
+                    res = res ^ 8;
+                else if(lastLetter == 'C')      
+                    res = res ^ 4;
+                else if(lastLetter == 'G')
+                    res = res ^ 2;
+                else if(lastLetter == 'T')
+                    res = res ^ 1;
+            }
+        }
+    }
+    return res;
+}
+
+
+/**
+ * Returns the number of 1-bit to the left of position index
+ * @param index the position
+ * @param v an sd_vector
+ * @return a count
+ */
+uint64_t ConwayBromage::rank1bit(uint64_t index){
+    sd_vector<>::rank_1_type sdb_rank(&m_sequence);
+    return sdb_rank(index);
+}
+
+/**
+ * Returns the number of 0-bit to the left of position index
+ * @param index the position 
+ * @param v an sd_vector
+ * @return a count
+ */
+uint64_t ConwayBromage::rank0bit(uint64_t index){
+    sd_vector<>::rank_0_type sdb_rank(&m_sequence);
+    return sdb_rank(index);
+}
+
+/**
+ * Returns the position of the index-th 1-bit.
+ * @param index the position 
+ * @param v an sd_vector
+ * @return an index
+ */
+uint64_t ConwayBromage::select1bit(uint64_t index){
+    sd_vector<>::select_1_type sdb_sel(&m_sequence);
+    return sdb_sel(index);
+}
+
+/**
+ * Returns the position of the index-th 0-bit.
+ * @param index the position 
+ * @param v an sd_vector
+ * @return an index
+ */
+uint64_t ConwayBromage::select0bit(uint64_t index){
+    sd_vector<>::select_0_type sdb_sel(&m_sequence);
+    return sdb_sel(index);
+}
+
+
