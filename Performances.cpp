@@ -9,20 +9,23 @@
 #include <string>
 #include <iostream>
 #include <istream>
+#include <fstream>
 #include <random>
 #include <chrono>
 #include "Functions.hpp"
 #include "ConwayBromage.hpp"
-#include <lest/lest_basic.hpp> 
+#include <lest/lest_basic.hpp>
+#include <vector>
+#include <bitset>
 #include <sdsl/sd_vector.hpp>
 #include <sdsl/vectors.hpp>
 #include <cmath>
 #include <future>
 
-
 using namespace std;
 using namespace sdsl;
 using namespace lest;
+using namespace std::chrono;
                               
 /*
  * Compilation line : g++ -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o exec Performances.cpp ConwayBromage.cpp -lsdsl -ldivsufsort -ldivsufsort64
@@ -155,9 +158,84 @@ void launchPerformanceTests(int sizeOfTestList){
     file.close();   
 }
 
+/**
+ * Build a row of element to test timing performance of the function isPresent depending on percentage of elements
+ * user wants to be in the original sd_vector
+ * @param ratioIn - represent the percentage of elements which are really present in the sd_vector
+ * @param nbOfOnes - the number of elements we want in the test row, typically we need 1000000
+ * @param cb - ConwayBromage object which contains the sd_vector and shows the encoding format
+ * @return an int_vector which contains a percentage of numbers which are present in the sd_vector and which are not contain in
+ */
+int_vector<> ratioForIsPresent(int ratioIn, int nbOfOnes, ConwayBromage cb){
+    srand (time(NULL));
+    uint64_t kMerSize = cb.m_kmerSize - 1;  //Size of the k-mer we will build, if sd_vector element is 11-mers, we will build 10-mers
+    uint64_t kMerSizeSeq = cb.size() / 4;
+    cout << "kmer size : " << kMerSize << endl;
+    cout << "kMerSizeSeq : " << kMerSizeSeq << endl;
+    cout << "pMerSize : " << cb.size() << endl;
+    uint64_t ratioInNumber = ((double)ratioIn/(double)100) * nbOfOnes;  //number which represent the percentage of elements
+    int_vector<> al(nbOfOnes, 0);
+    vector<uint64_t> isIn;  //Will contain all the elements which are present in the sd_vector
+    vector<uint64_t> isOut; //Elements which are NOT present
+    uint64_t myMer;
+    for(int i = 0 ; i < kMerSizeSeq ; i++){ //We test all k-mers elements. For example, all the 10-mers which can be contain in 11-mers sd_vector
+        if(cb.isPresent(i)){
+            isIn.push_back(i);  //is in
+        }else{
+            isOut.push_back(i); //is not in
+        }
+    }
+    cout << "ratio in number : " << ratioInNumber << endl;
+    int i(0);
+    while(ratioInNumber > 0){   //We start to complete with elements which are present in the sd_vector
+        myMer = rand() % isIn.size();   //Take a random number in the vector which contains present elements
+        al[i] = isIn[myMer];
+        i++;
+        ratioInNumber--;    //count how many present elements we have
+    }
+    while(i < nbOfOnes){    //Same with elements which are NOT present
+        myMer = rand() % isOut.size();  //We complete the int_vector until we have the number of elements we want, typically 1000000 elements
+        al[i] = isOut[myMer];           //OBSERVATION : we don't care about duplication, it does not affect isPresent working
+        i++;
+    }
+    return al;
+}
+/**
+ * Call ratioForIsPresent and do time tests on 11 differents percentages (from 0 to 100)
+ * Send time and percentage data in a file for graphs building
+ */
+void metricForIsPresent(){
+    ifstream f("./plageTest.txt", ios::in); //File which contains elements to build tests : 1000000 11-mers
+    ofstream result("./perfIsPresent.txt"); //File where we will send time and percentage data
+    if(result){
+        KmerManipulatorACGT k(11);  //Creation of objects
+        ConwayBromage cb(f, &k);
+        for(int j = 0 ; j <= 100 ; j = j+10){   //We will test isPresent for percentage from 0 to 100
+            cout << "cas j = " << j << endl;
+            int_vector<> ratio = ratioForIsPresent(j, 1000000, cb); // row test build
+            high_resolution_clock::time_point beg = high_resolution_clock::now();   //time measurement starting
+            for(int i = 0 ; i < ratio.size() ; i++){
+                cb.isPresent(ratio[i]);
+            }
+            high_resolution_clock::time_point en = high_resolution_clock::now();    //time measurement ending
+            auto durationmicro = duration_cast<microseconds>( en - beg ).count();   //Calculation of time in microseconds
+            //auto durationsec = duration_cast<seconds>( en - beg ).count();        //Same in seconds
+            result << j;    //Send elements to perfIsPresent.txt, format : presentage   time needed
+            result << "\t";
+            result << durationmicro << endl;
+        }
+    }else{
+        cout << " Fail while opening file" << endl;
+    }
+}
+
 int main(){
     launchPerformanceTests(10000); //size of the test list
     string command = "/usr/local/bin/python3 chart.py";
+    system(command.c_str());
+
+    metricForIsPresent();   //call of time tests for isPresent
+    string command = "/usr/local/bin/python3 graphsForIsPresent.py";    //call of Python script to build graphs
     system(command.c_str());
     return 0;
 }
