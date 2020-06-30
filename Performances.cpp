@@ -1,5 +1,5 @@
 /*
- * File:   Tests.cpp
+ * File:   Performances.cpp
  * Author: muratokutucu
  *
  * Created on 29 juin 2020, 11:07
@@ -32,6 +32,20 @@ using namespace std::chrono;
  */
 
 /**
+ * Return the next canonical kmer starting from an index and incrementing it.
+ * @param start - beginning index
+ * @param km - A kmer manipulator
+ * @return an index
+ */
+uint64_t nextCanonical(uint64_t start, KmerManipulatorACGT km){
+    uint64_t index = start;
+    while(km.getCanonical(index) != index){ //index is canonical if getCanonical returns the same
+        index++;
+    }
+    return index;
+}
+
+/**
  * Return an sd_vector with X percent of 1-bit and an vector<int> of all existing k-mers.
  * It's not always possible to generate the exact X percent. For example, for a size of 11 we can't produce an sd_vector with exactly 10% of 1.
  * This is why the parameter producedX will store the produced percentage. In this example, it will be of 9.1 percent.
@@ -40,7 +54,7 @@ using namespace std::chrono;
  * @param producedX - the obtained percentage
  * @return the sd_vector and an int_vector
  */
-tuple<sd_vector<>, vector<int>> buildSDVWithXPercentOfPresence(uint64_t len, int KmerSize, int X, double &producedX){
+tuple<sd_vector<>, vector<int>> buildSDVWithXPercentOfPresence(uint64_t len, int PmerSize, int X){
     if(X == 0){ //if X=0 then it must be no 1-bit in the sd_vector
         sd_vector_builder builder(len, 0);
         vector<int> iv(0);
@@ -49,6 +63,7 @@ tuple<sd_vector<>, vector<int>> buildSDVWithXPercentOfPresence(uint64_t len, int
     }
     //construction of the variable which permits to take the left-side kmer of a pmer
     uint64_t takeLeftSideKmer = 0;
+    int KmerSize = PmerSize-1;
     for(int i = 0; i < 2*KmerSize; i++){
         takeLeftSideKmer <<= 1;
         takeLeftSideKmer += 1;
@@ -63,9 +78,9 @@ tuple<sd_vector<>, vector<int>> buildSDVWithXPercentOfPresence(uint64_t len, int
     //builder of the final sd_vector
     sd_vector_builder builder(len, nbOf1);    
     vector<int> existingKmers(nbOf1*2, 0);
-    
+    KmerManipulatorACGT km(PmerSize);
     uint64_t intVecIndex = 0;
-    for(uint64_t pmer = 0; nbOf1Placed < nbOf1 && pmer < len; pmer+=pas){
+    for(uint64_t pmer = 0; nbOf1Placed < nbOf1 && pmer < len; pmer = nextCanonical(pmer+1, km)){
         //build of the sd_vector
         builder.set(pmer);
         nbOf1Placed++;
@@ -76,8 +91,7 @@ tuple<sd_vector<>, vector<int>> buildSDVWithXPercentOfPresence(uint64_t len, int
         intVecIndex++;
     }
     
-    producedX = nbOf1Placed*100.0/len;
-    cout << "SD_VECTOR : Wanted percentage is " << X << "%. Obtained percentage is " << producedX << "%." << endl;
+    cout << "SD_VECTOR : Wanted percentage is " << X << "%. Obtained percentage is " << (nbOf1Placed*100.0/len)<< "%." << endl;
     return make_tuple(sd_vector<>(builder), existingKmers);
 }
 
@@ -90,9 +104,9 @@ tuple<sd_vector<>, vector<int>> buildSDVWithXPercentOfPresence(uint64_t len, int
  * @param producedPercent - the percentage of presence in the produced vector<int>.
  * @return a vector<int> of k-mer with some percentage existing.
  */
-vector<int> generateTestList(int size, int percent, const vector<int> &allExistingKmers, int sdvSize, double &producedPercent){
+vector<int> generateTestList(int size, int percent, const vector<int> &allExistingKmers, const ConwayBromage &cb){
     vector<int> res(size, 0);
-    
+    int sdvSize = cb.size();
     //creation of objects in order to generate a random non existing kmer
     random_device rd1; 
     mt19937 genKmer(rd1());
@@ -112,16 +126,16 @@ vector<int> generateTestList(int size, int percent, const vector<int> &allExisti
             cptOfPresent++; //we count it in order to obtain the real percentage of presence that we have produced
         } else {//generation of a non-existing k-mer
             randomNb = randomKmer(genKmer);//generate a number between 0 and sdvSize-1 which coresponds to a pmer
-            while(find(allExistingKmers.begin(), allExistingKmers.end(), randomNb) == allExistingKmers.end()){ //check if the k-mer is present
+            //while(find(allExistingKmers.begin(), allExistingKmers.end(), randomNb) == allExistingKmers.end()){ //check if the k-mer is present
+            while(cb.isPresent(randomNb)){
                 randomNb = randomKmer(genKmer);
             }    
         }
         res[i] = randomNb;
         i++;
     }
-    producedPercent = cptOfPresent*100.0/res.size();
-    cout << "Wanted percentage for the list(i.e vector<int>) of kmers : "<< percent << "%. ";
-    cout << "Obtained percentage : " << producedPercent << "%." << endl;
+    cout << "Wanted percentage for the list of kmers : "<< percent << "%. ";
+    cout << "Obtained percentage : " << (cptOfPresent*100.0/res.size()) << "%." << endl;
     return res;
 }
 /**
@@ -130,30 +144,38 @@ vector<int> generateTestList(int size, int percent, const vector<int> &allExisti
  * calls to successors function on all k-mers.
  * @param sizeOfRequestLists - size of the generated test list
  */
-void launchPerformanceTests(int sizeOfTestList){
-    int PmerSize = 10;
-    double producedX = 0;
-    ofstream file; 
-    auto result = buildSDVWithXPercentOfPresence(pow(4, PmerSize), PmerSize-1, 10, producedX);
+void launchPerformanceTests(int sizeOfTestList, int PmerSize){
+    ofstream file;
+    int probabilityForSDV = 10;
+    //creation of the sd_vector with 10% of 1-bit and retrieve of a vector<int> of these k-mers
+    auto result = buildSDVWithXPercentOfPresence(pow(4, PmerSize), PmerSize, probabilityForSDV);
     sd_vector<> sdv = get<0>(result);
     vector<int> allExistingKmers = get<1>(result);
     
     KmerManipulatorACGT km(PmerSize);
     ConwayBromage cb(sdv, &km);
     file.open ("perf.txt");
-    
-    double producedPercent = 0;
-    for(int percent = 10; percent <= 90; percent+=10){
+    //calls to successors on lists with different percent of existing k-mers
+    for(int percentOfPresence = 10; percentOfPresence <= 90; percentOfPresence+=10){
         //generation of the list of test with X percent of existing Kmers
-        vector<int> testList = generateTestList(sizeOfTestList, percent, allExistingKmers, sdv.size(), producedPercent);
+        vector<int> testList = generateTestList(sizeOfTestList, percentOfPresence, allExistingKmers, cb);
+        cout << "testList's size : " << testList.size();
+        int cpt = 0;
+        for(int i = 0; i < testList.size(); i++){ 
+            if(cb.isPresent(testList[i])==true)
+                cpt++;
+        }
+        double realPercentage = cpt*100.0/testList.size();
+        cout << " | Percentage of isPresent " << realPercentage << endl;
+        //time measurement of the calls to successors
         auto b = chrono::high_resolution_clock::now();
         for(int i = 0; i < testList.size(); i++) cb.successors(testList[i]);
         auto e = chrono::high_resolution_clock::now();
-        double elapsed = std::chrono::duration_cast<std::chrono::microseconds>(e-b).count(); 
-        file << producedPercent;
+        double elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(e-b).count(); 
+        file << realPercentage;
         file << "\t";
         file << elapsed;
-        file << "\tmicrosecondes\n";
+        file << "\tms\n";
     }
     file.close();   
 }
@@ -230,7 +252,7 @@ void metricForIsPresent(){
 }
 
 int main(){
-    launchPerformanceTests(10000); //size of the test list
+    launchPerformanceTests(1000000, 10); //size of the test list and pmer size
     string command = "/usr/local/bin/python3 chart.py";
     system(command.c_str());
 
