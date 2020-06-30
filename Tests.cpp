@@ -155,7 +155,7 @@ const test atTheEnd[] = {
             }
             EXPECT(result);
         },
-        CASE("isThisKMerHere : 100 4-mers with ACGT encoding"){
+        CASE("isPresent : 100 4-mers with ACGT encoding"){
             ifstream f("./sortACGT.txt", ios::in);
             KmerManipulatorACGT km(4);
             ConwayBromage cb(f, &km);
@@ -165,10 +165,11 @@ const test atTheEnd[] = {
             string unCompressedKMer;
             string reverseComplement;
             bool isHere;
+            KmerManipulatorACGT kmSize3(3);
             for(int i = 0 ; i < 64 ; i++){
                 isHere = false;
-                unCompressedKMer = decode(i, 3);
-                reverseComplement = decode(reverseComplementLexico(i, 3), 3);
+                unCompressedKMer = kmSize3.decode(i);
+                reverseComplement = kmSize3.decode(kmSize3.reverseComplement(i));
                 while(getline(file,line)){
                     if(line.find(unCompressedKMer) != string::npos){ //if forward is present
                         isHere = true;
@@ -185,7 +186,7 @@ const test atTheEnd[] = {
             }
             file.close();
         },
-        CASE("isThisKMerHere : 100 4-mers with ACTG encoding"){
+        CASE("isPresent : 100 4-mers with ACTG encoding"){
             ifstream f("./sortACTG.txt", ios::in);
             KmerManipulatorACTG km(4);
             ConwayBromage cb(f, &km);
@@ -195,10 +196,11 @@ const test atTheEnd[] = {
             string unCompressedKMer;
             string reverseComplement;
             bool isHere;
+            KmerManipulatorACGT kmSize3(3);
             for(int i = 0 ; i < 64 ; i++){
                 isHere = false;
-                unCompressedKMer = decodeEcoli(i, 3);
-                reverseComplement = decodeEcoli(reverseComplementGATBLibEcoli(i, 3), 3);
+                unCompressedKMer = kmSize3.decode(i);
+                reverseComplement = kmSize3.decode(kmSize3.reverseComplement(i));
                 while(getline(file,line)){
                     if(line.find(unCompressedKMer) != string::npos){
                         isHere = true;
@@ -214,7 +216,7 @@ const test atTheEnd[] = {
                 file.seekg(0, ios::beg);
             }
             file.close();
-        },
+        }
         /*CASE("successors with the successors counter : "){  //Need to be modify to fit with POO
             cout << "\t--> successors with the successor counter" << endl;
             sd_vector<>ret = fromFileToSdVectorChooser("./sortACTG.txt", "ACTG");
