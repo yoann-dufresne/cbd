@@ -791,4 +791,26 @@ uint64_t ConwayBromage::select0bit(uint64_t index){
     return sdb_sel(index);
 }
 
+/**
+ * Return the size of the sequence.
+ * @return an int
+ */
+int ConwayBromage::getKmerSize(){
+    return m_kmerSize;
+}
+
+/**
+ * Return the compressed sequence.
+ * @return an sd_vector
+ */
+sdsl::sd_vector<> ConwayBromage::getSequence(){
+    return m_sequence;
+}
+
+/**
+ * Return the kmer manipulator.
+ */
+KmerManipulator* ConwayBromage::getKmerManipulator(){
+    return m_kmerManipulator;
+}
 
