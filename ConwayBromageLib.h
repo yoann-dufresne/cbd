@@ -114,6 +114,13 @@ public:
     uint64_t rank0bit  (uint64_t index);
     uint64_t select1bit(uint64_t index);
     uint64_t select0bit(uint64_t index);
+
+    /*
+     * Functions for isPresent performance tests
+     * Use them as friend of ConwayBromage to allow them to use attribute easily
+     */
+    friend sdsl::int_vector<> ratioForIsPresent(int ratioIn, int nbOfOnes, ConwayBromage cb);
+    friend void metricForIsPresent();
 };
 
 #endif //CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
