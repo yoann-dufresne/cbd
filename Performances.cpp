@@ -31,15 +31,16 @@ using namespace std::chrono;
  * Compilation line : g++ -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o exec Performances.cpp ConwayBromage.cpp -lsdsl -ldivsufsort -ldivsufsort64
  */
 
+
 /**
  * Return the next canonical kmer starting from an index and incrementing it.
  * @param start - beginning index
  * @param km - A kmer manipulator
  * @return an index
  */
-uint64_t nextCanonical(uint64_t start, KmerManipulatorACGT km){
+uint64_t nextCanonical(uint64_t start, KmerManipulator* km){
     uint64_t index = start;
-    while(km.getCanonical(index) != index){ //index is canonical if getCanonical returns the same
+    while(km->getCanonical(index) != index){ //index is canonical if getCanonical returns the same
         index++;
     }
     return index;
@@ -54,7 +55,7 @@ uint64_t nextCanonical(uint64_t start, KmerManipulatorACGT km){
  * @param producedX - the obtained percentage
  * @return the sd_vector and an int_vector
  */
-tuple<sd_vector<>, vector<int>> buildSDVWithXPercentOfPresence(uint64_t len, int PmerSize, int X){
+tuple<sd_vector<>, vector<int>> buildSDVWithXPercentOfPresence(uint64_t len, int PmerSize, int X, KmerManipulator* km){
     if(X == 0){ //if X=0 then it must be no 1-bit in the sd_vector
         sd_vector_builder builder(len, 0);
         vector<int> iv(0);
@@ -78,7 +79,7 @@ tuple<sd_vector<>, vector<int>> buildSDVWithXPercentOfPresence(uint64_t len, int
     //builder of the final sd_vector
     sd_vector_builder builder(len, nbOf1);    
     vector<int> existingKmers(nbOf1*2, 0);
-    KmerManipulatorACGT km(PmerSize);
+
     uint64_t intVecIndex = 0;
     for(uint64_t pmer = 0; nbOf1Placed < nbOf1 && pmer < len; pmer = nextCanonical(pmer+1, km)){
         //build of the sd_vector
@@ -144,16 +145,17 @@ vector<int> generateTestList(int size, int percent, const vector<int> &allExisti
  * calls to successors function on all k-mers.
  * @param sizeOfRequestLists - size of the generated test list
  */
-void launchPerformanceTests(int sizeOfTestList, int PmerSize){
+void launchPerformanceTests(int sizeOfTestList, int PmerSize, KmerManipulator* km){
     ofstream file;
     int probabilityForSDV = 10;
     //creation of the sd_vector with 10% of 1-bit and retrieve of a vector<int> of these k-mers
-    auto result = buildSDVWithXPercentOfPresence(pow(4, PmerSize), PmerSize, probabilityForSDV);
+    auto result = buildSDVWithXPercentOfPresence(pow(4, PmerSize), PmerSize, probabilityForSDV, km);
     sd_vector<> sdv = get<0>(result);
     vector<int> allExistingKmers = get<1>(result);
     
-    KmerManipulatorACGT km(PmerSize);
-    ConwayBromage cb(sdv, &km);
+    //KmerManipulatorACTG km(PmerSize);
+    ConwayBromage cb(sdv, km);
+    cout << "Pmer size : " << cb.getKmerSize() << endl;
     file.open ("perf.txt");
     //calls to successors on lists with different percent of existing k-mers
     for(int percentOfPresence = 10; percentOfPresence <= 90; percentOfPresence+=10){
@@ -171,7 +173,7 @@ void launchPerformanceTests(int sizeOfTestList, int PmerSize){
         auto b = chrono::high_resolution_clock::now();
         for(int i = 0; i < testList.size(); i++) cb.successors(testList[i]);
         auto e = chrono::high_resolution_clock::now();
-        double elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(e-b).count(); 
+        double elapsed = chrono::duration_cast<chrono::milliseconds>(e-b).count(); 
         file << realPercentage;
         file << "\t";
         file << elapsed;
@@ -252,9 +254,11 @@ void metricForIsPresent(){
 }
 
 int main(){
-    launchPerformanceTests(1000000, 10); //size of the test list and pmer size
+    int PmerSize = 11;
+    KmerManipulatorACTG km(PmerSize);
+    launchPerformanceTests(10000000, PmerSize, &km); //launch the test for the function successors and save the results in perf.txt
     string command = "/usr/local/bin/python3 chart.py";
-    system(command.c_str());
+    system(command.c_str()); //plots the results of perf.txt
 
     metricForIsPresent();   //call of time tests for isPresent
     string command = "/usr/local/bin/python3 graphsForIsPresent.py";    //call of Python script to build graphs
