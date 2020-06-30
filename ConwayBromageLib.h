@@ -114,7 +114,10 @@ public:
     uint64_t rank0bit  (uint64_t index);
     uint64_t select1bit(uint64_t index);
     uint64_t select0bit(uint64_t index);
-
+    //getters
+    int getKmerSize();
+    sdsl::sd_vector<> getSequence();
+    KmerManipulator* getKmerManipulator();
     /*
      * Functions for isPresent performance tests
      * Use them as friend of ConwayBromage to allow them to use attribute easily
