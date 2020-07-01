@@ -13,9 +13,8 @@
 
 #include <cstdlib>
 #include <string>
-//#include "Tests.h"
 #include "ConwayBromageLib.h"
-#include <lest/lest_basic.hpp>        //Use of lest for unit tests, see here : https://github.com/martinmoene/lest.git
+#include <lest/lest_basic.hpp>      
 #include <sdsl/sd_vector.hpp>
 #include <sdsl/vectors.hpp>
 
@@ -119,14 +118,14 @@ const test atTheEnd[] = {
             ConwayBromage cb(sdv, &km);
             
             vector<uint8_t> TrueNext(4);
-            TrueNext[0]  = 82;  //01010010
-            TrueNext[1]  = 193; //11000001
-            TrueNext[2]  = 176; //10110000
-            TrueNext[3]  = 104; //01101000
+            TrueNext[0]  = 86;  //01010110
+            TrueNext[1]  = 205; //11001101
+            TrueNext[2]  = 179; //10110011
+            TrueNext[3]  = 106; //01101010
             bool result = true;
             for(int i(0); i < sdv.size()/4; i++){
                 uint8_t succ = cb.successors(i);
-                //check if same
+                //check if they are the same
                 if(TrueNext[i] != succ){
                     result = false;
                 }
@@ -140,14 +139,14 @@ const test atTheEnd[] = {
             ConwayBromage cb(sdv, &km);
             
             vector<uint8_t> TrueNext(4);
-            TrueNext[0]  = 97;  //01100001
-            TrueNext[1]  = 208;  //11010000
-            TrueNext[2]  = 164;  //10100100
-            TrueNext[3]  = 56;   //00111000
+            TrueNext[0]  = 101;  //01100101
+            TrueNext[1]  = 220;  //11011100
+            TrueNext[2]  = 166;  //10100110
+            TrueNext[3]  = 59;   //00111011
             bool result = true;
             for(int i(0); i < sdv.size()/4; i++){
                 uint8_t succ = cb.successors(i);
-                //check if same
+                //check if they are the same
                 if(TrueNext[i] != succ){
                     result = false;
                 }
