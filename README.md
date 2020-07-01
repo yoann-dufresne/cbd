@@ -2,26 +2,37 @@
 
 # Conway and Bromage succinct data structures for assembling large genomnes
 
-## Current content
+## Object KmerManipulator
+Abstract class to manage ACGT or ACTG encoding for k-mers<br>
+Mother class of KmerManipulatorACGT and KmerManipulatorACTG
 
-### encode function
-**encode** allow us to translate a nucleotide sequence into an int thanks to a given code :
-A = 0
-C = 1
-G = 2
-T = 3
-We use an hash to create and return unique int. This will help us to complete the sd_vector
-The function returns an int that matches with the location of a one in the future sd_vector
+### KmerManipulatorACGT::encode and KmerManipulatorACTG::encode
+**encode** allow us to translate a nucleotide sequence into an uint64_t thanks to ACGT or ACTG encoding<br>
+We use an hash to create and return unique uint64_t.<br>
+The function returns an uint64_t which corresponds to the given string sequence<br>
+Example of code :<br>
+```
+KmerManipulatorACGT encoder(4);	//4-mers in ACGT format
+encoder.encode("GGTA");		//172
+```
 
-### decode function
+### KmerManipulatorACGT::decode and KmerManipulatorACTG::decode
 Returns the string representation of a value representing a k-mer.<br>
-<br>
 Example of code :
 ```
-int value = 0;
-int size = 4; //the size of the kmer
-string kmer1 = decode(value, size); // kmer = "AAAA"
-string kmer2 = decode(100, 4);      // kmer = "CGCA"
+KmerManipulatorACTG decoder(4);	//4-mers in ACTG format
+decoder.decode(248);	//GGTA
+```
+
+### KmerManipulatorACGT::getCanonical and KmerManipulatorACTG::getCanonical
+Calculate the canonical version of a compressed k-mer (a uint64_t).<br>
+The canonical version depends on encoding format.<br>
+Example of code :
+```
+KmerManipulatorACGT canonicaler(4);	//4-mers in ACGT format
+canonicaler.getCanonical(172);		//172
+KmerManipulatorACTG canonicaler(4);	//4-mers in ACTG format
+canonicaler.getCanonical(172);		//144
 ```
 
 ### fromFileToSdVector function
