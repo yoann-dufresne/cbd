@@ -391,7 +391,7 @@ bool ConwayBromage::isPresent(uint64_t Kmer) const{
 }
 
 /**
- * Returns the successors of a canonical kmer. Duplicate successors are removed.
+ * Returns the successors of a canonical kmer.
  * @param Kmer : the Kmer that we want to find its successors. Can either be canonical or not.
  * @return a uint8_t representing the (at most 8) successors of the kmer.
  */
@@ -402,15 +402,12 @@ uint8_t ConwayBromage::successors(uint64_t Kmer) const{
     if(Kmer >= limit) { //we must have nonCompressedKmer < 4^(P-1)
         cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << limit << endl;
         return res; //empty
-    }  
-    vector<uint64_t> nextSuccessors;
+    }
     //we build the eight possible successors    
     //4 next pmers
     uint64_t Pmer = Kmer << 2; //<-> XA where X is the Kmer
     for(int i = 0; i < 4; i++){
-        if(m_sequence[m_kmerManipulator->getCanonical(Pmer)]){ 
-            uint64_t successorKmer = Pmer%limit; //get the last KmerSize caracters
-            nextSuccessors.push_back(successorKmer);
+        if(m_sequence[m_kmerManipulator->getCanonical(Pmer)]){ //if the pmer is present 
             //if compressedSeq.size() = 256 (P=4) then compressedSeq.size() >> 2 = 64 ==> AACA%64 ==> ACA (i_next_kmer)
             string PmerStr = m_kmerManipulator->decode(Pmer);
             char lastLetter = PmerStr[PmerStr.size()-1];
@@ -431,21 +428,17 @@ uint8_t ConwayBromage::successors(uint64_t Kmer) const{
     for(int i = 0; i < 4; i++){
         Pmer = Kmer + (i << numberOfBitsToShift); //equals to AX then CX then GX then TX where X is the Kmer
         if(m_sequence[m_kmerManipulator->getCanonical(Pmer)]){
-            uint64_t successorKmer = Pmer >> 2;
-            //check if vector doesn't contain successorKmer
-            if(find(nextSuccessors.begin(), nextSuccessors.end(), successorKmer) == nextSuccessors.end()){
-                string PmerStr = m_kmerManipulator->decode(Pmer);
-                char lastLetter = PmerStr[0];
-                //we set the concerned bit to 1
-                if(lastLetter == 'A')
-                    res = res ^ 8;
-                else if(lastLetter == 'C')      
-                    res = res ^ 4;
-                else if(lastLetter == 'G')
-                    res = res ^ 2;
-                else if(lastLetter == 'T')
-                    res = res ^ 1;
-            }
+            string PmerStr = m_kmerManipulator->decode(Pmer);
+            char lastLetter = PmerStr[0];
+            //we set the concerned bit to 1
+            if(lastLetter == 'A')
+                res = res ^ 8;
+            else if(lastLetter == 'C')      
+                res = res ^ 4;
+            else if(lastLetter == 'G')
+                res = res ^ 2;
+            else if(lastLetter == 'T')
+                res = res ^ 1;
         }
     }
     return res;
