@@ -122,7 +122,7 @@ using namespace sdsl;
  * @param format - Give the encoding format : true = ACGT, false = ACTG
  * @return a vector of uint64_t which represent compressed successors of the compressed kmer
  */
-/*vector<uint64_t> successorTranslator(int successors, uint64_t compressedKMer, uint64_t size, bool format){    //need upload to POO version
+vector<uint64_t> successorTranslator(int successors, uint64_t compressedKMer, uint64_t size, bool format){    //need upload to POO version
     vector<uint64_t>compressedSucc; //for the return
     if(successors > 256){
         cout << "bad 8 bits numbers" << endl;
@@ -154,8 +154,8 @@ using namespace sdsl;
             cout << binaryList[i] << " ";
         }
         cout << endl;*/
-  //      uint64_t limit = pow(ALPHABET, size);   //The limit we can't be taller than. Example : 3-mer limit is 64
-    //    uint64_t numberOfBitToShift((size-1) << 1); //The number of bits we want to shift if there is previous among successors
+        uint64_t limit = pow(ALPHABET, size);   //The limit we can't be taller than. Example : 3-mer limit is 64
+        uint64_t numberOfBitToShift((size-1) << 1); //The number of bits we want to shift if there is previous among successors
         /* Explanation :
          * if we have AACA, previous successors will have a XAAC form and X can be A, C; T or G.
          * Each letters cost 2 bits. So X <- +2bits -- A <- +2bits -- A <- +2bits -- C (C is at zero position, don't need to count)
@@ -164,10 +164,10 @@ using namespace sdsl;
          */
         /*cout << "number of bit to shift : " << numberOfBitToShift << endl;
         cout << "limit : " << limit << endl;*/
-      //  for(int i = 0 ; i < 8 ; i++){   //one case per bit
-        //    if(binaryList[i] == 1){ //The successor is present
-          //      if(i < 4){  //First fourth (from 0 to 3) are next
-            //        compressedSucc.push_back(((compressedKMer << 2)%limit) + ((!format)?i:((i%2 == 0)?i+1:i-1)));
+        for(int i = 0 ; i < 8 ; i++){   //one case per bit
+            if(binaryList[i] == 1){ //The successor is present
+                if(i < 4){  //First fourth (from 0 to 3) are next
+                    compressedSucc.push_back(((compressedKMer << 2)%limit) + ((!format)?i:((i%2 == 0)?i+1:i-1)));
                     /* Same explanation but we want ACAX form
                     * AACA << 2 <=> AACAA and we quit the limit of a 4-mers.
                     * In this case, we have to take care of the limit (256 for 4-mers) and have to stay in it
@@ -175,9 +175,9 @@ using namespace sdsl;
                     * Finally we obtain ACAA which is the first form
                     * We don't need to shit to the left because we just have to add the letter at the end (place 0)
                     */
-              //  }else{ // from 4 to 7 are previous
-                //    int nexI = i-4;
-                  //  compressedSucc.push_back((compressedKMer >> 2) + (((!format)?nexI:((nexI%2 == 0)?nexI+1:nexI-1)) << numberOfBitToShift));
+                }else{ // from 4 to 7 are previous
+                    int nexI = i-4;
+                    compressedSucc.push_back((compressedKMer >> 2) + (((!format)?nexI:((nexI%2 == 0)?nexI+1:nexI-1)) << numberOfBitToShift));
                     /* Explanation : 2 steps, AACA example
                      * I know it is previous, I need a XAAC form and each letters cost 2 bits
                      * So AACA >> 2 <=> AAAC, we have the first form, let's check the others 3 with addition
@@ -185,16 +185,16 @@ using namespace sdsl;
                      * When we have the correct number, we shift it at the begin (where the
                      * X is) thanks to numberOfBitToShift (see it above)
                      */
-                //}
-            //}
-        //}
+                }
+            }
+        }
         /*cout << "final :"  << compressedSucc << endl;
         for(int i = 0 ; i < compressedSucc.size() ; i++){
             cout << compressedSucc[i] << " : " << decodeEcoli(compressedSucc[i], size) << endl;
         }*/
-    //}
-    //return compressedSucc;
-//}
+    }
+    return compressedSucc;
+}
 
 //POO for KmerManipulator
 //abstract class KmerManipulator
