@@ -97,7 +97,7 @@ public:
     //operators on the sequence
     bool operator[](uint64_t i) const;
     //AVX version of the operator
-    bool ConwayBromage::operator[](__m256i i) const;
+    bool operator[](__m256i i) const;
     uint64_t size() const;
     //rank and select operators
     uint64_t rank1bit  (uint64_t index);
