@@ -1,4 +1,5 @@
 #include <sdsl/sd_vector.hpp>
+#include <immintrin.h>  //for AVX/AVX2 use
 #ifndef CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 #define CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 
@@ -32,11 +33,19 @@ public:
     *@return a uint64_t which is the compressed kmer itself if it is already canonical, or its canonical version
     */
     virtual uint64_t getCanonical(const uint64_t kmer) = 0;
+    /**
+     * AVX version of getCanonical
+     */
+    virtual __m256i getCanonicalAVX(const __m256i kmer) = 0;
     /* Calculate the reverse complement, depends on encoding : see daughter classes
     * @param kmer - a uin64_t which represent the compressed version of a k-mer
     * @return a uin64_t which represent the compressed version of the reverse complement of the given k-mer
     */
     virtual uint64_t reverseComplement(const  uint64_t kmer) = 0;
+    /**
+     * AVX version of reverseComplement
+     */
+    virtual __m256i reverseComplementAVX(const __m256i kmer) = 0;
     virtual ~KmerManipulator();     //Desctructor
 protected:
     uint64_t m_size;
@@ -48,7 +57,9 @@ public:
     uint64_t encode(const std::string word);
     std::string decode(uint64_t kmer);
     uint64_t getCanonical(const uint64_t kmer);
+    __m256i getCanonicalAVX(const __m256i kmer);
     uint64_t reverseComplement(const uint64_t kmer);
+    __m256i reverseComplementAVX(const __m256i kmer);
     ~KmerManipulatorACGT();
 private:
     std::string m_format;
@@ -60,7 +71,9 @@ public:
     uint64_t encode(const std::string word);
     std::string decode(uint64_t kmer);
     uint64_t getCanonical(const uint64_t kmer);
+    __m256i getCanonicalAVX(const __m256i kmer);
     uint64_t reverseComplement(const u_int64_t kmer);
+    __m256i reverseComplementAVX(const __m256i kmer);
     ~KmerManipulatorACTG();
 private:
     std::string m_format;
@@ -78,9 +91,13 @@ public:
     ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km);
     //principal functions
     bool isPresent (uint64_t Kmer) const;
+    //AVX prototype of isPresent
+    bool isPresentAVX(uint64_t Kmer) const;
     uint8_t successors(uint64_t Kmer) const;
     //operators on the sequence
     bool operator[](uint64_t i) const;
+    //AVX version of the operator
+    bool ConwayBromage::operator[](__m256i i) const;
     uint64_t size() const;
     //rank and select operators
     uint64_t rank1bit  (uint64_t index);
