@@ -241,7 +241,7 @@ uint64_t KmerManipulatorACTG::getCanonical(const uint64_t kmer) {
     return((kmer < reverseCompl)?kmer:reverseCompl);
 }
 
-__m256i KmerManipulatorACTG::getCanonicalAVX(const int kmer) {  //WORK IN PROGRESS
+__m256i KmerManipulatorACTG::getCanonicalAVX(const __m256i kmer) {  //WORK IN PROGRESS
     return _mm256_set1_epi64x(0);
 }
 
@@ -299,7 +299,7 @@ uint64_t KmerManipulatorACGT::getCanonical(const uint64_t kmer) {
     return((kmer < reverseCompl)?kmer:reverseCompl);
 }
 
-__m256i KmerManipulatorACGT::getCanonicalAVX(const int kmer) {
+__m256i KmerManipulatorACGT::getCanonicalAVX(const __m256i kmer) {
     __m256i tab = kmer;
     __m256i reverseCompl = reverseComplementAVX(kmer);  //call reverseComplement AVX version, 4 by 4 calls
     if(reverseCompl[0] < kmer[0]) tab = _mm256_insert_epi64(tab, reverseCompl[0], 0);   //if the reverse is the canonic one, we replace the ancient one by it
@@ -453,8 +453,8 @@ bool ConwayBromage::isPresentAVX(uint64_t Kmer) const {
      * Creation of 2 __m256i vectors of 4 elements (can't create an higher one)
      * _mm256_setr_epi64x is faster than _mm256_set_epi64x
      */
-    if(operator[](m_kmerManipulator->getCanonicalSSE(_mm256_setr_epi64x(next, next+1, next+2, next+3)))) return true;
-    if(operator[](m_kmerManipulator->getCanonicalSSE(_mm256_setr_epi64x(Kmer, (Kmer + (1 << numberOfBitsToShift)),
+    if(operator[](m_kmerManipulator->getCanonicalAVX(_mm256_setr_epi64x(next, next+1, next+2, next+3)))) return true;
+    if(operator[](m_kmerManipulator->getCanonicalAVX(_mm256_setr_epi64x(Kmer, (Kmer + (1 << numberOfBitsToShift)),
                                                                         (Kmer + (2 << numberOfBitsToShift)), (Kmer + (3 << numberOfBitsToShift)))))) return true;
     return false;
 }
