@@ -242,7 +242,6 @@ uint64_t KmerManipulatorACTG::getCanonical(const uint64_t kmer) {
 }
 
 __m256i KmerManipulatorACTG::getCanonicalAVX(const __m256i kmer) {  //WORK IN PROGRESS
-    return (_mm256_set_epi64x(0, 0, 0, 0));
 }
 
 uint64_t KmerManipulatorACTG::reverseComplement(const u_int64_t kmer) {
@@ -257,7 +256,6 @@ uint64_t KmerManipulatorACTG::reverseComplement(const u_int64_t kmer) {
 }
 
 __m256i KmerManipulatorACTG::reverseComplementAVX(const __m256i kmer){  //WORK IN PROGRESS
-    return (_mm256_set_epi64x(0, 0, 0, 0));
 }
 //class KmerManipulatorACGT
 KmerManipulatorACGT::KmerManipulatorACGT(uint64_t size): KmerManipulator(size), m_format("ACGT") {}
