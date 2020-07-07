@@ -298,13 +298,13 @@ uint64_t KmerManipulatorACGT::getCanonical(const uint64_t kmer) {
 }
 
 __m256i KmerManipulatorACGT::getCanonicalAVX(const __m256i kmer) {
-    __m256i tab = kmer;
-    __m256i reverseCompl = reverseComplementAVX(kmer);  //call reverseComplement AVX version, 4 by 4 calls
-    if(reverseCompl[0] < kmer[0]) tab = _mm256_insert_epi64(tab, reverseCompl[0], 0);   //if the reverse is the canonic one, we replace the ancient one by it
-    if(reverseCompl[1] < kmer[1]) tab = _mm256_insert_epi64(tab, reverseCompl[1], 1);
-    if(reverseCompl[2] < kmer[2]) tab = _mm256_insert_epi64(tab, reverseCompl[2], 2);
-    if(reverseCompl[3] < kmer[3]) tab = _mm256_insert_epi64(tab, reverseCompl[3], 3);
-    return tab;
+    __m256i reverseCompl = reverseComplementAVX(kmer);  //creation of a __m256i which contains reverse complement of the __m256i k-mers
+    __m256i cmp1 = _mm256_cmpgt_epi64(kmer, reverseCompl);  //kmer < reverseCompl => 0, else -1
+    __m256i cmp2 = _mm256_cmpgt_epi64(reverseCompl, kmer);  //reverseCompl < kmer => 0, else -1
+    __m256i and1 = _mm256_and_si256(cmp2, kmer);    //delete elements wich are higher than their reverse
+    __m256i and2 = _mm256_and_si256(cmp1, reverseCompl);    //delete reverses which are higher than their forward
+    __m256i ult = _mm256_or_si256(and1, and2);  //final construction
+    return ult;
 }
 
 uint64_t KmerManipulatorACGT::reverseComplement(const uint64_t kmer) {
