@@ -590,6 +590,35 @@ bool ConwayBromage::isPresentAVX(uint64_t Kmer) const {
     if(operator[](m_kmerManipulator->getCanonicalAVX(_mm256_setr_epi64x(Kmer, (Kmer + (1 << numberOfBitsToShift)),
                                                                         (Kmer + (2 << numberOfBitsToShift)), (Kmer + (3 << numberOfBitsToShift)))))) return true;
     return false;
+    //Try for an AVX version of the new isPresent
+    /*if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
+        cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << m_limit << endl;
+        return false;
+    }
+    uint64_t RC_Kmer = m_kmerManipulator->reverseComplement(Kmer) >> 2;
+    uint64_t RC_Kmer_ShiftedOf2Bits = RC_Kmer << 2;
+    uint64_t next = Kmer << 2;
+
+    __m256i PmerNext = _mm256_setr_epi64x(next, next+1, next+2, next+3);    //__m256i for all the forward nexts
+    __m256i RC_PmerNext = _mm256_setr_epi64x(RC_Kmer + m_RC_shifted[0], RC_Kmer + m_RC_shifted[1],  //__m256i for all the reverseComplement nexts
+                                            RC_Kmer + m_RC_shifted[2], RC_Kmer + m_RC_shifted[3]);
+    __m256i cmp1 = _mm256_cmpgt_epi64(PmerNext, RC_PmerNext);   //Apply the same thing than in getCanonicalAVX
+    __m256i cmp2 = _mm256_cmpgt_epi64(RC_PmerNext, PmerNext);
+    __m256i and1 = _mm256_and_si256(cmp2, PmerNext);
+    __m256i and2 = _mm256_and_si256(cmp1, RC_PmerNext);
+    __m256i ultN = _mm256_or_si256(and1, and2);
+    if(operator[](ultN)) return true;   //verify existence
+    __m256i PmerPrev = _mm256_setr_epi64x(Kmer + m_nucleotides_shifted[0], Kmer + m_nucleotides_shifted[1], //__m256i for all the forward previous
+                                         Kmer + m_nucleotides_shifted[2], Kmer + m_nucleotides_shifted[3]);
+    __m256i RC_PmerPrev = _mm256_setr_epi64x(RC_Kmer_ShiftedOf2Bits + m_RC[0], RC_Kmer_ShiftedOf2Bits + m_RC[1],    //__m256i for all the reverseComplement previous
+                                            RC_Kmer_ShiftedOf2Bits + m_RC[2], RC_Kmer_ShiftedOf2Bits + m_RC[3]);
+    cmp1 = _mm256_cmpgt_epi64(PmerPrev, RC_PmerPrev);
+    cmp2 = _mm256_cmpgt_epi64(RC_PmerPrev, PmerPrev);
+    and1 = _mm256_and_si256(cmp2, PmerPrev);
+    and2 = _mm256_and_si256(cmp1, RC_PmerPrev);
+    __m256i ultP = _mm256_or_si256(and1, and2);
+    if(operator[](ultP)) return true;
+    return false;*/
 }
 
 /**
