@@ -257,6 +257,35 @@ uint64_t KmerManipulatorACTG::reverseComplement(const u_int64_t kmer) {
 
 __m256i KmerManipulatorACTG::reverseComplementAVX(const __m256i kmer){  //WORK IN PROGRESS
 }
+
+/**
+ * Returns the reverse complement of a nucleotide.
+ */
+uint8_t KmerManipulatorACTG::reverseComplementOfNucleotide(const uint8_t nucleotide){
+    if(nucleotide == 0) //A
+        return 2; //T
+    if(nucleotide == 1) //C
+        return 3; //G
+    if(nucleotide == 2) //T
+        return 0; //A
+    if(nucleotide == 3) //G
+        return 1; //C
+}
+
+/**
+ * Returns the corresponding caracter to the nucleotide's value.
+ */
+char KmerManipulatorACTG::decodeNucleotide(const uint8_t nucleotide){
+    if(nucleotide == 0)
+        return 'A';
+    if(nucleotide == 1)
+        return 'C';
+    if(nucleotide == 2)
+        return 'T';
+    if(nucleotide == 3)
+        return 'G';
+}
+
 //class KmerManipulatorACGT
 KmerManipulatorACGT::KmerManipulatorACGT(uint64_t size): KmerManipulator(size), m_format("ACGT") {}
 KmerManipulatorACGT::~KmerManipulatorACGT() noexcept {}
@@ -337,6 +366,33 @@ __m256i KmerManipulatorACGT::reverseComplementAVX(const __m256i kmer) {
     res = _mm256_srli_epi64(res, (2 * (32 - m_size)));  //(res >> (2 * (32 - m_size))), we can return it directly
     return res;
 }
+/**
+ * Returns the reverse complement of a nucleotide.
+ */
+uint8_t KmerManipulatorACGT::reverseComplementOfNucleotide(const uint8_t nucleotide){
+    if(nucleotide == 0) //A
+        return 3; //T
+    if(nucleotide == 1) //C
+        return 2; //G
+    if(nucleotide == 2) //G
+        return 1; //C
+    if(nucleotide == 3) //T
+        return 0; //A
+}
+
+/**
+ * Returns the corresponding caracter to the nucleotide's value.
+ */
+char KmerManipulatorACGT::decodeNucleotide(const uint8_t nucleotide){
+    if(nucleotide == 0)
+        return 'A';
+    if(nucleotide == 1)
+        return 'C';
+    if(nucleotide == 2)
+        return 'G';
+    if(nucleotide == 3)
+        return 'T';
+}
 
 /**
  * Construct the ConwayBromage object based on the sd_vector in parameter and the KmerManipulator.
@@ -347,6 +403,44 @@ ConwayBromage::ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km){
     m_kmerSize = (int)(log(sdv.size())/log(4));
     m_sequence = sdv; //copy of the sd_vector
     m_kmerManipulator = km;
+    m_limit = (m_sequence.size() >> 2) - 1;
+    
+    //initialization of the cache
+    int nbOfBitsToShift = 2 * (m_kmerSize-1);
+    m_numberOfBitsToShift = nbOfBitsToShift;
+
+    m_RC[0] = km->reverseComplementOfNucleotide(0);
+    m_RC[1] = km->reverseComplementOfNucleotide(1);
+    m_RC[2] = km->reverseComplementOfNucleotide(2);
+    m_RC[3] = km->reverseComplementOfNucleotide(3);
+
+    m_RC_shifted[0] = m_RC[0] << nbOfBitsToShift;
+    m_RC_shifted[1] = m_RC[1] << nbOfBitsToShift;
+    m_RC_shifted[2] = m_RC[2] << nbOfBitsToShift;
+    m_RC_shifted[3] = m_RC[3] << nbOfBitsToShift;
+    
+    m_nucleotides_shifted[0] = 0 << nbOfBitsToShift;
+    m_nucleotides_shifted[1] = 1 << nbOfBitsToShift;
+    m_nucleotides_shifted[2] = 2 << nbOfBitsToShift;
+    m_nucleotides_shifted[3] = 3 << nbOfBitsToShift;
+
+    for(int i = 0; i < 4; i++){
+        //for next and previous pmers
+        char nucleotideOfI = m_kmerManipulator->decodeNucleotide(i);
+        if(nucleotideOfI == 'A'){ 
+            m_correspondingBitValueForNextPmers[i] = 128;
+            m_correspondingBitValueForPrevPmers[i] = 8;  
+        } else if(nucleotideOfI == 'C') {     
+            m_correspondingBitValueForNextPmers[i] = 64; 
+            m_correspondingBitValueForPrevPmers[i] = 4; 
+        } else if(nucleotideOfI == 'G') {
+            m_correspondingBitValueForNextPmers[i] = 32; 
+            m_correspondingBitValueForPrevPmers[i] = 2; 
+        } else {//'T'
+            m_correspondingBitValueForNextPmers[i] = 16; 
+            m_correspondingBitValueForPrevPmers[i] = 1; 
+        }
+    }
 }
 
 /**
@@ -384,6 +478,44 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     }
     m_sequence = builder;
     m_kmerSize = KmerSize;
+    m_limit = (m_sequence.size() >> 2) - 1;
+    
+    //initialization of the cache
+    int nbOfBitsToShift = 2 * (m_kmerSize-1);
+    m_numberOfBitsToShift = nbOfBitsToShift;
+
+    m_RC[0] = km->reverseComplementOfNucleotide(0);
+    m_RC[1] = km->reverseComplementOfNucleotide(1);
+    m_RC[2] = km->reverseComplementOfNucleotide(2);
+    m_RC[3] = km->reverseComplementOfNucleotide(3);
+
+    m_RC_shifted[0] = m_RC[0] << nbOfBitsToShift;
+    m_RC_shifted[1] = m_RC[1] << nbOfBitsToShift;
+    m_RC_shifted[2] = m_RC[2] << nbOfBitsToShift;
+    m_RC_shifted[3] = m_RC[3] << nbOfBitsToShift;
+    
+    m_nucleotides_shifted[0] = 0 << nbOfBitsToShift;
+    m_nucleotides_shifted[1] = 1 << nbOfBitsToShift;
+    m_nucleotides_shifted[2] = 2 << nbOfBitsToShift;
+    m_nucleotides_shifted[3] = 3 << nbOfBitsToShift;
+
+    for(int i = 0; i < 4; i++){
+        //for next and previous pmers
+        char nucleotideOfI = m_kmerManipulator->decodeNucleotide(i);
+        if(nucleotideOfI == 'A'){ 
+            m_correspondingBitValueForNextPmers[i] = 128;
+            m_correspondingBitValueForPrevPmers[i] = 8;  
+        } else if(nucleotideOfI == 'C') {     
+            m_correspondingBitValueForNextPmers[i] = 64; 
+            m_correspondingBitValueForPrevPmers[i] = 4; 
+        } else if(nucleotideOfI == 'G') {
+            m_correspondingBitValueForNextPmers[i] = 32; 
+            m_correspondingBitValueForPrevPmers[i] = 2; 
+        } else {//'T'
+            m_correspondingBitValueForNextPmers[i] = 16; 
+            m_correspondingBitValueForPrevPmers[i] = 1; 
+        }
+    }
 }
 /**
  * Return the value stored at the block of index i.
@@ -419,27 +551,30 @@ uint64_t ConwayBromage::size() const{
  * @return true if the k-mer is present.
  */
 bool ConwayBromage::isPresent(uint64_t Kmer) const{
-    int KmerSize = m_kmerSize-1;
-    uint64_t limit = m_sequence.size() >> 2;
-    if(Kmer >= limit) { //we must have nonCompressedKmer < 4^(P-1)
-        cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << limit << endl;
+    if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
+        cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << m_limit << endl;
         return false; 
     }  
     
-    uint64_t next = Kmer << 2; //next contains XA where X is the Kmer
-    if(m_sequence[m_kmerManipulator->getCanonical(next)])   return true; //getCanonical(XA) where X is the Kmer
-    if(m_sequence[m_kmerManipulator->getCanonical(next+1)]) return true; //getCanonical(XC)
-    if(m_sequence[m_kmerManipulator->getCanonical(next+2)]) return true; //getCanonical(XG)
-    if(m_sequence[m_kmerManipulator->getCanonical(next+3)]) return true; //getCanonical(XT)
-    
-    int numberOfBitsToShift = KmerSize << 1;  
-    if(m_sequence[m_kmerManipulator->getCanonical(Kmer)])   return true; //getCanonical(AX) where X is the Kmer
-    if(m_sequence[m_kmerManipulator->getCanonical(Kmer + (1 << numberOfBitsToShift))]) return true; //getCanonical(CX)
-    if(m_sequence[m_kmerManipulator->getCanonical(Kmer + (2 << numberOfBitsToShift))]) return true; //getCanonical(GX)
-    if(m_sequence[m_kmerManipulator->getCanonical(Kmer + (3 << numberOfBitsToShift))]) return true; //getCanonical(TX)
-    
+    uint64_t PmerPrev, RC_PmerNext, RC_PmerPrev;
+    uint64_t PmerNext = Kmer << 2; //<-> XA where X is the Kmer
+    uint64_t RC_Kmer = m_kmerManipulator->reverseComplement(Kmer) >> 2;
+    uint64_t RC_Kmer_ShiftedOf2Bits = RC_Kmer << 2;
+
+    for(int i = 0; i < 4; i++){ 
+        //next
+        RC_PmerNext = RC_Kmer + m_RC_shifted[i]; //YX where X is the reverse complement of the kmer and Y is the reverse complement of the last nucleotide of the pmer
+        if(m_sequence[(PmerNext < RC_PmerNext)?PmerNext:RC_PmerNext]) return true;
+        //previous
+        PmerPrev = Kmer + m_nucleotides_shifted[i]; //equals to AX then CX then GX then TX where X is the Kmer
+        RC_PmerPrev = RC_Kmer_ShiftedOf2Bits + m_RC[i];
+        if(m_sequence[(PmerPrev < RC_PmerPrev)?PmerPrev:RC_PmerPrev]) return true;
+        
+        PmerNext++; //equals to XA then XC then XG then XT
+    }
     return false;
 }
+
 /**
  * AVX version of isPresent, for perf tests
  */
@@ -463,51 +598,30 @@ bool ConwayBromage::isPresentAVX(uint64_t Kmer) const {
  * @return a uint8_t representing the (at most 8) successors of the kmer.
  */
 uint8_t ConwayBromage::successors(uint64_t Kmer) const{
+    if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
+        cout << "The value of the kmer must be equal or inferior to 4^(P-1) i.e " << m_limit << endl;
+        return 0; //empty
+    }
     uint8_t res = 0;
-    int KmerSize = m_kmerSize-1;
-    uint64_t limit = m_sequence.size() >> 2;
-    if(Kmer >= limit) { //we must have nonCompressedKmer < 4^(P-1)
-        cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << limit << endl;
-        return res; //empty
-    }
     //we build the eight possible successors    
-    //4 next pmers
-    uint64_t Pmer = Kmer << 2; //<-> XA where X is the Kmer
-    for(int i = 0; i < 4; i++){
-        if(m_sequence[m_kmerManipulator->getCanonical(Pmer)]){ //if the pmer is present 
-            //if compressedSeq.size() = 256 (P=4) then compressedSeq.size() >> 2 = 64 ==> AACA%64 ==> ACA (i_next_kmer)
-            string PmerStr = m_kmerManipulator->decode(Pmer);
-            char lastLetter = PmerStr[PmerStr.size()-1];
-            //we set the concerned bit to 1
-            if(lastLetter == 'A') 
-                res = res ^ 128; 
-            else if(lastLetter == 'C')      
-                res = res ^ 64;
-            else if(lastLetter == 'G') 
-                res = res ^ 32;
-            else if(lastLetter == 'T')
-                res = res ^ 16;
+    uint64_t PmerPrev, RC_PmerNext, RC_PmerPrev;
+    uint64_t PmerNext = Kmer << 2; //<-> XA where X is the Kmer
+    uint64_t RC_Kmer = m_kmerManipulator->reverseComplement(Kmer) >> 2;
+    uint64_t RC_Kmer_ShiftedOf2Bits = RC_Kmer << 2;
+
+    for(int i = 0; i < 4; i++){ 
+        RC_PmerNext = RC_Kmer + m_RC_shifted[i]; //YX where X is the reverse complement of the kmer and Y is the reverse complement of the last nucleotide of the pmer
+        if(m_sequence[(PmerNext < RC_PmerNext)?PmerNext:RC_PmerNext]){ //if the pmer is present 
+            res ^= m_correspondingBitValueForNextPmers[i];
         }
-        Pmer++; //equals to XA then XC then XG then XT
-    }
-    //4 predecessors
-    int numberOfBitsToShift = KmerSize << 1;
-    for(int i = 0; i < 4; i++){
-        Pmer = Kmer + (i << numberOfBitsToShift); //equals to AX then CX then GX then TX where X is the Kmer
-        if(m_sequence[m_kmerManipulator->getCanonical(Pmer)]){
-            string PmerStr = m_kmerManipulator->decode(Pmer);
-            char lastLetter = PmerStr[0];
-            //we set the concerned bit to 1
-            if(lastLetter == 'A')
-                res = res ^ 8;
-            else if(lastLetter == 'C')      
-                res = res ^ 4;
-            else if(lastLetter == 'G')
-                res = res ^ 2;
-            else if(lastLetter == 'T')
-                res = res ^ 1;
+        PmerPrev = Kmer + m_nucleotides_shifted[i]; //equals to AX then CX then GX then TX where X is the Kmer
+        RC_PmerPrev = RC_Kmer_ShiftedOf2Bits + m_RC[i];
+        if(m_sequence[(PmerPrev < RC_PmerPrev)?PmerPrev:RC_PmerPrev]){
+            res ^= m_correspondingBitValueForPrevPmers[i];
         }
+        PmerNext++; //equals to XA then XC then XG then XT
     }
+    
     return res;
 }
 
