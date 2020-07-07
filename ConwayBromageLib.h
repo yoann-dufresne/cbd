@@ -46,6 +46,17 @@ public:
      * AVX version of reverseComplement
      */
     virtual __m256i reverseComplementAVX(const __m256i kmer) = 0;
+    
+    /**
+    * Returns the reverse complement of a nucleotide.
+    */
+    virtual uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide) = 0;
+    
+    /**
+    * Returns the corresponding caracter to the nucleotide's value.
+    */
+    virtual char decodeNucleotide(const uint8_t nucleotide) = 0;
+    
     virtual ~KmerManipulator();     //Desctructor
 protected:
     uint64_t m_size;
@@ -60,6 +71,8 @@ public:
     __m256i getCanonicalAVX(const __m256i kmer);
     uint64_t reverseComplement(const uint64_t kmer);
     __m256i reverseComplementAVX(const __m256i kmer);
+    uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide);
+    char decodeNucleotide(const uint8_t nucleotide);
     ~KmerManipulatorACGT();
 private:
     std::string m_format;
@@ -74,6 +87,8 @@ public:
     __m256i getCanonicalAVX(const __m256i kmer);
     uint64_t reverseComplement(const u_int64_t kmer);
     __m256i reverseComplementAVX(const __m256i kmer);
+    uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide);
+    char decodeNucleotide(const uint8_t nucleotide);
     ~KmerManipulatorACTG();
 private:
     std::string m_format;
@@ -84,6 +99,14 @@ private:
     int m_kmerSize;                     //PmerSize actually
     sdsl::sd_vector<> m_sequence;       //the compressed k-mer sequence
     KmerManipulator* m_kmerManipulator; //stores information about encode/decode
+    
+    //cache used in isPresent and successors in order to go faster
+    int m_correspondingBitValueForNextPmers[4];
+    int m_correspondingBitValueForPrevPmers[4];
+    int m_numberOfBitsToShift;
+    uint64_t m_RC[4];                      //{reverse complement of nucleotide (0), ... , reverse complement of of nucleotide(3)}
+    uint64_t m_RC_shifted[4];              //{reverse complement of of nucleotide(0) << (2*(m_kmerSize-1)), ... , reverse complement of (3) << (2*(m_kmerSize-1))}
+    uint64_t m_nucleotides_shifted[4];     //{0 << m_numberOfBitsToShift, ... , 3 << m_numberOfBitsToShift}
     
 public:
     //constructors
