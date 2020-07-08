@@ -82,7 +82,7 @@ Let's suppose that only the canonical version of these k-mers are present : GTTA
 GTTA and GTTT are, what we call **next** k-mers so we will store the information in the 4 left bits of the result (uint8_t).<br>
 CGTT and TGTT are **previous** k-mers so, this time, the information will be stored in the 4 right bits of the result.<br><br>
 Thus, the function will return 1001 0101 which corresponds to 149 in base 10.<br>
-It means that, in this example, **the successors of the (k-1)-mers GTT are TTA, TTT, CGT and TGT**.<br>
+It means that, in this example, **the successors of the (k-1)-mer GTT are TTA, TTT, CGT and TGT**.<br>
 
 Example of use: <br>
 ```
