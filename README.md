@@ -47,7 +47,8 @@ f.close();
 ```
 #### Requirements
 - The k-mers in the istream must me **canonical** and have a **size <= 32**.<br>
-- The isstream must have at each line (if it's a file for example) **the k-mer and its counts**.<br>
+- The istream must have at each line (if it's a file for example) **the k-mers and its counts**.<br>
+<br>
 Example of a classic txt-file with k-mers of size 4: <br>
 AAAG	1
 AAGA	1
@@ -56,7 +57,7 @@ AAGC	1
 ...
 
 ### bool ConwayBromage::isPresent(uint64_t Kmer)
-Takes a (k-1)-mer and returns true if it is present among the k-mers.<br>
+Takes a (k-1)-mer and returns true if it's present among the stored k-mers.<br>
 Example of use:<br>
 ```
 bool kmer_exists = cb.isPresent(230);
