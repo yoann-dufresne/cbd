@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/yoann-dufresne/ConwayBromageLib.svg?branch=master)](https://travis-ci.com/yoann-dufresne/ConwayBromageLib)
 
-# Conway and Bromage succinct data structures for assembling large genomnes
+# Conway and Bromage succinct data structures for assembling large genomes
 
 ## Object KmerManipulator
 Abstract class to manage ACGT or ACTG encoding for k-mers<br>
