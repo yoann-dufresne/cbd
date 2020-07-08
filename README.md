@@ -69,11 +69,11 @@ Informations : <br>
 - The method doesn't check if the Kmer exists (so you have to do it on your own).<br>
 - The result can sometimes have duplicate.<br>
 <br>
-Example of use:<br>
+Example of use: <br>
 ```
 uint8_t successors = cb.successors(78);
 ```
-<br>
+
 #### Explanation on how it works
 Let's say the function takes as a parameter the integer which represents the (k-1)-mer **GTT** and we assume we are in ACGT encoding.<br>
 First, the method will generate the following k-mers : GTTA, GTTC, GTTG, GTTT, AGTT, CGTT, GGTT, TGTT.<br>
