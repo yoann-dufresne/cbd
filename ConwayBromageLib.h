@@ -122,11 +122,6 @@ public:
     //AVX version of the operator
     bool operator[](__m256i i) const;
     uint64_t size() const;
-    //rank and select operators
-    uint64_t rank1bit  (uint64_t index);
-    uint64_t rank0bit  (uint64_t index);
-    uint64_t select1bit(uint64_t index);
-    uint64_t select0bit(uint64_t index);
     //getters
     int getKmerSize();
     sdsl::sd_vector<> getSequence();
