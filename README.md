@@ -61,6 +61,10 @@ Takes a (k-1)-mer and returns true if it's present among the stored k-mers.<br>
 Example of use:<br>
 ```
 bool kmer_exists = cb.isPresent(230);
+
+KmerManipulatorACGT km(3);
+uint64_t intGTT = km.decode("GTT");
+bool GTT_exists = cb.isPresent(intGTT);
 ```
 
 ### uint8_t ConwayBromage::successors(uint64_t Kmer)
@@ -72,6 +76,10 @@ Informations : <br>
 Example of use: <br>
 ```
 uint8_t successors = cb.successors(78);
+
+KmerManipulatorACGT km(3);
+uint64_t intGTT = km.decode("GTT");
+uint8_t successorsOfGTT = cb.successors(intGTT);
 ```
 
 #### Explanation on how it works
