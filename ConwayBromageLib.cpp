@@ -654,51 +654,6 @@ uint8_t ConwayBromage::successors(uint64_t Kmer) const{
     return res;
 }
 
-
-/**
- * Returns the number of 1-bit to the left of position index
- * @param index the position
- * @param v an sd_vector
- * @return a count
- */
-uint64_t ConwayBromage::rank1bit(uint64_t index){
-    sd_vector<>::rank_1_type sdb_rank(&m_sequence);
-    return sdb_rank(index);
-}
-
-/**
- * Returns the number of 0-bit to the left of position index
- * @param index the position 
- * @param v an sd_vector
- * @return a count
- */
-uint64_t ConwayBromage::rank0bit(uint64_t index){
-    sd_vector<>::rank_0_type sdb_rank(&m_sequence);
-    return sdb_rank(index);
-}
-
-/**
- * Returns the position of the index-th 1-bit.
- * @param index the position 
- * @param v an sd_vector
- * @return an index
- */
-uint64_t ConwayBromage::select1bit(uint64_t index){
-    sd_vector<>::select_1_type sdb_sel(&m_sequence);
-    return sdb_sel(index);
-}
-
-/**
- * Returns the position of the index-th 0-bit.
- * @param index the position 
- * @param v an sd_vector
- * @return an index
- */
-uint64_t ConwayBromage::select0bit(uint64_t index){
-    sd_vector<>::select_0_type sdb_sel(&m_sequence);
-    return sdb_sel(index);
-}
-
 /**
  * Return the size of the sequence.
  * @return an int
