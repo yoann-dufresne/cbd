@@ -73,14 +73,6 @@ Informations : <br>
 - The method doesn't check if the Kmer exists (so you have to do it on your own).<br>
 - The result can sometimes have duplicate.<br>
 <br>
-Example of use: <br>
-```
-uint8_t successors = cb.successors(78);
-
-KmerManipulatorACGT km(3);
-uint64_t intGTT = km.decode("GTT");
-uint8_t successorsOfGTT = cb.successors(intGTT);
-```
 
 #### Explanation on how it works
 Let's say the function takes as a parameter the integer which represents the (k-1)-mer **GTT** and we assume we are in ACGT encoding.<br>
@@ -91,3 +83,12 @@ GTTA and GTTT are, what we call **next** k-mers so we will store the information
 CGTT and TGTT are **previous** k-mers so, this time, the information will be stored in the 4 right bits of the result.<br><br>
 Thus, the function will return 1001 0101 which corresponds to 149 in base 10.<br>
 It means that, in this example, **the successors of the (k-1)-mers GTT are TTA, TTT, CGT and TGT**.<br>
+
+Example of use: <br>
+```
+uint8_t successors = cb.successors(78);
+
+KmerManipulatorACGT km(3);
+uint64_t intGTT = km.decode("GTT");
+uint8_t successorsOfGTT = cb.successors(intGTT);
+```
