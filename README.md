@@ -50,10 +50,10 @@ f.close();
 - The istream must have at each line (if it's a file for example) **the k-mers and its counts**.<br>
 <br>
 Example of a classic txt-file with k-mers of size 4: <br>
-AAAG	1
-AAGA	1
-AAGC	2
-AAGC	1
+AAAG	1 <br>
+AAGA	3 <br>
+AAGC	2 <br>
+AAGC	1 <br>
 ...
 
 ### bool ConwayBromage::isPresent(uint64_t Kmer)
