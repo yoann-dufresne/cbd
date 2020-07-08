@@ -467,14 +467,27 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     //cout << "SD VECTOR SIZE  : " << sdvSize << endl;
     
     sd_vector_builder builder(sdvSize, numberOfKmer);
-    while(kmerFlux >> word){
-        uint64_t kmer = m_kmerManipulator->encode(word);
-        if(m_kmerManipulator->getCanonical(kmer) != kmer){
+    uint64_t encodeList[4];
+    uint64_t j(0);
+    kmerFlux >> word;   //Init to the first word
+    while(j < numberOfKmer){
+        for(int i = 0 ; i < 4 ; i++){   //Take words 4 by 4
+            encodeList[i] =  m_kmerManipulator->encode(word);   //Static array to encode k-mers
+            kmerFlux >> word;   //Skip numbers of k-mers
+            kmerFlux >> word;   //The n+1 word
+        }
+        __m256i kmerVec = _mm256_setr_epi64x(encodeList[0], encodeList[1],  //__m256i which contains the four encoding elements
+                encodeList[2], encodeList[3]);
+        __m256i verif = m_kmerManipulator->getCanonicalAVX(kmerVec);    //verify veracity with getCanonicalAVX
+        if(_mm256_testc_si256(verif, kmerVec) == 0){    //verify if it is equal, if not failure => very low, maybe look for delete the if condition
             cout << "The file is not completely canonical" << endl;
             exit(1); //EXIT_FAILURE
         }
-        builder.set(kmer);
-        kmerFlux >> word;
+        builder.set(kmerVec[0]);    //set elements to the sd_vector builder
+        builder.set(kmerVec[1]);
+        builder.set(kmerVec[2]);
+        builder.set(kmerVec[3]);
+        j = j + 4;  //take elements 4 by 4
     }
     m_sequence = builder;
     m_kmerSize = KmerSize;
