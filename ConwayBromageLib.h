@@ -133,5 +133,7 @@ public:
     friend sdsl::int_vector<> ratioForIsPresent(int ratioIn, int nbOfOnes, ConwayBromage cb);
     friend void metricForIsPresent();
 };
+//For ConwayBromage constructor, include it in ConwayBromage object as static function ?
+std::string rightWord(std::istream& kmer);
 
 #endif //CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
