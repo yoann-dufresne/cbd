@@ -471,15 +471,16 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     uint64_t j(0);
     kmerFlux >> word;   //Init to the first word
     while(j < numberOfKmer){
-        for(int i = 0 ; i < 4 ; i++){   //Take words 4 by 4
-            encodeList[i] =  m_kmerManipulator->encode(word);   //Static array to encode k-mers
-            kmerFlux >> word;   //Skip numbers of k-mers
-            kmerFlux >> word;   //The n+1 word
+        __m256i kmerVec;
+        if(j < 4){  //To take in consideration the first word, we call "kmerFlux >> word" just one time
+            kmerVec = _mm256_setr_epi64x(m_kmerManipulator->encode(word), m_kmerManipulator->encode(rightWord(kmerFlux)),
+                                         m_kmerManipulator->encode(rightWord(kmerFlux)), m_kmerManipulator->encode(rightWord(kmerFlux)));
+        }else{  //for all other words, call rightWord
+            kmerVec = _mm256_setr_epi64x(m_kmerManipulator->encode(rightWord(kmerFlux)), m_kmerManipulator->encode(rightWord(kmerFlux)),
+                                         m_kmerManipulator->encode(rightWord(kmerFlux)), m_kmerManipulator->encode(rightWord(kmerFlux)));
         }
-        __m256i kmerVec = _mm256_setr_epi64x(encodeList[0], encodeList[1],  //__m256i which contains the four encoding elements
-                encodeList[2], encodeList[3]);
-        __m256i verif = m_kmerManipulator->getCanonicalAVX(kmerVec);    //verify veracity with getCanonicalAVX
-        if(_mm256_testc_si256(verif, kmerVec) == 0){    //verify if it is equal, if not failure => very low, maybe look for delete the if condition
+        __m256i verif = m_kmerManipulator->getCanonicalAVX(kmerVec);    //To verify elements on __m256i
+        if(_mm256_testc_si256(verif, kmerVec) == 0){    //Verify if it is equal
             cout << "The file is not completely canonical" << endl;
             exit(1); //EXIT_FAILURE
         }
@@ -688,5 +689,18 @@ sdsl::sd_vector<> ConwayBromage::getSequence(){
  */
 KmerManipulator* ConwayBromage::getKmerManipulator(){
     return m_kmerManipulator;
+}
+
+/**
+ * Move around the file word by word
+ * The file is like : "kmer \t numberOfApparition, we want to know the kmer only
+ * @param kmer - An istream which represents the file we read
+ * @return the k-mer which is contain in each lines of the file, without the number of apparition
+ */
+string rightWord(istream& kmer){
+    string word("");
+    kmer >> word;   //Skip the number of apparition
+    kmer >> word;   //the k-mer we wan to study
+    return word;
 }
 
