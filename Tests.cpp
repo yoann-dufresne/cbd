@@ -112,7 +112,8 @@ const test lessLessCrit[] = {
 
 const test atTheEnd[] = {
         //Test of successors on a small sd_vectors
-        CASE("successors with ACGT encoding"){
+        CASE("successors with ACGT encoding : "){
+            cout << "\t--> successors with ACGT encoding" << endl;
             sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
             KmerManipulatorACGT km(2);
             ConwayBromage cb(sdv, &km);
@@ -134,6 +135,7 @@ const test atTheEnd[] = {
             EXPECT(result);
         },
         CASE("successors with ACTG encoding"){
+            cout << "\t--> successors with ACTG encoding" << endl;
             sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
             KmerManipulatorACTG km(2);
             ConwayBromage cb(sdv, &km);
@@ -154,7 +156,8 @@ const test atTheEnd[] = {
             }
             EXPECT(result);
         },
-        CASE("isPresent : 100 4-mers with ACGT encoding"){
+        CASE("isPresent : 100 4-mers with ACGT encoding : "){
+            cout << "\t--> isPresent : 100 4-mers with ACGT encoding" << endl;
             ifstream f("./sortACGT.txt", ios::in);
             KmerManipulatorACGT km(4);
             ConwayBromage cb(f, &km);
@@ -185,7 +188,8 @@ const test atTheEnd[] = {
             }
             file.close();
         },
-        CASE("isPresent : 100 4-mers with ACTG encoding"){
+        CASE("isPresent : 100 4-mers with ACTG encoding : "){
+            cout << "\t--> isPresent : 100 4-mers with ACTG encoding" << endl;
             ifstream f("./sortACTG.txt", ios::in);
             KmerManipulatorACTG km(4);
             ConwayBromage cb(f, &km);
