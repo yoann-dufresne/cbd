@@ -220,19 +220,16 @@ uint64_t KmerManipulatorACTG::encode(const string &word) {
 }
 
 string KmerManipulatorACTG::decode(uint64_t kmer) {
+    static const char valueToCaracter[4] = {'A','C','T','G'}; //declared and initialized only during the first call to this method
     string res(m_size, ' ');
     uint64_t lastIndex = res.size()-1;
-    for(int i(0); i < m_size; i++){
-        switch(kmer & 0x3){ //compares the decimal value of the first two bits
-            case 0: res[lastIndex-i] = 'A'; break;
-            case 1: res[lastIndex-i] = 'C'; break;
-            case 2: res[lastIndex-i] = 'T'; break;
-            case 3: res[lastIndex-i] = 'G'; break;
-        }
+    for(int i = 0; i < m_size; i++){
+        res[lastIndex-i] = valueToCaracter[kmer & 0x3];
         kmer >>= 2;
     }
     return res;
 }
+
 uint64_t KmerManipulatorACTG::getCanonical(const uint64_t kmer) {
     uint64_t reverseCompl = reverseComplement(kmer);
     return((kmer < reverseCompl)?kmer:reverseCompl);
@@ -329,20 +326,17 @@ uint64_t KmerManipulatorACGT::encode(const string &word) {
     return res;    //return the final hash of the sequence
 }
 
-std::string KmerManipulatorACGT::decode(uint64_t kmer) {
+string KmerManipulatorACGT::decode(uint64_t kmer) {
+    static const char valueToCaracter[4] = {'A','C','G','T'}; //declared and initialized only during the first call to this method
     string res(m_size, ' ');
     uint64_t lastIndex = res.size()-1;
-    for(int i(0); i < m_size; i++){
-        switch(kmer & 0x3){ //compares the decimal value of the first two bits
-            case 0: res[lastIndex-i] = 'A'; break;
-            case 1: res[lastIndex-i] = 'C'; break;
-            case 2: res[lastIndex-i] = 'G'; break;
-            case 3: res[lastIndex-i] = 'T'; break;
-        }
+    for(int i = 0; i < m_size; i++){
+        res[lastIndex-i] = valueToCaracter[kmer & 0x3];
         kmer >>= 2;
     }
     return res;
 }
+
 uint64_t KmerManipulatorACGT::getCanonical(const uint64_t kmer) {
     uint64_t reverseCompl = reverseComplement(kmer);
     return((kmer < reverseCompl)?kmer:reverseCompl);
