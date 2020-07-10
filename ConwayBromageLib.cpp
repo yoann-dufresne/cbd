@@ -304,6 +304,12 @@ char KmerManipulatorACTG::decodeNucleotide(const uint8_t nucleotide){
     if(nucleotide == 3)
         return 'G';
 }
+/**
+* Returns the size attribute.
+*/
+int KmerManipulatorACTG::getSize(){
+    return m_size;
+}
 
 //class KmerManipulatorACGT
 KmerManipulatorACGT::KmerManipulatorACGT(uint64_t size): KmerManipulator(size), m_format("ACGT") {}
@@ -409,6 +415,13 @@ char KmerManipulatorACGT::decodeNucleotide(const uint8_t nucleotide){
         return 'G';
     if(nucleotide == 3)
         return 'T';
+}
+
+/**
+* Returns the size attribute.
+*/
+int KmerManipulatorACGT::getSize(){
+    return m_size;
 }
 
 /**
