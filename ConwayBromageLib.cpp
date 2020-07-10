@@ -205,20 +205,24 @@ KmerManipulator::~KmerManipulator() noexcept {}
 KmerManipulatorACTG::KmerManipulatorACTG(uint64_t size): KmerManipulator(size), m_format("ACTG"){}
 KmerManipulatorACTG::~KmerManipulatorACTG() noexcept {}
 uint64_t KmerManipulatorACTG::encode(const string word) {
-    uint64_t hash = 0;
-    char c;
-    for(uint i = 0 ; i < m_size ; i++){   //We go through the sequence to encode each nucleotides
-        hash <<= 2; // We shift 2 bits to the right
-        c = word[i];    //Take each nucleotides to encode them
-        uint64_t charval = 0; // 'A' = 0
-        if(c == 'C'){
-            charval = 1;    // 'C' = 1
-        }else if(c == 'T'){
-            charval = 2;    // 'T' = 2
-        }else if(c == 'G'){
-            charval = 3;    // 'G' = 3
-        }
-        hash += charval;    //creation of the hash for the given sequence
+   uint64_t hash = 0;
+   uint64_t charval(0);
+   for(uint i = 0 ; i < m_size ; i++){   //We go through the sequence to encode each nucleotides
+       hash <<= 2; // We shift 2 bits to the right
+       switch (word[i]) {
+           case 'C':
+                charval = 1;
+                break;
+           case 'T':
+                charval = 2;
+                break;
+           case 'G':
+                charval = 3;
+                break;
+           default:
+                charval = 0;
+       }
+       hash += charval;
     }
     return hash;    //return the final hash of the sequence
 }
@@ -477,6 +481,7 @@ ConwayBromage::ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km){
 ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     m_kmerManipulator = km;
     string word("");
+    string numb("");
     string line("");
     kmerFlux >> word;   //Take the first word to analyze size of one k-mer
     kmerFlux.seekg(0, ios::beg);    //Return to the beginning of the file
@@ -493,14 +498,13 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     //cout << "SD VECTOR SIZE  : " << sdvSize << endl;
     
     sd_vector_builder builder(sdvSize, numberOfKmer);
-    while(kmerFlux >> word) {
+    while(kmerFlux >> word >> numb) {
         uint64_t kmer = m_kmerManipulator->encode(word);
         if (m_kmerManipulator->getCanonical(kmer) != kmer) {
             cout << "The file is not completely canonical" << endl;
             exit(1); //EXIT_FAILURE
         }
         builder.set(kmer);
-        kmerFlux >> word;
     }
     m_sequence = builder;
     m_kmerSize = KmerSize;
