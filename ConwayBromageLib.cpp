@@ -204,28 +204,21 @@ KmerManipulator::~KmerManipulator() noexcept {}
 //class KmerManipulatorACTG
 KmerManipulatorACTG::KmerManipulatorACTG(uint64_t size): KmerManipulator(size), m_format("ACTG"){}
 KmerManipulatorACTG::~KmerManipulatorACTG() noexcept {}
-uint64_t KmerManipulatorACTG::encode(const string word) {
-   uint64_t hash = 0;
-   uint64_t charval(0);
-   for(uint i = 0 ; i < m_size ; i++){   //We go through the sequence to encode each nucleotides
-       hash <<= 2; // We shift 2 bits to the right
-       switch (word[i]) {
-           case 'C':
-                charval = 1;
-                break;
-           case 'T':
-                charval = 2;
-                break;
-           case 'G':
-                charval = 3;
-                break;
-           default:
-                charval = 0;
-       }
-       hash += charval;
+
+uint64_t KmerManipulatorACTG::encode(const string &word) {
+    //A = 65 : 0100 0001 <-> 0 
+    //C = 67 : 0100 0011 <-> 1  
+    //T = 84 : 0101 0100 <-> 2 
+    //G = 71 : 0100 0111 <-> 3 
+    static const uint64_t caracterToValue[8] = {0, 0, 0, 1, 2, 0, 0, 3}; //declared and initialized only during the first call to this method
+    //the -1 values in the array are never used because (c & 0x7) will always produce one of the followind index : 1, 3, 4, or 7
+    uint64_t res = 0;
+    for(uint i = 0 ; i < m_size ; i++){   //We go through the sequence to encode each nucleotides
+        res = (res << 2) + caracterToValue[word[i] & 0x7];    //creation of the hash for the given sequence
     }
-    return hash;    //return the final hash of the sequence
+    return res;    //return the final hash of the sequence
 }
+
 string KmerManipulatorACTG::decode(uint64_t kmer) {
     string res(m_size, ' ');
     uint64_t lastIndex = res.size()-1;
@@ -318,24 +311,24 @@ char KmerManipulatorACTG::decodeNucleotide(const uint8_t nucleotide){
 //class KmerManipulatorACGT
 KmerManipulatorACGT::KmerManipulatorACGT(uint64_t size): KmerManipulator(size), m_format("ACGT") {}
 KmerManipulatorACGT::~KmerManipulatorACGT() noexcept {}
-uint64_t KmerManipulatorACGT::encode(const std::string word) {
-    uint64_t hash = 0;
+
+uint64_t KmerManipulatorACGT::encode(const string &word) {
+    //A = 65 : 0100 0001 <-> 0 
+    //C = 67 : 0100 0011 <-> 1   
+    //G = 71 : 0100 0111 <-> 2 
+    //T = 84 : 0101 0100 <-> 3
+    static const int caracterToValue[8] = {-1, 0, -1, 1, 3, -1, -1, 2}; //declared and initialized only during the first call to this method
+    //the -1 values in the array are never used because (c & 0x7) will always produce one of the followind index : 1, 3, 4, or 7
     char c;
+    uint64_t res = 0;
     for(uint i = 0 ; i < m_size ; i++){   //We go through the sequence to encode each nucleotides
-        hash <<= 2; // We shift 2 bits to the right
+        res <<= 2; // We shift 2 bits to the right
         c = word[i];    //Take each nucleotides to encode them
-        uint64_t charval = 0; // 'A' = 0
-        if(c == 'C'){
-            charval = 1;    // 'C' = 1
-        }else if(c == 'G'){
-            charval = 2;    // 'G' = 2
-        }else if(c == 'T'){
-            charval = 3;    // 'T' = 3
-        }
-        hash += charval;    //creation of the hash for the given sequence
+        res += caracterToValue[c & 0x7];    //creation of the hash for the given sequence
     }
-    return hash;    //return the final hash of the sequence
+    return res;    //return the final hash of the sequence
 }
+
 std::string KmerManipulatorACGT::decode(uint64_t kmer) {
     string res(m_size, ' ');
     uint64_t lastIndex = res.size()-1;
