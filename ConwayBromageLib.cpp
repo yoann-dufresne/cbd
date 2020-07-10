@@ -506,7 +506,6 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     }
     
     m_sequence = builder;
-    m_kmerSize = KmerSize;
     m_limit = (m_sequence.size() >> 2) - 1;
     
     //initialization of the cache
