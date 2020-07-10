@@ -57,6 +57,11 @@ public:
     */
     virtual char decodeNucleotide(const uint8_t nucleotide) = 0;
     
+    /**
+    * Returns the size attribute.
+    */
+    virtual int getSize() = 0;
+    
     virtual ~KmerManipulator();     //Desctructor
 protected:
     uint64_t m_size;
@@ -74,6 +79,7 @@ public:
     uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide);
     char decodeNucleotide(const uint8_t nucleotide);
     ~KmerManipulatorACGT();
+    int getSize();
 private:
     std::string m_format;
 };
@@ -90,6 +96,7 @@ public:
     uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide);
     char decodeNucleotide(const uint8_t nucleotide);
     ~KmerManipulatorACTG();
+    int getSize();
 private:
     std::string m_format;
 };
