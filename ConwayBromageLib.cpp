@@ -242,6 +242,14 @@ uint64_t KmerManipulatorACTG::getCanonical(const uint64_t kmer) {
 }
 
 __m256i KmerManipulatorACTG::getCanonicalAVX(const __m256i kmer) {  //WORK IN PROGRESS
+    __m256i reverseCompl = reverseComplementAVX(kmer);  //creation of a __m256i which contains reverse complement of the __m256i k-mers
+    __m256i eq = _mm256_cmpeq_epi64(kmer,reverseCompl); //Case where forward and reverse are the same
+    __m256i cmp1 = _mm256_or_si256(_mm256_cmpgt_epi64(kmer, reverseCompl), eq);  //kmer < reverseCompl => 0, else -1
+    __m256i cmp2 = _mm256_cmpgt_epi64(reverseCompl, kmer);  //reverseCompl < kmer => 0, else -1
+    __m256i and1 = _mm256_and_si256(cmp2, kmer);    //delete elements wich are higher than their reverse
+    __m256i and2 = _mm256_and_si256(cmp1, reverseCompl);    //delete reverses which are higher than their forward
+    __m256i ult = _mm256_or_si256(and1, and2);  //final construction
+    return ult;
 }
 
 uint64_t KmerManipulatorACTG::reverseComplement(const u_int64_t kmer) {
@@ -255,7 +263,15 @@ uint64_t KmerManipulatorACTG::reverseComplement(const u_int64_t kmer) {
     return (res >> (2*( 32 - m_size))) ;
 }
 
-__m256i KmerManipulatorACTG::reverseComplementAVX(const __m256i kmer){  //WORK IN PROGRESS
+__m256i KmerManipulatorACTG::reverseComplementAVX(const __m256i kmer){
+     u_int64_t res = kmer;
+    res = ((res>> 2 & 0x3333333333333333) | (res & 0x3333333333333333) <<  2);
+    res = ((res>> 4 & 0x0F0F0F0F0F0F0F0F) | (res & 0x0F0F0F0F0F0F0F0F) <<  4);
+    res = ((res>> 8 & 0x00FF00FF00FF00FF) | (res & 0x00FF00FF00FF00FF) <<  8);
+    res = ((res>>16 & 0x0000FFFF0000FFFF) | (res & 0x0000FFFF0000FFFF) << 16);
+    res = ((res>>32 & 0x00000000FFFFFFFF) | (res & 0x00000000FFFFFFFF) << 32);
+    res = res ^ 0xAAAAAAAAAAAAAAAA;
+    return (res >> (2*( 32 - m_size))) ;
 }
 
 /**
@@ -328,7 +344,8 @@ uint64_t KmerManipulatorACGT::getCanonical(const uint64_t kmer) {
 
 __m256i KmerManipulatorACGT::getCanonicalAVX(const __m256i kmer) {
     __m256i reverseCompl = reverseComplementAVX(kmer);  //creation of a __m256i which contains reverse complement of the __m256i k-mers
-    __m256i cmp1 = _mm256_cmpgt_epi64(kmer, reverseCompl);  //kmer < reverseCompl => 0, else -1
+    __m256i eq = _mm256_cmpeq_epi64(kmer,reverseCompl); //Case where reverse and forward are the same
+    __m256i cmp1 = _mm256_or_si256(_mm256_cmpgt_epi64(kmer, reverseCompl), eq);  //kmer < reverseCompl => 0, else -1
     __m256i cmp2 = _mm256_cmpgt_epi64(reverseCompl, kmer);  //reverseCompl < kmer => 0, else -1
     __m256i and1 = _mm256_and_si256(cmp2, kmer);    //delete elements wich are higher than their reverse
     __m256i and2 = _mm256_and_si256(cmp1, reverseCompl);    //delete reverses which are higher than their forward
@@ -467,28 +484,14 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     //cout << "SD VECTOR SIZE  : " << sdvSize << endl;
     
     sd_vector_builder builder(sdvSize, numberOfKmer);
-    uint64_t encodeList[4];
-    uint64_t j(0);
-    kmerFlux >> word;   //Init to the first word
-    while(j < numberOfKmer){
-        __m256i kmerVec;
-        if(j < 4){  //To take in consideration the first word, we call "kmerFlux >> word" just one time
-            kmerVec = _mm256_setr_epi64x(m_kmerManipulator->encode(word), m_kmerManipulator->encode(rightWord(kmerFlux)),
-                                         m_kmerManipulator->encode(rightWord(kmerFlux)), m_kmerManipulator->encode(rightWord(kmerFlux)));
-        }else{  //for all other words, call rightWord
-            kmerVec = _mm256_setr_epi64x(m_kmerManipulator->encode(rightWord(kmerFlux)), m_kmerManipulator->encode(rightWord(kmerFlux)),
-                                         m_kmerManipulator->encode(rightWord(kmerFlux)), m_kmerManipulator->encode(rightWord(kmerFlux)));
-        }
-        __m256i verif = m_kmerManipulator->getCanonicalAVX(kmerVec);    //To verify elements on __m256i
-        if(_mm256_testc_si256(verif, kmerVec) == 0){    //Verify if it is equal
+    while(kmerFlux >> word) {
+        uint64_t kmer = m_kmerManipulator->encode(word);
+        if (m_kmerManipulator->getCanonical(kmer) != kmer) {
             cout << "The file is not completely canonical" << endl;
             exit(1); //EXIT_FAILURE
         }
-        builder.set(kmerVec[0]);    //set elements to the sd_vector builder
-        builder.set(kmerVec[1]);
-        builder.set(kmerVec[2]);
-        builder.set(kmerVec[3]);
-        j = j + 4;  //take elements 4 by 4
+        builder.set(kmer);
+        kmerFlux >> word;
     }
     m_sequence = builder;
     m_kmerSize = KmerSize;
@@ -691,16 +694,4 @@ KmerManipulator* ConwayBromage::getKmerManipulator(){
     return m_kmerManipulator;
 }
 
-/**
- * Move around the file word by word
- * The file is like : "kmer \t numberOfApparition, we want to know the kmer only
- * @param kmer - An istream which represents the file we read
- * @return the k-mer which is contain in each lines of the file, without the number of apparition
- */
-string rightWord(istream& kmer){
-    string word("");
-    kmer >> word;   //Skip the number of apparition
-    kmer >> word;   //the k-mer we wan to study
-    return word;
-}
 
