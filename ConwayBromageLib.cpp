@@ -211,7 +211,7 @@ uint64_t KmerManipulatorACTG::encode(const string &word) {
     //T = 84 : 0101 0100 <-> 2 
     //G = 71 : 0100 0111 <-> 3 
     static const uint64_t caracterToValue[8] = {0, 0, 0, 1, 2, 0, 0, 3}; //declared and initialized only during the first call to this method
-    //the -1 values in the array are never used because (c & 0x7) will always produce one of the followind index : 1, 3, 4, or 7
+    //some 0 values in the array are never used because (c & 0x7) will always produce one of the followind index : 1, 3, 4, or 7
     uint64_t res = 0;
     for(uint i = 0 ; i < m_size ; i++){   //We go through the sequence to encode each nucleotides
         res = (res << 2) + caracterToValue[word[i] & 0x7];    //creation of the hash for the given sequence
@@ -321,7 +321,7 @@ uint64_t KmerManipulatorACGT::encode(const string &word) {
     //G = 71 : 0100 0111 <-> 2 
     //T = 84 : 0101 0100 <-> 3
     static const int caracterToValue[8] = {-1, 0, -1, 1, 3, -1, -1, 2}; //declared and initialized only during the first call to this method
-    //the -1 values in the array are never used because (c & 0x7) will always produce one of the followind index : 1, 3, 4, or 7
+    //some 0 values in the array are never used because (c & 0x7) will always produce one of the followind index : 1, 3, 4, or 7
     char c;
     uint64_t res = 0;
     for(uint i = 0 ; i < m_size ; i++){   //We go through the sequence to encode each nucleotides
