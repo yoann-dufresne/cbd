@@ -480,32 +480,31 @@ ConwayBromage::ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km){
  */
 ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     m_kmerManipulator = km;
-    string word("");
-    string numb("");
+    m_kmerSize = m_kmerManipulator->getSize(); //Size of k_mer, it is the 'k'
+
     string line("");
-    kmerFlux >> word;   //Take the first word to analyze size of one k-mer
-    kmerFlux.seekg(0, ios::beg);    //Return to the beginning of the file
-    int KmerSize(word.size()); //Size of k_mer, it is the 'k'
     int numberOfKmer = 0;
     while(getline(kmerFlux, line)) //Counts the number of k-mer in the file
         numberOfKmer++;
  
     kmerFlux.clear();
     kmerFlux.seekg(0, ios::beg);    //Return to the beginning of the file
+    uint64_t one = 1;
+    uint64_t sdvSize = one << (2*m_kmerSize); //Creation of the total length to create the sd_vector_builder
     //cout << "K-MER SIZE      : " << KmerSize << endl;
     //cout << "NUMBER OF K-MER : " << numberOfKmer << endl;
-    uint64_t sdvSize(pow(4,KmerSize));//1 << (2*KmerSize));//pow(4,KmerSize);   //Creation of the total length to create the sd_vector_builder
-    //cout << "SD VECTOR SIZE  : " << sdvSize << endl;
+    //cout << "SD VECTOR SIZE  : " << sdvSize;
     
     sd_vector_builder builder(sdvSize, numberOfKmer);
-    while(kmerFlux >> word >> numb) {
-        uint64_t kmer = m_kmerManipulator->encode(word);
-        if (m_kmerManipulator->getCanonical(kmer) != kmer) {
+    while(getline(kmerFlux, line)){
+        uint64_t k = m_kmerManipulator->encode(line);
+        if(k >  m_kmerManipulator->reverseComplement(k)){
             cout << "The file is not completely canonical" << endl;
-            exit(1); //EXIT_FAILURE
+            exit(1);
         }
-        builder.set(kmer);
+        builder.set(k);   
     }
+    
     m_sequence = builder;
     m_kmerSize = KmerSize;
     m_limit = (m_sequence.size() >> 2) - 1;
