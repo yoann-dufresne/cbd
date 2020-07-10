@@ -20,7 +20,7 @@ public:
     *@param word - the string we want to encode into a uint64_t
     *@return a uint64_t which represent the encoding version of the word
     */
-    virtual uint64_t encode(const std::string word) = 0;
+    virtual uint64_t encode(const std::string &word) = 0;
     /*
     * Returns a string which is the word which corresponds to the uint64_t value, depends on encoding : see daughter classes
     * @param kmer - the value.
@@ -65,7 +65,7 @@ protected:
 class KmerManipulatorACGT : public KmerManipulator{
 public:
     KmerManipulatorACGT(uint64_t size);
-    uint64_t encode(const std::string word);
+    uint64_t encode(const std::string &word);
     std::string decode(uint64_t kmer);
     uint64_t getCanonical(const uint64_t kmer);
     __m256i getCanonicalAVX(const __m256i kmer);
@@ -81,7 +81,7 @@ private:
 class KmerManipulatorACTG : public KmerManipulator{
 public:
     KmerManipulatorACTG(uint64_t size);
-    uint64_t encode(const std::string word);
+    uint64_t encode(const std::string &word);
     std::string decode(uint64_t kmer);
     uint64_t getCanonical(const uint64_t kmer);
     __m256i getCanonicalAVX(const __m256i kmer);
