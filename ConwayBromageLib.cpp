@@ -264,14 +264,23 @@ uint64_t KmerManipulatorACTG::reverseComplement(const u_int64_t kmer) {
 }
 
 __m256i KmerManipulatorACTG::reverseComplementAVX(const __m256i kmer){
-     u_int64_t res = kmer;
-    res = ((res>> 2 & 0x3333333333333333) | (res & 0x3333333333333333) <<  2);
-    res = ((res>> 4 & 0x0F0F0F0F0F0F0F0F) | (res & 0x0F0F0F0F0F0F0F0F) <<  4);
-    res = ((res>> 8 & 0x00FF00FF00FF00FF) | (res & 0x00FF00FF00FF00FF) <<  8);
-    res = ((res>>16 & 0x0000FFFF0000FFFF) | (res & 0x0000FFFF0000FFFF) << 16);
-    res = ((res>>32 & 0x00000000FFFFFFFF) | (res & 0x00000000FFFFFFFF) << 32);
-    res = res ^ 0xAAAAAAAAAAAAAAAA;
-    return (res >> (2*( 32 - m_size))) ;
+    //We initialize variables like __mm256i vectors
+    __m256i AAA = _mm256_set1_epi64x(0xAAAAAAAAAAAAAAAA);
+    __m256i val1 = _mm256_set1_epi64x(0x3333333333333333);
+    __m256i val2 = _mm256_set1_epi64x(0x0F0F0F0F0F0F0F0F);
+    __m256i val3 = _mm256_set1_epi64x(0x00FF00FF00FF00FF);
+    __m256i val4 = _mm256_set1_epi64x(0x0000FFFF0000FFFF);
+    __m256i val5 = _mm256_set1_epi64x(0x00000000FFFFFFFF);
+    __m256i res = kmer;  // <=> res = kmer
+    //translation in AVX instruction of the original reverseComplement : CARE ABOUT UNSIGNED INT !!!
+    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 2), val1), _mm256_slli_epi64(_mm256_and_si256(res, val1), 2))); // <=> res = ((res >> 2 & 0x3333333333333333) | (res & 0x3333333333333333) << 2);
+    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 4), val2), _mm256_slli_epi64(_mm256_and_si256(res, val2), 4)));
+    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 8), val3), _mm256_slli_epi64(_mm256_and_si256(res, val3), 8)));
+    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 16), val4), _mm256_slli_epi64(_mm256_and_si256(res, val4), 16)));
+    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 32), val5), _mm256_slli_epi64(_mm256_and_si256(res, val5), 32)));
+    res = _mm256_xor_si256(res, AAA);
+    res = _mm256_srli_epi64(res, (2 * (32 - m_size)));  //(res >> (2 * (32 - m_size))), we can return it directly
+    return res;
 }
 
 /**
