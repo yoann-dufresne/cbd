@@ -13,6 +13,7 @@
 
 #include <cstdlib>
 #include <string>
+#include <bitset>
 #include "ConwayBromageLib.h"
 #include <lest/lest_basic.hpp>      
 #include <sdsl/sd_vector.hpp>
