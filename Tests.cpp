@@ -219,38 +219,53 @@ const test atTheEnd[] = {
                 file.seekg(0, ios::beg);
             }
             file.close();
-        }
-        /*CASE("successors with the successors counter : "){  //Need to be modify to fit with POO
-            cout << "\t--> successors with the successor counter" << endl;
-            sd_vector<>ret = fromFileToSdVectorChooser("./sortACTG.txt", "ACTG");
+        },
+        CASE("successors with the successors counter : "){  //Modify to fit with the OOP, abandonment of successorCounter
+            cout << "\t--> successors : 100 4-mers (no differences for encoding)" << endl;
+            ifstream f("./sortACGT.txt", ios::in);
+            string call[4]{"A", "C", "G", "T"}; //build comrades manually
+            KmerManipulatorACGT k(4);
+            KmerManipulatorACGT k3(3);
+            ConwayBromage cb(f, &k);
             for(int i = 0 ; i < 64 ; i++){
-                vector<uint64_t> counter = successorCounter(i, ret, 0);
-                vector<uint64_t> succ = successors(i, ret, 0);
-                sort(counter.begin(), counter.end());
-                sort(succ.begin(), succ.end());
-                EXPECT(succ == counter);
+                bitset<8> bitForm((unsigned)cb.successors(i));  //uint8_t of successors, bit version
+                string uncompressedNex(k3.decode(i).erase(0,1));
+                string uncompressedPre(k3.decode(i).erase(k3.decode(i).size()-1,1));
+                vector<uint64_t> potSucc;
+                for(int j = 0 ; j < 8 ; j++){
+                    if(bitForm[7-j] == 1){
+                        if(j < 4){
+                            potSucc.push_back(k.getCanonical(k3.encode(uncompressedNex + call[j])));
+                        }else{
+                            potSucc.push_back(k.getCanonical(k3.encode(call[j-4] + uncompressedPre)));
+                        }
+                    }
+                }
+                for(int j = 0 ; j < potSucc.size() ; j++){
+                    EXPECT(cb.isPresent(potSucc[j]));
+                }
             }
-        }*/
+        }
 };
 
 int main(){
     int failures(0);
-    cout << "*** First tests : merge, decode and previous without file call ***" << endl;
+    cout << "*** First tests : decode and encode ***" << endl;
     if(failures = run(critical)){  //run all the test cases
         return failures;
     }
     cout << "*** First tests passed ! ***\n" << endl;
-    cout << "*** Second tests : reverse complement ***" << endl;
+    cout << "*** Second tests : reverse complement and successorTranslator ***" << endl;
     if (failures = run(lessCritical)){
         return failures;
     }
     cout << "*** Second tests passed ! ***\n" << endl;
-    cout << "*** Third tests : fromFileToSdVector ***" << endl;
+    cout << "*** Third tests : getCanonical ***" << endl;
     if (failures = run(lessLessCrit)){
         return failures;
     }
     cout << "*** Third tests passed ! ***\n" << endl;
-    cout << "*** Fourth tests : previous/next with fromFileToSdVector call and isThisKMerHere ***" << endl;
+    cout << "*** Fourth tests : successors and isPresent ***" << endl;
     if (failures = run(atTheEnd)){
         return failures;
     }
