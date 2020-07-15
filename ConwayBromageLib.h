@@ -7,9 +7,6 @@ const int ALPHABET(4);  // Size of the alphabet : E = {A, C, G, T}
 const std::string NUCLEOTIDES [4] = {"A", "C", "G", "T"};
 
 std::vector<uint64_t> successorTranslator(int successors, uint64_t compressedKMer, uint64_t size, bool format);
-//Functions for tests only
-bool isCanonical (uint64_t kmer, uint64_t kmerSize, bool encodingIsACGT);
-std::vector<uint64_t> successorCounter(uint64_t compressedKMer, sdsl::sd_vector<>currentCompressedSeq, bool format);
 
 //POO for KmerManipulator
 class KmerManipulator{  //abstract class
