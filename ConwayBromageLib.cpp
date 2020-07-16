@@ -328,13 +328,12 @@ int KmerManipulatorACGT::getSize(){
  * @param km - A KmerManipulator.
  */
 ConwayBromage::ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km){
-    m_kmerSize = (int)(log(sdv.size())/log(4));
     m_sequence = sdv; //copy of the sd_vector
     m_kmerManipulator = km;
     m_limit = (m_sequence.size() >> 2) - 1;
     
     //initialization of the cache
-    int nbOfBitsToShift = 2 * (m_kmerSize-1);
+    int nbOfBitsToShift = 2 * (m_kmerManipulator->getSize()-1);
     m_numberOfBitsToShift = nbOfBitsToShift;
 
     m_RC[0] = km->reverseComplementOfNucleotide(0);
@@ -378,7 +377,6 @@ ConwayBromage::ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km){
  */
 ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     m_kmerManipulator = km;
-    m_kmerSize = m_kmerManipulator->getSize(); //Size of k_mer, it is the 'k'
 
     string line("");
     int numberOfKmer = 0;
@@ -388,7 +386,7 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     kmerFlux.clear();
     kmerFlux.seekg(0, ios::beg);    //Return to the beginning of the file
     uint64_t one = 1;
-    uint64_t sdvSize = one << (2*m_kmerSize); //Creation of the total length to create the sd_vector_builder
+    uint64_t sdvSize = one << (2*m_kmerManipulator->getSize()); //Creation of the total length to create the sd_vector_builder
     //cout << "K-MER SIZE      : " << KmerSize << endl;
     //cout << "NUMBER OF K-MER : " << numberOfKmer << endl;
     //cout << "SD VECTOR SIZE  : " << sdvSize;
@@ -407,7 +405,7 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     m_limit = (m_sequence.size() >> 2) - 1;
     
     //initialization of the cache
-    int nbOfBitsToShift = 2 * (m_kmerSize-1);
+    int nbOfBitsToShift = 2 * (m_kmerManipulator->getSize()-1);
     m_numberOfBitsToShift = nbOfBitsToShift;
 
     m_RC[0] = km->reverseComplementOfNucleotide(0);
@@ -505,7 +503,7 @@ bool ConwayBromage::isPresent(uint64_t Kmer) const{
  * AVX version of isPresent, for perf tests
  */
 bool ConwayBromage::isPresentAVX(uint64_t Kmer) const {
-    int KmerSize = m_kmerSize-1;
+    int KmerSize = m_kmerManipulator->getSize()-1;
     uint64_t next = Kmer << 2;
     int numberOfBitsToShift = KmerSize << 1;
     /*
@@ -585,7 +583,7 @@ uint8_t ConwayBromage::successors(uint64_t Kmer) const{
  * @return an int
  */
 int ConwayBromage::getKmerSize(){
-    return m_kmerSize;
+    return m_kmerManipulator->getSize();
 }
 
 /**
