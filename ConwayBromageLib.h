@@ -100,7 +100,6 @@ private:
 
 class ConwayBromage{
 private:
-    int m_kmerSize;                     //PmerSize actually
     sdsl::sd_vector<> m_sequence;       //the compressed k-mer sequence
     KmerManipulator* m_kmerManipulator; //stores information about encode/decode
     uint64_t m_limit;
