@@ -3,7 +3,9 @@
 # Conway and Bromage succinct data structure for assembling large genomes
 ## Installation
 To download the library, please use the following command : 
-``git clone --recursive-submodules https://github.com/yoann-dufresne/ConwayBromageLib.git``
+```
+git clone --recursive-submodules https://github.com/yoann-dufresne/ConwayBromageLib.git
+```
 If you have already used ``git clone`` without the ``--recursive-submodules`` flag, please use int the project :
 ```
 git submodule init
