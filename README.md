@@ -11,7 +11,7 @@ If you have already used ``git clone`` without the ``--recursive-submodules`` fl
 git submodule init
 git submodule update
 ```
-## Object KmerManipulator
+## KmerManipulator class
 Abstract class to manage ACGT or ACTG encoding for k-mers<br>
 Mother class of KmerManipulatorACGT and KmerManipulatorACTG
 
@@ -65,15 +65,15 @@ AAGC	2 <br>
 AAGC	1 <br>
 ...
 
-### bool ConwayBromage::isPresent(uint64_t Kmer)
+### bool ConwayBromage::contains(uint64_t Kmer)
 Takes a (k-1)-mer and returns true if it's present among the stored k-mers.<br>
 Example of use:<br>
 ```
-bool kmer_exists = cb.isPresent(230);
+bool kmer_exists = cb.contains(230);
 
 KmerManipulatorACGT km(3);
 uint64_t intGTT = km.decode("GTT");
-bool GTT_exists = cb.isPresent(intGTT);
+bool GTT_exists = cb.contains(intGTT);
 ```
 
 ### uint8_t ConwayBromage::successors(uint64_t Kmer)
