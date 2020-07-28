@@ -474,7 +474,7 @@ uint64_t ConwayBromage::size() const{
  * @param Kmer - An integer representing the k-mer.
  * @return true if the k-mer is present.
  */
-bool ConwayBromage::isPresent(uint64_t Kmer) const{
+bool ConwayBromage::contains(uint64_t Kmer) const{
     if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
         cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << m_limit << endl;
         return false; 

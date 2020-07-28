@@ -128,7 +128,7 @@ vector<int> generateTestList(int size, int percent, const vector<int> &allExisti
         } else {//generation of a non-existing k-mer
             randomNb = randomKmer(genKmer);//generate a number between 0 and sdvSize-1 which coresponds to a pmer
             //while(find(allExistingKmers.begin(), allExistingKmers.end(), randomNb) == allExistingKmers.end()){ //check if the k-mer is present
-            while(cb.isPresent(randomNb)){
+            while(cb.contains(randomNb)){
                 randomNb = randomKmer(genKmer);
             }    
         }
@@ -164,7 +164,7 @@ void launchPerformanceTests(int sizeOfTestList, int PmerSize, KmerManipulator* k
         cout << "testList's size : " << testList.size();
         int cpt = 0;
         for(int i = 0; i < testList.size(); i++){ 
-            if(cb.isPresent(testList[i])==true)
+            if(cb.contains(testList[i])==true)
                 cpt++;
         }
         double realPercentage = cpt*100.0/testList.size();
@@ -203,7 +203,7 @@ int_vector<> ratioForIsPresent(int ratioIn, int nbOfOnes, ConwayBromage cb){
     vector<uint64_t> isOut; //Elements which are NOT present
     uint64_t myMer;
     for(int i = 0 ; i < kMerSizeSeq ; i++){ //We test all k-mers elements. For example, all the 10-mers which can be contain in 11-mers sd_vector
-        if(cb.isPresent(i)){
+        if(cb.contains(i)){
             isIn.push_back(i);  //is in
         }else{
             isOut.push_back(i); //is not in
@@ -239,7 +239,7 @@ void metricForIsPresent(){
             int_vector<> ratio = ratioForIsPresent(j, 1000000, cb); // row test build
             high_resolution_clock::time_point beg = high_resolution_clock::now();   //time measurement starting
             for(int i = 0 ; i < ratio.size() ; i++){
-                cb.isPresent(ratio[i]);
+                cb.contains(ratio[i]);
             }
             high_resolution_clock::time_point en = high_resolution_clock::now();    //time measurement ending
             auto durationmicro = duration_cast<microseconds>( en - beg ).count();   //Calculation of time in microseconds

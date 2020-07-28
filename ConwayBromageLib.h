@@ -116,7 +116,7 @@ public:
     ConwayBromage(std::istream& kmerFlux, KmerManipulator* km);
     ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km);
     //principal functions
-    bool isPresent (uint64_t Kmer) const;
+    bool contains (uint64_t Kmer) const;
     //AVX prototype of isPresent
     bool isPresentAVX(uint64_t Kmer) const;
     uint8_t successors(uint64_t Kmer) const;

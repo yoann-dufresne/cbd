@@ -157,8 +157,8 @@ const test atTheEnd[] = {
             }
             EXPECT(result);
         },
-        CASE("isPresent : 100 4-mers with ACGT encoding : "){
-            cout << "\t--> isPresent : 100 4-mers with ACGT encoding" << endl;
+        CASE("contains : 100 4-mers with ACGT encoding : "){
+            cout << "\t--> contains : 100 4-mers with ACGT encoding" << endl;
             ifstream f("./sortACGT.txt", ios::in);
             KmerManipulatorACGT km(4);
             ConwayBromage cb(f, &km);
@@ -183,14 +183,14 @@ const test atTheEnd[] = {
                         break;
                     }
                 }
-                EXPECT(cb.isPresent(i) == isHere);
+                EXPECT(cb.contains(i) == isHere);
                 file.clear();
                 file.seekg(0, ios::beg);
             }
             file.close();
         },
-        CASE("isPresent : 100 4-mers with ACTG encoding : "){
-            cout << "\t--> isPresent : 100 4-mers with ACTG encoding" << endl;
+        CASE("contains : 100 4-mers with ACTG encoding : "){
+            cout << "\t--> contains : 100 4-mers with ACTG encoding" << endl;
             ifstream f("./sortACTG.txt", ios::in);
             KmerManipulatorACTG km(4);
             ConwayBromage cb(f, &km);
@@ -215,7 +215,7 @@ const test atTheEnd[] = {
                         break;
                     }
                 }
-                EXPECT(cb.isPresent(i) == isHere);
+                EXPECT(cb.contains(i) == isHere);
                 file.clear();
                 file.seekg(0, ios::beg);
             }
@@ -243,7 +243,7 @@ const test atTheEnd[] = {
                     }
                 }
                 for(int j = 0 ; j < potSucc.size() ; j++){
-                    EXPECT(cb.isPresent(potSucc[j]));
+                    EXPECT(cb.contains(potSucc[j]));
                 }
             }
         }
@@ -266,7 +266,7 @@ int main(){
         return failures;
     }
     cout << "*** Third tests passed ! ***\n" << endl;
-    cout << "*** Fourth tests : successors and isPresent ***" << endl;
+    cout << "*** Fourth tests : successors and contains ***" << endl;
     if (failures = run(atTheEnd)){
         return failures;
     }
