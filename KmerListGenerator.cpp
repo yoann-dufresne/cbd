@@ -14,45 +14,74 @@ using namespace sdsl;
 using namespace chrono;
 
 /**
-* Returns a list of random k-mers (doesn't depend on encoding).
-* @param listSize - size of the list
+* Returns a list of k-mers contained in a query file.
+* @param fastqFilePath - query file
+* @param KmerSize - size of cut sequences
+*/
+vector<uint64_t> getKmersFromQueryFile(string fastqFilePath, KmerManipulator *km){
+    vector<uint64_t> res;
+    int KmerSize = km->getSize();
+    ifstream fi(fastqFilePath, ios::in);
+
+    string sequence;
+    //sequences are in lineNumber = 2*k with k an integer    
+    while(getline(fi, sequence)){ //we ignore the lines containing ">kmer"
+        getline(fi, sequence);    //take the kmer
+        int numberOfKmer = 1 + (sequence.size()-KmerSize);
+        for(int i = 0; i < numberOfKmer; i++){
+            string kmer = sequence.substr(i, KmerSize);
+            res.push_back(km->encode(kmer));
+        }
+    }
+
+    fi.close();
+    cout << "K-mers obtained in vector from : " << fastqFilePath << ". List size : " << res.size() << endl;
+    return res;
+}
+
+/**
+* Generate a fastq file containing random k-mers (doesn't depend on encoding).
+* @param outputFile - fastq file that will contain k-mers
+* @param numberOfKmer - number of kmer that should be present in the output file
 * @kmerSize - size of the k-mers
 */
-vector<uint64_t> getRandomKmerList(int listSize, int kmerSize){
-    vector<uint64_t> res(listSize);
-
+void generateRandomKmers(string outputFile, int numberOfKmer, int kmerSize){
+    ofstream fo(outputFile);
+    KmerManipulatorACTG km(kmerSize);
     //generator of random kmers
     random_device rd; 
     mt19937 gen(rd());
     uniform_int_distribution<uint64_t> random(0, pow(4, kmerSize)-1);
 
     //fill the list
-    for(int i = 0; i < res.size(); i++)
-        res[i] = random(gen);
+    for(int i = 0; i < numberOfKmer; i++){
+        fo << ">kmer" << (i+1) << "\n" << km.decode(random(gen)) << endl;
+    }
 
-    cout << "Random k-mers list size : " << res.size() << endl;
-    return res;
+    cout << "Random k-mers query file generated under the name : " << outputFile << endl;
+    fo.close();
 }    
 
 /**
-* Returns a list of random k-mers among existing ones in a file.
-* @param listSize - size of the list
-* @km - a kmer manipulator for encoding
-* @file_path - path of the file containing p-mers and their counts.
+* Generate a fastq file containing random existing k-mers.
+* @param inputFile - counts file (txt)
+* @param outputFile - fastq file containing k-mers
 * @cb - ConwayBromage built on file_path
+* @km - a kmer manipulator for encoding
+* @param numberOfKmer - number of kmer that should be present in the output file
 */
-vector<uint64_t> getRandomKmerListAmongExisting(int listSize, KmerManipulator* km, string file_path, ConwayBromage const& cb){
-    vector<uint64_t> res(listSize);
-    ifstream f(file_path, ios::in);
+void generateRandomExistingKmers(string inputFile, string outputFile, ConwayBromage const& cb, KmerManipulator* kmForPmer, KmerManipulator* kmForKmer, int numberOfKmer){
+    ifstream f(inputFile, ios::in);
+    vector<uint64_t> res(numberOfKmer);
 
     //retrieve some (not all) kmers
     string line;
     int numberOfPmer = 0;
     vector<uint64_t> existingKmers;
-    int kmerSize = (km->getSize()-1);
+    int kmerSize = kmForKmer->getSize();
     while(getline(f, line)){
         numberOfPmer++;
-        uint64_t pmer = km->encode(line);
+        uint64_t pmer = kmForPmer->encode(line);
         uint64_t kmer1 = pmer >> 2;
         if(cb.contains(kmer1))
             existingKmers.push_back(kmer1);
@@ -78,35 +107,13 @@ vector<uint64_t> getRandomKmerListAmongExisting(int listSize, KmerManipulator* k
         exit(1);
     }
 
-    cout << "Random existing k-mers list size : " << res.size() << endl;
-    return res;
-}    
-
-/**
-* Returns a list of(genomic) k-mers contained in the file.
-* @param fastqFilePath - query file
-* @param KmerSize - size of cut sequences
-*/
-vector<uint64_t> getKmersFromQueryFile(string fastqFilePath, KmerManipulator *km){
-    vector<uint64_t> res;
-    int KmerSize = km->getSize();
-    ifstream fi(fastqFilePath, ios::in);
-
-    string sequence;
-    //sequences are in lineNumber = 2*k with k an integer    
-    while(getline(fi, sequence)){ //we ignore the lines containing ">kmer"
-        getline(fi, sequence);    //take the kmer
-        int numberOfKmer = 1 + (sequence.size()-KmerSize);
-        for(int i = 0; i < numberOfKmer; i++){
-            string kmer = sequence.substr(i, KmerSize);
-            res.push_back(km->encode(kmer));
-        }
+    ofstream fo(outputFile);
+    for(int i = 0; i < res.size(); i++){
+        fo << ">kmer" << (i+1) << "\n" << kmForKmer->decode(res[i]) << endl;
     }
-
-    fi.close();
-    cout << "Genomic k-mers obtained from : " << fastqFilePath << ". List size : " << res.size() << endl;
-    return res;
-}
+    fo.close();
+    cout << "Random existing k-mers query file generated under the name : " << outputFile << endl;
+}    
 
 /**
 * Write in a (fastq) file genomic k-mers from a file containing sequences. The produced file will be used for query.
@@ -115,7 +122,7 @@ vector<uint64_t> getKmersFromQueryFile(string fastqFilePath, KmerManipulator *km
 * @param KmerSize - size of cut sequences
 * @param maximumNumberOfKmer - maximum number of kmer that will be present in the query file
 */
-void fastqToKmerFile(string fastqFilePath, string queryFile, int KmerSize, int maximumNumberOfKmer){
+void generateGenomicKmers(string fastqFilePath, string queryFile, int KmerSize, int maximumNumberOfKmer){
     KmerManipulatorACTG km(KmerSize);
     ifstream fi(fastqFilePath, ios::in);
     ofstream fo(queryFile);
@@ -145,27 +152,42 @@ void fastqToKmerFile(string fastqFilePath, string queryFile, int KmerSize, int m
 
     fi.close();
     fo.close();
-    cout << "Query file has been generated under the name : " << queryFile << endl;
+    cout << "Genomic k-mers query file generated under the name : " << queryFile << endl;
 }
 
 //EXAMPLE OF USE
 int main(){
-    //produce the file query_file_human.fastq which contains 300 k-mers (k=30) from human.fastq
-    fastqToKmerFile("./human.fastq", "query_file_human.fastq", 30, 10);
+    /*---------------------------
+      Generation of genomic Kmers
+      ---------------------------*/
 
-    //to get the genomic k-mers, we must precise the query file and the kmer manipulator (k=30) in which we want the sequences to be cut
+        //produce the file query_file_human.fastq which contains 10 k-mers (k=30) from human.fastq
+    string output1 = "./query/queryGenomicKmers_human.fastq";
+    generateGenomicKmers("./human.fastq", output1, 30, 10);
+
+        //to get the genomic k-mers, we must precise the query file and the kmer manipulator (k=30) in which we want the sequences to be cut
     KmerManipulatorACTG km30(30);
-    vector<uint64_t> genomicKmers = getKmersFromQueryFile("./query_file_human.fastq", &km30);
+    vector<uint64_t> genomicKmers = getKmersFromQueryFile(output1, &km30);
 
-    //random kmers
-    vector<uint64_t> randomKmers = getRandomKmerList(1000000, 30); //list size of 1000000
+    /*---------------------------
+      Generation of random Kmers
+      ---------------------------*/
 
-    //random kmers among existing ones
+    string output2 = "./query/queryRandomKmers.fastq";
+    generateRandomKmers(output2, 10, 30); //1000 30-mers
+    vector<uint64_t> randomKmers = getKmersFromQueryFile(output2, &km30);
+
+    /*---------------------------
+      Generation of random existing Kmers
+      ---------------------------*/
+
     ifstream f("./ecoli_count.txt", ios::in);
     KmerManipulatorACTG km31(31);
     ConwayBromage cb(f, &km31);
     f.close();
-    vector<uint64_t> randomExistingKmers = getRandomKmerListAmongExisting(1000000, &km31, "./ecoli_count.txt", cb);
+    string output3 = "./query/queryExistingKmers_ecoli.fastq";
+    generateRandomExistingKmers("./ecoli_count.txt", output3, cb, &km31, &km30, 10);
+    vector<uint64_t> randomExistingKmers = getKmersFromQueryFile(output3, &km30);
     
     return 0;
 }
