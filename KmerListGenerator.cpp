@@ -189,5 +189,34 @@ int main(){
     generateRandomExistingKmers("./ecoli_count.txt", output3, cb, &km31, &km30, 10);
     vector<uint64_t> randomExistingKmers = getKmersFromQueryFile(output3, &km30);
     
+    /*
+    int numberOfKmer = 100000000;
+    //  Generation of genomic Kmers
+        //produce the file query_file_human.fastq which contains 10 k-mers (k=30) from human.fastq
+    string output1 = "./query/queryGenomicKmers_human.fastq";
+    generateGenomicKmers("/pasteur/projets/policy02/seqbio/yo/genomes/human/SRR2052337.1/SRR2052337.1.fastq", output1, 30, numberOfKmer);
+
+        //to get the genomic k-mers, we must precise the query file and the kmer manipulator (k=30) in which we want the sequences to be cut
+    KmerManipulatorACTG km30(30);
+    vector<uint64_t> genomicKmers = getKmersFromQueryFile(output1, &km30);
+
+    //  Generation of random Kmers
+    string output2 = "./query/queryRandomKmers.fastq";
+    generateRandomKmers(output2, numberOfKmer, 30); //1000 30-mers
+    vector<uint64_t> randomKmers = getKmersFromQueryFile(output2, &km30);
+
+    //  Generation of random existing Kmers
+    ifstream f("/pasteur/projets/policy02/seqbio/murat/metagenome.txt", ios::in);
+    KmerManipulatorACTG km31(31);
+    auto a = chrono::high_resolution_clock::now();
+    ConwayBromage cb(f, &km31);
+    auto b = chrono::high_resolution_clock::now();
+    double elapsed = chrono::duration_cast<chrono::milliseconds>(b-a).count(); 
+    cout << "CB construit pour metagenome en " << elapsed << "ms" << endl;
+    f.close();
+    string output3 = "./query/queryExistingKmers_metagenome.fastq";
+    generateRandomExistingKmers("/pasteur/projets/policy02/seqbio/murat/metagenome.txt", output3, cb, &km31, &km30, numberOfKmer);
+    vector<uint64_t> randomExistingKmers = getKmersFromQueryFile(output3, &km30);
+    */
     return 0;
 }
