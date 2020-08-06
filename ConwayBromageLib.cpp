@@ -379,7 +379,7 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     m_kmerManipulator = km;
 
     string line("");
-    int numberOfKmer = 0;
+    uint64_t numberOfKmer = 0;
     while(getline(kmerFlux, line)) //Counts the number of k-mer in the file
         numberOfKmer++;
  
