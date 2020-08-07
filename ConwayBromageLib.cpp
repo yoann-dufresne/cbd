@@ -398,7 +398,7 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
         }
         if(k < previousKmer){
             cout << "The file is not sort in the ascending order" << endl;
-            exit(2);
+            exit(1);
         }
         builder.set(k);   
         previousKmer = k;
