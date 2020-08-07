@@ -1,0 +1,226 @@
+#include <iostream>
+#include <istream>
+#include <vector>
+#include <string>
+#include "ConwayBromageLib.h"
+
+using namespace std;
+
+/**
+* Print a vector<uint64_t>
+* @param v - a vector
+*/
+void printv(const vector<uint64_t> &v){
+    for(uint64_t i = 0; i < v.size(); i++)
+        cout << v[i] << " ";
+    cout << endl;
+}
+
+/**
+* Print a vector<vector<uint64_t>>
+* @param v - a vector
+*/
+void printvv(const vector<vector<uint64_t>> &vv){
+    cout << "---------------------------------" << endl;
+    cout << "print vector<vector<uint64_t>> : " << endl;
+    cout << vv.size() << endl;
+    for(uint64_t i = 0; i < vv.size(); i++){
+        for(uint64_t j = 0; j < vv[i].size(); j++)
+            cout << vv[i][j] << " ";
+        cout << endl;
+    }
+    cout << "---------------------------------" << endl;
+}
+
+
+/**
+* Returns a sorted vector with the content of two vectors. 
+* @param v1 - first vector
+* @param v2 - second vector 
+*/
+vector<uint64_t> merge(const vector<uint64_t> &v1, const vector<uint64_t> &v2){
+    vector<uint64_t> res;
+    uint64_t i1 = 0, i2 = 0;
+    uint64_t v1_len = v1.size(), v2_len = v2.size();
+
+    while(i1 < v1_len && i2 < v2_len){
+        uint64_t a = v1[i1];
+        uint64_t b = v2[i2];
+        if(a < b){
+            res.push_back(a);
+            i1++;
+        } else if(b < a){
+            res.push_back(b);
+            i2++;
+        } else { //both equal
+            res.push_back(a);
+            res.push_back(b);
+            i1++;
+            i2++;
+        }
+    }
+    //here i1=v1.size() or i2=v2.size()
+    if(i1 == v1.size()){
+        while(i2 < v2.size()){
+            res.push_back(v2[i2]);
+            i2++;
+        }
+    } else {
+        while(i1 < v1.size()){
+            res.push_back(v1[i1]);
+            i1++;
+        }
+    }
+    return res;
+}
+
+/**
+* Returns a sorted vector with the contents of many vectors
+* @param groups - a vector of vector
+*/
+vector<uint64_t> mergeGroups(vector<vector<uint64_t>> groups){
+    while(groups.size() > 1){
+        vector<vector<uint64_t>> final;
+        int groups_len = groups.size();
+        if(groups_len%2 == 0){
+            for(int i = 0; i < groups_len; i+=2)
+                final.push_back(merge(groups[i], groups[i+1]));
+        } else { //for impair nb of groups, the last one will not be merged during this tour
+            for(int i = 0; i < groups_len-1; i+=2)
+                final.push_back(merge(groups[i], groups[i+1]));
+            final.push_back(groups[groups_len-1]);   
+        }
+        groups = final;
+    }
+    if(groups.size() != 1){
+        cout << "PROBLEM - SIZE MUST BE 1" << endl;
+    }
+    return groups[0];
+}
+
+/**
+* Write in a file the k-mers of a vector.
+* @param v - a vector
+* @param km - a kmer manipulator
+* @param path - where to write
+*/
+void writeInFile(const vector<uint64_t> &v, KmerManipulator* km, string path){
+    ofstream fo(path);
+    for(uint64_t i = 0; i < v.size(); i++){
+        string kmer_str = km->decode(v[i]);
+        if(km->encode(kmer_str) != v[i]){
+            cout << "FAIL encode(decode("<< v[i] << ")) != " << v[i] << endl;
+            exit(1);
+        }
+        fo << kmer_str << "\t1\n";
+    }
+    fo.close();
+}
+
+/**
+* Sort a file and write in another file
+* @param fileToSort - path of the file to sort
+* @param outputFile - sorted output
+* @param km - a kmer manipulator for the k-mers in the file to sort
+*/
+void sortFile(string fileToSort, string outputFile, KmerManipulator *km){
+    //open files
+    ifstream input(fileToSort, ios::in);
+    ofstream output(outputFile);
+    //get the number of line in input file and each group ending index
+    vector<uint64_t> endLines;
+    string kmer_str;
+    getline(input, kmer_str);
+    uint64_t kmerCount = 1, lineNumber = 2, kmer_previous = km->encode(kmer_str);
+    while(getline(input, kmer_str)){
+        uint64_t kmer = km->encode(kmer_str);
+        if(kmer < kmer_previous)
+            endLines.push_back(lineNumber);
+
+        kmerCount++;
+        lineNumber++;
+        kmer_previous = kmer;
+    }
+    if(endLines.back() < lineNumber)
+        endLines.push_back(lineNumber);
+
+    input.clear();
+    input.seekg(0, ios::beg);
+
+    //build a vector (groups) containing each of the groups then sort it
+    vector<vector<uint64_t>> groups;
+    for(uint64_t i = 0; i < endLines.size(); i++){
+        vector<uint64_t> pack;
+        groups.push_back(pack);
+    }
+    string line;
+    lineNumber = 1;
+    uint64_t groupIndex = 0, currentWrongLineNumber;
+    while(groupIndex < endLines.size()){
+        currentWrongLineNumber = endLines[groupIndex];
+        while(lineNumber < currentWrongLineNumber){
+            getline(input, line);
+            groups[groupIndex].push_back(km->encode(line));
+            lineNumber++;
+        }
+        groupIndex++;
+    }
+    cout << "Number of groups : " << groups.size() << endl;
+    uint64_t beginning_line = 0;
+    for(uint64_t i = 0; i < groups.size(); i++){
+        cout << "\t > Group " << (i+1) << " size : " << groups[i].size() << " ";
+        cout << "| in lines [ "<< beginning_line << " ; " << (endLines[i]-1) <<" ]" << endl;
+        beginning_line = endLines[i];
+    }
+    vector<uint64_t> sorted = mergeGroups(groups);
+    for(uint64_t i = 0; i < sorted.size(); i++){
+        output << km->decode(sorted[i]) << "\t1\n";
+    }
+
+    //close file
+    input.close();
+    output.close();
+}
+
+/**
+* Print if the file is sorted or not. Generally used after a call to sortFile() in order to check that the output is really sorted.
+* @param path - the file
+* @param km - a k-mer manipulator to analyze k-mers in the file to sort 
+*/
+void checkIfSorted(string path, KmerManipulator* km){
+    ifstream fi(path, ios::in);
+    string line, line_previous;
+
+    getline(fi, line_previous);
+    uint64_t lineNumber = 1, k_previous = km->encode(line_previous);
+
+    bool isSorted = true;
+    while(getline(fi, line)){
+        uint64_t k = km->encode(line);
+        if(k < k_previous){
+            isSorted = false;
+            cout << path << " : NOT SORTED AT LINE : " << lineNumber << endl;
+            cout << "\t" << (lineNumber-1) << " : " << line << endl;
+            cout << "\t" << lineNumber << " : " << line_previous << endl;
+        }
+        lineNumber++;
+        k_previous = k;
+        line_previous = line;
+    }
+
+    if(isSorted)
+        cout << path << " : FILE IS SORTED" << endl;
+}
+
+
+int main(){
+    KmerManipulatorACTG km(31);
+
+    //produce ecoli_sorted.txt
+    sortFile("ecoli_count.txt", "ecoli_sorted.txt", &km);
+
+    //check if there is no mistake 
+    checkIfSorted("ecoli_sorted.txt", &km);
+
+    return 0;
+}
