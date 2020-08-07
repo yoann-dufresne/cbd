@@ -389,13 +389,19 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     //cout << "SD VECTOR SIZE  : " << sdvSize;
     
     sd_vector_builder builder(sdvSize, numberOfKmer);
+    uint64_t previousKmer(0);
     while(getline(kmerFlux, line)){
         uint64_t k = m_kmerManipulator->encode(line);
         if(k >  m_kmerManipulator->reverseComplement(k)){
             cout << "The file is not completely canonical" << endl;
             exit(1);
         }
+        if(k < previousKmer){
+            cout << "The file is not sort in the ascending order" << endl;
+            exit(2);
+        }
         builder.set(k);   
+        previousKmer = k;
     }
     
     m_sequence = builder;
