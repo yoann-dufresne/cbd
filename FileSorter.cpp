@@ -2,10 +2,10 @@
 #include <istream>
 #include <vector>
 #include <string>
+#include <chrono>
 #include "ConwayBromageLib.h"
 
 using namespace std;
-
 /**
 * Print a vector<uint64_t>
 * @param v - a vector
@@ -79,7 +79,7 @@ vector<uint64_t> merge(const vector<uint64_t> &v1, const vector<uint64_t> &v2){
 * @param groups - a vector of vector
 */
 vector<uint64_t> mergeGroups(vector<vector<uint64_t>> groups){
-    while(groups.size() > 1){
+    while(groups.size() != 1){
         vector<vector<uint64_t>> final;
         int groups_len = groups.size();
         if(groups_len%2 == 0){
@@ -91,9 +91,6 @@ vector<uint64_t> mergeGroups(vector<vector<uint64_t>> groups){
             final.push_back(groups[groups_len-1]);   
         }
         groups = final;
-    }
-    if(groups.size() != 1){
-        cout << "PROBLEM - SIZE MUST BE 1" << endl;
     }
     return groups[0];
 }
@@ -107,12 +104,7 @@ vector<uint64_t> mergeGroups(vector<vector<uint64_t>> groups){
 void writeInFile(const vector<uint64_t> &v, KmerManipulator* km, string path){
     ofstream fo(path);
     for(uint64_t i = 0; i < v.size(); i++){
-        string kmer_str = km->decode(v[i]);
-        if(km->encode(kmer_str) != v[i]){
-            cout << "FAIL encode(decode("<< v[i] << ")) != " << v[i] << endl;
-            exit(1);
-        }
-        fo << kmer_str << "\t1\n";
+        fo << km->decode(v[i]) << "\t1\n";
     }
     fo.close();
 }
@@ -124,47 +116,48 @@ void writeInFile(const vector<uint64_t> &v, KmerManipulator* km, string path){
 * @param km - a kmer manipulator for the k-mers in the file to sort
 */
 void sortFile(string fileToSort, string outputFile, KmerManipulator *km){
-    //open files
+    auto X = chrono::high_resolution_clock::now();
+
+    //open file
     ifstream input(fileToSort, ios::in);
-    ofstream output(outputFile);
-    //get the number of line in input file and each group ending index
+
+    cout << "Creation of the sorted groups. " << endl;;
+    //creation of the sorted groups
+    auto a = chrono::high_resolution_clock::now(); 
     vector<uint64_t> endLines;
+    vector<vector<uint64_t>> groups;
+
     string kmer_str;
     getline(input, kmer_str);
-    uint64_t kmerCount = 1, lineNumber = 2, kmer_previous = km->encode(kmer_str);
+    uint64_t kmer_previous = km->encode(kmer_str);
+
+    uint64_t groupIndex = 0, lineNumber = 2;
+
+    vector<uint64_t> pack;
+    groups.push_back(pack);
+
     while(getline(input, kmer_str)){
         uint64_t kmer = km->encode(kmer_str);
-        if(kmer < kmer_previous)
-            endLines.push_back(lineNumber);
 
-        kmerCount++;
+        if(kmer < kmer_previous){
+            vector<uint64_t> pack;
+            groups.push_back(pack);
+            groupIndex++;
+            endLines.push_back(lineNumber);
+        }
+        groups[groupIndex].push_back(kmer);
+
         lineNumber++;
         kmer_previous = kmer;
     }
-    if(endLines.back() < lineNumber)
-        endLines.push_back(lineNumber);
 
-    input.clear();
-    input.seekg(0, ios::beg);
+    if(endLines.back() < lineNumber) endLines.push_back(lineNumber);
 
-    //build a vector (groups) containing each of the groups then sort it
-    vector<vector<uint64_t>> groups;
-    for(uint64_t i = 0; i < endLines.size(); i++){
-        vector<uint64_t> pack;
-        groups.push_back(pack);
-    }
-    string line;
-    lineNumber = 1;
-    uint64_t groupIndex = 0, currentWrongLineNumber;
-    while(groupIndex < endLines.size()){
-        currentWrongLineNumber = endLines[groupIndex];
-        while(lineNumber < currentWrongLineNumber){
-            getline(input, line);
-            groups[groupIndex].push_back(km->encode(line));
-            lineNumber++;
-        }
-        groupIndex++;
-    }
+    auto b = chrono::high_resolution_clock::now();
+    double elapsed1 = chrono::duration_cast<chrono::seconds>(b-a).count();
+    cout << "   >Done in " << elapsed1 << " s." << endl;
+
+    //print info
     cout << "Number of groups : " << groups.size() << endl;
     uint64_t beginning_line = 0;
     for(uint64_t i = 0; i < groups.size(); i++){
@@ -172,14 +165,30 @@ void sortFile(string fileToSort, string outputFile, KmerManipulator *km){
         cout << "| in lines [ "<< beginning_line << " ; " << (endLines[i]-1) <<" ]" << endl;
         beginning_line = endLines[i];
     }
+
+    //sort
+    cout << "Sorting. " << endl;
+    auto c = chrono::high_resolution_clock::now();
     vector<uint64_t> sorted = mergeGroups(groups);
-    for(uint64_t i = 0; i < sorted.size(); i++){
-        output << km->decode(sorted[i]) << "\t1\n";
-    }
+    auto d = chrono::high_resolution_clock::now();
+    double elapsed2 = chrono::duration_cast<chrono::seconds>(d-c).count();
+    cout << "   >Done in " << elapsed2 << " s." << endl;
+
+    //write in file
+    cout << "Writing in file. " << endl;
+    auto e = chrono::high_resolution_clock::now();
+    writeInFile(sorted, km, outputFile);
+    auto f = chrono::high_resolution_clock::now();
+    double elapsed3 = chrono::duration_cast<chrono::seconds>(f-e).count();
+    cout << "   >Done in " << elapsed3 << " s." << endl;
 
     //close file
     input.close();
-    output.close();
+
+    auto Y = chrono::high_resolution_clock::now();
+    double total_time = chrono::duration_cast<chrono::seconds>(Y-X).count();
+    cout << "Sorted file produced. TOTAL TIME : " << total_time << " s." << endl;
+
 }
 
 /**
@@ -188,28 +197,32 @@ void sortFile(string fileToSort, string outputFile, KmerManipulator *km){
 * @param km - a k-mer manipulator to analyze k-mers in the file to sort 
 */
 void checkIfSorted(string path, KmerManipulator* km){
-    ifstream fi(path, ios::in);
-    string line, line_previous;
+    auto X = chrono::high_resolution_clock::now();
 
-    getline(fi, line_previous);
-    uint64_t lineNumber = 1, k_previous = km->encode(line_previous);
+    ifstream fi(path, ios::in);
+    string line;
+
+    getline(fi, line);
+    uint64_t lineNumber = 1, k_previous = km->encode(line);
 
     bool isSorted = true;
     while(getline(fi, line)){
+        lineNumber++;
         uint64_t k = km->encode(line);
+
         if(k < k_previous){
             isSorted = false;
             cout << path << " : NOT SORTED AT LINE : " << lineNumber << endl;
-            cout << "\t" << (lineNumber-1) << " : " << line << endl;
-            cout << "\t" << lineNumber << " : " << line_previous << endl;
+            cout << "\t" << lineNumber << " : " << line << endl;
         }
-        lineNumber++;
         k_previous = k;
-        line_previous = line;
     }
 
-    if(isSorted)
-        cout << path << " : FILE IS SORTED" << endl;
+    if(isSorted) cout << path << " : FILE IS SORTED" << endl;
+
+    auto Y = chrono::high_resolution_clock::now();
+    double elapsed = chrono::duration_cast<chrono::seconds>(Y-X).count();
+    cout << "   >Done in " << elapsed << " s." << endl;
 }
 
 
