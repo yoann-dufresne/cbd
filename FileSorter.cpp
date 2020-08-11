@@ -92,6 +92,8 @@ vector<uint64_t> mergeGroups(vector<vector<uint64_t>> groups){
         }
         groups = final;
     }
+    cout << "vector max size : " << groups[0].max_size() << endl;
+    cout << "final vector size : " << groups[0].size() << endl;
     return groups[0];
 }
 
@@ -104,7 +106,7 @@ vector<uint64_t> mergeGroups(vector<vector<uint64_t>> groups){
 void writeInFile(const vector<uint64_t> &v, KmerManipulator* km, string path){
     ofstream fo(path);
     for(uint64_t i = 0; i < v.size(); i++){
-        fo << km->decode(v[i]) << "\t1\n";
+        fo << km->decode(v[i]) << "\t1" << endl;
     }
     fo.close();
 }
@@ -126,7 +128,8 @@ void sortFile(string fileToSort, string outputFile, KmerManipulator *km){
     auto a = chrono::high_resolution_clock::now(); 
     vector<uint64_t> endLines;
     vector<vector<uint64_t>> groups;
-
+    cout << "vector max size : " << groups.max_size() << endl;
+    
     string kmer_str;
     getline(input, kmer_str);
     uint64_t kmer_previous = km->encode(kmer_str);
@@ -161,8 +164,7 @@ void sortFile(string fileToSort, string outputFile, KmerManipulator *km){
     cout << "Number of groups : " << groups.size() << endl;
     uint64_t beginning_line = 0;
     for(uint64_t i = 0; i < groups.size(); i++){
-        cout << "\t > Group " << (i+1) << " size : " << groups[i].size() << " ";
-        cout << "| in lines [ "<< beginning_line << " ; " << (endLines[i]-1) <<" ]" << endl;
+        cout << "\t > Group " << (i+1) << " size : " << groups[i].size() << " | in lines [ "<< beginning_line << " ; " << (endLines[i]-1) <<" ]" << endl;
         beginning_line = endLines[i];
     }
 
