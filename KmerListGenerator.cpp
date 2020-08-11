@@ -117,12 +117,17 @@ void generateRandomExistingKmers(string inputFile, string outputFile, KmerManipu
     while(getline(fi, line))
         existingKmers.push_back(km->encode(line));
 
-    //write random existing kmers in file
     srand((unsigned)time(NULL)); 
     uint64_t limit = existingKmers.size()-1;
 
+    //generator of random kmers
+    random_device rd; 
+    mt19937 gen(rd());
+    uniform_int_distribution<uint64_t> random(0, existingKmers.size()-1);
+
+    //write random existing kmers in file
     for(uint64_t i = 0; i < numberOfKmer; i++)
-        fo << ">kmer" << (i+1) << "\n" << km->decode(existingKmers[rand()%limit]) << endl; //pick a random kmer in existing ones
+        fo << ">kmer" << (i+1) << "\n" << km->decode(existingKmers[random(gen)]) << endl; //pick a random kmer in existing ones
 
     fi.close();
     fo.close();
