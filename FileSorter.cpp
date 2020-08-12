@@ -120,7 +120,8 @@ void sortFile(string fileToSort, string outputFile, KmerManipulator *km){
 
     vector<uint64_t> pack;
     groups.push_back(pack);
-
+    groups[groupIndex].push_back(kmer_previous);
+    
     while(getline(input, kmer_str)){
         uint64_t kmer = km->encode(kmer_str);
 
