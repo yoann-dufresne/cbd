@@ -6,32 +6,6 @@
 #include "ConwayBromageLib.h"
 
 using namespace std;
-/**
-* Print a vector<uint64_t>
-* @param v - a vector
-*/
-void printv(const vector<uint64_t> &v){
-    for(uint64_t i = 0; i < v.size(); i++)
-        cout << v[i] << " ";
-    cout << endl;
-}
-
-/**
-* Print a vector<vector<uint64_t>>
-* @param v - a vector
-*/
-void printvv(const vector<vector<uint64_t>> &vv){
-    cout << "---------------------------------" << endl;
-    cout << "print vector<vector<uint64_t>> : " << endl;
-    cout << vv.size() << endl;
-    for(uint64_t i = 0; i < vv.size(); i++){
-        for(uint64_t j = 0; j < vv[i].size(); j++)
-            cout << vv[i][j] << " ";
-        cout << endl;
-    }
-    cout << "---------------------------------" << endl;
-}
-
 
 /**
 * Returns a sorted vector with the content of two vectors. 
@@ -41,22 +15,26 @@ void printvv(const vector<vector<uint64_t>> &vv){
 vector<uint64_t> merge(const vector<uint64_t> &v1, const vector<uint64_t> &v2){
     vector<uint64_t> res;
     uint64_t i1 = 0, i2 = 0;
-    uint64_t v1_len = v1.size(), v2_len = v2.size();
-
-    while(i1 < v1_len && i2 < v2_len){
+    //uint64_t v1_len = v1.size(), v2_len = v2.size();
+    uint64_t v1MaxIndice = v1.size()-1, v2MaxIndice = v2.size()-1;
+    //while(i1 < v1_len && i2 < v2_len){
+    while(true){
         uint64_t a = v1[i1];
         uint64_t b = v2[i2];
         if(a < b){
             res.push_back(a);
             i1++;
+            if(i1 > v1MaxIndice) break;
         } else if(b < a){
             res.push_back(b);
             i2++;
+            if(i2 > v2MaxIndice) break;
         } else { //both equal
             res.push_back(a);
             res.push_back(b);
             i1++;
             i2++;
+            if(i1 > v1MaxIndice || i2 > v2MaxIndice) break;
         }
     }
     //here i1=v1.size() or i2=v2.size()
@@ -83,11 +61,15 @@ vector<uint64_t> mergeGroups(vector<vector<uint64_t>> groups){
         vector<vector<uint64_t>> final;
         int groups_len = groups.size();
         if(groups_len%2 == 0){
-            for(int i = 0; i < groups_len; i+=2)
+            #pragma omp parallel for
+            for(int i = 0; i < groups_len; i+=2){
                 final.push_back(merge(groups[i], groups[i+1]));
+            }
         } else { //for impair nb of groups, the last one will not be merged during this tour
-            for(int i = 0; i < groups_len-1; i+=2)
+            #pragma omp parallel for
+            for(int i = 0; i < groups_len-1; i+=2){
                 final.push_back(merge(groups[i], groups[i+1]));
+            }
             final.push_back(groups[groups_len-1]);   
         }
         groups = final;
