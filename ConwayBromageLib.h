@@ -75,7 +75,7 @@ public:
     //principal functions
     bool contains (uint64_t Kmer) const;
     uint8_t successors(uint64_t Kmer) const;
-    uint64_t size() const;
+
     //getters
     int getKmerSize();
     sdsl::sd_vector<> getSequence();
