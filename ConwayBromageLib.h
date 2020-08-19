@@ -3,8 +3,6 @@
 #ifndef CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 #define CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 
-std::vector<uint64_t> successorTranslator(int successors, uint64_t compressedKMer, uint64_t size, bool format);
-
 class KmerManipulator{  //abstract class
 protected:
     uint64_t m_size;    //size of the k-mers
