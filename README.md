@@ -27,11 +27,56 @@ git submodule init
 git submodule update
 ```
 ## How to use CBL ?
-The current ``CMakeLists.txt`` is made for unit tests.<br>
-Example of code :<br>
+The current ``CMakeLists.txt`` **is made for unit tests**.<br>
+To use CBL, please create a new C++ file.<br>
+Example of code, main.cpp :<br>
 ```
-```
+#include "ConwayBromageLib.h"
 
+using namespace std;
+
+int main(){
+    ifstream f("my_demo_test.txt"); //file which contains genome sequence
+    KmerManipulatorACGT k(4);       // size of p-mers ((k+1)-mers)
+    ConwayBromage cb(f, &k);        //build of the bitvector with 4-mers
+
+    KmerManipulatorACGT k3(3);      //size of k-mers
+    uint64_t my_mer = k3.encode("ACG"); //encode "ACG" into an unique number
+
+    cb.contains(my_mer);    //return 1 if my_mer is present, otherwise 0
+    cb.successors(my_mer);  //return a uint8_t that represent the 8 potential successors :
+                            //1 = is present in the sequence, 0 = is absent.
+    return 0;
+}
+```
+To compile modify the ``CMakeLists.txt``, for example with main.cpp above : 
+```
+cmake_minimum_required(VERSION 3.12)    #The minimal version of cmake we need
+                                        #Here we need 3.12 or higher version
+project(example)               #The name of the projet, it will be the executable name
+                               #Can be renamed, renamed it in all the CM akeLists.txt
+add_compile_options(-Wall -Wextra)      #basic compiler options
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -mavx2 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG") #Compilation flag
+#Variables which represents compilation elements
+#One for .cpp elements
+set(SRCS
+        main.cpp  #Our main.cpp file example, can be modify according to your work
+        ConwayBromageLib.cpp)
+#One for .h
+set(HEADERS
+        ConwayBromageLib.h)
+link_directories(example ./sdsl-lite/lib ./sdsl-lite/external/libdivsufsort/lib)    #Where we put .cpp from sdsl library
+add_executable(example ${SRCS} ${HEADERS}) #Create executable example
+add_subdirectory(external)      #Add subdirectories like sdsl and lest, call the CMakeLists.txt from external directory
+target_include_directories(example PUBLIC ./external/lest/include)   #Where we put .h from lest libraries : It needs to be after add_executable !!!
+target_link_libraries(example sdsl divsufsort divsufsort64)    #Specific flags from sdsl library
+
+```
+## Bug reporting
+If there are bugs or mistakes in CBL please send us an issue on [CBL issue reports](https://github.com/yoann-dufresne/ConwayBromageLib/issues)
+## External ressources
+CBL uses others libraries to work.
+The [SDSL](https://github.com/simongog/sdsl-lite) that is a library implementing succinct data structures. We use it to implement bitvector (sd_vector in SDSL syntax).
 ## KmerManipulator class
 Abstract class to manage ACGT or ACTG encoding for k-mers<br>
 Mother class of KmerManipulatorACGT and KmerManipulatorACTG
