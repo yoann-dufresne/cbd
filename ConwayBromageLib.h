@@ -3,9 +3,6 @@
 #ifndef CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 #define CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 
-const int ALPHABET(4);  // Size of the alphabet : E = {A, C, G, T}
-const std::string NUCLEOTIDES [4] = {"A", "C", "G", "T"};
-
 std::vector<uint64_t> successorTranslator(int successors, uint64_t compressedKMer, uint64_t size, bool format);
 
 class KmerManipulator{  //abstract class
@@ -74,6 +71,8 @@ protected:
 };
 //KmerManipulator for ACGT encoding
 class KmerManipulatorACGT : public KmerManipulator{
+private:
+    std::string m_format;   //always ACGT
 public:
     KmerManipulatorACGT(uint64_t size);
     uint64_t encode(const std::string &word);
@@ -86,11 +85,11 @@ public:
     char decodeNucleotide(const uint8_t nucleotide);
     ~KmerManipulatorACGT();
     int getSize();
-private:
-    std::string m_format;   //always ACGT
 };
 //KmerManipulator for ACTG encoding
 class KmerManipulatorACTG : public KmerManipulator{
+private:
+    std::string m_format; // always ACTG
 public:
     KmerManipulatorACTG(uint64_t size);
     uint64_t encode(const std::string &word);
@@ -103,8 +102,6 @@ public:
     char decodeNucleotide(const uint8_t nucleotide);
     ~KmerManipulatorACTG();
     int getSize();
-private:
-    std::string m_format; // always ACTG
 };
 
 class ConwayBromage{
