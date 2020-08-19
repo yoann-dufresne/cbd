@@ -119,7 +119,7 @@ canonicaler.getCanonical(172);		//144
 ### ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km)
 The **ConwayBromage constructor** takes an istream which represents the k-mer flux and a **KmerManipulator** which contains all the information about encoding format.<br>
 It returns an object containing all the k-mers in the flux with very low memory consumption.<br>
-Example of use: <br>
+Example of use :
 ```
 int kmerSize = 31;
 ifstream f("./k-mers.txt", ios::in);
@@ -127,18 +127,19 @@ KmerManipulatorACGT km(kmerSize);
 ConwayBromage cb(f, &km);        
 f.close();
 ```
-_Requirements_
-- The k-mers in the istream must me **canonical** and have a **size k <= 32**.<br>
-- The istream must have at each line (if it's a file for example) **a unique k-mers**.  <br>
+**Requirements**
+- The k-mers in the istream must me **canonical** and have a **size k <= 32**.
+- The istream must have at each line (if it's a file for example) **a unique k-mers**.
 - The k-mers in the istream must be sorted either in lexicographical order (A<C<G<T) or in A<C<T<G. It depends on the encoding format.
-<br>
+```
 Example of a classic txt-file with k-mers of size 4 associated with the counts :
-AAAG	1 <br>
-AAGA	3 <br>
-AAGC	2 <br>
-AAGC	1 <br>
-...
-_N.B_ : **The presence of the counts doesn't affect building, they are automatically ignored by CBL** 
+AAAG	1 
+AAGA	3 
+AAGC	2 
+AAGC	1 
+```
+<br>
+**Note** : The presence of the counts doesn't affect building, they are automatically ignored by CBL.
 ### bool ConwayBromage::contains(uint64_t Kmer)
 **contains** takes a (k-1)-mer (a ``uint64_t``) and returns true if it's present among the stored k-mers.<br>
 Example of use:<br>
@@ -151,7 +152,7 @@ bool GTT_exists = cb.contains(intGTT);
 ```
 ### uint8_t ConwayBromage::successors(uint64_t Kmer)
 **successors** takes a (k-1)-mer (a ``uint64_t``) and returns its potenial successors. A (k-1)-mer has at minimum 0 successors and maximum 8 successors.<br>
-__Informations__ : <br>
+**Informations** : <br>
 - The method doesn't check if the Kmer exists (so you have to do it on your own).<br>
 - The result can sometimes have duplicates.<br>
 <br>
