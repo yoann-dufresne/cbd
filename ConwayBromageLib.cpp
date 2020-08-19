@@ -24,7 +24,7 @@ KmerManipulatorACTG::~KmerManipulatorACTG() noexcept {}
 
 uint64_t KmerManipulatorACTG::encode(const string &word) {
     //Value in ASCII table
-    //A = 65 : 0100 0001 <-> 0 
+    //A = 65 : 0100 0001 <-> 0 (encoded value)
     //C = 67 : 0100 0011 <-> 1  
     //T = 84 : 0101 0100 <-> 2 
     //G = 71 : 0100 0111 <-> 3 
@@ -103,19 +103,19 @@ uint8_t KmerManipulatorACTG::reverseComplementOfNucleotide(const uint8_t nucleot
         return 3; //G
     if(nucleotide == 2) //T
         return 0; //A
-    if(nucleotide == 3) //G
-        return 1; //C
+    // nucleotide = 3 <-> G
+    return 1; //C
 }
 
 char KmerManipulatorACTG::decodeNucleotide(const uint8_t nucleotide){
-    if(nucleotide == 0)
+    if(nucleotide == 0) 
         return 'A';
     if(nucleotide == 1)
         return 'C';
     if(nucleotide == 2)
         return 'T';
-    if(nucleotide == 3)
-        return 'G';
+    //nucleotide = 3
+    return 'G';
 }
 
 int KmerManipulatorACTG::getSize(){
@@ -128,7 +128,7 @@ KmerManipulatorACGT::~KmerManipulatorACGT() noexcept {}
 
 uint64_t KmerManipulatorACGT::encode(const string &word) {
     //value in ASCII table
-    //A = 65 : 0100 0001 <-> 0 
+    //A = 65 : 0100 0001 <-> 0 (encoded value)
     //C = 67 : 0100 0011 <-> 1   
     //G = 71 : 0100 0111 <-> 2 
     //T = 84 : 0101 0100 <-> 3
@@ -206,8 +206,8 @@ uint8_t KmerManipulatorACGT::reverseComplementOfNucleotide(const uint8_t nucleot
         return 2; //G
     if(nucleotide == 2) //G
         return 1; //C
-    if(nucleotide == 3) //T
-        return 0; //A
+    //nucleotide = 3 <-> T
+    return 0; //A
 }
 
 char KmerManipulatorACGT::decodeNucleotide(const uint8_t nucleotide){
@@ -217,8 +217,8 @@ char KmerManipulatorACGT::decodeNucleotide(const uint8_t nucleotide){
         return 'C';
     if(nucleotide == 2)
         return 'G';
-    if(nucleotide == 3)
-        return 'T';
+    // nucleotide = 3
+    return 'T';
 }
 
 int KmerManipulatorACGT::getSize(){
