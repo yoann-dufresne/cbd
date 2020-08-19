@@ -1,7 +1,3 @@
-//
-// Created by Alexandra and Murat on 05/06/2020.
-//
-
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -22,6 +18,11 @@ KmerManipulator::~KmerManipulator() noexcept {}
 KmerManipulatorACTG::KmerManipulatorACTG(uint64_t size): KmerManipulator(size), m_format("ACTG"){}
 KmerManipulatorACTG::~KmerManipulatorACTG() noexcept {}
 
+/** 
+ * Encodes a k-mer in ACTG format
+ * @param word - the string we want to encode into a uint64_t
+ * @return a uint64_t which represent the encoding version of the word
+*/
 uint64_t KmerManipulatorACTG::encode(const string &word) {
     //Value in ASCII table
     //A = 65 : 0100 0001 <-> 0 (encoded value)
@@ -37,6 +38,11 @@ uint64_t KmerManipulatorACTG::encode(const string &word) {
     return res;
 }
 
+/**
+ * Returns a string which is the word which corresponds to the uint64_t value
+ * @param kmer - the value.
+ * @return a string representing the decoding version of the uint64_t.
+*/
 string KmerManipulatorACTG::decode(uint64_t kmer) {
     static const char valueToCaracter[4] = {'A','C','T','G'}; //declared and initialized only during the first call to this method
     string res(m_size, ' ');
@@ -48,6 +54,11 @@ string KmerManipulatorACTG::decode(uint64_t kmer) {
     return res;
 }
 
+/**
+ * Returns the canonical version of a  k-mer, depends on encoding : see daughter classes
+ * @param kmer - a uint64_t which represents the compressed kmer we want to study
+ * @return a uint64_t which is the kmer itself if it is already canonical, or its canonical version
+ */
 uint64_t KmerManipulatorACTG::getCanonical(const uint64_t kmer) {
     uint64_t reverseCompl = reverseComplement(kmer);
     return((kmer < reverseCompl)?kmer:reverseCompl);
@@ -65,6 +76,11 @@ __m256i KmerManipulatorACTG::getCanonicalAVX(const __m256i kmer) {
     return ult;
 }
 
+/** 
+ * Returns the reverse complement
+ * @param kmer - a uin64_t which represent the compressed version of a k-mer
+ * @return a uin64_t which represent the compressed version of the reverse complement of the given k-mer
+ */
 uint64_t KmerManipulatorACTG::reverseComplement(const u_int64_t kmer) {
     u_int64_t res = kmer;
     res = ((res>> 2 & 0x3333333333333333) | (res & 0x3333333333333333) <<  2);
@@ -96,6 +112,12 @@ __m256i KmerManipulatorACTG::reverseComplementAVX(const __m256i kmer){
     return res;
 }
 
+/**
+ * Returns the reverse complement of a nucleotide.
+ * @param nucleotide - an encode nucleotide
+ * @return the reverse complement of the param nucleotide
+ * We use this method for cache creation
+ */
 uint8_t KmerManipulatorACTG::reverseComplementOfNucleotide(const uint8_t nucleotide){
     if(nucleotide == 0) //A
         return 2; //T
@@ -107,6 +129,11 @@ uint8_t KmerManipulatorACTG::reverseComplementOfNucleotide(const uint8_t nucleot
     return 1; //C
 }
 
+/**
+ * Returns the corresponding caracter to the nucleotide's value.
+ * @param nucleotide - an encode nucleotide
+ * @return a char that correspond to the nucleotide value (A, C, T or G)
+ */
 char KmerManipulatorACTG::decodeNucleotide(const uint8_t nucleotide){
     if(nucleotide == 0) 
         return 'A';
@@ -118,6 +145,10 @@ char KmerManipulatorACTG::decodeNucleotide(const uint8_t nucleotide){
     return 'G';
 }
 
+/**
+ * Returns the size attribute.
+ * @return an int that is the size of the sequence
+ */
 int KmerManipulatorACTG::getSize(){
     return m_size;
 }
@@ -126,6 +157,11 @@ int KmerManipulatorACTG::getSize(){
 KmerManipulatorACGT::KmerManipulatorACGT(uint64_t size): KmerManipulator(size), m_format("ACGT") {}
 KmerManipulatorACGT::~KmerManipulatorACGT() noexcept {}
 
+/** 
+ * Encodes a k-mer in ACGT format
+ * @param word - the string we want to encode into a uint64_t
+ * @return a uint64_t which represent the encoding version of the word
+ */
 uint64_t KmerManipulatorACGT::encode(const string &word) {
     //value in ASCII table
     //A = 65 : 0100 0001 <-> 0 (encoded value)
@@ -141,6 +177,11 @@ uint64_t KmerManipulatorACGT::encode(const string &word) {
     return res;   
 }
 
+/**
+ * Returns a string which is the word which corresponds to the uint64_t value (in ACGT format)
+ * @param kmer - the value.
+ * @return a string representing the decoding version of the uint64_t.
+ */
 string KmerManipulatorACGT::decode(uint64_t kmer) {
     static const char valueToCaracter[4] = {'A','C','G','T'}; //declared and initialized only during the first call to this method
     string res(m_size, ' ');
@@ -152,6 +193,11 @@ string KmerManipulatorACGT::decode(uint64_t kmer) {
     return res;
 }
 
+/**
+ * Returns the canonical version of a k-mer in ACGT format
+ * @param kmer - a uint64_t which represents the compressed kmer we want to study
+ * @return a uint64_t which is the compressed kmer itself if it is already canonical, or its canonical version
+ */
 uint64_t KmerManipulatorACGT::getCanonical(const uint64_t kmer) {
     uint64_t reverseCompl = reverseComplement(kmer);
     return((kmer < reverseCompl)?kmer:reverseCompl);
@@ -169,6 +215,11 @@ __m256i KmerManipulatorACGT::getCanonicalAVX(const __m256i kmer) {
     return ult;
 }
 
+/** 
+ * Returns the reverse complement
+ * @param kmer - a uin64_t which represent the compressed version of a k-mer
+ * @return a uin64_t which represent the compressed version of the reverse complement of the given k-mer
+ */
 uint64_t KmerManipulatorACGT::reverseComplement(const uint64_t kmer) {
     uint64_t res = ~kmer;
     res = ((res >> 2 & 0x3333333333333333) | (res & 0x3333333333333333) << 2);
@@ -199,6 +250,12 @@ __m256i KmerManipulatorACGT::reverseComplementAVX(const __m256i kmer) {
     return res;
 }
 
+/**
+ * Returns the reverse complement of a nucleotide.
+ * @param nucleotide - an encode nucleotide
+ * @return the reverse complement of the param nucleotide
+ * We use this method for cache creation
+ */
 uint8_t KmerManipulatorACGT::reverseComplementOfNucleotide(const uint8_t nucleotide){
     if(nucleotide == 0) //A
         return 3; //T
@@ -210,6 +267,11 @@ uint8_t KmerManipulatorACGT::reverseComplementOfNucleotide(const uint8_t nucleot
     return 0; //A
 }
 
+/**
+ * Returns the corresponding caracter to the nucleotide's value.
+ * @param nucleotide - an encode nucleotide
+ * @return a char that correspond to the nucleotide value (A, C, T or G)
+ */
 char KmerManipulatorACGT::decodeNucleotide(const uint8_t nucleotide){
     if(nucleotide == 0)
         return 'A';
@@ -221,6 +283,10 @@ char KmerManipulatorACGT::decodeNucleotide(const uint8_t nucleotide){
     return 'T';
 }
 
+/**
+ * Returns the size attribute.
+ * @return an int that is the size of the sequence
+ */
 int KmerManipulatorACGT::getSize(){
     return m_size;
 }
@@ -375,9 +441,9 @@ uint64_t ConwayBromage::size() const{
 }
 
 /**
- * Check if the given Kmer is present in the sequence. The k-mer can either be canonical or not.
- * @param Kmer - An uint64_t representing the k-mer.
- * @return true if the k-mer is present. Otherwise 0
+ * Check if the given (k-1)-mer is present. The (k-1)-mer can either be canonical or not.
+ * @param Kmer - An uint64_t representing the (k-1)-mer.
+ * @return true if the (k-1)-mer is present. False otherwise. 
  */
 bool ConwayBromage::contains(uint64_t Kmer) const{
     if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
@@ -420,13 +486,14 @@ bool ConwayBromage::isPresentAVX(uint64_t Kmer) const {
 }
 
 /**
- * Returns the successors of a canonical kmer.
- * @param Kmer : the Kmer (uint64_t form) that we want to find its successors. Can either be canonical or not.
- * @return a uint8_t representing the (at most 8) successors of the kmer.
+ * Returns the successors of a (k-1)-mer. The (k-1)-mer can either be canonical or not.
+ * The function doesn't check if the (k-1)-mer is present.
+ * @param Kmer : a (k-1)-mer.
+ * @return a uint8_t which carry information about the presence/absence of the 8 potential successors of the (k-1)-mer.
  * Read of the return : 
  * read the uint8_t under bit form : the first four elements are "next" k-mers, the last four are "previous"
  * Always the same reading direction : A then C then G then T regardless of the encoding
- * check the read.me "Explanation on how it works" in https://github.com/yoann-dufresne/ConwayBromageLib for an example
+ * Check the read.me "Explanation on how it works" in https://github.com/yoann-dufresne/ConwayBromageLib for an example
  */
 uint8_t ConwayBromage::successors(uint64_t Kmer) const{
     if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
