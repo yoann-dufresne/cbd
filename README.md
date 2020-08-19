@@ -131,15 +131,16 @@ ConwayBromage cb(f, &km);
 f.close();
 ```
 #### Requirements
-- The k-mers in the istream must me **canonical** and have a **size <= 32**.<br>
-- The istream must have at each line (if it's a file for example) **the k-mers and its counts**.<br>
+- The k-mers in the istream must me **canonical** and have a **size k <= 32**.<br>
+- The istream must have at each line (if it's a file for example) **a unique k-mers**.  <br>
 <br>
-Example of a classic txt-file with k-mers of size 4: <br>
+Example of a classic txt-file with k-mers of size 4 associated with the counts :
 AAAG	1 <br>
 AAGA	3 <br>
 AAGC	2 <br>
 AAGC	1 <br>
 ...
+N.B : **The presence of the counts doesn't affect building, they are automatically ignored by CBL** <br>
 
 ### bool ConwayBromage::contains(uint64_t Kmer)
 Takes a (k-1)-mer and returns true if it's present among the stored k-mers.<br>
