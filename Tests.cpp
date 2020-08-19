@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * File:   Tests.cpp
- * Author: muratokutucu
- *
- * Created on 8 juin 2020, 11:07
- */
-
 #include <cstdlib>
 #include <string>
 #include <bitset>
@@ -19,14 +6,12 @@
 #include <sdsl/sd_vector.hpp>
 #include <sdsl/vectors.hpp>
 
-
 using namespace std;
 using namespace sdsl;
 using namespace lest;
 
-
-static const uint64_t  totalLen = 4611686018427387904;
-static const sd_vector<>littleTestPrev = bit_vector{0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1};
+//static const uint64_t  totalLen = 4611686018427387904;
+//static const sd_vector<>littleTestPrev = bit_vector{0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1};
 //static const sd_vector<> ret = fromFileToSdVectorChooser("./sorted_kmers.txt","ACGT");
 /*
  * Compilation line : g++ -Wall -Wextra -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o Tests.exe Tests.cpp ConwayBromageLib.cpp -lsdsl -ldivsufsort -ldivsufsort64
