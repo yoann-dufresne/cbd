@@ -7,14 +7,14 @@ CBL is developped for the assembling of larges genomes. It stores canonical k-me
 Article : https://www.researchgate.net/publication/49765043_Succinct_Data_Structures_for_Assembling_Large_Genomes
 
 ## Method
-ConwayBromageLib is based on the library SDSL (https://github.com/simongog/sdsl-lite) which provides succinct data structures. More precisely, CBL use the class ```sd_vector``` which implements a sparse bit vector (vector made of zeros and ones) in order to store the k-mers. <br>
+ConwayBromageLib is based on the [SDSL](https://github.com/simongog/sdsl-lite) library which provides succinct data structures. More precisely, CBL use the class ```sd_vector``` which implements a sparse bit vector (vector made of zeros and ones) in order to store the k-mers. <br>
 <br>
 CBL takes a list of canonical k-mers as input. The bit vector use to store these k-mers is of size 4^k. These latter are represented by an index/position in the bit vector. If an element of a specific position is set to one, then it means that the k-mer representing this position is present at least once in the sequence. Otherwise (set to 0) it is absent.<br>
 <br>
 A succinct data structure is a data structure objects in memory-space close to the information-theoretic lower bounds and perform efficient query operations.
 
 ## What can I do with CBL ?
-CBL stores genomes sequences. One it is done, we can apply two query operations : <br>
+CBL stores genomes sequences. Once it is done, we can apply two query operations : <br>
 The query operation **contains** to know if a given (k-1)-mer is present or not.<br>
 The query operation **successors** to get the successors of a (k-1)-mer.<br>
 A successor of a k-mer ```x``` is any k-mer of the form ```a+x[1:k-1]``` or ```x[2:k]+a``` with ```a``` nucleotide. 
@@ -88,30 +88,29 @@ If there are bugs or mistakes in CBL please send us an issue on [CBL issue repor
 CBL uses others libraries to work.
 The [SDSL](https://github.com/simongog/sdsl-lite) that is a library implementing succinct data structures. We use it to implement bitvector (sd_vector in SDSL syntax).<br>
 The [Lest](https://github.com/martinmoene/lest#other-macros) library is used to write units tests.
-## KmerManipulator class
-Abstract class to manage ACGT or ACTG encoding for k-mers<br>
+## Technical description for developpers
+### The KmerManipulator class
+Abstract class that manage encoding (ACGT or ACTG) and size (the k) for k-mers<br>
 Mother class of KmerManipulatorACGT and KmerManipulatorACTG
-
 ### KmerManipulatorACGT::encode and KmerManipulatorACTG::encode
-**encode** allow us to translate a nucleotide sequence into an uint64_t thanks to ACGT or ACTG encoding<br>
-We use an hash to create and return unique uint64_t.<br>
-The function returns an uint64_t which corresponds to the given string sequence<br>
+**encode** allow us to translate a k-mer into an ``uint64_t`` thanks to ACGT or ACTG encoding<br>
+We use an hash to create and return unique ``uint64_t``.<br>
+The function takes a ``string`` (an uncompressed k-mer) and returns an ``uint64_t`` (a compressed k-mer) which corresponds to the given string sequence<br>
 Example of use :<br>
 ```
 KmerManipulatorACGT encoder(4);	//4-mers in ACGT format
 encoder.encode("GGTA");		//172
 ```
-
 ### KmerManipulatorACGT::decode and KmerManipulatorACTG::decode
+**decode** does the opposite of **encode** : it takes an ``uint64_t`` and returns the corresponding k-mer string.
 Returns the string representation of a value representing a k-mer.<br>
 Example of use :
 ```
 KmerManipulatorACTG decoder(4);	//4-mers in ACTG format
 decoder.decode(248);	//GGTA
 ```
-
 ### KmerManipulatorACGT::getCanonical and KmerManipulatorACTG::getCanonical
-Calculate the canonical version of a compressed k-mer (a uint64_t).<br>
+**getCanonical** takes an ``uint64_t`` (a compressed k-mer) and returns its canonical version in the form of an ``uint64_t``.<br>
 The canonical version depends on encoding format.<br>
 Example of use :
 ```
@@ -121,8 +120,8 @@ KmerManipulatorACTG canonicaler(4);	//4-mers in ACTG format
 canonicaler.getCanonical(172);		//144
 ```
 ### ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km)
-Take an istream which represents the k-mer flux and the KmerManipulator which contains all the informations about encoding format.<br>
-This constructor will build an object containing all the k-mers in the flux with very low memory consumption.<br>
+The **ConwayBromage constructor** takes an istream which represents the k-mer flux and a **KmerManipulator** which contains all the information about encoding format.<br>
+It returns an object containing all the k-mers in the flux with very low memory consumption.<br>
 Example of use: <br>
 ```
 int kmerSize = 31;
@@ -131,9 +130,10 @@ KmerManipulatorACGT km(kmerSize);
 ConwayBromage cb(f, &km);        
 f.close();
 ```
-#### Requirements
+__Requirements__
 - The k-mers in the istream must me **canonical** and have a **size k <= 32**.<br>
 - The istream must have at each line (if it's a file for example) **a unique k-mers**.  <br>
+- The k-mers in the istream must be sorted either in lexicographical order (A<C<G<T) or in A<C<T<G. It depends on the encoding format.
 <br>
 Example of a classic txt-file with k-mers of size 4 associated with the counts :
 AAAG	1 <br>
@@ -141,10 +141,9 @@ AAGA	3 <br>
 AAGC	2 <br>
 AAGC	1 <br>
 ...
-N.B : **The presence of the counts doesn't affect building, they are automatically ignored by CBL** <br>
-
+__N.B__ : **The presence of the counts doesn't affect building, they are automatically ignored by CBL** <br>
 ### bool ConwayBromage::contains(uint64_t Kmer)
-Takes a (k-1)-mer and returns true if it's present among the stored k-mers.<br>
+**contains** takes a (k-1)-mer (a ``uint64_t``) and returns true if it's present among the stored k-mers.<br>
 Example of use:<br>
 ```
 bool kmer_exists = cb.contains(230);
@@ -153,14 +152,12 @@ KmerManipulatorACGT km(3);
 uint64_t intGTT = km.decode("GTT");
 bool GTT_exists = cb.contains(intGTT);
 ```
-
 ### uint8_t ConwayBromage::successors(uint64_t Kmer)
-Returns the successors of a (k-1)-mer. A (k-1)-mer has at minimum 0 successors and maximum 8 successors.<br>
-Informations : <br>
+**successors** takes a (k-1)-mer (a ``uint64_t``) and returns its potenial successors. A (k-1)-mer has at minimum 0 successors and maximum 8 successors.<br>
+__Informations__ : <br>
 - The method doesn't check if the Kmer exists (so you have to do it on your own).<br>
 - The result can sometimes have duplicates.<br>
 <br>
-
 #### Explanation on how it works
 Let's say the function takes as a parameter the integer which represents the (k-1)-mer **GTT** and we assume we are in ACGT encoding.<br>
 First, the method will generate the following k-mers : GTTA, GTTC, GTTG, GTTT, AGTT, CGTT, GGTT, TGTT.<br>
