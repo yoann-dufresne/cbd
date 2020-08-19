@@ -2,25 +2,29 @@
 [![Build Status](https://travis-ci.com/yoann-dufresne/ConwayBromageLib.svg?branch=master)](https://travis-ci.com/yoann-dufresne/ConwayBromageLib)
 ## What is ConwayBromageLib ?
 The ConwayBromageLib (CBL) is a C++11 library that implements the succinct data structure described in the article of Thomas C. Conway and Andrew J. Bromage.<br>
-CBL is especially developped for assembling larges genomes. It stores k-mers and permits query operations. It represents an edge-centric De Bruijn Graph in a memory-efficient way by also supporting time-efficient operations.
+CBL is developped for the assembling of larges genomes. It stores canonical k-mers and permits query operations. More specifically, it represents an edge-centric **De Bruijn Graph** in a memory-efficient way by also supporting time-efficient operations.
 
 Article : https://www.researchgate.net/publication/49765043_Succinct_Data_Structures_for_Assembling_Large_Genomes
+
 ## Method
-ConwayBromageLib is based on the library SDSL (https://github.com/simongog/sdsl-lite) which provides succinct data structures. More precisely, CBL use the class '''sd_vector''', implementing a sparse bit vector (vector made of zeros and ones), to store the k-mers. <br>
+ConwayBromageLib is based on the library SDSL (https://github.com/simongog/sdsl-lite) which provides succinct data structures. More precisely, CBL use the class ```sd_vector``` which implements a sparse bit vector (vector made of zeros and ones) in order to store the k-mers. <br>
 <br>
 CBL takes a list of canonical k-mers as input. The bit vector use to store these k-mers is of size 4^k. These latter are represented by an index/position in the bit vector. If an element of a specific position is set to one, then it means that the k-mer representing this position is present at least once in the sequence. Otherwise (set to 0) it is absent.<br>
 <br>
-A succinct data structure is a data structure  objects in memory-space close to the information-theoretic lower bounds and perform efficient query operations.
+A succinct data structure is a data structure objects in memory-space close to the information-theoretic lower bounds and perform efficient query operations.
 
 ## What can I do with CBL ?
-CBL stores genomes sequences. One it is done, we can apply some query operations on the bitvector : <br>
-The query operation **contains** to know if a given k-mer (an element of size k, made of nucleotides) is present in the bitvector (the sequence) or not.<br>
-The query operation **successors** to find out which successors of a given k-mer are present.<br> A successor of a k-mer x is any k-mer of the form a+x[1:k-1] or x[2:k]+a with a nucleotide.
+CBL stores genomes sequences. One it is done, we can apply two query operations : <br>
+The query operation **contains** to know if a given (k-1)-mer is present or not.<br>
+The query operation **successors** to get the successors of a (k-1)-mer.<br>
+A successor of a k-mer ```x``` is any k-mer of the form ```a+x[1:k-1]``` or ```x[2:k]+a``` with a nucleotide. 
+
 ## Requirements
 CBL requires :<br>
 ``g++`` version 8.2.0 or higher.<br>
 ``cmake`` version 3.12 or higher (to build unit tests).
-Mac OS and Linux (Ubuntu) are supported.
+Mac OS and Linux are supported.
+
 ## Installation
 To download the library, please use the following command : 
 ```
