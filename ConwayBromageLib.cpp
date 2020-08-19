@@ -14,8 +14,8 @@
 using namespace std;
 using namespace sdsl;
 
-//POO for KmerManipulator
 //abstract class KmerManipulator
+//For KmerManipulator and children comments, please tcheck the ConwayBromageLib.h
 KmerManipulator::KmerManipulator(uint64_t size): m_size(size) {}
 KmerManipulator::~KmerManipulator() noexcept {}
 //class KmerManipulatorACTG
@@ -23,6 +23,7 @@ KmerManipulatorACTG::KmerManipulatorACTG(uint64_t size): KmerManipulator(size), 
 KmerManipulatorACTG::~KmerManipulatorACTG() noexcept {}
 
 uint64_t KmerManipulatorACTG::encode(const string &word) {
+    //Value in ASCII table
     //A = 65 : 0100 0001 <-> 0 
     //C = 67 : 0100 0011 <-> 1  
     //T = 84 : 0101 0100 <-> 2 
@@ -52,7 +53,8 @@ uint64_t KmerManipulatorACTG::getCanonical(const uint64_t kmer) {
     return((kmer < reverseCompl)?kmer:reverseCompl);
 }
 
-__m256i KmerManipulatorACTG::getCanonicalAVX(const __m256i kmer) {  //WORK IN PROGRESS
+//AVX version of getCanonical
+__m256i KmerManipulatorACTG::getCanonicalAVX(const __m256i kmer) { 
     __m256i reverseCompl = reverseComplementAVX(kmer);  //creation of a __m256i which contains reverse complement of the __m256i k-mers
     __m256i eq = _mm256_cmpeq_epi64(kmer,reverseCompl); //Case where forward and reverse are the same
     __m256i cmp1 = _mm256_or_si256(_mm256_cmpgt_epi64(kmer, reverseCompl), eq);  //kmer < reverseCompl => 0, else -1
@@ -74,6 +76,7 @@ uint64_t KmerManipulatorACTG::reverseComplement(const u_int64_t kmer) {
     return (res >> (2*( 32 - m_size))) ;
 }
 
+//AVX version of reverseComplement
 __m256i KmerManipulatorACTG::reverseComplementAVX(const __m256i kmer){
     //We initialize variables like __mm256i vectors
     __m256i AAA = _mm256_set1_epi64x(0xAAAAAAAAAAAAAAAA);
@@ -83,7 +86,6 @@ __m256i KmerManipulatorACTG::reverseComplementAVX(const __m256i kmer){
     __m256i val4 = _mm256_set1_epi64x(0x0000FFFF0000FFFF);
     __m256i val5 = _mm256_set1_epi64x(0x00000000FFFFFFFF);
     __m256i res = kmer;  // <=> res = kmer
-    //translation in AVX instruction of the original reverseComplement : CARE ABOUT UNSIGNED INT !!!
     res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 2), val1), _mm256_slli_epi64(_mm256_and_si256(res, val1), 2))); // <=> res = ((res >> 2 & 0x3333333333333333) | (res & 0x3333333333333333) << 2);
     res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 4), val2), _mm256_slli_epi64(_mm256_and_si256(res, val2), 4)));
     res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 8), val3), _mm256_slli_epi64(_mm256_and_si256(res, val3), 8)));
@@ -94,9 +96,6 @@ __m256i KmerManipulatorACTG::reverseComplementAVX(const __m256i kmer){
     return res;
 }
 
-/**
- * Returns the reverse complement of a nucleotide.
- */
 uint8_t KmerManipulatorACTG::reverseComplementOfNucleotide(const uint8_t nucleotide){
     if(nucleotide == 0) //A
         return 2; //T
@@ -108,9 +107,6 @@ uint8_t KmerManipulatorACTG::reverseComplementOfNucleotide(const uint8_t nucleot
         return 1; //C
 }
 
-/**
- * Returns the corresponding caracter to the nucleotide's value.
- */
 char KmerManipulatorACTG::decodeNucleotide(const uint8_t nucleotide){
     if(nucleotide == 0)
         return 'A';
@@ -121,9 +117,7 @@ char KmerManipulatorACTG::decodeNucleotide(const uint8_t nucleotide){
     if(nucleotide == 3)
         return 'G';
 }
-/**
-* Returns the size attribute.
-*/
+
 int KmerManipulatorACTG::getSize(){
     return m_size;
 }
@@ -133,6 +127,7 @@ KmerManipulatorACGT::KmerManipulatorACGT(uint64_t size): KmerManipulator(size), 
 KmerManipulatorACGT::~KmerManipulatorACGT() noexcept {}
 
 uint64_t KmerManipulatorACGT::encode(const string &word) {
+    //value in ASCII table
     //A = 65 : 0100 0001 <-> 0 
     //C = 67 : 0100 0011 <-> 1   
     //G = 71 : 0100 0111 <-> 2 
@@ -162,6 +157,7 @@ uint64_t KmerManipulatorACGT::getCanonical(const uint64_t kmer) {
     return((kmer < reverseCompl)?kmer:reverseCompl);
 }
 
+// AVX version of getCanonical
 __m256i KmerManipulatorACGT::getCanonicalAVX(const __m256i kmer) {
     __m256i reverseCompl = reverseComplementAVX(kmer);  //creation of a __m256i which contains reverse complement of the __m256i k-mers
     __m256i eq = _mm256_cmpeq_epi64(kmer,reverseCompl); //Case where reverse and forward are the same
@@ -182,9 +178,8 @@ uint64_t KmerManipulatorACGT::reverseComplement(const uint64_t kmer) {
     res = ((res >> 32 & 0x00000000FFFFFFFF) | (res & 0x00000000FFFFFFFF) << 32);
     return (res >> (2 * (32 - m_size)));
 }
-/**
- * AVX version of reverseComplement
- */
+
+//AVX version of reverseComplement
 __m256i KmerManipulatorACGT::reverseComplementAVX(const __m256i kmer) {
     //We initialize variables like __mm256i vectors
     __m256i allAtOne = _mm256_set1_epi64x(0xFFFFFFFFFFFFFFFF);
@@ -203,9 +198,7 @@ __m256i KmerManipulatorACGT::reverseComplementAVX(const __m256i kmer) {
     res = _mm256_srli_epi64(res, (2 * (32 - m_size)));  //(res >> (2 * (32 - m_size))), we can return it directly
     return res;
 }
-/**
- * Returns the reverse complement of a nucleotide.
- */
+
 uint8_t KmerManipulatorACGT::reverseComplementOfNucleotide(const uint8_t nucleotide){
     if(nucleotide == 0) //A
         return 3; //T
@@ -217,9 +210,6 @@ uint8_t KmerManipulatorACGT::reverseComplementOfNucleotide(const uint8_t nucleot
         return 0; //A
 }
 
-/**
- * Returns the corresponding caracter to the nucleotide's value.
- */
 char KmerManipulatorACGT::decodeNucleotide(const uint8_t nucleotide){
     if(nucleotide == 0)
         return 'A';
@@ -231,15 +221,12 @@ char KmerManipulatorACGT::decodeNucleotide(const uint8_t nucleotide){
         return 'T';
 }
 
-/**
-* Returns the size attribute.
-*/
 int KmerManipulatorACGT::getSize(){
     return m_size;
 }
 
 /**
- * Construct the ConwayBromage object based on the sd_vector in parameter and the KmerManipulator.
+ * First ConwayBromage constructor : Build the ConwayBromage object based on the sd_vector in parameter and the KmerManipulator.
  * @param sdv - An sd_vector which represents the sequence.
  * @param km - A KmerManipulator.
  */
@@ -287,7 +274,7 @@ ConwayBromage::ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km){
 }
 
 /**
- * Transform sequences which are contain in a file in a sd_vector
+ * Second ConwayBromage constructor : Transform sequences which are contain in a file in a sd_vector
  * @param kmerFlux - An istream of kmer. For example a file represented by an ifstream.
  * @param km - Object which contains all the information about encoding and decoding.
  */
@@ -303,18 +290,17 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     kmerFlux.seekg(0, ios::beg);    //Return to the beginning of the file
     uint64_t one = 1;
     uint64_t sdvSize = one << (2*m_kmerManipulator->getSize()); //Creation of the total length to create the sd_vector_builder
-    //cout << "K-MER SIZE      : " << KmerSize << endl;
-    //cout << "NUMBER OF K-MER : " << numberOfKmer << endl;
-    //cout << "SD VECTOR SIZE  : " << sdvSize;
-    
+
     sd_vector_builder builder(sdvSize, numberOfKmer);
     uint64_t previousKmer(0);
     while(getline(kmerFlux, line)){
         uint64_t k = m_kmerManipulator->encode(line);
+        //first chack : canonical elements expected
         if(k >  m_kmerManipulator->reverseComplement(k)){
             cout << "The file is not completely canonical" << endl;
             exit(1);
         }
+        //second check : ascending order expected
         if(k < previousKmer){
             cout << "The file is not sort in the ascending order" << endl;
             exit(1);
@@ -371,10 +357,7 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
 bool ConwayBromage::operator[](uint64_t i) const{
     return m_sequence[i];
 }
-/**
- * AVX version of the [] operator
- * does not return elements, just said if one or more elements of the sequence are set to 1 or not
- */
+//AVX version of the [] operator
 bool ConwayBromage::operator[](__m256i i) const {
     if(m_sequence[i[0]]) return true;
     if(m_sequence[i[1]]) return true;
@@ -392,9 +375,9 @@ uint64_t ConwayBromage::size() const{
 }
 
 /**
- * Check if the given Kmer is present in the sequence.
- * @param Kmer - An integer representing the k-mer.
- * @return true if the k-mer is present.
+ * Check if the given Kmer is present in the sequence. The k-mer can either be canonical or not.
+ * @param Kmer - An uint64_t representing the k-mer.
+ * @return true if the k-mer is present. Otherwise 0
  */
 bool ConwayBromage::contains(uint64_t Kmer) const{
     if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
@@ -421,9 +404,7 @@ bool ConwayBromage::contains(uint64_t Kmer) const{
     return false;
 }
 
-/**
- * AVX version of isPresent, for perf tests
- */
+//AVX version of isPresent
 bool ConwayBromage::isPresentAVX(uint64_t Kmer) const {
     int KmerSize = m_kmerManipulator->getSize()-1;
     uint64_t next = Kmer << 2;
@@ -436,41 +417,16 @@ bool ConwayBromage::isPresentAVX(uint64_t Kmer) const {
     if(operator[](m_kmerManipulator->getCanonicalAVX(_mm256_setr_epi64x(Kmer, (Kmer + (1 << numberOfBitsToShift)),
                                                                         (Kmer + (2 << numberOfBitsToShift)), (Kmer + (3 << numberOfBitsToShift)))))) return true;
     return false;
-    //Try for an AVX version of the new isPresent
-    /*if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
-        cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << m_limit << endl;
-        return false;
-    }
-    uint64_t RC_Kmer = m_kmerManipulator->reverseComplement(Kmer) >> 2;
-    uint64_t RC_Kmer_ShiftedOf2Bits = RC_Kmer << 2;
-    uint64_t next = Kmer << 2;
-
-    __m256i PmerNext = _mm256_setr_epi64x(next, next+1, next+2, next+3);    //__m256i for all the forward nexts
-    __m256i RC_PmerNext = _mm256_setr_epi64x(RC_Kmer + m_RC_shifted[0], RC_Kmer + m_RC_shifted[1],  //__m256i for all the reverseComplement nexts
-                                            RC_Kmer + m_RC_shifted[2], RC_Kmer + m_RC_shifted[3]);
-    __m256i cmp1 = _mm256_cmpgt_epi64(PmerNext, RC_PmerNext);   //Apply the same thing than in getCanonicalAVX
-    __m256i cmp2 = _mm256_cmpgt_epi64(RC_PmerNext, PmerNext);
-    __m256i and1 = _mm256_and_si256(cmp2, PmerNext);
-    __m256i and2 = _mm256_and_si256(cmp1, RC_PmerNext);
-    __m256i ultN = _mm256_or_si256(and1, and2);
-    if(operator[](ultN)) return true;   //verify existence
-    __m256i PmerPrev = _mm256_setr_epi64x(Kmer + m_nucleotides_shifted[0], Kmer + m_nucleotides_shifted[1], //__m256i for all the forward previous
-                                         Kmer + m_nucleotides_shifted[2], Kmer + m_nucleotides_shifted[3]);
-    __m256i RC_PmerPrev = _mm256_setr_epi64x(RC_Kmer_ShiftedOf2Bits + m_RC[0], RC_Kmer_ShiftedOf2Bits + m_RC[1],    //__m256i for all the reverseComplement previous
-                                            RC_Kmer_ShiftedOf2Bits + m_RC[2], RC_Kmer_ShiftedOf2Bits + m_RC[3]);
-    cmp1 = _mm256_cmpgt_epi64(PmerPrev, RC_PmerPrev);
-    cmp2 = _mm256_cmpgt_epi64(RC_PmerPrev, PmerPrev);
-    and1 = _mm256_and_si256(cmp2, PmerPrev);
-    and2 = _mm256_and_si256(cmp1, RC_PmerPrev);
-    __m256i ultP = _mm256_or_si256(and1, and2);
-    if(operator[](ultP)) return true;
-    return false;*/
 }
 
 /**
  * Returns the successors of a canonical kmer.
- * @param Kmer : the Kmer that we want to find its successors. Can either be canonical or not.
+ * @param Kmer : the Kmer (uint64_t form) that we want to find its successors. Can either be canonical or not.
  * @return a uint8_t representing the (at most 8) successors of the kmer.
+ * Read of the return : 
+ * read the uint8_t under bit form : the first four elements are "next" k-mers, the last four are "previous"
+ * Always the same reading direction : A then C then G then T regardless of the encoding
+ * check the read.me "Explanation on how it works" in https://github.com/yoann-dufresne/ConwayBromageLib for an example
  */
 uint8_t ConwayBromage::successors(uint64_t Kmer) const{
     if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
@@ -518,6 +474,7 @@ sdsl::sd_vector<> ConwayBromage::getSequence(){
 
 /**
  * Return the kmer manipulator.
+ * @return a KmerManipulator object
  */
 KmerManipulator* ConwayBromage::getKmerManipulator(){
     return m_kmerManipulator;
