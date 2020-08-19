@@ -155,10 +155,10 @@ bool GTT_exists = cb.contains(intGTT);
 ### uint8_t ConwayBromage::successors(uint64_t Kmer)
 **successors** takes a (k-1)-mer (a ``uint64_t``) and returns its potenial successors. A (k-1)-mer has at minimum 0 successors and maximum 8 successors.<br>
 **Informations** : <br>
-- The method doesn't check if the Kmer exists (so you have to do it on your own).<br>
+- The method doesn't check if the Kmer exists (so you have to do it on your own).
 - The result can sometimes have duplicates.<br>
-<br>
-**Explanation on how it works**<br>
+
+**Explanation on how it works**
 Let's say the function takes as a parameter the integer which represents the (k-1)-mer **GTT** and we assume we are in ACGT encoding.<br>
 First, the method will generate the following k-mers : GTTA, GTTC, GTTG, GTTT, AGTT, CGTT, GGTT, TGTT.<br>
 Then, it will check if the canonical version of these k-mers are present.<br>
