@@ -15,9 +15,7 @@ public:
     virtual uint64_t encode(const std::string &word) = 0;
     virtual std::string decode(uint64_t kmer) = 0;
     virtual uint64_t getCanonical(const uint64_t kmer) = 0;
-    virtual __m256i getCanonicalAVX(const __m256i kmer) = 0;      // AVX version of getCanonical prototype
     virtual uint64_t reverseComplement(const  uint64_t kmer) = 0;
-    virtual __m256i reverseComplementAVX(const __m256i kmer) = 0; // AVX version of reverseComplement prototype
     virtual uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide) = 0;
     virtual char decodeNucleotide(const uint8_t nucleotide) = 0;
     virtual int getSize() = 0;  
@@ -34,9 +32,7 @@ public:
     uint64_t encode(const std::string &word);
     std::string decode(uint64_t kmer);
     uint64_t getCanonical(const uint64_t kmer);
-    __m256i getCanonicalAVX(const __m256i kmer);        //AVX version
     uint64_t reverseComplement(const uint64_t kmer);
-    __m256i reverseComplementAVX(const __m256i kmer);   //AVX version
     uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide);
     char decodeNucleotide(const uint8_t nucleotide);
     int getSize();
@@ -53,9 +49,7 @@ public:
     uint64_t encode(const std::string &word);
     std::string decode(uint64_t kmer);
     uint64_t getCanonical(const uint64_t kmer);
-    __m256i getCanonicalAVX(const __m256i kmer);    //AVX version
     uint64_t reverseComplement(const u_int64_t kmer);
-    __m256i reverseComplementAVX(const __m256i kmer);   //AVX version
     uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide);
     char decodeNucleotide(const uint8_t nucleotide);
     int getSize();
@@ -82,13 +76,7 @@ public:
     ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km);
     //principal functions
     bool contains (uint64_t Kmer) const;
-    //AVX prototype of isPresent
-    bool isPresentAVX(uint64_t Kmer) const;
     uint8_t successors(uint64_t Kmer) const;
-    //operators on the sequence
-    bool operator[](uint64_t i) const;
-    //AVX version of the operator
-    bool operator[](__m256i i) const;
     uint64_t size() const;
     //getters
     int getKmerSize();
