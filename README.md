@@ -1,6 +1,21 @@
+# ConwayBromageLib : an implementation of Conway and Bromage succinct data structure for assembling large genomes
 [![Build Status](https://travis-ci.com/yoann-dufresne/ConwayBromageLib.svg?branch=master)](https://travis-ci.com/yoann-dufresne/ConwayBromageLib)
-
-# Conway and Bromage succinct data structure for assembling large genomes
+## What is ConwayBromageLib ?
+The ConwayBromageLib (CBL) is a C++11 library that implements the succinct data structure described in the Conway and Bromage article.<br>
+CBl is especially developped to manage genome sequences. It uses a bitvector (vector made of zeros and ones) to store p-mers of the sequence (a p-mer is an element of size k+1 composed of nucleotides (A,C,T,G)).<br>
+<br>
+Each cases of the bitvector represents a p-mer that has been encoded into a unique number. If the case is set to one, the p-mer is present in the bitvector at least once. Otherwise it is absent.<br>
+<br>
+Bitvectors are a succinct data structure which means they can store objects in memory-space close to the information-theoretic lower bounds and perform efficient query operations.
+## What can I do with CBL ?
+CBL stores genomes sequences. One it is done, we can apply some query operations on the bitvector : <br>
+The query operation **contains** to know if a given k-mer (an element of size k, made of nucleotides) is present in the bitvector (the sequence) or not.<br>
+The query operation **successors** to find out which successors of a given k-mer are present.<br>
+## Requirements
+CBL requires :<br>
+``g++`` version 8.2.0 or higher.<br>
+``cmake`` version 3.12 or higher (to build unit tests).
+Mac OS and Linux (Ubuntu) are supported.
 ## Installation
 To download the library, please use the following command : 
 ```
@@ -11,6 +26,12 @@ If you have already used ``git clone`` without the ``--recurse-submodules`` flag
 git submodule init
 git submodule update
 ```
+## How to use CBL ?
+The current ``CMakeLists.txt`` is made for unit tests.<br>
+Example of code :<br>
+```
+```
+
 ## KmerManipulator class
 Abstract class to manage ACGT or ACTG encoding for k-mers<br>
 Mother class of KmerManipulatorACGT and KmerManipulatorACTG
