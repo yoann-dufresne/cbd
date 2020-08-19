@@ -17,7 +17,7 @@ A succinct data structure is a data structure objects in memory-space close to t
 CBL stores genomes sequences. One it is done, we can apply two query operations : <br>
 The query operation **contains** to know if a given (k-1)-mer is present or not.<br>
 The query operation **successors** to get the successors of a (k-1)-mer.<br>
-A successor of a k-mer ```x``` is any k-mer of the form ```a+x[1:k-1]``` or ```x[2:k]+a``` with a nucleotide. 
+A successor of a k-mer ```x``` is any k-mer of the form ```a+x[1:k-1]``` or ```x[2:k]+a``` with ```a``` nucleotide. 
 
 ## Requirements
 CBL requires :<br>
@@ -26,7 +26,7 @@ CBL requires :<br>
 Mac OS and Linux are supported.
 
 ## Installation
-To download the library, please use the following command : 
+To download the library, use the following command : 
 ```
 git clone --recurse-submodules https://github.com/yoann-dufresne/ConwayBromageLib.git
 ```
@@ -45,16 +45,17 @@ Example of code, main.cpp :<br>
 using namespace std;
 
 int main(){
-    ifstream f("my_demo_test.txt"); //file which contains genome sequence
-    KmerManipulatorACGT k(4);       // size of p-mers ((k+1)-mers)
-    ConwayBromage cb(f, &k);        //build of the bitvector with 4-mers
+    ifstream f("my_demo_test.txt");     // file which contains genome sequence
+    KmerManipulatorACGT k4(4);          // to encode k-mers in ACGT format
+    ConwayBromage cb(f, &k4);           // build of the bit vector with 4-mers (the bit vector will be of size 4^k, here k = 4)
 
-    KmerManipulatorACGT k3(3);      //size of k-mers
-    uint64_t my_mer = k3.encode("ACG"); //encode "ACG" into an unique number
+    KmerManipulatorACGT k3(3);          // to encode (k-1)-mers in ACGT format
+    uint64_t node = k3.encode("ACG");   // gets the integer representing the (k-1)-mer
 
-    cb.contains(my_mer);    //return 1 if my_mer is present, otherwise 0
-    cb.successors(my_mer);  //return a uint8_t that represent the 8 potential successors :
-                            //1 = is present in the sequence, 0 = is absent.
+    cb.contains(node);                  // returns true if the (k-1)-mer is present, otherwise returns false
+    cb.successors(node);                // returns a uint8_t that represents carry information about the 8 potential successors 
+                                        // (see documentation below for more information)
+
     return 0;
 }
 ```
