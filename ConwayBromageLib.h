@@ -8,54 +8,63 @@ const std::string NUCLEOTIDES [4] = {"A", "C", "G", "T"};
 
 std::vector<uint64_t> successorTranslator(int successors, uint64_t compressedKMer, uint64_t size, bool format);
 
-//POO for KmerManipulator
 class KmerManipulator{  //abstract class
 public:
     KmerManipulator(uint64_t size); //Constructor
+    
     //abstract function
-    /* function to encode k-mer sequences, depends on encoding : see daughter classes
-    *@param word - the string we want to encode into a uint64_t
-    *@return a uint64_t which represent the encoding version of the word
+    /** 
+    * function to encode k-mer sequences, depends on encoding : see daughter classes
+    * @param word - the string we want to encode into a uint64_t
+    * @return a uint64_t which represent the encoding version of the word
     */
     virtual uint64_t encode(const std::string &word) = 0;
-    /*
+    
+    /**
     * Returns a string which is the word which corresponds to the uint64_t value, depends on encoding : see daughter classes
     * @param kmer - the value.
     * @return a string representing the decoding version of the uint64_t.
     */
     virtual std::string decode(uint64_t kmer) = 0;
-    /*
-    *calculate the canonical version of a compressed k-mer, depends on encoding : see daughter classes
-    *@param kmer - a uint64_t which represents the compressed kmer we want to study
-    *@return a uint64_t which is the compressed kmer itself if it is already canonical, or its canonical version
+    
+    /**
+    * calculate the canonical version of a compressed k-mer, depends on encoding : see daughter classes
+    * @param kmer - a uint64_t which represents the compressed kmer we want to study
+    * @return a uint64_t which is the compressed kmer itself if it is already canonical, or its canonical version
     */
     virtual uint64_t getCanonical(const uint64_t kmer) = 0;
-    /**
-     * AVX version of getCanonical
-     */
+    
+    // AVX version of getCanonical prototype
     virtual __m256i getCanonicalAVX(const __m256i kmer) = 0;
-    /* Calculate the reverse complement, depends on encoding : see daughter classes
+    
+    /** 
+    * Calculate the reverse complement, depends on encoding : see daughter classes
     * @param kmer - a uin64_t which represent the compressed version of a k-mer
     * @return a uin64_t which represent the compressed version of the reverse complement of the given k-mer
     */
     virtual uint64_t reverseComplement(const  uint64_t kmer) = 0;
-    /**
-     * AVX version of reverseComplement
-     */
+    
+    // AVX version of reverseComplement prototype
     virtual __m256i reverseComplementAVX(const __m256i kmer) = 0;
     
     /**
     * Returns the reverse complement of a nucleotide.
+    * @param nucleotide - an encode nucleotide
+    * @return the reverse complement of the param nucleotide
+    * We use this method for cache creation
     */
     virtual uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide) = 0;
     
     /**
     * Returns the corresponding caracter to the nucleotide's value.
+    * @param nucleotide - an encode nucleotide
+    * @return a char that correspond to the nucleotide value (A, C, T or G)
     */
     virtual char decodeNucleotide(const uint8_t nucleotide) = 0;
     
     /**
     * Returns the size attribute.
+    * @return an int that is the size of the sequence
     */
     virtual int getSize() = 0;
     
@@ -70,15 +79,15 @@ public:
     uint64_t encode(const std::string &word);
     std::string decode(uint64_t kmer);
     uint64_t getCanonical(const uint64_t kmer);
-    __m256i getCanonicalAVX(const __m256i kmer);
+    __m256i getCanonicalAVX(const __m256i kmer);    //AVX version
     uint64_t reverseComplement(const uint64_t kmer);
-    __m256i reverseComplementAVX(const __m256i kmer);
+    __m256i reverseComplementAVX(const __m256i kmer);   //AVX version
     uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide);
     char decodeNucleotide(const uint8_t nucleotide);
     ~KmerManipulatorACGT();
     int getSize();
 private:
-    std::string m_format;
+    std::string m_format;   //always ACGT
 };
 //KmerManipulator for ACTG encoding
 class KmerManipulatorACTG : public KmerManipulator{
@@ -87,15 +96,15 @@ public:
     uint64_t encode(const std::string &word);
     std::string decode(uint64_t kmer);
     uint64_t getCanonical(const uint64_t kmer);
-    __m256i getCanonicalAVX(const __m256i kmer);
+    __m256i getCanonicalAVX(const __m256i kmer);    //AVX version
     uint64_t reverseComplement(const u_int64_t kmer);
-    __m256i reverseComplementAVX(const __m256i kmer);
+    __m256i reverseComplementAVX(const __m256i kmer);   //AVX version
     uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide);
     char decodeNucleotide(const uint8_t nucleotide);
     ~KmerManipulatorACTG();
     int getSize();
 private:
-    std::string m_format;
+    std::string m_format; // always ACTG
 };
 
 class ConwayBromage{
@@ -132,6 +141,7 @@ public:
     /*
      * Functions for isPresent performance tests
      * Use them as friend of ConwayBromage to allow them to use attribute easily
+     * Not needed for the global functioning
      */
     friend sdsl::int_vector<> ratioForIsPresent(int ratioIn, int nbOfOnes, ConwayBromage cb);
     friend void metricForIsPresent();
