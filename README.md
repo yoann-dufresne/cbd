@@ -139,7 +139,9 @@ AAGC	2
 AAGC	1 
 ```
 <br>
+
 **Note** : The presence of the counts doesn't affect building, they are automatically ignored by CBL.
+
 ### bool ConwayBromage::contains(uint64_t Kmer)
 **contains** takes a (k-1)-mer (a ``uint64_t``) and returns true if it's present among the stored k-mers.<br>
 Example of use:<br>
@@ -156,7 +158,7 @@ bool GTT_exists = cb.contains(intGTT);
 - The method doesn't check if the Kmer exists (so you have to do it on your own).<br>
 - The result can sometimes have duplicates.<br>
 <br>
-#### Explanation on how it works
+**Explanation on how it works**<br>
 Let's say the function takes as a parameter the integer which represents the (k-1)-mer **GTT** and we assume we are in ACGT encoding.<br>
 First, the method will generate the following k-mers : GTTA, GTTC, GTTG, GTTT, AGTT, CGTT, GGTT, TGTT.<br>
 Then, it will check if the canonical version of these k-mers are present.<br>
