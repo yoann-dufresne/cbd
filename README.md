@@ -1,11 +1,8 @@
 # ConwayBromageLib : an implementation of Conway and Bromage succinct data structure for assembling large genomes
 [![Build Status](https://travis-ci.com/yoann-dufresne/ConwayBromageLib.svg?branch=master)](https://travis-ci.com/yoann-dufresne/ConwayBromageLib)
 ## What is ConwayBromageLib ?
-The ConwayBromageLib (CBL) is a C++11 library that implements the succinct data structure described in the article of Thomas C. Conway and Andrew J. Bromage.<br>
+The ConwayBromageLib (CBL) is a C++11 library that implements the succinct data structure described in the [article of Thomas C. Conway and Andrew J. Bromage](https://www.researchgate.net/publication/49765043_Succinct_Data_Structures_for_Assembling_Large_Genomes).<br>
 CBL is developped for the assembling of larges genomes. It stores canonical k-mers and permits query operations. More specifically, it represents an edge-centric **De Bruijn Graph** in a memory-efficient way by also supporting time-efficient operations.
-
-Article : https://www.researchgate.net/publication/49765043_Succinct_Data_Structures_for_Assembling_Large_Genomes
-
 ## Method
 ConwayBromageLib is based on the [SDSL](https://github.com/simongog/sdsl-lite) library which provides succinct data structures. More precisely, CBL use the class ```sd_vector``` which implements a sparse bit vector (vector made of zeros and ones) in order to store the k-mers. <br>
 <br>
@@ -130,7 +127,7 @@ KmerManipulatorACGT km(kmerSize);
 ConwayBromage cb(f, &km);        
 f.close();
 ```
-__Requirements__
+_Requirements_
 - The k-mers in the istream must me **canonical** and have a **size k <= 32**.<br>
 - The istream must have at each line (if it's a file for example) **a unique k-mers**.  <br>
 - The k-mers in the istream must be sorted either in lexicographical order (A<C<G<T) or in A<C<T<G. It depends on the encoding format.
@@ -141,7 +138,7 @@ AAGA	3 <br>
 AAGC	2 <br>
 AAGC	1 <br>
 ...
-__N.B__ : **The presence of the counts doesn't affect building, they are automatically ignored by CBL** <br>
+_N.B_ : **The presence of the counts doesn't affect building, they are automatically ignored by CBL** 
 ### bool ConwayBromage::contains(uint64_t Kmer)
 **contains** takes a (k-1)-mer (a ``uint64_t``) and returns true if it's present among the stored k-mers.<br>
 Example of use:<br>
