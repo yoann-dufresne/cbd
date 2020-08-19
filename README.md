@@ -1,16 +1,21 @@
 # ConwayBromageLib : an implementation of Conway and Bromage succinct data structure for assembling large genomes
 [![Build Status](https://travis-ci.com/yoann-dufresne/ConwayBromageLib.svg?branch=master)](https://travis-ci.com/yoann-dufresne/ConwayBromageLib)
 ## What is ConwayBromageLib ?
-The ConwayBromageLib (CBL) is a C++11 library that implements the succinct data structure described in the Conway and Bromage article.<br>
-CBl is especially developped to manage genome sequences. It uses a bitvector (vector made of zeros and ones) to store p-mers of the sequence (a p-mer is an element of size k+1 composed of nucleotides (A,C,T,G)).<br>
+The ConwayBromageLib (CBL) is a C++11 library that implements the succinct data structure described in the article of Thomas C. Conway and Andrew J. Bromage.<br>
+CBl is especially developped for assembling larges genomes. It stores k-mers and permits query operations. It represents an edge-centric De Bruijn Graph in a memory-efficient way by also supporting time-efficient operations.
+
+Article : https://www.researchgate.net/publication/49765043_Succinct_Data_Structures_for_Assembling_Large_Genomes
+## Method
+ConwayBromageLib is based on the library SDSL (https://github.com/simongog/sdsl-lite) which provides succinct data structures. More precisely, CBl use the class sd_vector, implementing a sparse bit vector (vector made of zeros and ones), to store the k-mers. <br>
 <br>
-Each cases of the bitvector represents a p-mer that has been encoded into a unique number. If the case is set to one, the p-mer is present in the bitvector at least once. Otherwise it is absent.<br>
+Each cases of the bitvector represents a k-mer that has been encoded into a unique number. If the case is set to one, the k-mer is present in the bitvector at least once. Otherwise it is absent.<br>
 <br>
-Bitvectors are a succinct data structure which means they can store objects in memory-space close to the information-theoretic lower bounds and perform efficient query operations.
+A succinct data structure which means they can store objects in memory-space close to the information-theoretic lower bounds and perform efficient query operations.
+
 ## What can I do with CBL ?
 CBL stores genomes sequences. One it is done, we can apply some query operations on the bitvector : <br>
 The query operation **contains** to know if a given k-mer (an element of size k, made of nucleotides) is present in the bitvector (the sequence) or not.<br>
-The query operation **successors** to find out which successors of a given k-mer are present.<br>
+The query operation **successors** to find out which successors of a given k-mer are present.<br> A successor of a k-mer x is any k-mer of the form $a \cdot x[1:k-1]$ or $x[2:k] \cdot a$
 ## Requirements
 CBL requires :<br>
 ``g++`` version 8.2.0 or higher.<br>
@@ -146,7 +151,7 @@ bool GTT_exists = cb.contains(intGTT);
 Returns the successors of a (k-1)-mer. A (k-1)-mer has at minimum 0 successors and maximum 8 successors.<br>
 Informations : <br>
 - The method doesn't check if the Kmer exists (so you have to do it on your own).<br>
-- The result can sometimes have duplicate.<br>
+- The result can sometimes have duplicates.<br>
 <br>
 
 #### Explanation on how it works
