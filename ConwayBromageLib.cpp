@@ -64,18 +64,6 @@ uint64_t KmerManipulatorACTG::getCanonical(const uint64_t kmer) {
     return((kmer < reverseCompl)?kmer:reverseCompl);
 }
 
-//AVX version of getCanonical
-__m256i KmerManipulatorACTG::getCanonicalAVX(const __m256i kmer) { 
-    __m256i reverseCompl = reverseComplementAVX(kmer);  //creation of a __m256i which contains reverse complement of the __m256i k-mers
-    __m256i eq = _mm256_cmpeq_epi64(kmer,reverseCompl); //Case where forward and reverse are the same
-    __m256i cmp1 = _mm256_or_si256(_mm256_cmpgt_epi64(kmer, reverseCompl), eq);  //kmer < reverseCompl => 0, else -1
-    __m256i cmp2 = _mm256_cmpgt_epi64(reverseCompl, kmer);  //reverseCompl < kmer => 0, else -1
-    __m256i and1 = _mm256_and_si256(cmp2, kmer);    //delete elements wich are higher than their reverse
-    __m256i and2 = _mm256_and_si256(cmp1, reverseCompl);    //delete reverses which are higher than their forward
-    __m256i ult = _mm256_or_si256(and1, and2);  //final construction
-    return ult;
-}
-
 /** 
  * Returns the reverse complement
  * @param kmer - a uin64_t which represent the compressed version of a k-mer
@@ -90,26 +78,6 @@ uint64_t KmerManipulatorACTG::reverseComplement(const u_int64_t kmer) {
     res = ((res>>32 & 0x00000000FFFFFFFF) | (res & 0x00000000FFFFFFFF) << 32);
     res = res ^ 0xAAAAAAAAAAAAAAAA;
     return (res >> (2*( 32 - m_size))) ;
-}
-
-//AVX version of reverseComplement
-__m256i KmerManipulatorACTG::reverseComplementAVX(const __m256i kmer){
-    //We initialize variables like __mm256i vectors
-    __m256i AAA = _mm256_set1_epi64x(0xAAAAAAAAAAAAAAAA);
-    __m256i val1 = _mm256_set1_epi64x(0x3333333333333333);
-    __m256i val2 = _mm256_set1_epi64x(0x0F0F0F0F0F0F0F0F);
-    __m256i val3 = _mm256_set1_epi64x(0x00FF00FF00FF00FF);
-    __m256i val4 = _mm256_set1_epi64x(0x0000FFFF0000FFFF);
-    __m256i val5 = _mm256_set1_epi64x(0x00000000FFFFFFFF);
-    __m256i res = kmer;  // <=> res = kmer
-    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 2), val1), _mm256_slli_epi64(_mm256_and_si256(res, val1), 2))); // <=> res = ((res >> 2 & 0x3333333333333333) | (res & 0x3333333333333333) << 2);
-    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 4), val2), _mm256_slli_epi64(_mm256_and_si256(res, val2), 4)));
-    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 8), val3), _mm256_slli_epi64(_mm256_and_si256(res, val3), 8)));
-    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 16), val4), _mm256_slli_epi64(_mm256_and_si256(res, val4), 16)));
-    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 32), val5), _mm256_slli_epi64(_mm256_and_si256(res, val5), 32)));
-    res = _mm256_xor_si256(res, AAA);
-    res = _mm256_srli_epi64(res, (2 * (32 - m_size)));  //(res >> (2 * (32 - m_size))), we can return it directly
-    return res;
 }
 
 /**
@@ -203,18 +171,6 @@ uint64_t KmerManipulatorACGT::getCanonical(const uint64_t kmer) {
     return((kmer < reverseCompl)?kmer:reverseCompl);
 }
 
-// AVX version of getCanonical
-__m256i KmerManipulatorACGT::getCanonicalAVX(const __m256i kmer) {
-    __m256i reverseCompl = reverseComplementAVX(kmer);  //creation of a __m256i which contains reverse complement of the __m256i k-mers
-    __m256i eq = _mm256_cmpeq_epi64(kmer,reverseCompl); //Case where reverse and forward are the same
-    __m256i cmp1 = _mm256_or_si256(_mm256_cmpgt_epi64(kmer, reverseCompl), eq);  //kmer < reverseCompl => 0, else -1
-    __m256i cmp2 = _mm256_cmpgt_epi64(reverseCompl, kmer);  //reverseCompl < kmer => 0, else -1
-    __m256i and1 = _mm256_and_si256(cmp2, kmer);    //delete elements wich are higher than their reverse
-    __m256i and2 = _mm256_and_si256(cmp1, reverseCompl);    //delete reverses which are higher than their forward
-    __m256i ult = _mm256_or_si256(and1, and2);  //final construction
-    return ult;
-}
-
 /** 
  * Returns the reverse complement
  * @param kmer - a uin64_t which represent the compressed version of a k-mer
@@ -228,26 +184,6 @@ uint64_t KmerManipulatorACGT::reverseComplement(const uint64_t kmer) {
     res = ((res >> 16 & 0x0000FFFF0000FFFF) | (res & 0x0000FFFF0000FFFF) << 16);
     res = ((res >> 32 & 0x00000000FFFFFFFF) | (res & 0x00000000FFFFFFFF) << 32);
     return (res >> (2 * (32 - m_size)));
-}
-
-//AVX version of reverseComplement
-__m256i KmerManipulatorACGT::reverseComplementAVX(const __m256i kmer) {
-    //We initialize variables like __mm256i vectors
-    __m256i allAtOne = _mm256_set1_epi64x(0xFFFFFFFFFFFFFFFF);
-    __m256i val1 = _mm256_set1_epi64x(0x3333333333333333);
-    __m256i val2 = _mm256_set1_epi64x(0x0F0F0F0F0F0F0F0F);
-    __m256i val3 = _mm256_set1_epi64x(0x00FF00FF00FF00FF);
-    __m256i val4 = _mm256_set1_epi64x(0x0000FFFF0000FFFF);
-    __m256i val5 = _mm256_set1_epi64x(0x00000000FFFFFFFF);
-    __m256i res = _mm256_andnot_si256(kmer, allAtOne);  // <=> res = ~kmer
-    //translation in AVX instruction of the original reverseComplement : CARE ABOUT UNSIGNED INT !!!
-    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 2), val1), _mm256_slli_epi64(_mm256_and_si256(res, val1), 2))); // <=> res = ((res >> 2 & 0x3333333333333333) | (res & 0x3333333333333333) << 2);
-    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 4), val2), _mm256_slli_epi64(_mm256_and_si256(res, val2), 4)));
-    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 8), val3), _mm256_slli_epi64(_mm256_and_si256(res, val3), 8)));
-    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 16), val4), _mm256_slli_epi64(_mm256_and_si256(res, val4), 16)));
-    res = (_mm256_or_si256(_mm256_and_si256(_mm256_srli_epi64(res, 32), val5), _mm256_slli_epi64(_mm256_and_si256(res, val5), 32)));
-    res = _mm256_srli_epi64(res, (2 * (32 - m_size)));  //(res >> (2 * (32 - m_size))), we can return it directly
-    return res;
 }
 
 /**
@@ -415,22 +351,6 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
         }
     }
 }
-/**
- * Return the value stored at the block of index i.
- * @param i - the index.
- * @return true if the block of index i is set to one.
- */
-bool ConwayBromage::operator[](uint64_t i) const{
-    return m_sequence[i];
-}
-//AVX version of the [] operator
-bool ConwayBromage::operator[](__m256i i) const {
-    if(m_sequence[i[0]]) return true;
-    if(m_sequence[i[1]]) return true;
-    if(m_sequence[i[2]]) return true;
-    if(m_sequence[i[3]]) return true;
-    return false;
-}
 
 /**
  * Return the size of the compressed sequence. It's always 4^K with K the size of the K-mers 
@@ -467,21 +387,6 @@ bool ConwayBromage::contains(uint64_t Kmer) const{
         
         PmerNext++; //equals to XA then XC then XG then XT
     }
-    return false;
-}
-
-//AVX version of isPresent
-bool ConwayBromage::isPresentAVX(uint64_t Kmer) const {
-    int KmerSize = m_kmerManipulator->getSize()-1;
-    uint64_t next = Kmer << 2;
-    int numberOfBitsToShift = KmerSize << 1;
-    /*
-     * Creation of 2 __m256i vectors of 4 elements (can't create an higher one)
-     * _mm256_setr_epi64x is faster than _mm256_set_epi64x
-     */
-    if(operator[](m_kmerManipulator->getCanonicalAVX(_mm256_setr_epi64x(next, next+1, next+2, next+3)))) return true;
-    if(operator[](m_kmerManipulator->getCanonicalAVX(_mm256_setr_epi64x(Kmer, (Kmer + (1 << numberOfBitsToShift)),
-                                                                        (Kmer + (2 << numberOfBitsToShift)), (Kmer + (3 << numberOfBitsToShift)))))) return true;
     return false;
 }
 
