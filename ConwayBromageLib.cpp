@@ -353,14 +353,6 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
 }
 
 /**
- * Return the size of the compressed sequence. It's always 4^K with K the size of the K-mers 
- * @return the size
- */
-uint64_t ConwayBromage::size() const{
-    return m_sequence.size();
-}
-
-/**
  * Check if the given (k-1)-mer is present. The (k-1)-mer can either be canonical or not.
  * @param Kmer - An uint64_t representing the (k-1)-mer.
  * @return true if the (k-1)-mer is present. False otherwise. 
