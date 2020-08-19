@@ -86,7 +86,8 @@ target_link_libraries(example sdsl divsufsort divsufsort64)    #Specific flags f
 If there are bugs or mistakes in CBL please send us an issue on [CBL issue reports](https://github.com/yoann-dufresne/ConwayBromageLib/issues)
 ## External ressources
 CBL uses others libraries to work.
-The [SDSL](https://github.com/simongog/sdsl-lite) that is a library implementing succinct data structures. We use it to implement bitvector (sd_vector in SDSL syntax).
+The [SDSL](https://github.com/simongog/sdsl-lite) that is a library implementing succinct data structures. We use it to implement bitvector (sd_vector in SDSL syntax).<br>
+The [Lest](https://github.com/martinmoene/lest#other-macros) library is used to write units tests.
 ## KmerManipulator class
 Abstract class to manage ACGT or ACTG encoding for k-mers<br>
 Mother class of KmerManipulatorACGT and KmerManipulatorACTG
