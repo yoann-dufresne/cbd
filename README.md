@@ -42,7 +42,7 @@ Example of code, main.cpp :<br>
 using namespace std;
 
 int main(){
-    ifstream f("my_demo_test.txt");     // file which contains genome sequence
+    ifstream f("my_demo_test.txt");     // file which contains k-mers
     KmerManipulatorACGT k4(4);          // to encode k-mers in ACGT format
     ConwayBromage cb(f, &k4);           // build of the bit vector with 4-mers (the bit vector will be of size 4^k, here k = 4)
 
