@@ -1,10 +1,3 @@
-/*
- * File:   Performances.cpp
- * Author: muratokutucu
- *
- * Created on 29 juin 2020, 11:07
- */
-
 #include <cstdlib>
 #include <string>
 #include <iostream>
@@ -26,12 +19,10 @@ using namespace std;
 using namespace sdsl;
 using namespace lest;
 using namespace std::chrono;
+
+/*Performances.cpp was use to study execution time and memory-space occupation performances
+It is not used in the library (ConwayBromageLib.cpp and COnwayBromageLib.h) and you don't need it to run*/
                               
-/*
- * Compilation line : g++ -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o exec Performances.cpp ConwayBromage.cpp -lsdsl -ldivsufsort -ldivsufsort64
- */
-
-
 /**
  * Return the next canonical kmer starting from an index and incrementing it.
  * @param start - beginning index
