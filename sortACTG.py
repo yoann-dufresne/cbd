@@ -1,5 +1,9 @@
 import sys
 
+# Python script to sort little sequence (10 millions elements) into the A<C<T<G order
+# It is a naive sort
+# You don't need it to run the library
+
 def sortForACTG(path):
     file = open(path, "r")
     list = []
