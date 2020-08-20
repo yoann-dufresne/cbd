@@ -34,7 +34,7 @@ const test critical[] = {
                     KmerManipulatorACGT decoder(4);
                     EXPECT(decoder.decode(172) == "GGTA");
         },
-        CASE("decode : ACTG encoding : "){        /
+        CASE("decode : ACTG encoding : "){        
             cout << "\t--> decode ACTG encoding" << endl;
                     KmerManipulatorACTG decoder(4);
                     EXPECT(decoder.decode(248) == "GGTA");
