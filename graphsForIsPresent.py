@@ -2,6 +2,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+#Python script used to make execution time performance graph
+#You don't need it to run the library
+
 #Extraction of data from perfIsPresent.txt
 def getDataFromFile():
     file = open('perfIsPresent.txt', "r")
