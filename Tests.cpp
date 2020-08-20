@@ -13,29 +13,25 @@ using namespace lest;
 //static const uint64_t  totalLen = 4611686018427387904;
 //static const sd_vector<>littleTestPrev = bit_vector{0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1};
 //static const sd_vector<> ret = fromFileToSdVectorChooser("./sorted_kmers.txt","ACGT");
-/*
- * Compilation line : g++ -Wall -Wextra -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o Tests.exe Tests.cpp ConwayBromageLib.cpp -lsdsl -ldivsufsort -ldivsufsort64
- */
 
-//Appears to other tests, need to be verify in first
 const test critical[] = {
-                //Tests of decode :
-        CASE("encode : ACGT encoding : "){    //Up to KmerManipulatorACGT class
+                //Tests of encode and decode :
+        CASE("encode : ACGT encoding : "){    
             cout << "\t--> encode ACGT encoding" << endl;
                     KmerManipulatorACGT encoder(4);
                     EXPECT(encoder.encode("GGTA") == 172);
         },
-        CASE("encode : ACTG encoding : "){           //Up to KmerManipulatorACTG class
+        CASE("encode : ACTG encoding : "){           
             cout << "\t--> encode ACTG encoding" << endl;
                     KmerManipulatorACTG encoder(4);
                     EXPECT(encoder.encode("GGTA") == 248);
         },
-        CASE("decode : ACGT encoding : "){    //Up to KmerManipulatorACGT class
+        CASE("decode : ACGT encoding : "){    
             cout << "\t--> decode ACGT encoding" << endl;
                     KmerManipulatorACGT decoder(4);
                     EXPECT(decoder.decode(172) == "GGTA");
         },
-        CASE("decode : ACTG encoding : "){        //Up to KmerManipulatorACTG class
+        CASE("decode : ACTG encoding : "){        /
             cout << "\t--> decode ACTG encoding" << endl;
                     KmerManipulatorACTG decoder(4);
                     EXPECT(decoder.decode(248) == "GGTA");
@@ -43,14 +39,15 @@ const test critical[] = {
 };
 
 const test lessCritical[] = {
-        CASE("reverse complement : ACGT encoding : "){  //Up to KmerManipulatorACGT class
+        //reverseComplement unit tests
+        CASE("reverse complement : ACGT encoding : "){ 
             cout << "\t--> ACGT encoding" << endl;
             KmerManipulatorACGT reverser(31);
             for(int i = 0 ; i < 1000000 ; i++){
                         EXPECT(i == reverser.reverseComplement(reverser.reverseComplement(i)));
             }
         },
-        CASE("reverse complement : ACTG encoding : "){    //Up to KmerManipulatorACTG class
+        CASE("reverse complement : ACTG encoding : "){   
             cout << "\t--> ACTG encoding" << endl;
             KmerManipulatorACTG reverser(31);
             for(int i = 0 ; i < 1000000 ; i++){
@@ -60,22 +57,23 @@ const test lessCritical[] = {
 };
 
 const test lessLessCrit[] = {
-        CASE("getCanonical : canonical k-mer ACGT format : "){                           //Up to KmerManipulatorACGT class
+        //getCanonical unit tests
+        CASE("getCanonical : canonical k-mer ACGT format : "){                       
             cout << "\t--> canonical k-mer ACGT format" << endl;
                     KmerManipulatorACGT canonicaler(4);
                     EXPECT(canonicaler.getCanonical(172) == 172);
         },
-        CASE("getCanonical : uncanonical k-mer ACGT format : "){                           //Up to KmerManipulatorACGT class
+        CASE("getCanonical : uncanonical k-mer ACGT format : "){                       
             cout << "\t--> uncanonical k-mer ACGT format" << endl;
                     KmerManipulatorACGT canonicaler(4);
                     EXPECT(canonicaler.getCanonical(138) == 93);
         },
-        CASE("getCanonical : canonical k-mer ACTG format : "){                           //Up to KmerManipulationACTG class
+        CASE("getCanonical : canonical k-mer ACTG format : "){                         
             cout << "\t--> canonical k-mer ACTG format" << endl;
                     KmerManipulatorACTG canonicaler(4);
                     EXPECT(canonicaler.getCanonical(8) == 8);
         },
-        CASE("getCanonical : uncanonical k-mer ACTG format :"){                           //Up to KmerManipulatorACTG class
+        CASE("getCanonical : uncanonical k-mer ACTG format :"){                 
             cout << "\t--> uncanonical k-mer ACTG format" << endl;
                     KmerManipulatorACTG canonicaler(4);
                     EXPECT(canonicaler.getCanonical(172) == 144);
@@ -83,7 +81,7 @@ const test lessLessCrit[] = {
 };
 
 const test atTheEnd[] = {
-        //Test of successors on a small sd_vectors
+        //successors unit tests on small sd_vectors
         CASE("successors with ACGT encoding : "){
             cout << "\t--> successors with ACGT encoding" << endl;
             sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
@@ -128,6 +126,7 @@ const test atTheEnd[] = {
             }
             EXPECT(result);
         },
+        //contains unit tests
         CASE("contains : 100 4-mers with ACGT encoding : "){
             cout << "\t--> contains : 100 4-mers with ACGT encoding" << endl;
             ifstream f("./sortACGT.txt", ios::in);
@@ -192,7 +191,7 @@ const test atTheEnd[] = {
             }
             file.close();
         },
-        CASE("successors with the successors counter : "){  //Modify to fit with the OOP, abandonment of successorCounter
+        CASE("successors with the successors counter : "){ 
             cout << "\t--> successors : 100 4-mers (no differences for encoding)" << endl;
             ifstream f("./sortACGT.txt", ios::in);
             string call[4]{"A", "C", "G", "T"}; //build comrades manually
