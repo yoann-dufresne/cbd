@@ -2,6 +2,9 @@
 import argparse
 from random import sample
 
+# Python script used to generate tests sequences depending on encoding format ACGT or ACTG
+# You don't need it to run the library
+# It is an involve version of generate_counts.py (generate for ACGT encoding only)
 
 def restricted_float(x):
     """ Verify if an argument is a float and is in between 0. and 1. included """
