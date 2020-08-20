@@ -11,7 +11,6 @@ using namespace std;
 using namespace sdsl;
 
 //abstract class KmerManipulator
-//For KmerManipulator and children comments, please tcheck the ConwayBromageLib.h
 KmerManipulator::KmerManipulator(uint64_t size): m_size(size) {}
 KmerManipulator::~KmerManipulator() noexcept {}
 //class KmerManipulatorACTG
