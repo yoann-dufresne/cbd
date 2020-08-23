@@ -8,6 +8,9 @@ python: "3.8"
 
 compiler: g++
 
+before_install:
+    - sudo apt-get install doxygen
+
 install:
   - git clone --recurse-submodules https://github.com/yoann-dufresne/ConwayBromageLib.git
 
