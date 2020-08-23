@@ -448,7 +448,7 @@ bool ConwayBromage::contains(uint64_t Kmer) const{
  * uint64_t intGTT = km.decode("GTT");
  * uint8_t successorsOfGTT = cb.successors(intGTT);
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * @warning The method doesn't check if the Kmer exists (so you have to do it on your own).
+ * @warning The method doesn't check the presence of the (k-1)-mer (so you have to do it on your own with the method contains for example).
  */
 uint8_t ConwayBromage::successors(uint64_t Kmer) const{
     if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
