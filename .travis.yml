@@ -8,15 +8,15 @@ python: "3.8"
 
 compiler: g++
 
-before_install:
-    - sudo apt-get install doxygen
+#before_install:
+#    - sudo apt-get install doxygen
 
 install:
   - git clone --recurse-submodules https://github.com/yoann-dufresne/ConwayBromageLib.git
 
 script:
   - cd $TRAVIS_BUILD_DIR  #dossier où est contenu notre code
-  - doxygen Doxyfile      #génération de la documentation dans le dossier doc/
+#  - doxygen Doxyfile      #génération de la documentation dans le dossier doc/
   - ls
   - cd ConwayBromageLib
   - ls
