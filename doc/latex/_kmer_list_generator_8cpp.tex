@@ -1,0 +1,110 @@
+\hypertarget{_kmer_list_generator_8cpp}{}\doxysection{Kmer\+List\+Generator.\+cpp File Reference}
+\label{_kmer_list_generator_8cpp}\index{KmerListGenerator.cpp@{KmerListGenerator.cpp}}
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$istream$>$}\newline
+{\ttfamily \#include $<$random$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include \char`\"{}Conway\+Bromage\+Lib.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$sdsl/sd\+\_\+vector.\+hpp$>$}\newline
+{\ttfamily \#include $<$sdsl/vectors.\+hpp$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+Include dependency graph for Kmer\+List\+Generator.\+cpp\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{_kmer_list_generator_8cpp_a767adba85df991ec3665a509f109094c}{get\+Kmers\+From\+Query\+File}} (string fastq\+File\+Path, \mbox{\hyperlink{class_kmer_manipulator}{Kmer\+Manipulator}} $\ast$km)
+\begin{DoxyCompactList}\small\item\em Returns a list of k-\/mers contained in a query file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_kmer_list_generator_8cpp_a5404c90b5679a3867a932bff5c958265}{generate\+Genomic\+Kmers}} (string fastq\+File\+Path, string query\+File, int Kmer\+Size, int number\+Of\+Kmer)
+\begin{DoxyCompactList}\small\item\em Write in a (fastq) file genomic k-\/mers from a file containing sequences. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_kmer_list_generator_8cpp_a0605566b4ae90bd7b4d3c26df2630153}{generate\+Random\+Kmers}} (string output\+File, uint64\+\_\+t number\+Of\+Kmer, int kmer\+Size)
+\begin{DoxyCompactList}\small\item\em Generate a fastq file containing random k-\/mers (doesn\textquotesingle{}t depend on encoding). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_kmer_list_generator_8cpp_aaf80ef10c72a847950ca9b1097b5423b}{generate\+Random\+Existing\+Kmers}} (string input\+File, string output\+File, \mbox{\hyperlink{class_kmer_manipulator}{Kmer\+Manipulator}} $\ast$km, uint64\+\_\+t number\+Of\+Kmer)
+\begin{DoxyCompactList}\small\item\em Generate a fastq file containing random existing k-\/mers. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_kmer_list_generator_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_kmer_list_generator_8cpp_a5404c90b5679a3867a932bff5c958265}\label{_kmer_list_generator_8cpp_a5404c90b5679a3867a932bff5c958265}} 
+\index{KmerListGenerator.cpp@{KmerListGenerator.cpp}!generateGenomicKmers@{generateGenomicKmers}}
+\index{generateGenomicKmers@{generateGenomicKmers}!KmerListGenerator.cpp@{KmerListGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{generateGenomicKmers()}{generateGenomicKmers()}}
+{\footnotesize\ttfamily void generate\+Genomic\+Kmers (\begin{DoxyParamCaption}\item[{string}]{fastq\+File\+Path,  }\item[{string}]{query\+File,  }\item[{int}]{Kmer\+Size,  }\item[{int}]{number\+Of\+Kmer }\end{DoxyParamCaption})}
+
+
+
+Write in a (fastq) file genomic k-\/mers from a file containing sequences. 
+
+The produced file will be used for query. 
+\begin{DoxyParams}{Parameters}
+{\em fastq\+File\+Path} & -\/ fastq file \\
+\hline
+{\em query\+File} & -\/ fastq file containing genomic k-\/mers to query \\
+\hline
+{\em Kmer\+Size} & -\/ size of cut sequences \\
+\hline
+{\em number\+Of\+Kmer} & -\/ number of kmer that should be present in the query file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_kmer_list_generator_8cpp_aaf80ef10c72a847950ca9b1097b5423b}\label{_kmer_list_generator_8cpp_aaf80ef10c72a847950ca9b1097b5423b}} 
+\index{KmerListGenerator.cpp@{KmerListGenerator.cpp}!generateRandomExistingKmers@{generateRandomExistingKmers}}
+\index{generateRandomExistingKmers@{generateRandomExistingKmers}!KmerListGenerator.cpp@{KmerListGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{generateRandomExistingKmers()}{generateRandomExistingKmers()}}
+{\footnotesize\ttfamily void generate\+Random\+Existing\+Kmers (\begin{DoxyParamCaption}\item[{string}]{input\+File,  }\item[{string}]{output\+File,  }\item[{\mbox{\hyperlink{class_kmer_manipulator}{Kmer\+Manipulator}} $\ast$}]{km,  }\item[{uint64\+\_\+t}]{number\+Of\+Kmer }\end{DoxyParamCaption})}
+
+
+
+Generate a fastq file containing random existing k-\/mers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+File} & -\/ counts file (txt) \\
+\hline
+{\em output\+File} & -\/ fastq file containing k-\/mers @km\+For\+Kmer -\/ a kmer manipulator for encoding \\
+\hline
+{\em number\+Of\+Kmer} & -\/ number of kmer that should be present in the output file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_kmer_list_generator_8cpp_a0605566b4ae90bd7b4d3c26df2630153}\label{_kmer_list_generator_8cpp_a0605566b4ae90bd7b4d3c26df2630153}} 
+\index{KmerListGenerator.cpp@{KmerListGenerator.cpp}!generateRandomKmers@{generateRandomKmers}}
+\index{generateRandomKmers@{generateRandomKmers}!KmerListGenerator.cpp@{KmerListGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{generateRandomKmers()}{generateRandomKmers()}}
+{\footnotesize\ttfamily void generate\+Random\+Kmers (\begin{DoxyParamCaption}\item[{string}]{output\+File,  }\item[{uint64\+\_\+t}]{number\+Of\+Kmer,  }\item[{int}]{kmer\+Size }\end{DoxyParamCaption})}
+
+
+
+Generate a fastq file containing random k-\/mers (doesn\textquotesingle{}t depend on encoding). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output\+File} & -\/ fastq file that will contain k-\/mers \\
+\hline
+{\em number\+Of\+Kmer} & -\/ number of kmer that should be present in the output file @kmer\+Size -\/ size of the k-\/mers \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_kmer_list_generator_8cpp_a767adba85df991ec3665a509f109094c}\label{_kmer_list_generator_8cpp_a767adba85df991ec3665a509f109094c}} 
+\index{KmerListGenerator.cpp@{KmerListGenerator.cpp}!getKmersFromQueryFile@{getKmersFromQueryFile}}
+\index{getKmersFromQueryFile@{getKmersFromQueryFile}!KmerListGenerator.cpp@{KmerListGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{getKmersFromQueryFile()}{getKmersFromQueryFile()}}
+{\footnotesize\ttfamily vector$<$uint64\+\_\+t$>$ get\+Kmers\+From\+Query\+File (\begin{DoxyParamCaption}\item[{string}]{fastq\+File\+Path,  }\item[{\mbox{\hyperlink{class_kmer_manipulator}{Kmer\+Manipulator}} $\ast$}]{km }\end{DoxyParamCaption})}
+
+
+
+Returns a list of k-\/mers contained in a query file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fastq\+File\+Path} & -\/ query file \\
+\hline
+{\em Kmer\+Size} & -\/ size of cut sequences \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_kmer_list_generator_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{_kmer_list_generator_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{KmerListGenerator.cpp@{KmerListGenerator.cpp}!main@{main}}
+\index{main@{main}!KmerListGenerator.cpp@{KmerListGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+

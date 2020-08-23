@@ -1,0 +1,203 @@
+\hypertarget{class_kmer_manipulator_a_c_g_t}{}\doxysection{Kmer\+Manipulator\+A\+C\+GT Class Reference}
+\label{class_kmer_manipulator_a_c_g_t}\index{KmerManipulatorACGT@{KmerManipulatorACGT}}
+
+
+{\ttfamily \#include $<$Conway\+Bromage\+Lib.\+h$>$}
+
+
+
+Inheritance diagram for Kmer\+Manipulator\+A\+C\+GT\+:
+% FIG 0
+
+
+Collaboration diagram for Kmer\+Manipulator\+A\+C\+GT\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_a002d52532af1d4b0d4cfac5124595062}{Kmer\+Manipulator\+A\+C\+GT}} (uint64\+\_\+t size)
+\item 
+\mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_a68a7e217ee23472cf7a420770a358201}{$\sim$\+Kmer\+Manipulator\+A\+C\+GT}} ()
+\item 
+uint64\+\_\+t \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_aa194ad192d1066d433b9e8a2656895d0}{encode}} (const std\+::string \&word)
+\begin{DoxyCompactList}\small\item\em Encodes a k-\/mer in A\+C\+GT format. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_a6a13fcf814686776adc96b3e0bd03056}{decode}} (uint64\+\_\+t kmer)
+\begin{DoxyCompactList}\small\item\em Returns a string which is the word which corresponds to the uint64\+\_\+t value (in A\+C\+GT format) \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_a744f73b917bcdc92978ba74f55530b48}{get\+Canonical}} (const uint64\+\_\+t kmer)
+\begin{DoxyCompactList}\small\item\em Returns the canonical version of a k-\/mer in A\+C\+GT format. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_adfa3c74c1a7c36f13629571e8596c379}{reverse\+Complement}} (const uint64\+\_\+t kmer)
+\begin{DoxyCompactList}\small\item\em Returns the reverse complement. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_a2e2963e4e42af272fd1bb4d7209bc073}{reverse\+Complement\+Of\+Nucleotide}} (const uint8\+\_\+t nucleotide)
+\begin{DoxyCompactList}\small\item\em Returns the reverse complement of a nucleotide. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_afac37ca7d410b9a9020615916bf1afaa}{decode\+Nucleotide}} (const uint8\+\_\+t nucleotide)
+\begin{DoxyCompactList}\small\item\em Returns the corresponding caracter to the nucleotide\textquotesingle{}s value. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_a7ec2b5876f08bfa921a2398613e72b4e}{get\+Size}} ()
+\begin{DoxyCompactList}\small\item\em Returns the size attribute. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_kmer_manipulator_a_c_g_t_a002d52532af1d4b0d4cfac5124595062}\label{class_kmer_manipulator_a_c_g_t_a002d52532af1d4b0d4cfac5124595062}} 
+\index{KmerManipulatorACGT@{KmerManipulatorACGT}!KmerManipulatorACGT@{KmerManipulatorACGT}}
+\index{KmerManipulatorACGT@{KmerManipulatorACGT}!KmerManipulatorACGT@{KmerManipulatorACGT}}
+\doxysubsubsection{\texorpdfstring{KmerManipulatorACGT()}{KmerManipulatorACGT()}}
+{\footnotesize\ttfamily Kmer\+Manipulator\+A\+C\+G\+T\+::\+Kmer\+Manipulator\+A\+C\+GT (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_kmer_manipulator_a_c_g_t_a68a7e217ee23472cf7a420770a358201}\label{class_kmer_manipulator_a_c_g_t_a68a7e217ee23472cf7a420770a358201}} 
+\index{KmerManipulatorACGT@{KmerManipulatorACGT}!````~KmerManipulatorACGT@{$\sim$KmerManipulatorACGT}}
+\index{````~KmerManipulatorACGT@{$\sim$KmerManipulatorACGT}!KmerManipulatorACGT@{KmerManipulatorACGT}}
+\doxysubsubsection{\texorpdfstring{$\sim$KmerManipulatorACGT()}{~KmerManipulatorACGT()}}
+{\footnotesize\ttfamily Kmer\+Manipulator\+A\+C\+G\+T\+::$\sim$\+Kmer\+Manipulator\+A\+C\+GT (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_kmer_manipulator_a_c_g_t_a6a13fcf814686776adc96b3e0bd03056}\label{class_kmer_manipulator_a_c_g_t_a6a13fcf814686776adc96b3e0bd03056}} 
+\index{KmerManipulatorACGT@{KmerManipulatorACGT}!decode@{decode}}
+\index{decode@{decode}!KmerManipulatorACGT@{KmerManipulatorACGT}}
+\doxysubsubsection{\texorpdfstring{decode()}{decode()}}
+{\footnotesize\ttfamily string Kmer\+Manipulator\+A\+C\+G\+T\+::decode (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{kmer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Returns a string which is the word which corresponds to the uint64\+\_\+t value (in A\+C\+GT format) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kmer} & -\/ the value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a string representing the decoding version of the uint64\+\_\+t. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_kmer_manipulator_a273b26d0f6eb184b4be5dd81335b4584}{Kmer\+Manipulator}}.
+
+\mbox{\Hypertarget{class_kmer_manipulator_a_c_g_t_afac37ca7d410b9a9020615916bf1afaa}\label{class_kmer_manipulator_a_c_g_t_afac37ca7d410b9a9020615916bf1afaa}} 
+\index{KmerManipulatorACGT@{KmerManipulatorACGT}!decodeNucleotide@{decodeNucleotide}}
+\index{decodeNucleotide@{decodeNucleotide}!KmerManipulatorACGT@{KmerManipulatorACGT}}
+\doxysubsubsection{\texorpdfstring{decodeNucleotide()}{decodeNucleotide()}}
+{\footnotesize\ttfamily char Kmer\+Manipulator\+A\+C\+G\+T\+::decode\+Nucleotide (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t}]{nucleotide }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Returns the corresponding caracter to the nucleotide\textquotesingle{}s value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nucleotide} & -\/ an encode nucleotide \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a char that correspond to the nucleotide value (A, C, T or G) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_kmer_manipulator_af22565a0d644b6cad8bb46ad0f2d08fb}{Kmer\+Manipulator}}.
+
+\mbox{\Hypertarget{class_kmer_manipulator_a_c_g_t_aa194ad192d1066d433b9e8a2656895d0}\label{class_kmer_manipulator_a_c_g_t_aa194ad192d1066d433b9e8a2656895d0}} 
+\index{KmerManipulatorACGT@{KmerManipulatorACGT}!encode@{encode}}
+\index{encode@{encode}!KmerManipulatorACGT@{KmerManipulatorACGT}}
+\doxysubsubsection{\texorpdfstring{encode()}{encode()}}
+{\footnotesize\ttfamily uint64\+\_\+t Kmer\+Manipulator\+A\+C\+G\+T\+::encode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Encodes a k-\/mer in A\+C\+GT format. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em word} & -\/ the string we want to encode into a uint64\+\_\+t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a uint64\+\_\+t which represent the encoding version of the word 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_kmer_manipulator_a01ecc15d5f7fe97a4d4f46f6dc21b351}{Kmer\+Manipulator}}.
+
+\mbox{\Hypertarget{class_kmer_manipulator_a_c_g_t_a744f73b917bcdc92978ba74f55530b48}\label{class_kmer_manipulator_a_c_g_t_a744f73b917bcdc92978ba74f55530b48}} 
+\index{KmerManipulatorACGT@{KmerManipulatorACGT}!getCanonical@{getCanonical}}
+\index{getCanonical@{getCanonical}!KmerManipulatorACGT@{KmerManipulatorACGT}}
+\doxysubsubsection{\texorpdfstring{getCanonical()}{getCanonical()}}
+{\footnotesize\ttfamily uint64\+\_\+t Kmer\+Manipulator\+A\+C\+G\+T\+::get\+Canonical (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t}]{kmer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Returns the canonical version of a k-\/mer in A\+C\+GT format. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kmer} & -\/ a uint64\+\_\+t which represents the compressed kmer we want to study \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a uint64\+\_\+t which is the compressed kmer itself if it is already canonical, or its canonical version 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_kmer_manipulator_add3feb78723f09ea4690875fefac7862}{Kmer\+Manipulator}}.
+
+\mbox{\Hypertarget{class_kmer_manipulator_a_c_g_t_a7ec2b5876f08bfa921a2398613e72b4e}\label{class_kmer_manipulator_a_c_g_t_a7ec2b5876f08bfa921a2398613e72b4e}} 
+\index{KmerManipulatorACGT@{KmerManipulatorACGT}!getSize@{getSize}}
+\index{getSize@{getSize}!KmerManipulatorACGT@{KmerManipulatorACGT}}
+\doxysubsubsection{\texorpdfstring{getSize()}{getSize()}}
+{\footnotesize\ttfamily int Kmer\+Manipulator\+A\+C\+G\+T\+::get\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Returns the size attribute. 
+
+\begin{DoxyReturn}{Returns}
+an int that is the size of the sequence 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_kmer_manipulator_a274db44e7a2fcdc4f91f1582ea5e7ed0}{Kmer\+Manipulator}}.
+
+\mbox{\Hypertarget{class_kmer_manipulator_a_c_g_t_adfa3c74c1a7c36f13629571e8596c379}\label{class_kmer_manipulator_a_c_g_t_adfa3c74c1a7c36f13629571e8596c379}} 
+\index{KmerManipulatorACGT@{KmerManipulatorACGT}!reverseComplement@{reverseComplement}}
+\index{reverseComplement@{reverseComplement}!KmerManipulatorACGT@{KmerManipulatorACGT}}
+\doxysubsubsection{\texorpdfstring{reverseComplement()}{reverseComplement()}}
+{\footnotesize\ttfamily uint64\+\_\+t Kmer\+Manipulator\+A\+C\+G\+T\+::reverse\+Complement (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t}]{kmer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Returns the reverse complement. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kmer} & -\/ a uin64\+\_\+t which represent the compressed version of a k-\/mer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a uin64\+\_\+t which represent the compressed version of the reverse complement of the given k-\/mer 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_kmer_manipulator_ab1f41c6385d6324f2854bc63aafe6514}{Kmer\+Manipulator}}.
+
+\mbox{\Hypertarget{class_kmer_manipulator_a_c_g_t_a2e2963e4e42af272fd1bb4d7209bc073}\label{class_kmer_manipulator_a_c_g_t_a2e2963e4e42af272fd1bb4d7209bc073}} 
+\index{KmerManipulatorACGT@{KmerManipulatorACGT}!reverseComplementOfNucleotide@{reverseComplementOfNucleotide}}
+\index{reverseComplementOfNucleotide@{reverseComplementOfNucleotide}!KmerManipulatorACGT@{KmerManipulatorACGT}}
+\doxysubsubsection{\texorpdfstring{reverseComplementOfNucleotide()}{reverseComplementOfNucleotide()}}
+{\footnotesize\ttfamily uint8\+\_\+t Kmer\+Manipulator\+A\+C\+G\+T\+::reverse\+Complement\+Of\+Nucleotide (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t}]{nucleotide }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Returns the reverse complement of a nucleotide. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nucleotide} & -\/ an encode nucleotide \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the reverse complement of the param nucleotide We use this method for cache creation 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_kmer_manipulator_a51b89cc02d98f4319347b0ff131c9a82}{Kmer\+Manipulator}}.
+

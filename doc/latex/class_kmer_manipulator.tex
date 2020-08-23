@@ -1,0 +1,133 @@
+\hypertarget{class_kmer_manipulator}{}\doxysection{Kmer\+Manipulator Class Reference}
+\label{class_kmer_manipulator}\index{KmerManipulator@{KmerManipulator}}
+
+
+{\ttfamily \#include $<$Conway\+Bromage\+Lib.\+h$>$}
+
+
+
+Inheritance diagram for Kmer\+Manipulator\+:
+% FIG 0
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_kmer_manipulator_a8de127f846cb4fc997c1c79e19383194}{Kmer\+Manipulator}} (uint64\+\_\+t size)
+\item 
+virtual \mbox{\hyperlink{class_kmer_manipulator_a7de7b9eb991e33163e1e8eafbf58f66a}{$\sim$\+Kmer\+Manipulator}} ()
+\item 
+virtual uint64\+\_\+t \mbox{\hyperlink{class_kmer_manipulator_a01ecc15d5f7fe97a4d4f46f6dc21b351}{encode}} (const std\+::string \&word)=0
+\item 
+virtual std\+::string \mbox{\hyperlink{class_kmer_manipulator_a273b26d0f6eb184b4be5dd81335b4584}{decode}} (uint64\+\_\+t kmer)=0
+\item 
+virtual uint64\+\_\+t \mbox{\hyperlink{class_kmer_manipulator_add3feb78723f09ea4690875fefac7862}{get\+Canonical}} (const uint64\+\_\+t kmer)=0
+\item 
+virtual uint64\+\_\+t \mbox{\hyperlink{class_kmer_manipulator_ab1f41c6385d6324f2854bc63aafe6514}{reverse\+Complement}} (const uint64\+\_\+t kmer)=0
+\item 
+virtual uint8\+\_\+t \mbox{\hyperlink{class_kmer_manipulator_a51b89cc02d98f4319347b0ff131c9a82}{reverse\+Complement\+Of\+Nucleotide}} (const uint8\+\_\+t nucleotide)=0
+\item 
+virtual char \mbox{\hyperlink{class_kmer_manipulator_af22565a0d644b6cad8bb46ad0f2d08fb}{decode\+Nucleotide}} (const uint8\+\_\+t nucleotide)=0
+\item 
+virtual int \mbox{\hyperlink{class_kmer_manipulator_a274db44e7a2fcdc4f91f1582ea5e7ed0}{get\+Size}} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{class_kmer_manipulator_a2f70614a938864d8dd3e7c3af4c557b6}{m\+\_\+size}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_kmer_manipulator_a8de127f846cb4fc997c1c79e19383194}\label{class_kmer_manipulator_a8de127f846cb4fc997c1c79e19383194}} 
+\index{KmerManipulator@{KmerManipulator}!KmerManipulator@{KmerManipulator}}
+\index{KmerManipulator@{KmerManipulator}!KmerManipulator@{KmerManipulator}}
+\doxysubsubsection{\texorpdfstring{KmerManipulator()}{KmerManipulator()}}
+{\footnotesize\ttfamily Kmer\+Manipulator\+::\+Kmer\+Manipulator (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_kmer_manipulator_a7de7b9eb991e33163e1e8eafbf58f66a}\label{class_kmer_manipulator_a7de7b9eb991e33163e1e8eafbf58f66a}} 
+\index{KmerManipulator@{KmerManipulator}!````~KmerManipulator@{$\sim$KmerManipulator}}
+\index{````~KmerManipulator@{$\sim$KmerManipulator}!KmerManipulator@{KmerManipulator}}
+\doxysubsubsection{\texorpdfstring{$\sim$KmerManipulator()}{~KmerManipulator()}}
+{\footnotesize\ttfamily Kmer\+Manipulator\+::$\sim$\+Kmer\+Manipulator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_kmer_manipulator_a273b26d0f6eb184b4be5dd81335b4584}\label{class_kmer_manipulator_a273b26d0f6eb184b4be5dd81335b4584}} 
+\index{KmerManipulator@{KmerManipulator}!decode@{decode}}
+\index{decode@{decode}!KmerManipulator@{KmerManipulator}}
+\doxysubsubsection{\texorpdfstring{decode()}{decode()}}
+{\footnotesize\ttfamily virtual std\+::string Kmer\+Manipulator\+::decode (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{kmer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g_a51e5251929a97c6d1fac2146f1fce927}{Kmer\+Manipulator\+A\+C\+TG}}, and \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_a6a13fcf814686776adc96b3e0bd03056}{Kmer\+Manipulator\+A\+C\+GT}}.
+
+\mbox{\Hypertarget{class_kmer_manipulator_af22565a0d644b6cad8bb46ad0f2d08fb}\label{class_kmer_manipulator_af22565a0d644b6cad8bb46ad0f2d08fb}} 
+\index{KmerManipulator@{KmerManipulator}!decodeNucleotide@{decodeNucleotide}}
+\index{decodeNucleotide@{decodeNucleotide}!KmerManipulator@{KmerManipulator}}
+\doxysubsubsection{\texorpdfstring{decodeNucleotide()}{decodeNucleotide()}}
+{\footnotesize\ttfamily virtual char Kmer\+Manipulator\+::decode\+Nucleotide (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t}]{nucleotide }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g_abf92e675c0b7e5dd4eb7f8fbe50e8697}{Kmer\+Manipulator\+A\+C\+TG}}, and \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_afac37ca7d410b9a9020615916bf1afaa}{Kmer\+Manipulator\+A\+C\+GT}}.
+
+\mbox{\Hypertarget{class_kmer_manipulator_a01ecc15d5f7fe97a4d4f46f6dc21b351}\label{class_kmer_manipulator_a01ecc15d5f7fe97a4d4f46f6dc21b351}} 
+\index{KmerManipulator@{KmerManipulator}!encode@{encode}}
+\index{encode@{encode}!KmerManipulator@{KmerManipulator}}
+\doxysubsubsection{\texorpdfstring{encode()}{encode()}}
+{\footnotesize\ttfamily virtual uint64\+\_\+t Kmer\+Manipulator\+::encode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g_a76f8b6bb7d88dfc38f54354fae9c53ac}{Kmer\+Manipulator\+A\+C\+TG}}, and \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_aa194ad192d1066d433b9e8a2656895d0}{Kmer\+Manipulator\+A\+C\+GT}}.
+
+\mbox{\Hypertarget{class_kmer_manipulator_add3feb78723f09ea4690875fefac7862}\label{class_kmer_manipulator_add3feb78723f09ea4690875fefac7862}} 
+\index{KmerManipulator@{KmerManipulator}!getCanonical@{getCanonical}}
+\index{getCanonical@{getCanonical}!KmerManipulator@{KmerManipulator}}
+\doxysubsubsection{\texorpdfstring{getCanonical()}{getCanonical()}}
+{\footnotesize\ttfamily virtual uint64\+\_\+t Kmer\+Manipulator\+::get\+Canonical (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t}]{kmer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g_ad1fad278af3af7d6de8f2272f4fe46ff}{Kmer\+Manipulator\+A\+C\+TG}}, and \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_a744f73b917bcdc92978ba74f55530b48}{Kmer\+Manipulator\+A\+C\+GT}}.
+
+\mbox{\Hypertarget{class_kmer_manipulator_a274db44e7a2fcdc4f91f1582ea5e7ed0}\label{class_kmer_manipulator_a274db44e7a2fcdc4f91f1582ea5e7ed0}} 
+\index{KmerManipulator@{KmerManipulator}!getSize@{getSize}}
+\index{getSize@{getSize}!KmerManipulator@{KmerManipulator}}
+\doxysubsubsection{\texorpdfstring{getSize()}{getSize()}}
+{\footnotesize\ttfamily virtual int Kmer\+Manipulator\+::get\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g_a90026b461bb59b61da8eb59597066138}{Kmer\+Manipulator\+A\+C\+TG}}, and \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_a7ec2b5876f08bfa921a2398613e72b4e}{Kmer\+Manipulator\+A\+C\+GT}}.
+
+\mbox{\Hypertarget{class_kmer_manipulator_ab1f41c6385d6324f2854bc63aafe6514}\label{class_kmer_manipulator_ab1f41c6385d6324f2854bc63aafe6514}} 
+\index{KmerManipulator@{KmerManipulator}!reverseComplement@{reverseComplement}}
+\index{reverseComplement@{reverseComplement}!KmerManipulator@{KmerManipulator}}
+\doxysubsubsection{\texorpdfstring{reverseComplement()}{reverseComplement()}}
+{\footnotesize\ttfamily virtual uint64\+\_\+t Kmer\+Manipulator\+::reverse\+Complement (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t}]{kmer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_adfa3c74c1a7c36f13629571e8596c379}{Kmer\+Manipulator\+A\+C\+GT}}.
+
+\mbox{\Hypertarget{class_kmer_manipulator_a51b89cc02d98f4319347b0ff131c9a82}\label{class_kmer_manipulator_a51b89cc02d98f4319347b0ff131c9a82}} 
+\index{KmerManipulator@{KmerManipulator}!reverseComplementOfNucleotide@{reverseComplementOfNucleotide}}
+\index{reverseComplementOfNucleotide@{reverseComplementOfNucleotide}!KmerManipulator@{KmerManipulator}}
+\doxysubsubsection{\texorpdfstring{reverseComplementOfNucleotide()}{reverseComplementOfNucleotide()}}
+{\footnotesize\ttfamily virtual uint8\+\_\+t Kmer\+Manipulator\+::reverse\+Complement\+Of\+Nucleotide (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t}]{nucleotide }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g_a8efe3e53adc92bc3596a564fc1bf24ae}{Kmer\+Manipulator\+A\+C\+TG}}, and \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_a2e2963e4e42af272fd1bb4d7209bc073}{Kmer\+Manipulator\+A\+C\+GT}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_kmer_manipulator_a2f70614a938864d8dd3e7c3af4c557b6}\label{class_kmer_manipulator_a2f70614a938864d8dd3e7c3af4c557b6}} 
+\index{KmerManipulator@{KmerManipulator}!m\_size@{m\_size}}
+\index{m\_size@{m\_size}!KmerManipulator@{KmerManipulator}}
+\doxysubsubsection{\texorpdfstring{m\_size}{m\_size}}
+{\footnotesize\ttfamily uint64\+\_\+t Kmer\+Manipulator\+::m\+\_\+size\hspace{0.3cm}{\ttfamily [protected]}}
+

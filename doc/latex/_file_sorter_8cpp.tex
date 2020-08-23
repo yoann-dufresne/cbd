@@ -1,0 +1,121 @@
+\hypertarget{_file_sorter_8cpp}{}\doxysection{File\+Sorter.\+cpp File Reference}
+\label{_file_sorter_8cpp}\index{FileSorter.cpp@{FileSorter.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$istream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include \char`\"{}Conway\+Bromage\+Lib.\+h\char`\"{}}\newline
+Include dependency graph for File\+Sorter.\+cpp\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{_file_sorter_8cpp_a7e2265b3b00896585b7a1fdbceaa5c9a}{merge}} (const vector$<$ uint64\+\_\+t $>$ \&v1, const vector$<$ uint64\+\_\+t $>$ \&v2)
+\begin{DoxyCompactList}\small\item\em Returns a sorted vector with the content of two vectors. \end{DoxyCompactList}\item 
+vector$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{_file_sorter_8cpp_a8dfbfb6b1b977a07e401f264e07f11c5}{merge\+Groups}} (vector$<$ vector$<$ uint64\+\_\+t $>$$>$ groups)
+\begin{DoxyCompactList}\small\item\em Returns a sorted vector with the contents of many vectors. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_file_sorter_8cpp_aba125192a94633a092517a6d2e3ef272}{write\+In\+File}} (const vector$<$ uint64\+\_\+t $>$ \&v, \mbox{\hyperlink{class_kmer_manipulator}{Kmer\+Manipulator}} $\ast$km, string path)
+\begin{DoxyCompactList}\small\item\em Write in a file the k-\/mers of a vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_file_sorter_8cpp_ae0337c536ef5a005eba3da38aa1a9468}{sort\+File}} (string file\+To\+Sort, string output\+File, \mbox{\hyperlink{class_kmer_manipulator}{Kmer\+Manipulator}} $\ast$km)
+\begin{DoxyCompactList}\small\item\em Sort a file and write in another file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_file_sorter_8cpp_a81438c5048e8a0f3389eec655f970da2}{check\+If\+Sorted}} (string path, \mbox{\hyperlink{class_kmer_manipulator}{Kmer\+Manipulator}} $\ast$km)
+\begin{DoxyCompactList}\small\item\em Print if the file is sorted or not. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_file_sorter_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_file_sorter_8cpp_a81438c5048e8a0f3389eec655f970da2}\label{_file_sorter_8cpp_a81438c5048e8a0f3389eec655f970da2}} 
+\index{FileSorter.cpp@{FileSorter.cpp}!checkIfSorted@{checkIfSorted}}
+\index{checkIfSorted@{checkIfSorted}!FileSorter.cpp@{FileSorter.cpp}}
+\doxysubsubsection{\texorpdfstring{checkIfSorted()}{checkIfSorted()}}
+{\footnotesize\ttfamily void check\+If\+Sorted (\begin{DoxyParamCaption}\item[{string}]{path,  }\item[{\mbox{\hyperlink{class_kmer_manipulator}{Kmer\+Manipulator}} $\ast$}]{km }\end{DoxyParamCaption})}
+
+
+
+Print if the file is sorted or not. 
+
+Generally used after a call to \mbox{\hyperlink{_file_sorter_8cpp_ae0337c536ef5a005eba3da38aa1a9468}{sort\+File()}} in order to check that the output is really sorted. 
+\begin{DoxyParams}{Parameters}
+{\em path} & -\/ the file \\
+\hline
+{\em km} & -\/ a k-\/mer manipulator to analyze k-\/mers in the file to sort \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_file_sorter_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{_file_sorter_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{FileSorter.cpp@{FileSorter.cpp}!main@{main}}
+\index{main@{main}!FileSorter.cpp@{FileSorter.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_file_sorter_8cpp_a7e2265b3b00896585b7a1fdbceaa5c9a}\label{_file_sorter_8cpp_a7e2265b3b00896585b7a1fdbceaa5c9a}} 
+\index{FileSorter.cpp@{FileSorter.cpp}!merge@{merge}}
+\index{merge@{merge}!FileSorter.cpp@{FileSorter.cpp}}
+\doxysubsubsection{\texorpdfstring{merge()}{merge()}}
+{\footnotesize\ttfamily vector$<$uint64\+\_\+t$>$ merge (\begin{DoxyParamCaption}\item[{const vector$<$ uint64\+\_\+t $>$ \&}]{v1,  }\item[{const vector$<$ uint64\+\_\+t $>$ \&}]{v2 }\end{DoxyParamCaption})}
+
+
+
+Returns a sorted vector with the content of two vectors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v1} & -\/ first vector \\
+\hline
+{\em v2} & -\/ second vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_file_sorter_8cpp_a8dfbfb6b1b977a07e401f264e07f11c5}\label{_file_sorter_8cpp_a8dfbfb6b1b977a07e401f264e07f11c5}} 
+\index{FileSorter.cpp@{FileSorter.cpp}!mergeGroups@{mergeGroups}}
+\index{mergeGroups@{mergeGroups}!FileSorter.cpp@{FileSorter.cpp}}
+\doxysubsubsection{\texorpdfstring{mergeGroups()}{mergeGroups()}}
+{\footnotesize\ttfamily vector$<$uint64\+\_\+t$>$ merge\+Groups (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ uint64\+\_\+t $>$$>$}]{groups }\end{DoxyParamCaption})}
+
+
+
+Returns a sorted vector with the contents of many vectors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em groups} & -\/ a vector of vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_file_sorter_8cpp_ae0337c536ef5a005eba3da38aa1a9468}\label{_file_sorter_8cpp_ae0337c536ef5a005eba3da38aa1a9468}} 
+\index{FileSorter.cpp@{FileSorter.cpp}!sortFile@{sortFile}}
+\index{sortFile@{sortFile}!FileSorter.cpp@{FileSorter.cpp}}
+\doxysubsubsection{\texorpdfstring{sortFile()}{sortFile()}}
+{\footnotesize\ttfamily void sort\+File (\begin{DoxyParamCaption}\item[{string}]{file\+To\+Sort,  }\item[{string}]{output\+File,  }\item[{\mbox{\hyperlink{class_kmer_manipulator}{Kmer\+Manipulator}} $\ast$}]{km }\end{DoxyParamCaption})}
+
+
+
+Sort a file and write in another file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+To\+Sort} & -\/ path of the file to sort \\
+\hline
+{\em output\+File} & -\/ sorted output \\
+\hline
+{\em km} & -\/ a kmer manipulator for the k-\/mers in the file to sort \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_file_sorter_8cpp_aba125192a94633a092517a6d2e3ef272}\label{_file_sorter_8cpp_aba125192a94633a092517a6d2e3ef272}} 
+\index{FileSorter.cpp@{FileSorter.cpp}!writeInFile@{writeInFile}}
+\index{writeInFile@{writeInFile}!FileSorter.cpp@{FileSorter.cpp}}
+\doxysubsubsection{\texorpdfstring{writeInFile()}{writeInFile()}}
+{\footnotesize\ttfamily void write\+In\+File (\begin{DoxyParamCaption}\item[{const vector$<$ uint64\+\_\+t $>$ \&}]{v,  }\item[{\mbox{\hyperlink{class_kmer_manipulator}{Kmer\+Manipulator}} $\ast$}]{km,  }\item[{string}]{path }\end{DoxyParamCaption})}
+
+
+
+Write in a file the k-\/mers of a vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & -\/ a vector \\
+\hline
+{\em km} & -\/ a kmer manipulator \\
+\hline
+{\em path} & -\/ where to write \\
+\hline
+\end{DoxyParams}

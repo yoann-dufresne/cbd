@@ -1,0 +1,217 @@
+\href{https://travis-ci.com/yoann-dufresne/ConwayBromageLib}{\texttt{ }} \doxysection*{What is Conway\+Bromage\+Lib ?}
+
+The Conway\+Bromage\+Lib (C\+BL) is a C++11 library that implements the succinct data structure described in the \href{https://www.researchgate.net/publication/49765043_Succinct_Data_Structures_for_Assembling_Large_Genomes}{\texttt{ article of Thomas C. Conway and Andrew J. Bromage}}.~\newline
+ C\+BL is developped for the assembling of larges genomes. It stores canonical k-\/mers and permits query operations. More specifically, it represents an edge-\/centric {\bfseries{De Bruijn Graph}} in a memory-\/efficient way by also supporting time-\/efficient operations. \doxysection*{Method}
+
+Conway\+Bromage\+Lib is based on the \href{https://github.com/simongog/sdsl-lite}{\texttt{ S\+D\+SL}} library which provides succinct data structures. More precisely, C\+BL use the class {\ttfamily sd\+\_\+vector} which implements a sparse bit vector (vector made of zeros and ones) in order to store the k-\/mers. ~\newline
+ ~\newline
+ C\+BL takes a list of canonical k-\/mers as input. The bit vector use to store these k-\/mers is of size 4$^\wedge$k. These latter are represented by an index/position in the bit vector. If an element of a specific position is set to one, then it means that the k-\/mer representing this position is present at least once in the sequence. Otherwise (set to 0) it is absent.~\newline
+ ~\newline
+ A succinct data structure is a data structure objects in memory-\/space close to the information-\/theoretic lower bounds and perform efficient query operations.
+
+\doxysection*{What can I do with C\+BL ?}
+
+C\+BL stores genomes sequences. Once it is done, we can apply two query operations \+: ~\newline
+ The query operation {\bfseries{contains}} to know if a given (k-\/1)-\/mer is present or not.~\newline
+ The query operation {\bfseries{successors}} to get the successors of a (k-\/1)-\/mer.~\newline
+ A successor of a k-\/mer {\ttfamily x} is any k-\/mer of the form {\ttfamily a+x\mbox{[}1\+:k-\/1\mbox{]}} or {\ttfamily x\mbox{[}2\+:k\mbox{]}+a} with {\ttfamily a} nucleotide.
+
+\doxysection*{Requirements}
+
+C\+BL requires \+:~\newline
+ {\ttfamily g++} version 8.\+2.\+0 or higher.~\newline
+ {\ttfamily cmake} version 3.\+12 or higher (to build unit tests). Mac OS, Windows and Linux are supported.
+
+\doxysection*{Installation}
+
+To download the library, use the following command \+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git clone -\/-\/recurse-\/submodules https://github.com/yoann-\/dufresne/ConwayBromageLib.git}
+\end{DoxyCode}
+
+
+If you have already used {\ttfamily git clone} without the {\ttfamily -\/-\/recurse-\/submodules} flag, please use in the project \+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git submodule init}
+\DoxyCodeLine{git submodule update}
+\end{DoxyCode}
+
+
+\doxysection*{How to use C\+BL ?}
+
+The current {\ttfamily C\+Make\+Lists.\+txt} {\bfseries{is made for unit tests}}.~\newline
+ To use C\+BL, please create a new C++ file.~\newline
+ Example of code, main.\+cpp \+:~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#include "{}ConwayBromageLib.h"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{using namespace std;}
+\DoxyCodeLine{}
+\DoxyCodeLine{int main()\{}
+\DoxyCodeLine{    ifstream f("{}my\_demo\_test.txt"{});     // file which contains k-\/mers}
+\DoxyCodeLine{    KmerManipulatorACGT k4(4);          // to encode k-\/mers in ACGT format}
+\DoxyCodeLine{    ConwayBromage cb(f, \&k4);           // build of the bit vector with 4-\/mers (the bit vector will be of size 4\string^k, here k = 4)}
+\DoxyCodeLine{}
+\DoxyCodeLine{    KmerManipulatorACGT k3(3);          // to encode (k-\/1)-\/mers in ACGT format}
+\DoxyCodeLine{    uint64\_t node = k3.encode("{}ACG"{});   // gets the integer representing the (k-\/1)-\/mer}
+\DoxyCodeLine{}
+\DoxyCodeLine{    cb.contains(node);                  // returns true if the (k-\/1)-\/mer is present, otherwise returns false}
+\DoxyCodeLine{    cb.successors(node);                // returns a uint8\_t that represents carry information about the 8 potential successors }
+\DoxyCodeLine{                                        // (see documentation below for more information)}
+\DoxyCodeLine{}
+\DoxyCodeLine{    return 0;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+To compile modify the {\ttfamily C\+Make\+Lists.\+txt}, for example with main.\+cpp above \+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\_minimum\_required(VERSION 3.12)    \#The minimal version of cmake we need}
+\DoxyCodeLine{                                        \#Here we need 3.12 or higher version}
+\DoxyCodeLine{project(example)               \#The name of the projet, it will be the executable name}
+\DoxyCodeLine{                               \#Can be renamed, renamed it in all the CM akeLists.txt}
+\DoxyCodeLine{add\_compile\_options(-\/Wall -\/Wextra)      \#basic compiler options}
+\DoxyCodeLine{set(CMAKE\_CXX\_FLAGS "{}\$\{CMAKE\_CXX\_FLAGS\} -\/std=c++11 -\/mavx2 -\/Dlest\_FEATURE\_AUTO\_REGISTER=1 -\/Dlest\_FEATURE\_COLOURISE=1 -\/O3 -\/DNDEBUG"{}) \#Compilation flag}
+\DoxyCodeLine{\#Variables which represents compilation elements}
+\DoxyCodeLine{\#One for .cpp elements}
+\DoxyCodeLine{set(SRCS}
+\DoxyCodeLine{        main.cpp  \#Our main.cpp file example, can be modify according to your work}
+\DoxyCodeLine{        ConwayBromageLib.cpp)}
+\DoxyCodeLine{\#One for .h}
+\DoxyCodeLine{set(HEADERS}
+\DoxyCodeLine{        ConwayBromageLib.h)}
+\DoxyCodeLine{link\_directories(example ./sdsl-\/lite/lib ./sdsl-\/lite/external/libdivsufsort/lib)    \#Where we put .cpp from sdsl library}
+\DoxyCodeLine{add\_executable(example \$\{SRCS\} \$\{HEADERS\}) \#Create executable example}
+\DoxyCodeLine{add\_subdirectory(external)      \#Add subdirectories like sdsl and lest, call the CMakeLists.txt from external directory}
+\DoxyCodeLine{target\_include\_directories(example PUBLIC ./external/lest/include)   \#Where we put .h from lest libraries : It needs to be after add\_executable !!!}
+\DoxyCodeLine{target\_link\_libraries(example sdsl divsufsort divsufsort64)    \#Specific flags from sdsl library}
+\end{DoxyCode}
+
+
+\doxysection*{Bug reporting}
+
+If there are bugs or mistakes in C\+BL please send us an issue on \href{https://github.com/yoann-dufresne/ConwayBromageLib/issues}{\texttt{ C\+BL issue reports}} \doxysection*{External ressources}
+
+C\+BL uses others libraries to work. The \href{https://github.com/simongog/sdsl-lite}{\texttt{ S\+D\+SL}} that is a library implementing succinct data structures. We use it to implement bit vector (sd\+\_\+vector in S\+D\+SL syntax).~\newline
+ The \href{https://github.com/martinmoene/lest\#other-macros}{\texttt{ Lest}} library is used to write units tests. \doxysection*{Technical description for developers}
+
+\doxysubsection*{The \mbox{\hyperlink{class_kmer_manipulator}{Kmer\+Manipulator}} class}
+
+Abstract class that manage encoding (A\+C\+GT or A\+C\+TG) and size (the k) for k-\/mers~\newline
+ Mother class of \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t}{Kmer\+Manipulator\+A\+C\+GT}} and \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g}{Kmer\+Manipulator\+A\+C\+TG}} \doxysubsection*{\mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_aa194ad192d1066d433b9e8a2656895d0}{Kmer\+Manipulator\+A\+C\+G\+T\+::encode}} and \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g_a76f8b6bb7d88dfc38f54354fae9c53ac}{Kmer\+Manipulator\+A\+C\+T\+G\+::encode}}}
+
+{\bfseries{encode}} allow us to translate a k-\/mer into an {\ttfamily uint64\+\_\+t} thanks to A\+C\+GT or A\+C\+TG encoding~\newline
+ We use an hash to create and return unique {\ttfamily uint64\+\_\+t}.~\newline
+ The function takes a {\ttfamily string} (an uncompressed k-\/mer) and returns an {\ttfamily uint64\+\_\+t} (a compressed k-\/mer) which corresponds to the given string sequence~\newline
+ Example of use \+:~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{KmerManipulatorACGT encoder(4); //4-\/mers in ACGT format}
+\DoxyCodeLine{encoder.encode("{}GGTA"{});     //172}
+\end{DoxyCode}
+
+
+\doxysubsection*{\mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_a6a13fcf814686776adc96b3e0bd03056}{Kmer\+Manipulator\+A\+C\+G\+T\+::decode}} and \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g_a51e5251929a97c6d1fac2146f1fce927}{Kmer\+Manipulator\+A\+C\+T\+G\+::decode}}}
+
+{\bfseries{decode}} does the opposite of {\bfseries{encode}} \+: it takes an {\ttfamily uint64\+\_\+t} and returns the corresponding k-\/mer string. Returns the string representation of a value representing a k-\/mer.~\newline
+ Example of use \+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{KmerManipulatorACTG decoder(4); //4-\/mers in ACTG format}
+\DoxyCodeLine{decoder.decode(248);    //GGTA}
+\end{DoxyCode}
+
+
+\doxysubsection*{\mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_a744f73b917bcdc92978ba74f55530b48}{Kmer\+Manipulator\+A\+C\+G\+T\+::get\+Canonical}} and \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g_ad1fad278af3af7d6de8f2272f4fe46ff}{Kmer\+Manipulator\+A\+C\+T\+G\+::get\+Canonical}}}
+
+{\bfseries{get\+Canonical}} takes an {\ttfamily uint64\+\_\+t} (a compressed k-\/mer) and returns its canonical version in the form of an {\ttfamily uint64\+\_\+t}.~\newline
+ The canonical version depends on encoding format.~\newline
+ Example of use \+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{KmerManipulatorACGT canonicaler(4); //4-\/mers in ACGT format}
+\DoxyCodeLine{canonicaler.getCanonical(172);      //172}
+\DoxyCodeLine{KmerManipulatorACTG canonicaler(4); //4-\/mers in ACTG format}
+\DoxyCodeLine{canonicaler.getCanonical(172);      //144}
+\end{DoxyCode}
+
+
+\doxysubsection*{Conway\+Bromage\+::\+Conway\+Bromage(istream\& kmer\+Flux, Kmer\+Manipulator$\ast$ km)}
+
+The {\bfseries{\mbox{\hyperlink{class_conway_bromage}{Conway\+Bromage}} constructor}} takes an istream which represents the k-\/mer flux and a {\bfseries{\mbox{\hyperlink{class_kmer_manipulator}{Kmer\+Manipulator}}}} which contains all the information about encoding format.~\newline
+ It returns an object containing all the k-\/mers in the flux with very low memory consumption.~\newline
+ Example of use \+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{int kmerSize = 31;}
+\DoxyCodeLine{ifstream f("{}./k-\/mers.txt"{}, ios::in);}
+\DoxyCodeLine{KmerManipulatorACGT km(kmerSize);}
+\DoxyCodeLine{ConwayBromage cb(f, \&km);        }
+\DoxyCodeLine{f.close();}
+\end{DoxyCode}
+
+
+{\bfseries{Requirements}}
+\begin{DoxyItemize}
+\item The k-\/mers in the istream must me {\bfseries{canonical}} and have a {\bfseries{size k $<$= 32}}.
+\item The istream must have at each line (if it\textquotesingle{}s a file for example) {\bfseries{a unique k-\/mers}}.
+\item The k-\/mers in the istream must be sorted either in lexicographical order (A$<$C$<$G$<$T) or in A$<$C$<$T$<$G. It depends on the encoding format. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Example of a classic txt-\/file with k-\/mers of size 4 associated with the counts :}
+\DoxyCodeLine{AAAG    1 }
+\DoxyCodeLine{AAGA    3 }
+\DoxyCodeLine{AAGC    2 }
+\DoxyCodeLine{AAGC    1 }
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+~\newline
+
+
+{\bfseries{Note}} \+: The presence of the counts doesn\textquotesingle{}t affect building, they are automatically ignored by C\+BL.
+
+\doxysubsection*{bool Conway\+Bromage\+::contains(uint64\+\_\+t Kmer)}
+
+{\bfseries{contains}} takes a (k-\/1)-\/mer (a {\ttfamily uint64\+\_\+t}) and returns true if it\textquotesingle{}s present among the stored k-\/mers.~\newline
+ Example of use\+:~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{bool kmer\_exists = cb.contains(230);}
+\DoxyCodeLine{}
+\DoxyCodeLine{KmerManipulatorACGT km(3);}
+\DoxyCodeLine{uint64\_t intGTT = km.decode("{}GTT"{});}
+\DoxyCodeLine{bool GTT\_exists = cb.contains(intGTT);}
+\end{DoxyCode}
+
+
+\doxysubsection*{uint8\+\_\+t Conway\+Bromage\+::successors(uint64\+\_\+t Kmer)}
+
+{\bfseries{successors}} takes a (k-\/1)-\/mer (a {\ttfamily uint64\+\_\+t}) and returns its potenial successors. A (k-\/1)-\/mer has at minimum 0 successors and maximum 8 successors.~\newline
+ {\bfseries{Informations}} \+: ~\newline
+
+\begin{DoxyItemize}
+\item The method doesn\textquotesingle{}t check if the Kmer exists (so you have to do it on your own).
+\item The result can sometimes have duplicates.~\newline
+
+\end{DoxyItemize}
+
+{\bfseries{Explanation on how it works}} Let\textquotesingle{}s say the function takes as a parameter the integer which represents the (k-\/1)-\/mer {\bfseries{G\+TT}} and we assume we are in A\+C\+GT encoding.~\newline
+ First, the method will generate the following k-\/mers \+: G\+T\+TA, G\+T\+TC, G\+T\+TG, G\+T\+TT, A\+G\+TT, C\+G\+TT, G\+G\+TT, T\+G\+TT.~\newline
+ Then, it will check if the canonical version of these k-\/mers are present.~\newline
+ Let\textquotesingle{}s suppose that only the canonical version of these k-\/mers are present \+: G\+T\+TA, G\+T\+TT, C\+G\+TT, T\+G\+TT.~\newline
+ G\+T\+TA and G\+T\+TT are, what we call {\bfseries{next}} k-\/mers so we will store the information in the 4 left bits of the result (uint8\+\_\+t).~\newline
+ C\+G\+TT and T\+G\+TT are {\bfseries{previous}} k-\/mers so, this time, the information will be stored in the 4 right bits of the result.~\newline
+~\newline
+ Thus, the function will return 1001 0101 which corresponds to 149 in base 10.~\newline
+ It means that, in this example, {\bfseries{the successors of the (k-\/1)-\/mer G\+TT are T\+TA, T\+TT, C\+GT and T\+GT}}.~\newline
+
+
+Example of use\+: ~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{uint8\_t successors = cb.successors(78);}
+\DoxyCodeLine{}
+\DoxyCodeLine{KmerManipulatorACGT km(3);}
+\DoxyCodeLine{uint64\_t intGTT = km.decode("{}GTT"{});}
+\DoxyCodeLine{uint8\_t successorsOfGTT = cb.successors(intGTT);}
+\end{DoxyCode}
+ 
