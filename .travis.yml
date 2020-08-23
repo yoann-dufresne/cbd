@@ -12,7 +12,8 @@ install:
   - git clone --recurse-submodules https://github.com/yoann-dufresne/ConwayBromageLib.git
 
 script:
-  - cd $TRAVIS_BUILD_DIR #là où est contenu notre code
+  - cd $TRAVIS_BUILD_DIR  #dossier où est contenu notre code
+  - doxygen Doxyfile      #génération de la documentation dans le dossier doc/
   - ls
   - cd ConwayBromageLib
   - ls
