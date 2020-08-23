@@ -21,7 +21,7 @@ KmerManipulatorACTG::~KmerManipulatorACTG() noexcept {}
  * Encodes a k-mer in ACTG format
  * @param word - the string we want to encode into a uint64_t
  * @return a uint64_t which represent the encoding version of the word
-*/
+ */
 uint64_t KmerManipulatorACTG::encode(const string &word) {
     //Value in ASCII table
     //A = 65 : 0100 0001 <-> 0 (encoded value)
@@ -41,7 +41,12 @@ uint64_t KmerManipulatorACTG::encode(const string &word) {
  * Returns a string which is the word which corresponds to the uint64_t value
  * @param kmer - the value.
  * @return a string representing the decoding version of the uint64_t.
-*/
+ * ### Example
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.cpp
+ * KmerManipulatorACTG decoder(4); //4-mers in ACTG format
+ * decoder.decode(248);            //GGTA
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
 string KmerManipulatorACTG::decode(uint64_t kmer) {
     static const char valueToCaracter[4] = {'A','C','T','G'}; //declared and initialized only during the first call to this method
     string res(m_size, ' ');
@@ -57,6 +62,13 @@ string KmerManipulatorACTG::decode(uint64_t kmer) {
  * Returns the canonical version of a  k-mer, depends on encoding : see daughter classes
  * @param kmer - a uint64_t which represents the compressed kmer we want to study
  * @return a uint64_t which is the kmer itself if it is already canonical, or its canonical version
+ * ### Example
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.cpp
+ * KmerManipulatorACGT canonicaler(4); //4-mers in ACGT format
+ * canonicaler.getCanonical(172);      //172
+ * KmerManipulatorACTG canonicaler(4); //4-mers in ACTG format
+ * canonicaler.getCanonical(172);      //144
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 uint64_t KmerManipulatorACTG::getCanonical(const uint64_t kmer) {
     uint64_t reverseCompl = reverseComplement(kmer);
@@ -128,6 +140,11 @@ KmerManipulatorACGT::~KmerManipulatorACGT() noexcept {}
  * Encodes a k-mer in ACGT format
  * @param word - the string we want to encode into a uint64_t
  * @return a uint64_t which represent the encoding version of the word
+ * ### Example
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.cpp
+ * KmerManipulatorACGT encoder(4);  //4-mers in ACGT format
+ * encoder.encode("GGTA");          //172
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 uint64_t KmerManipulatorACGT::encode(const string &word) {
     //value in ASCII table
@@ -164,6 +181,13 @@ string KmerManipulatorACGT::decode(uint64_t kmer) {
  * Returns the canonical version of a k-mer in ACGT format
  * @param kmer - a uint64_t which represents the compressed kmer we want to study
  * @return a uint64_t which is the compressed kmer itself if it is already canonical, or its canonical version
+ * ### Example
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.cpp
+ * KmerManipulatorACGT canonicaler(4); //4-mers in ACGT format
+ * canonicaler.getCanonical(172);      //172
+ * KmerManipulatorACTG canonicaler(4); //4-mers in ACTG format
+ * canonicaler.getCanonical(172);      //144
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 uint64_t KmerManipulatorACGT::getCanonical(const uint64_t kmer) {
     uint64_t reverseCompl = reverseComplement(kmer);
@@ -278,6 +302,17 @@ ConwayBromage::ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km){
  * Second ConwayBromage constructor : Transform sequences which are contain in a file in a sd_vector
  * @param kmerFlux - An istream of kmer. For example a file represented by an ifstream.
  * @param km - Object which contains all the information about encoding and decoding.
+ * ### Example
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.cpp
+ * int kmerSize = 31;
+ * ifstream f("./k-mers.txt", ios::in);
+ * KmerManipulatorACGT km(kmerSize);
+ * ConwayBromage cb(f, &km);        
+ * f.close();
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * @warning The k-mers in the istream must me canonical and have a size k <= 32.
+ * @warning The istream must have at each line (if it's a file for example) a unique k-mers.
+ * @warning The k-mers in the istream must be sorted either in lexicographical order (A<C<G<T) or in A<C<T<G. It depends on the encoding format.
  */
 ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     m_kmerManipulator = km;
@@ -355,6 +390,13 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
  * Check if the given (k-1)-mer is present. The (k-1)-mer can either be canonical or not.
  * @param Kmer - An uint64_t representing the (k-1)-mer.
  * @return true if the (k-1)-mer is present. False otherwise. 
+ * ### Example
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.cpp
+ * bool kmer_exists = cb.contains(230);
+ * KmerManipulatorACGT km(3);
+ * uint64_t intGTT = km.decode("GTT");
+ * bool GTT_exists = cb.contains(intGTT);
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 bool ConwayBromage::contains(uint64_t Kmer) const{
     if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
@@ -382,14 +424,31 @@ bool ConwayBromage::contains(uint64_t Kmer) const{
 }
 
 /**
- * Returns the successors of a (k-1)-mer. The (k-1)-mer can either be canonical or not.
+ * Returns the successors of a (k-1)-mer. The (k-1)-mer can either be canonical or not. A (k-1)-mer has at minimum 0 successors and maximum 8 successors.
  * The function doesn't check if the (k-1)-mer is present.
+ * ### How it works ? 
+ * Let's say the function takes as a parameter the integer which represents the (k-1)-mer GTT and we assume we are in ACGT encoding.
+ * First, the method will generate the following k-mers : GTTA, GTTC, GTTG, GTTT, AGTT, CGTT, GGTT, TGTT.
+ * Then, it will check if the canonical version of these k-mers are present.
+ * Let's suppose that only the canonical version of these k-mers are present : GTTA, GTTT, CGTT, TGTT.
+ * GTTA and GTTT are, what we call next k-mers so we will store the information in the 4 left bits of the result (uint8_t).
+ * CGTT and TGTT are previous k-mers so, this time, the information will be stored in the 4 right bits of the result.
+ * Thus, the function will return 1001 0101 which corresponds to 149 in base 10.
+ * It means that, in this example, the successors of the (k-1)-mer GTT are TTA, TTT, CGT and TGT.
+ *
  * @param Kmer : a (k-1)-mer.
  * @return a uint8_t which carry information about the presence/absence of the 8 potential successors of the (k-1)-mer.
  * Read of the return : 
  * read the uint8_t under bit form : the first four elements are "next" k-mers, the last four are "previous"
  * Always the same reading direction : A then C then G then T regardless of the encoding
- * Check the read.me "Explanation on how it works" in https://github.com/yoann-dufresne/ConwayBromageLib for an example
+ * ### Example
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.cpp
+ * uint8_t successors = cb.successors(78);
+ * KmerManipulatorACGT km(3);
+ * uint64_t intGTT = km.decode("GTT");
+ * uint8_t successorsOfGTT = cb.successors(intGTT);
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * @warning The method doesn't check if the Kmer exists (so you have to do it on your own).
  */
 uint8_t ConwayBromage::successors(uint64_t Kmer) const{
     if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)

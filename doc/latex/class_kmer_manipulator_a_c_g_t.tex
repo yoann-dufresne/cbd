@@ -112,9 +112,14 @@ Encodes a k-\/mer in A\+C\+GT format.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-a uint64\+\_\+t which represent the encoding version of the word 
+a uint64\+\_\+t which represent the encoding version of the word \doxyparagraph*{Example}
 \end{DoxyReturn}
 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_kmer_manipulator_a_c_g_t}{KmerManipulatorACGT}} encoder(4);  \textcolor{comment}{//4-\/mers in ACGT format}}
+\DoxyCodeLine{encoder.encode(\textcolor{stringliteral}{"{}GGTA"{}});          \textcolor{comment}{//172}}
+\end{DoxyCode}
+ 
 
 Implements \mbox{\hyperlink{class_kmer_manipulator_a01ecc15d5f7fe97a4d4f46f6dc21b351}{Kmer\+Manipulator}}.
 
@@ -134,9 +139,16 @@ Returns the canonical version of a k-\/mer in A\+C\+GT format.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-a uint64\+\_\+t which is the compressed kmer itself if it is already canonical, or its canonical version 
+a uint64\+\_\+t which is the compressed kmer itself if it is already canonical, or its canonical version \doxyparagraph*{Example}
 \end{DoxyReturn}
 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_kmer_manipulator_a_c_g_t}{KmerManipulatorACGT}} canonicaler(4); \textcolor{comment}{//4-\/mers in ACGT format}}
+\DoxyCodeLine{canonicaler.getCanonical(172);      \textcolor{comment}{//172}}
+\DoxyCodeLine{\mbox{\hyperlink{class_kmer_manipulator_a_c_t_g}{KmerManipulatorACTG}} canonicaler(4); \textcolor{comment}{//4-\/mers in ACTG format}}
+\DoxyCodeLine{canonicaler.getCanonical(172);      \textcolor{comment}{//144}}
+\end{DoxyCode}
+ 
 
 Implements \mbox{\hyperlink{class_kmer_manipulator_add3feb78723f09ea4690875fefac7862}{Kmer\+Manipulator}}.
 

@@ -68,9 +68,14 @@ Returns a string which is the word which corresponds to the uint64\+\_\+t value.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-a string representing the decoding version of the uint64\+\_\+t. 
+a string representing the decoding version of the uint64\+\_\+t. \doxyparagraph*{Example}
 \end{DoxyReturn}
 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_kmer_manipulator_a_c_t_g}{KmerManipulatorACTG}} decoder(4); \textcolor{comment}{//4-\/mers in ACTG format}}
+\DoxyCodeLine{decoder.decode(248);            \textcolor{comment}{//GGTA}}
+\end{DoxyCode}
+ 
 
 Implements \mbox{\hyperlink{class_kmer_manipulator_a273b26d0f6eb184b4be5dd81335b4584}{Kmer\+Manipulator}}.
 
@@ -134,9 +139,16 @@ Returns the canonical version of a k-\/mer, depends on encoding \+: see daughter
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-a uint64\+\_\+t which is the kmer itself if it is already canonical, or its canonical version 
+a uint64\+\_\+t which is the kmer itself if it is already canonical, or its canonical version \doxyparagraph*{Example}
 \end{DoxyReturn}
 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_kmer_manipulator_a_c_g_t}{KmerManipulatorACGT}} canonicaler(4); \textcolor{comment}{//4-\/mers in ACGT format}}
+\DoxyCodeLine{canonicaler.getCanonical(172);      \textcolor{comment}{//172}}
+\DoxyCodeLine{\mbox{\hyperlink{class_kmer_manipulator_a_c_t_g}{KmerManipulatorACTG}} canonicaler(4); \textcolor{comment}{//4-\/mers in ACTG format}}
+\DoxyCodeLine{canonicaler.getCanonical(172);      \textcolor{comment}{//144}}
+\end{DoxyCode}
+ 
 
 Implements \mbox{\hyperlink{class_kmer_manipulator_add3feb78723f09ea4690875fefac7862}{Kmer\+Manipulator}}.
 

@@ -225,8 +225,13 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the (k-1)-mer is present. False otherwise. </dd></dl>
-
+<dl class="section return"><dt>Returns</dt><dd>true if the (k-1)-mer is present. False otherwise. <h3>Example</h3>
+</dd></dl>
+<div class="fragment"><div class="line"><span class="keywordtype">bool</span> kmer_exists = cb.contains(230);</div>
+<div class="line"><a class="code" href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a> km(3);</div>
+<div class="line">uint64_t intGTT = km.decode(<span class="stringliteral">&quot;GTT&quot;</span>);</div>
+<div class="line"><span class="keywordtype">bool</span> GTT_exists = cb.contains(intGTT);</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a9b6ff916827a06c9fbff6b3021fabad1"></a>
@@ -306,13 +311,21 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the successors of a (k-1)-mer. </p>
-<p>The (k-1)-mer can either be canonical or not. The function doesn't check if the (k-1)-mer is present. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The (k-1)-mer can either be canonical or not. A (k-1)-mer has at minimum 0 successors and maximum 8 successors. The function doesn't check if the (k-1)-mer is present. </p><h3>How it works ?</h3>
+<p>Let's say the function takes as a parameter the integer which represents the (k-1)-mer GTT and we assume we are in ACGT encoding. First, the method will generate the following k-mers : GTTA, GTTC, GTTG, GTTT, AGTT, CGTT, GGTT, TGTT. Then, it will check if the canonical version of these k-mers are present. Let's suppose that only the canonical version of these k-mers are present : GTTA, GTTT, CGTT, TGTT. GTTA and GTTT are, what we call next k-mers so we will store the information in the 4 left bits of the result (uint8_t). CGTT and TGTT are previous k-mers so, this time, the information will be stored in the 4 right bits of the result. Thus, the function will return 1001 0101 which corresponds to 149 in base 10. It means that, in this example, the successors of the (k-1)-mer GTT are TTA, TTT, CGT and TGT.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">Kmer</td><td>: a (k-1)-mer. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a uint8_t which carry information about the presence/absence of the 8 potential successors of the (k-1)-mer. Read of the return : read the uint8_t under bit form : the first four elements are "next" k-mers, the last four are "previous" Always the same reading direction : A then C then G then T regardless of the encoding Check the read.me "Explanation on how it works" in <a href="https://github.com/yoann-dufresne/ConwayBromageLib">https://github.com/yoann-dufresne/ConwayBromageLib</a> for an example </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a uint8_t which carry information about the presence/absence of the 8 potential successors of the (k-1)-mer. Read of the return : read the uint8_t under bit form : the first four elements are "next" k-mers, the last four are "previous" Always the same reading direction : A then C then G then T regardless of the encoding <h3>Example</h3>
+</dd></dl>
+<div class="fragment"><div class="line">uint8_t <a class="code" href="class_conway_bromage.html#ae8e1f4a7374002416e357af7a983f028">successors</a> = cb.successors(78);</div>
+<div class="line"><a class="code" href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a> km(3);</div>
+<div class="line">uint64_t intGTT = km.decode(<span class="stringliteral">&quot;GTT&quot;</span>);</div>
+<div class="line">uint8_t successorsOfGTT = cb.successors(intGTT);</div>
+</div><!-- fragment --><dl class="section warning"><dt>Warning</dt><dd>The method doesn't check if the Kmer exists (so you have to do it on your own). </dd></dl>
 
 </div>
 </div>
@@ -399,6 +412,8 @@ Friends</h2></td></tr>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aclass_conway_bromage_html_ae8e1f4a7374002416e357af7a983f028"><div class="ttname"><a href="class_conway_bromage.html#ae8e1f4a7374002416e357af7a983f028">ConwayBromage::successors</a></div><div class="ttdeci">uint8_t successors(uint64_t Kmer) const</div><div class="ttdoc">Returns the successors of a (k-1)-mer.</div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.cpp:453</div></div>
+<div class="ttc" id="aclass_kmer_manipulator_a_c_g_t_html"><div class="ttname"><a href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a></div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.h:23</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

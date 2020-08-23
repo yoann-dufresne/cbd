@@ -229,8 +229,11 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a string representing the decoding version of the uint64_t. </dd></dl>
-
+<dl class="section return"><dt>Returns</dt><dd>a string representing the decoding version of the uint64_t. <h3>Example</h3>
+</dd></dl>
+<div class="fragment"><div class="line"><a class="code" href="class_kmer_manipulator_a_c_t_g.html">KmerManipulatorACTG</a> decoder(4); <span class="comment">//4-mers in ACTG format</span></div>
+<div class="line">decoder.decode(248);            <span class="comment">//GGTA</span></div>
+</div><!-- fragment --> 
 <p>Implements <a class="el" href="class_kmer_manipulator.html#a273b26d0f6eb184b4be5dd81335b4584">KmerManipulator</a>.</p>
 
 </div>
@@ -340,8 +343,13 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a uint64_t which is the kmer itself if it is already canonical, or its canonical version </dd></dl>
-
+<dl class="section return"><dt>Returns</dt><dd>a uint64_t which is the kmer itself if it is already canonical, or its canonical version <h3>Example</h3>
+</dd></dl>
+<div class="fragment"><div class="line"><a class="code" href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a> canonicaler(4); <span class="comment">//4-mers in ACGT format</span></div>
+<div class="line">canonicaler.getCanonical(172);      <span class="comment">//172</span></div>
+<div class="line"><a class="code" href="class_kmer_manipulator_a_c_t_g.html">KmerManipulatorACTG</a> canonicaler(4); <span class="comment">//4-mers in ACTG format</span></div>
+<div class="line">canonicaler.getCanonical(172);      <span class="comment">//144</span></div>
+</div><!-- fragment --> 
 <p>Implements <a class="el" href="class_kmer_manipulator.html#add3feb78723f09ea4690875fefac7862">KmerManipulator</a>.</p>
 
 </div>
@@ -442,6 +450,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aclass_kmer_manipulator_a_c_g_t_html"><div class="ttname"><a href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a></div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.h:23</div></div>
+<div class="ttc" id="aclass_kmer_manipulator_a_c_t_g_html"><div class="ttname"><a href="class_kmer_manipulator_a_c_t_g.html">KmerManipulatorACTG</a></div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.h:40</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

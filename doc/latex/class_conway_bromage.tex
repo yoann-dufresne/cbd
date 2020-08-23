@@ -73,9 +73,16 @@ The (k-\/1)-\/mer can either be canonical or not.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-true if the (k-\/1)-\/mer is present. False otherwise. 
+true if the (k-\/1)-\/mer is present. False otherwise. \doxyparagraph*{Example}
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_conway_bromage_a9b6ff916827a06c9fbff6b3021fabad1}\label{class_conway_bromage_a9b6ff916827a06c9fbff6b3021fabad1}} 
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} kmer\_exists = cb.contains(230);}
+\DoxyCodeLine{\mbox{\hyperlink{class_kmer_manipulator_a_c_g_t}{KmerManipulatorACGT}} km(3);}
+\DoxyCodeLine{uint64\_t intGTT = km.decode(\textcolor{stringliteral}{"{}GTT"{}});}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} GTT\_exists = cb.contains(intGTT);}
+\end{DoxyCode}
+ \mbox{\Hypertarget{class_conway_bromage_a9b6ff916827a06c9fbff6b3021fabad1}\label{class_conway_bromage_a9b6ff916827a06c9fbff6b3021fabad1}} 
 \index{ConwayBromage@{ConwayBromage}!getKmerManipulator@{getKmerManipulator}}
 \index{getKmerManipulator@{getKmerManipulator}!ConwayBromage@{ConwayBromage}}
 \doxysubsubsection{\texorpdfstring{getKmerManipulator()}{getKmerManipulator()}}
@@ -124,14 +131,30 @@ an sd\+\_\+vector
 
 Returns the successors of a (k-\/1)-\/mer. 
 
-The (k-\/1)-\/mer can either be canonical or not. The function doesn\textquotesingle{}t check if the (k-\/1)-\/mer is present. 
+The (k-\/1)-\/mer can either be canonical or not. A (k-\/1)-\/mer has at minimum 0 successors and maximum 8 successors. The function doesn\textquotesingle{}t check if the (k-\/1)-\/mer is present. \doxyparagraph*{How it works ?}
+
+Let\textquotesingle{}s say the function takes as a parameter the integer which represents the (k-\/1)-\/mer G\+TT and we assume we are in A\+C\+GT encoding. First, the method will generate the following k-\/mers \+: G\+T\+TA, G\+T\+TC, G\+T\+TG, G\+T\+TT, A\+G\+TT, C\+G\+TT, G\+G\+TT, T\+G\+TT. Then, it will check if the canonical version of these k-\/mers are present. Let\textquotesingle{}s suppose that only the canonical version of these k-\/mers are present \+: G\+T\+TA, G\+T\+TT, C\+G\+TT, T\+G\+TT. G\+T\+TA and G\+T\+TT are, what we call next k-\/mers so we will store the information in the 4 left bits of the result (uint8\+\_\+t). C\+G\+TT and T\+G\+TT are previous k-\/mers so, this time, the information will be stored in the 4 right bits of the result. Thus, the function will return 1001 0101 which corresponds to 149 in base 10. It means that, in this example, the successors of the (k-\/1)-\/mer G\+TT are T\+TA, T\+TT, C\+GT and T\+GT.
+
+
 \begin{DoxyParams}{Parameters}
 {\em Kmer} & \+: a (k-\/1)-\/mer. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-a uint8\+\_\+t which carry information about the presence/absence of the 8 potential successors of the (k-\/1)-\/mer. Read of the return \+: read the uint8\+\_\+t under bit form \+: the first four elements are \char`\"{}next\char`\"{} k-\/mers, the last four are \char`\"{}previous\char`\"{} Always the same reading direction \+: A then C then G then T regardless of the encoding Check the read.\+me \char`\"{}\+Explanation on how it works\char`\"{} in \href{https://github.com/yoann-dufresne/ConwayBromageLib}{\texttt{ https\+://github.\+com/yoann-\/dufresne/\+Conway\+Bromage\+Lib}} for an example 
+a uint8\+\_\+t which carry information about the presence/absence of the 8 potential successors of the (k-\/1)-\/mer. Read of the return \+: read the uint8\+\_\+t under bit form \+: the first four elements are \char`\"{}next\char`\"{} k-\/mers, the last four are \char`\"{}previous\char`\"{} Always the same reading direction \+: A then C then G then T regardless of the encoding \doxyparagraph*{Example}
 \end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{uint8\_t \mbox{\hyperlink{class_conway_bromage_ae8e1f4a7374002416e357af7a983f028}{successors}} = cb.successors(78);}
+\DoxyCodeLine{\mbox{\hyperlink{class_kmer_manipulator_a_c_g_t}{KmerManipulatorACGT}} km(3);}
+\DoxyCodeLine{uint64\_t intGTT = km.decode(\textcolor{stringliteral}{"{}GTT"{}});}
+\DoxyCodeLine{uint8\_t successorsOfGTT = cb.successors(intGTT);}
+\end{DoxyCode}
+
+
+\begin{DoxyWarning}{Warning}
+The method doesn\textquotesingle{}t check if the Kmer exists (so you have to do it on your own). 
+\end{DoxyWarning}
 
 
 \doxysubsection{Friends And Related Function Documentation}
