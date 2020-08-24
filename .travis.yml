@@ -13,6 +13,15 @@ before_install:
   - sudo apt-get install -y doxygen 
 
 install:
+  - cd ~/
+  - mkdir include
+  - git clone https://github.com/simongog/sdsl-lite.git
+  - git clone https://github.com/martinmoene/lest.git
+  - cd sdsl-lite
+  - ./install.sh
+  - cd ../
+  - cp -r ./sdsl-lite/include/sdsl ./include
+  - cp -r ./lest/include/lest ./include
   - git clone --recurse-submodules https://github.com/yoann-dufresne/ConwayBromageLib.git
 
 script:
@@ -23,7 +32,8 @@ script:
   - python3 involveGenerate_counts.py -k 4 -n 100 -f ACGT > unsortACGT.txt
   - sort unsortACGT.txt > sortACGT.txt
   - python3 sortACTG.py unsortACTG.txt > sortACTG.txt
-  - cmake CMakeLists.txt
-  - make
+  # don't use cmake for tests
+  - g++ -Wall -Wextra -std=c++11 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG -I ~/include -L ~/lib -o ConwayBromageLib Tests.cpp ConwayBromageLib.cpp -lsdsl -ldivsufsort -ldivsufsort64
   - ./ConwayBromageLib
+  
   
