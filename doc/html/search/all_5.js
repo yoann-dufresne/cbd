@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['filesorter_2ecpp_16',['FileSorter.cpp',['../_file_sorter_8cpp.html',1,'']]]
+  ['metricforispresent_14',['metricForIsPresent',['../class_conway_bromage.html#aae6bbb22d03163f212bc5d01c206d740',1,'ConwayBromage']]]
 ];

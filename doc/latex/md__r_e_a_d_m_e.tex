@@ -1,29 +1,19 @@
-\href{https://travis-ci.com/yoann-dufresne/ConwayBromageLib}{\texttt{ }} \doxysection*{What is Conway\+Bromage\+Lib ?}
-
+\href{https://travis-ci.com/yoann-dufresne/ConwayBromageLib}{\texttt{ }} \hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysection{What is Conway\+Bromage\+Lib ?}\label{md__r_e_a_d_m_e_autotoc_md9}
 The Conway\+Bromage\+Lib (C\+BL) is a C++11 library that implements the succinct data structure described in the \href{https://www.researchgate.net/publication/49765043_Succinct_Data_Structures_for_Assembling_Large_Genomes}{\texttt{ article of Thomas C. Conway and Andrew J. Bromage}}.~\newline
- C\+BL is developped for the assembling of larges genomes. It stores canonical k-\/mers and permits query operations. More specifically, it represents an edge-\/centric {\bfseries{De Bruijn Graph}} in a memory-\/efficient way by also supporting time-\/efficient operations. \doxysection*{Method}
-
+ C\+BL is developped for the assembling of larges genomes. It stores canonical k-\/mers and permits query operations. More specifically, it represents an edge-\/centric {\bfseries{De Bruijn Graph}} in a memory-\/efficient way by also supporting time-\/efficient operations. \hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysection{Method}\label{md__r_e_a_d_m_e_autotoc_md10}
 Conway\+Bromage\+Lib is based on the \href{https://github.com/simongog/sdsl-lite}{\texttt{ S\+D\+SL}} library which provides succinct data structures. More precisely, C\+BL use the class {\ttfamily sd\+\_\+vector} which implements a sparse bit vector (vector made of zeros and ones) in order to store the k-\/mers. ~\newline
  ~\newline
  C\+BL takes a list of canonical k-\/mers as input. The bit vector use to store these k-\/mers is of size 4$^\wedge$k. These latter are represented by an index/position in the bit vector. If an element of a specific position is set to one, then it means that the k-\/mer representing this position is present at least once in the sequence. Otherwise (set to 0) it is absent.~\newline
  ~\newline
- A succinct data structure is a data structure objects in memory-\/space close to the information-\/theoretic lower bounds and perform efficient query operations.
-
-\doxysection*{What can I do with C\+BL ?}
-
+ A succinct data structure is a data structure objects in memory-\/space close to the information-\/theoretic lower bounds and perform efficient query operations.\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysection{What can I do with C\+B\+L ?}\label{md__r_e_a_d_m_e_autotoc_md11}
 C\+BL stores genomes sequences. Once it is done, we can apply two query operations \+: ~\newline
  The query operation {\bfseries{contains}} to know if a given (k-\/1)-\/mer is present or not.~\newline
  The query operation {\bfseries{successors}} to get the successors of a (k-\/1)-\/mer.~\newline
- A successor of a k-\/mer {\ttfamily x} is any k-\/mer of the form {\ttfamily a+x\mbox{[}1\+:k-\/1\mbox{]}} or {\ttfamily x\mbox{[}2\+:k\mbox{]}+a} with {\ttfamily a} nucleotide.
-
-\doxysection*{Requirements}
-
+ A successor of a k-\/mer {\ttfamily x} is any k-\/mer of the form {\ttfamily a+x\mbox{[}1\+:k-\/1\mbox{]}} or {\ttfamily x\mbox{[}2\+:k\mbox{]}+a} with {\ttfamily a} nucleotide.\hypertarget{md__r_e_a_d_m_e_autotoc_md12}{}\doxysection{Requirements}\label{md__r_e_a_d_m_e_autotoc_md12}
 C\+BL requires \+:~\newline
  {\ttfamily g++} version 8.\+2.\+0 or higher.~\newline
- {\ttfamily cmake} version 3.\+12 or higher (to build unit tests). Mac OS, Windows and Linux are supported.
-
-\doxysection*{Installation}
-
+ {\ttfamily cmake} version 3.\+12 or higher (to build unit tests).~\newline
+ Mac OS and Linux (Ubuntu) are supported.\hypertarget{md__r_e_a_d_m_e_autotoc_md13}{}\doxysection{Installation}\label{md__r_e_a_d_m_e_autotoc_md13}
 To download the library, use the following command \+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{git clone -\/-\/recurse-\/submodules https://github.com/yoann-\/dufresne/ConwayBromageLib.git}
@@ -35,10 +25,7 @@ If you have already used {\ttfamily git clone} without the {\ttfamily -\/-\/recu
 \DoxyCodeLine{git submodule init}
 \DoxyCodeLine{git submodule update}
 \end{DoxyCode}
-
-
-\doxysection*{How to use C\+BL ?}
-
+\hypertarget{md__r_e_a_d_m_e_autotoc_md14}{}\doxysection{How to use C\+B\+L ?}\label{md__r_e_a_d_m_e_autotoc_md14}
 The current {\ttfamily C\+Make\+Lists.\+txt} {\bfseries{is made for unit tests}}.~\newline
  To use C\+BL, please create a new C++ file.~\newline
  Example of code, main.\+cpp \+:~\newline
@@ -87,20 +74,14 @@ To compile modify the {\ttfamily C\+Make\+Lists.\+txt}, for example with main.\+
 \DoxyCodeLine{target\_include\_directories(example PUBLIC ./external/lest/include)   \#Where we put .h from lest libraries : It needs to be after add\_executable !!!}
 \DoxyCodeLine{target\_link\_libraries(example sdsl divsufsort divsufsort64)    \#Specific flags from sdsl library}
 \end{DoxyCode}
-
-
-\doxysection*{Bug reporting}
-
-If there are bugs or mistakes in C\+BL please send us an issue on \href{https://github.com/yoann-dufresne/ConwayBromageLib/issues}{\texttt{ C\+BL issue reports}} \doxysection*{External ressources}
-
-C\+BL uses others libraries to work. The \href{https://github.com/simongog/sdsl-lite}{\texttt{ S\+D\+SL}} that is a library implementing succinct data structures. We use it to implement bit vector (sd\+\_\+vector in S\+D\+SL syntax).~\newline
- The \href{https://github.com/martinmoene/lest\#other-macros}{\texttt{ Lest}} library is used to write units tests. \doxysection*{Technical description for developers}
-
-\href{http://htmlpreview.github.io/?https://github.com/yoann-dufresne/ConwayBromageLib/blob/master/doc/html/index.html}{\texttt{ Documentation}} \doxysubsection*{The \mbox{\hyperlink{class_kmer_manipulator}{Kmer\+Manipulator}} class}
-
+\hypertarget{md__r_e_a_d_m_e_autotoc_md15}{}\doxysection{Bug reporting}\label{md__r_e_a_d_m_e_autotoc_md15}
+If there are bugs or mistakes in C\+BL please send us an issue on \href{https://github.com/yoann-dufresne/ConwayBromageLib/issues}{\texttt{ C\+BL issue reports}} \hypertarget{md__r_e_a_d_m_e_autotoc_md16}{}\doxysection{External ressources}\label{md__r_e_a_d_m_e_autotoc_md16}
+C\+BL uses others libraries to work.~\newline
+ The \href{https://github.com/simongog/sdsl-lite}{\texttt{ S\+D\+SL}} that is a library implementing succinct data structures. We use it to implement bit vector (sd\+\_\+vector in S\+D\+SL syntax).~\newline
+ The \href{https://github.com/martinmoene/lest\#other-macros}{\texttt{ Lest}} library is used to write units tests. \hypertarget{md__r_e_a_d_m_e_autotoc_md17}{}\doxysection{Technical description for developers}\label{md__r_e_a_d_m_e_autotoc_md17}
+\href{http://htmlpreview.github.io/?https://github.com/yoann-dufresne/ConwayBromageLib/blob/master/doc/html/index.html}{\texttt{ Documentation}} \hypertarget{md__r_e_a_d_m_e_autotoc_md18}{}\doxysubsection{The Kmer\+Manipulator class}\label{md__r_e_a_d_m_e_autotoc_md18}
 Abstract class that manage encoding (A\+C\+GT or A\+C\+TG) and size (the k) for k-\/mers~\newline
- Mother class of \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t}{Kmer\+Manipulator\+A\+C\+GT}} and \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g}{Kmer\+Manipulator\+A\+C\+TG}} \doxysubsection*{\mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_aa194ad192d1066d433b9e8a2656895d0}{Kmer\+Manipulator\+A\+C\+G\+T\+::encode}} and \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g_a76f8b6bb7d88dfc38f54354fae9c53ac}{Kmer\+Manipulator\+A\+C\+T\+G\+::encode}}}
-
+ Mother class of \mbox{\hyperlink{class_kmer_manipulator_a_c_g_t}{Kmer\+Manipulator\+A\+C\+GT}} and \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g}{Kmer\+Manipulator\+A\+C\+TG}} \hypertarget{md__r_e_a_d_m_e_autotoc_md19}{}\doxysubsection{Kmer\+Manipulator\+A\+C\+G\+T\+::encode and Kmer\+Manipulator\+A\+C\+T\+G\+::encode}\label{md__r_e_a_d_m_e_autotoc_md19}
 {\bfseries{encode}} allow us to translate a k-\/mer into an {\ttfamily uint64\+\_\+t} thanks to A\+C\+GT or A\+C\+TG encoding~\newline
  We use an hash to create and return unique {\ttfamily uint64\+\_\+t}.~\newline
  The function takes a {\ttfamily string} (an uncompressed k-\/mer) and returns an {\ttfamily uint64\+\_\+t} (a compressed k-\/mer) which corresponds to the given string sequence~\newline
@@ -110,20 +91,14 @@ Abstract class that manage encoding (A\+C\+GT or A\+C\+TG) and size (the k) for 
 \DoxyCodeLine{KmerManipulatorACGT encoder(4); //4-\/mers in ACGT format}
 \DoxyCodeLine{encoder.encode("{}GGTA"{});     //172}
 \end{DoxyCode}
-
-
-\doxysubsection*{\mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_a6a13fcf814686776adc96b3e0bd03056}{Kmer\+Manipulator\+A\+C\+G\+T\+::decode}} and \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g_a51e5251929a97c6d1fac2146f1fce927}{Kmer\+Manipulator\+A\+C\+T\+G\+::decode}}}
-
+\hypertarget{md__r_e_a_d_m_e_autotoc_md20}{}\doxysubsection{Kmer\+Manipulator\+A\+C\+G\+T\+::decode and Kmer\+Manipulator\+A\+C\+T\+G\+::decode}\label{md__r_e_a_d_m_e_autotoc_md20}
 {\bfseries{decode}} does the opposite of {\bfseries{encode}} \+: it takes an {\ttfamily uint64\+\_\+t} and returns the corresponding k-\/mer string. Returns the string representation of a value representing a k-\/mer.~\newline
  Example of use \+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{KmerManipulatorACTG decoder(4); //4-\/mers in ACTG format}
 \DoxyCodeLine{decoder.decode(248);    //GGTA}
 \end{DoxyCode}
-
-
-\doxysubsection*{\mbox{\hyperlink{class_kmer_manipulator_a_c_g_t_a744f73b917bcdc92978ba74f55530b48}{Kmer\+Manipulator\+A\+C\+G\+T\+::get\+Canonical}} and \mbox{\hyperlink{class_kmer_manipulator_a_c_t_g_ad1fad278af3af7d6de8f2272f4fe46ff}{Kmer\+Manipulator\+A\+C\+T\+G\+::get\+Canonical}}}
-
+\hypertarget{md__r_e_a_d_m_e_autotoc_md21}{}\doxysubsection{Kmer\+Manipulator\+A\+C\+G\+T\+::get\+Canonical and Kmer\+Manipulator\+A\+C\+T\+G\+::get\+Canonical}\label{md__r_e_a_d_m_e_autotoc_md21}
 {\bfseries{get\+Canonical}} takes an {\ttfamily uint64\+\_\+t} (a compressed k-\/mer) and returns its canonical version in the form of an {\ttfamily uint64\+\_\+t}.~\newline
  The canonical version depends on encoding format.~\newline
  Example of use \+: 
@@ -133,10 +108,7 @@ Abstract class that manage encoding (A\+C\+GT or A\+C\+TG) and size (the k) for 
 \DoxyCodeLine{KmerManipulatorACTG canonicaler(4); //4-\/mers in ACTG format}
 \DoxyCodeLine{canonicaler.getCanonical(172);      //144}
 \end{DoxyCode}
-
-
-\doxysubsection*{Conway\+Bromage\+::\+Conway\+Bromage(istream\& kmer\+Flux, Kmer\+Manipulator$\ast$ km)}
-
+\hypertarget{md__r_e_a_d_m_e_autotoc_md22}{}\doxysubsection{Conway\+Bromage\+::\+Conway\+Bromage(istream\& kmer\+Flux, Kmer\+Manipulator$\ast$ km)}\label{md__r_e_a_d_m_e_autotoc_md22}
 The {\bfseries{\mbox{\hyperlink{class_conway_bromage}{Conway\+Bromage}} constructor}} takes an istream which represents the k-\/mer flux and a {\bfseries{\mbox{\hyperlink{class_kmer_manipulator}{Kmer\+Manipulator}}}} which contains all the information about encoding format.~\newline
  It returns an object containing all the k-\/mers in the flux with very low memory consumption.~\newline
  Example of use \+: 
@@ -167,10 +139,7 @@ The {\bfseries{\mbox{\hyperlink{class_conway_bromage}{Conway\+Bromage}} construc
 ~\newline
 
 
-{\bfseries{Note}} \+: The presence of the counts doesn\textquotesingle{}t affect building, they are automatically ignored by C\+BL.
-
-\doxysubsection*{bool Conway\+Bromage\+::contains(uint64\+\_\+t Kmer)}
-
+{\bfseries{Note}} \+: The presence of the counts doesn\textquotesingle{}t affect building, they are automatically ignored by C\+BL.\hypertarget{md__r_e_a_d_m_e_autotoc_md23}{}\doxysubsection{bool Conway\+Bromage\+::contains(uint64\+\_\+t Kmer)}\label{md__r_e_a_d_m_e_autotoc_md23}
 {\bfseries{contains}} takes a (k-\/1)-\/mer (a {\ttfamily uint64\+\_\+t}) and returns true if it\textquotesingle{}s present among the stored k-\/mers.~\newline
  Example of use\+:~\newline
  
@@ -181,10 +150,7 @@ The {\bfseries{\mbox{\hyperlink{class_conway_bromage}{Conway\+Bromage}} construc
 \DoxyCodeLine{uint64\_t intGTT = km.decode("{}GTT"{});}
 \DoxyCodeLine{bool GTT\_exists = cb.contains(intGTT);}
 \end{DoxyCode}
-
-
-\doxysubsection*{uint8\+\_\+t Conway\+Bromage\+::successors(uint64\+\_\+t Kmer)}
-
+\hypertarget{md__r_e_a_d_m_e_autotoc_md24}{}\doxysubsection{uint8\+\_\+t Conway\+Bromage\+::successors(uint64\+\_\+t Kmer)}\label{md__r_e_a_d_m_e_autotoc_md24}
 {\bfseries{successors}} takes a (k-\/1)-\/mer (a {\ttfamily uint64\+\_\+t}) and returns its potenial successors. A (k-\/1)-\/mer has at minimum 0 successors and maximum 8 successors.~\newline
  {\bfseries{Informations}} \+: ~\newline
 

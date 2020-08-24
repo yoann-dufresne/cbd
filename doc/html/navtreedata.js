@@ -25,13 +25,23 @@
 var NAVTREE =
 [
   [ "ConwayBromageLib", "index.html", [
-    [ "ConwayBromageLib : an implementation of Conway and Bromage succinct data structure for assembling large genomes", "md__r_e_a_d_m_e.html", null ],
-    [ "Namespaces", "namespaces.html", [
-      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
-      [ "Namespace Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", null ],
-        [ "Functions", "namespacemembers_func.html", null ],
-        [ "Variables", "namespacemembers_vars.html", null ]
+    [ "ConwayBromageLib : an implementation of Conway and Bromage succinct data structure for assembling large genomes", "md__r_e_a_d_m_e.html", [
+      [ "What is ConwayBromageLib ?", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
+      [ "Method", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
+      [ "What can I do with CBL ?", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
+      [ "Requirements", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
+      [ "Installation", "md__r_e_a_d_m_e.html#autotoc_md13", null ],
+      [ "How to use CBL ?", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
+      [ "Bug reporting", "md__r_e_a_d_m_e.html#autotoc_md15", null ],
+      [ "External ressources", "md__r_e_a_d_m_e.html#autotoc_md16", null ],
+      [ "Technical description for developers", "md__r_e_a_d_m_e.html#autotoc_md17", [
+        [ "The KmerManipulator class", "md__r_e_a_d_m_e.html#autotoc_md18", null ],
+        [ "KmerManipulatorACGT::encode and KmerManipulatorACTG::encode", "md__r_e_a_d_m_e.html#autotoc_md19", null ],
+        [ "KmerManipulatorACGT::decode and KmerManipulatorACTG::decode", "md__r_e_a_d_m_e.html#autotoc_md20", null ],
+        [ "KmerManipulatorACGT::getCanonical and KmerManipulatorACTG::getCanonical", "md__r_e_a_d_m_e.html#autotoc_md21", null ],
+        [ "ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km)", "md__r_e_a_d_m_e.html#autotoc_md22", null ],
+        [ "bool ConwayBromage::contains(uint64_t Kmer)", "md__r_e_a_d_m_e.html#autotoc_md23", null ],
+        [ "uint8_t ConwayBromage::successors(uint64_t Kmer)", "md__r_e_a_d_m_e.html#autotoc_md24", null ]
       ] ]
     ] ],
     [ "Classes", "annotated.html", [
@@ -41,25 +51,18 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ],
         [ "Related Functions", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ],
-      [ "File Members", "globals.html", [
-        [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ],
-        [ "Variables", "globals_vars.html", null ],
-        [ "Macros", "globals_defs.html", null ]
-      ] ]
+      [ "File List", "files.html", "files_dup" ]
     ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"_conway_bromage_lib_8cpp.html"
+"_conway_bromage_lib_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
