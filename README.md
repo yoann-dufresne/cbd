@@ -19,8 +19,8 @@ A successor of a k-mer ```x``` is any k-mer of the form ```a+x[1:k-1]``` or ```x
 ## Requirements
 CBL requires :<br>
 ``g++`` version 8.2.0 or higher.<br>
-``cmake`` version 3.12 or higher (to build unit tests).
-Mac OS, Windows and Linux are supported.
+``cmake`` version 3.12 or higher (to build unit tests).<br>
+Mac OS and Linux (Ubuntu) are supported.
 
 ## Installation
 To download the library, use the following command : 
@@ -82,7 +82,7 @@ target_link_libraries(example sdsl divsufsort divsufsort64)    #Specific flags f
 ## Bug reporting
 If there are bugs or mistakes in CBL please send us an issue on [CBL issue reports](https://github.com/yoann-dufresne/ConwayBromageLib/issues)
 ## External ressources
-CBL uses others libraries to work.
+CBL uses others libraries to work.<br>
 The [SDSL](https://github.com/simongog/sdsl-lite) that is a library implementing succinct data structures. We use it to implement bit vector (sd_vector in SDSL syntax).<br>
 The [Lest](https://github.com/martinmoene/lest#other-macros) library is used to write units tests.
 ## Technical description for developers
