@@ -8,26 +8,22 @@ python: "3.8"
 
 compiler: g++
 
-#before_install:
-#    - sudo apt-get install doxygen
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y doxygen 
 
 install:
   - git clone --recurse-submodules https://github.com/yoann-dufresne/ConwayBromageLib.git
 
 script:
   - cd $TRAVIS_BUILD_DIR  #dossier où est contenu notre code
-#  - doxygen Doxyfile      #génération de la documentation dans le dossier doc/
-  - ls
+  - doxygen Doxyfile      #génération de la documentation dans le dossier doc/
   - cd ConwayBromageLib
-  - ls
   - python3 involveGenerate_counts.py -k 4 -n 100 -f ACTG > unsortACTG.txt
   - python3 involveGenerate_counts.py -k 4 -n 100 -f ACGT > unsortACGT.txt
   - sort unsortACGT.txt > sortACGT.txt
   - python3 sortACTG.py unsortACTG.txt > sortACTG.txt
-  - ls
   - cmake CMakeLists.txt
-  - ls
   - make
-  - ls
   - ./ConwayBromageLib
   
