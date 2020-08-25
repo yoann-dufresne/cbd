@@ -262,8 +262,8 @@ int KmerManipulatorACGT::getSize(){
 }
 
 /**
- * First ConwayBromage constructor : Store memory-efficiently k-mers coming from an istream in a specific format.  
- * @param kmerFlux - An istream of kmer. For example a file represented by an ifstream.
+ * First ConwayBromage constructor : Stores memory-efficiently k-mers coming from an istream in a specific format.  
+ * @param kmerFlux - An istream of k-mers. For example a file represented by an ifstream.
  * @param km - Object which contains all the information about encoding and decoding in a specific format.
  * ### Example
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.cpp
@@ -404,8 +404,9 @@ ConwayBromage::ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km){
  * ### Example
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.cpp
  * bool kmer_exists = cb.contains(230);
+ *
  * KmerManipulatorACGT km(3);
- * uint64_t intGTT = km.decode("GTT");
+ * uint64_t intGTT = km.encode("GTT");
  * bool GTT_exists = cb.contains(intGTT);
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
@@ -455,7 +456,7 @@ bool ConwayBromage::contains(uint64_t Kmer) const{
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.cpp
  * uint8_t successors = cb.successors(78);
  * KmerManipulatorACGT km(3);
- * uint64_t intGTT = km.decode("GTT");
+ * uint64_t intGTT = km.encode("GTT");
  * uint8_t successorsOfGTT = cb.successors(intGTT);
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * @warning The method doesn't check the presence of the (k-1)-mer (so you have to do it on your own with the method contains for example).

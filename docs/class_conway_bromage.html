@@ -198,8 +198,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <h3><a class="anchor" id="autotoc_md6"></a>
 Example</h3>
 <div class="fragment"><div class="line"><span class="keywordtype">bool</span> kmer_exists = cb.contains(230);</div>
+<div class="line"> </div>
 <div class="line"><a class="code" href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a> km(3);</div>
-<div class="line">uint64_t intGTT = km.decode(<span class="stringliteral">&quot;GTT&quot;</span>);</div>
+<div class="line">uint64_t intGTT = km.encode(<span class="stringliteral">&quot;GTT&quot;</span>);</div>
 <div class="line"><span class="keywordtype">bool</span> GTT_exists = cb.contains(intGTT);</div>
 </div><!-- fragment --> 
 </div>
@@ -296,7 +297,7 @@ How it works ?</h3>
 Example</h3>
 <div class="fragment"><div class="line">uint8_t <a class="code" href="class_conway_bromage.html#ae8e1f4a7374002416e357af7a983f028">successors</a> = cb.successors(78);</div>
 <div class="line"><a class="code" href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a> km(3);</div>
-<div class="line">uint64_t intGTT = km.decode(<span class="stringliteral">&quot;GTT&quot;</span>);</div>
+<div class="line">uint64_t intGTT = km.encode(<span class="stringliteral">&quot;GTT&quot;</span>);</div>
 <div class="line">uint8_t successorsOfGTT = cb.successors(intGTT);</div>
 </div><!-- fragment --><dl class="section warning"><dt>Warning</dt><dd>The method doesn't check the presence of the (k-1)-mer (so you have to do it on your own with the method contains for example). </dd></dl>
 
@@ -362,7 +363,7 @@ Example</h3>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_conway_bromage_html_ae8e1f4a7374002416e357af7a983f028"><div class="ttname"><a href="class_conway_bromage.html#ae8e1f4a7374002416e357af7a983f028">ConwayBromage::successors</a></div><div class="ttdeci">uint8_t successors(uint64_t Kmer) const</div><div class="ttdoc">Returns the successors of a (k-1)-mer.</div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.cpp:463</div></div>
+<div class="ttc" id="aclass_conway_bromage_html_ae8e1f4a7374002416e357af7a983f028"><div class="ttname"><a href="class_conway_bromage.html#ae8e1f4a7374002416e357af7a983f028">ConwayBromage::successors</a></div><div class="ttdeci">uint8_t successors(uint64_t Kmer) const</div><div class="ttdoc">Returns the successors of a (k-1)-mer.</div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.cpp:464</div></div>
 <div class="ttc" id="aclass_kmer_manipulator_a_c_g_t_html"><div class="ttname"><a href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a></div><div class="ttdoc">KmerManipulator for ACGT encoding : permits to apply operations on k-mers in ACGT format.</div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.h:24</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
