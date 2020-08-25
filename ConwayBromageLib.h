@@ -3,6 +3,7 @@
 #ifndef CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 #define CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 
+///Abstract class : permits to apply operations on k-mers in two formats (see child classes)
 class KmerManipulator{  //abstract class
 protected:
     uint64_t m_size;    //size of the k-mers
@@ -19,7 +20,7 @@ public:
     virtual int getSize() = 0;  
 };
 
-//KmerManipulator for ACGT encoding : permits to apply operations on k-mers in ACGT format
+///KmerManipulator for ACGT encoding : permits to apply operations on k-mers in ACGT format
 class KmerManipulatorACGT : public KmerManipulator{
 private:
     std::string m_format;   //always equal to "ACGT"
@@ -36,7 +37,7 @@ public:
     int getSize();
 };
 
-//KmerManipulator for ACTG encoding : permits to apply operations on k-mers in ACTG format
+///KmerManipulator for ACTG encoding : permits to apply operations on k-mers in ACTG format
 class KmerManipulatorACTG : public KmerManipulator{
 private:
     std::string m_format; // always equal to "ACTG"
@@ -53,7 +54,7 @@ public:
     int getSize();
 };
 
-//ConwayBromage : permits to store k-mers and apply two operations on them : 'contains' and 'successors'
+/// ConwayBromage : permits to store k-mers and apply two operations on them : 'contains' and 'successors'
 class ConwayBromage{
 private:
     sdsl::sd_vector<> m_sequence;          //the sparse bit vector which stores the k-mers
