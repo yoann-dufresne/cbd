@@ -76,7 +76,8 @@ CBL uses others libraries to work.<br>
 The [SDSL](https://github.com/simongog/sdsl-lite) that is a library implementing succinct data structures. We use it to implement bit vector (sd_vector in SDSL syntax).<br>
 The [Lest](https://github.com/martinmoene/lest#other-macros) library is used to write units tests.
 ## Technical description for developers
-See the [documentation](https://yoann-dufresne.github.io/ConwayBromageLib/)
+Below, you will find a description of the library's main functions.
+See the [documentation](https://yoann-dufresne.github.io/ConwayBromageLib/) for further information.
 ### The KmerManipulator class
 Abstract class that manage encoding (ACGT or ACTG) and size (the k) for k-mers<br>
 Mother class of KmerManipulatorACGT and KmerManipulatorACTG
