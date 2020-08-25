@@ -89,26 +89,31 @@ $(document).ready(function(){initNavTree('class_kmer_manipulator_a_c_g_t.html','
 <div class="title">KmerManipulatorACGT Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="class_kmer_manipulator.html" title="Abstract class : permits to apply operations on k-mers in two formats (see child classes)">KmerManipulator</a> for ACGT encoding : permits to apply operations on k-mers in ACGT format.  
+ <a href="class_kmer_manipulator_a_c_g_t.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_conway_bromage_lib_8h_source.html">ConwayBromageLib.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for KmerManipulatorACGT:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_kmer_manipulator_a_c_g_t.png" usemap="#KmerManipulatorACGT_map" alt=""/>
   <map id="KmerManipulatorACGT_map" name="KmerManipulatorACGT_map">
-<area href="class_kmer_manipulator.html" alt="KmerManipulator" shape="rect" coords="0,0,142,24"/>
+<area href="class_kmer_manipulator.html" title="Abstract class : permits to apply operations on k-mers in two formats (see child classes)" alt="KmerManipulator" shape="rect" coords="0,0,142,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a002d52532af1d4b0d4cfac5124595062"><td class="memItemLeft" align="right" valign="top"><a id="a002d52532af1d4b0d4cfac5124595062"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>KmerManipulatorACGT</b> (uint64_t size)</td></tr>
+<tr class="memitem:a002d52532af1d4b0d4cfac5124595062"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kmer_manipulator_a_c_g_t.html#a002d52532af1d4b0d4cfac5124595062">KmerManipulatorACGT</a> (uint64_t size)</td></tr>
+<tr class="memdesc:a002d52532af1d4b0d4cfac5124595062"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor.  <a href="class_kmer_manipulator_a_c_g_t.html#a002d52532af1d4b0d4cfac5124595062">More...</a><br /></td></tr>
 <tr class="separator:a002d52532af1d4b0d4cfac5124595062"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa194ad192d1066d433b9e8a2656895d0"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kmer_manipulator_a_c_g_t.html#aa194ad192d1066d433b9e8a2656895d0">encode</a> (const std::string &amp;word)</td></tr>
 <tr class="memdesc:aa194ad192d1066d433b9e8a2656895d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes a k-mer in ACGT format.  <a href="class_kmer_manipulator_a_c_g_t.html#aa194ad192d1066d433b9e8a2656895d0">More...</a><br /></td></tr>
 <tr class="separator:aa194ad192d1066d433b9e8a2656895d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a13fcf814686776adc96b3e0bd03056"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kmer_manipulator_a_c_g_t.html#a6a13fcf814686776adc96b3e0bd03056">decode</a> (uint64_t kmer)</td></tr>
-<tr class="memdesc:a6a13fcf814686776adc96b3e0bd03056"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a string which is the word which corresponds to the uint64_t value (in ACGT format)  <a href="class_kmer_manipulator_a_c_g_t.html#a6a13fcf814686776adc96b3e0bd03056">More...</a><br /></td></tr>
+<tr class="memdesc:a6a13fcf814686776adc96b3e0bd03056"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a string representing the k-mer.  <a href="class_kmer_manipulator_a_c_g_t.html#a6a13fcf814686776adc96b3e0bd03056">More...</a><br /></td></tr>
 <tr class="separator:a6a13fcf814686776adc96b3e0bd03056"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a744f73b917bcdc92978ba74f55530b48"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kmer_manipulator_a_c_g_t.html#a744f73b917bcdc92978ba74f55530b48">getCanonical</a> (const uint64_t kmer)</td></tr>
 <tr class="memdesc:a744f73b917bcdc92978ba74f55530b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the canonical version of a k-mer in ACGT format.  <a href="class_kmer_manipulator_a_c_g_t.html#a744f73b917bcdc92978ba74f55530b48">More...</a><br /></td></tr>
@@ -123,7 +128,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:afac37ca7d410b9a9020615916bf1afaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the corresponding caracter to the nucleotide's value.  <a href="class_kmer_manipulator_a_c_g_t.html#afac37ca7d410b9a9020615916bf1afaa">More...</a><br /></td></tr>
 <tr class="separator:afac37ca7d410b9a9020615916bf1afaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ec2b5876f08bfa921a2398613e72b4e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kmer_manipulator_a_c_g_t.html#a7ec2b5876f08bfa921a2398613e72b4e">getSize</a> ()</td></tr>
-<tr class="memdesc:a7ec2b5876f08bfa921a2398613e72b4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the size attribute.  <a href="class_kmer_manipulator_a_c_g_t.html#a7ec2b5876f08bfa921a2398613e72b4e">More...</a><br /></td></tr>
+<tr class="memdesc:a7ec2b5876f08bfa921a2398613e72b4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the size k of the k-mers that the object is representing.  <a href="class_kmer_manipulator_a_c_g_t.html#a7ec2b5876f08bfa921a2398613e72b4e">More...</a><br /></td></tr>
 <tr class="separator:a7ec2b5876f08bfa921a2398613e72b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_kmer_manipulator"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_kmer_manipulator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kmer_manipulator.html">KmerManipulator</a></td></tr>
 <tr class="memitem:a8de127f846cb4fc997c1c79e19383194 inherit pub_methods_class_kmer_manipulator"><td class="memItemLeft" align="right" valign="top"><a id="a8de127f846cb4fc997c1c79e19383194"></a>
@@ -137,6 +142,35 @@ Additional Inherited Members</h2></td></tr>
 uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_size</b></td></tr>
 <tr class="separator:a2f70614a938864d8dd3e7c3af4c557b6 inherit pro_attribs_class_kmer_manipulator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="class_kmer_manipulator.html" title="Abstract class : permits to apply operations on k-mers in two formats (see child classes)">KmerManipulator</a> for ACGT encoding : permits to apply operations on k-mers in ACGT format. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a002d52532af1d4b0d4cfac5124595062"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a002d52532af1d4b0d4cfac5124595062">&#9670;&nbsp;</a></span>KmerManipulatorACGT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">KmerManipulatorACGT::KmerManipulatorACGT </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>- k-mer size. Must be inferior or equal to 32. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6a13fcf814686776adc96b3e0bd03056"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a13fcf814686776adc96b3e0bd03056">&#9670;&nbsp;</a></span>decode()</h2>
@@ -162,15 +196,19 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_size</b></td></
 </table>
 </div><div class="memdoc">
 
-<p>Returns a string which is the word which corresponds to the uint64_t value (in ACGT format) </p>
+<p>Returns a string representing the k-mer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">kmer</td><td>- the value. </td></tr>
+    <tr><td class="paramname">kmer</td><td>- a value. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a string representing the decoding version of the uint64_t. </dd></dl>
-
+<h3><a class="anchor" id="autotoc_md3"></a>
+Example</h3>
+<div class="fragment"><div class="line"><a class="code" href="class_kmer_manipulator_a_c_t_g.html">KmerManipulatorACTG</a> decoder(4); <span class="comment">//4-mers in ACTG format</span></div>
+<div class="line">decoder.decode(248);            <span class="comment">//GGTA</span></div>
+</div><!-- fragment --> 
 <p>Implements <a class="el" href="class_kmer_manipulator.html">KmerManipulator</a>.</p>
 
 </div>
@@ -280,12 +318,12 @@ Example</h3>
 <p>Returns the canonical version of a k-mer in ACGT format. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">kmer</td><td>- a uint64_t which represents the compressed kmer we want to study </td></tr>
+    <tr><td class="paramname">kmer</td><td>- an uint64_t which represents the compressed kmer we want to study. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a uint64_t which is the compressed kmer itself if it is already canonical, or its canonical version </dd></dl>
-<h3><a class="anchor" id="autotoc_md3"></a>
+<dl class="section return"><dt>Returns</dt><dd>a uint64_t which is the compressed kmer itself if it is already canonical, or its canonical version. </dd></dl>
+<h3><a class="anchor" id="autotoc_md4"></a>
 Example</h3>
 <div class="fragment"><div class="line"><a class="code" href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a> canonicaler(4); <span class="comment">//4-mers in ACGT format</span></div>
 <div class="line">canonicaler.getCanonical(172);      <span class="comment">//172</span></div>
@@ -319,8 +357,8 @@ Example</h3>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the size attribute. </p>
-<dl class="section return"><dt>Returns</dt><dd>an int that is the size of the sequence </dd></dl>
+<p>Returns the size k of the k-mers that the object is representing. </p>
+<dl class="section return"><dt>Returns</dt><dd>k-mers length </dd></dl>
 
 <p>Implements <a class="el" href="class_kmer_manipulator.html">KmerManipulator</a>.</p>
 
@@ -353,11 +391,11 @@ Example</h3>
 <p>Returns the reverse complement. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">kmer</td><td>- a uin64_t which represent the compressed version of a k-mer </td></tr>
+    <tr><td class="paramname">kmer</td><td>- a uin64_t which represent the compressed version of a k-mer. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a uin64_t which represent the compressed version of the reverse complement of the given k-mer </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a uin64_t which represent the compressed version of the reverse complement of the given k-mer. </dd></dl>
 
 <p>Implements <a class="el" href="class_kmer_manipulator.html">KmerManipulator</a>.</p>
 
@@ -390,11 +428,11 @@ Example</h3>
 <p>Returns the reverse complement of a nucleotide. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">nucleotide</td><td>- an encode nucleotide </td></tr>
+    <tr><td class="paramname">nucleotide</td><td>- an int between 0 and 3 (included) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the reverse complement of the param nucleotide We use this method for cache creation </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the complement (either 0, 1, 2, or 3) </dd></dl>
 
 <p>Implements <a class="el" href="class_kmer_manipulator.html">KmerManipulator</a>.</p>
 
@@ -406,8 +444,8 @@ Example</h3>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_kmer_manipulator_a_c_g_t_html"><div class="ttname"><a href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a></div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.h:23</div></div>
-<div class="ttc" id="aclass_kmer_manipulator_a_c_t_g_html"><div class="ttname"><a href="class_kmer_manipulator_a_c_t_g.html">KmerManipulatorACTG</a></div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.h:40</div></div>
+<div class="ttc" id="aclass_kmer_manipulator_a_c_g_t_html"><div class="ttname"><a href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a></div><div class="ttdoc">KmerManipulator for ACGT encoding : permits to apply operations on k-mers in ACGT format.</div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.h:24</div></div>
+<div class="ttc" id="aclass_kmer_manipulator_a_c_t_g_html"><div class="ttname"><a href="class_kmer_manipulator_a_c_t_g.html">KmerManipulatorACTG</a></div><div class="ttdoc">KmerManipulator for ACTG encoding : permits to apply operations on k-mers in ACTG format.</div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.h:41</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

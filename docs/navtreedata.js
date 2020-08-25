@@ -26,22 +26,22 @@ var NAVTREE =
 [
   [ "ConwayBromageLib", "index.html", [
     [ "ConwayBromageLib : an implementation of Conway and Bromage succinct data structure for assembling large genomes", "md__r_e_a_d_m_e.html", [
-      [ "What is ConwayBromageLib ?", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
-      [ "Method", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
-      [ "What can I do with CBL ?", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
-      [ "Requirements", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
-      [ "Installation", "md__r_e_a_d_m_e.html#autotoc_md13", null ],
-      [ "How to use CBL ?", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
-      [ "Bug reporting", "md__r_e_a_d_m_e.html#autotoc_md15", null ],
-      [ "External ressources", "md__r_e_a_d_m_e.html#autotoc_md16", null ],
-      [ "Technical description for developers", "md__r_e_a_d_m_e.html#autotoc_md17", [
-        [ "The KmerManipulator class", "md__r_e_a_d_m_e.html#autotoc_md18", null ],
-        [ "KmerManipulatorACGT::encode and KmerManipulatorACTG::encode", "md__r_e_a_d_m_e.html#autotoc_md19", null ],
-        [ "KmerManipulatorACGT::decode and KmerManipulatorACTG::decode", "md__r_e_a_d_m_e.html#autotoc_md20", null ],
-        [ "KmerManipulatorACGT::getCanonical and KmerManipulatorACTG::getCanonical", "md__r_e_a_d_m_e.html#autotoc_md21", null ],
-        [ "ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km)", "md__r_e_a_d_m_e.html#autotoc_md22", null ],
-        [ "bool ConwayBromage::contains(uint64_t Kmer)", "md__r_e_a_d_m_e.html#autotoc_md23", null ],
-        [ "uint8_t ConwayBromage::successors(uint64_t Kmer)", "md__r_e_a_d_m_e.html#autotoc_md24", null ]
+      [ "What is ConwayBromageLib ?", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
+      [ "Method", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
+      [ "What can I do with CBL ?", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
+      [ "Requirements", "md__r_e_a_d_m_e.html#autotoc_md13", null ],
+      [ "Installation", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
+      [ "How to use CBL ?", "md__r_e_a_d_m_e.html#autotoc_md15", null ],
+      [ "Bug reporting", "md__r_e_a_d_m_e.html#autotoc_md16", null ],
+      [ "External ressources", "md__r_e_a_d_m_e.html#autotoc_md17", null ],
+      [ "Technical description for developers", "md__r_e_a_d_m_e.html#autotoc_md18", [
+        [ "The KmerManipulator class", "md__r_e_a_d_m_e.html#autotoc_md19", null ],
+        [ "KmerManipulatorACGT::encode and KmerManipulatorACTG::encode", "md__r_e_a_d_m_e.html#autotoc_md20", null ],
+        [ "KmerManipulatorACGT::decode and KmerManipulatorACTG::decode", "md__r_e_a_d_m_e.html#autotoc_md21", null ],
+        [ "KmerManipulatorACGT::getCanonical and KmerManipulatorACTG::getCanonical", "md__r_e_a_d_m_e.html#autotoc_md22", null ],
+        [ "ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km)", "md__r_e_a_d_m_e.html#autotoc_md23", null ],
+        [ "bool ConwayBromage::contains(uint64_t Kmer)", "md__r_e_a_d_m_e.html#autotoc_md24", null ],
+        [ "uint8_t ConwayBromage::successors(uint64_t Kmer)", "md__r_e_a_d_m_e.html#autotoc_md25", null ]
       ] ]
     ] ],
     [ "Classes", "annotated.html", [

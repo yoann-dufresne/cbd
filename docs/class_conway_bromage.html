@@ -90,6 +90,11 @@ $(document).ready(function(){initNavTree('class_conway_bromage.html',''); initRe
 <div class="title">ConwayBromage Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="class_conway_bromage.html" title="ConwayBromage : permits to store k-mers and apply two operations on them : &#39;contains&#39; and &#39;successors...">ConwayBromage</a> : permits to store k-mers and apply two operations on them : 'contains' and 'successors'.  
+ <a href="class_conway_bromage.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_conway_bromage_lib_8h_source.html">ConwayBromageLib.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -97,7 +102,7 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ConwayBromage</b> (std::istream &amp;kmerFlux, <a class="el" href="class_kmer_manipulator.html">KmerManipulator</a> *km)</td></tr>
 <tr class="separator:a5d59df31e6d9f6d093dacbf343233b72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a080622c6c7ce125973a3a16ed08fc75c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conway_bromage.html#a080622c6c7ce125973a3a16ed08fc75c">ConwayBromage</a> (sdsl::sd_vector&lt;&gt; const &amp;sdv, <a class="el" href="class_kmer_manipulator.html">KmerManipulator</a> *km)</td></tr>
-<tr class="memdesc:a080622c6c7ce125973a3a16ed08fc75c"><td class="mdescLeft">&#160;</td><td class="mdescRight">First <a class="el" href="class_conway_bromage.html">ConwayBromage</a> constructor : Build the <a class="el" href="class_conway_bromage.html">ConwayBromage</a> object based on the sd_vector in parameter and the <a class="el" href="class_kmer_manipulator.html">KmerManipulator</a>.  <a href="class_conway_bromage.html#a080622c6c7ce125973a3a16ed08fc75c">More...</a><br /></td></tr>
+<tr class="memdesc:a080622c6c7ce125973a3a16ed08fc75c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second <a class="el" href="class_conway_bromage.html" title="ConwayBromage : permits to store k-mers and apply two operations on them : &#39;contains&#39; and &#39;successors...">ConwayBromage</a> constructor : Build the <a class="el" href="class_conway_bromage.html" title="ConwayBromage : permits to store k-mers and apply two operations on them : &#39;contains&#39; and &#39;successors...">ConwayBromage</a> object based on the sd_vector in parameter and the <a class="el" href="class_kmer_manipulator.html" title="Abstract class : permits to apply operations on k-mers in two formats (see child classes)">KmerManipulator</a>.  <a href="class_conway_bromage.html#a080622c6c7ce125973a3a16ed08fc75c">More...</a><br /></td></tr>
 <tr class="separator:a080622c6c7ce125973a3a16ed08fc75c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e5532b9f7bc6f3feb6a808c695d6812"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conway_bromage.html#a3e5532b9f7bc6f3feb6a808c695d6812">contains</a> (uint64_t Kmer) const</td></tr>
 <tr class="memdesc:a3e5532b9f7bc6f3feb6a808c695d6812"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the given (k-1)-mer is present.  <a href="class_conway_bromage.html#a3e5532b9f7bc6f3feb6a808c695d6812">More...</a><br /></td></tr>
@@ -106,13 +111,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae8e1f4a7374002416e357af7a983f028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the successors of a (k-1)-mer.  <a href="class_conway_bromage.html#ae8e1f4a7374002416e357af7a983f028">More...</a><br /></td></tr>
 <tr class="separator:ae8e1f4a7374002416e357af7a983f028"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafdb0528988e42d0fdb214304bff5b12"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conway_bromage.html#aafdb0528988e42d0fdb214304bff5b12">getKmerSize</a> ()</td></tr>
-<tr class="memdesc:aafdb0528988e42d0fdb214304bff5b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the size of the sequence.  <a href="class_conway_bromage.html#aafdb0528988e42d0fdb214304bff5b12">More...</a><br /></td></tr>
+<tr class="memdesc:aafdb0528988e42d0fdb214304bff5b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the size k of the k-mer that are stored.  <a href="class_conway_bromage.html#aafdb0528988e42d0fdb214304bff5b12">More...</a><br /></td></tr>
 <tr class="separator:aafdb0528988e42d0fdb214304bff5b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84f6042955d90f138e352444476c4074"><td class="memItemLeft" align="right" valign="top">sdsl::sd_vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conway_bromage.html#a84f6042955d90f138e352444476c4074">getSequence</a> ()</td></tr>
-<tr class="memdesc:a84f6042955d90f138e352444476c4074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the compressed sequence.  <a href="class_conway_bromage.html#a84f6042955d90f138e352444476c4074">More...</a><br /></td></tr>
+<tr class="memdesc:a84f6042955d90f138e352444476c4074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the compressed sequence.  <a href="class_conway_bromage.html#a84f6042955d90f138e352444476c4074">More...</a><br /></td></tr>
 <tr class="separator:a84f6042955d90f138e352444476c4074"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b6ff916827a06c9fbff6b3021fabad1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kmer_manipulator.html">KmerManipulator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_conway_bromage.html#a9b6ff916827a06c9fbff6b3021fabad1">getKmerManipulator</a> ()</td></tr>
-<tr class="memdesc:a9b6ff916827a06c9fbff6b3021fabad1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the kmer manipulator.  <a href="class_conway_bromage.html#a9b6ff916827a06c9fbff6b3021fabad1">More...</a><br /></td></tr>
+<tr class="memdesc:a9b6ff916827a06c9fbff6b3021fabad1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the kmer manipulator.  <a href="class_conway_bromage.html#a9b6ff916827a06c9fbff6b3021fabad1">More...</a><br /></td></tr>
 <tr class="separator:a9b6ff916827a06c9fbff6b3021fabad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
@@ -125,7 +130,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:aae6bbb22d03163f212bc5d01c206d740"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call ratioForIsPresent and do time tests on 11 differents percentages (from 0 to 100) Send time and percentage data in a file for graphs building. <br /></td></tr>
 <tr class="separator:aae6bbb22d03163f212bc5d01c206d740"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="class_conway_bromage.html" title="ConwayBromage : permits to store k-mers and apply two operations on them : &#39;contains&#39; and &#39;successors...">ConwayBromage</a> : permits to store k-mers and apply two operations on them : 'contains' and 'successors'. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a080622c6c7ce125973a3a16ed08fc75c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a080622c6c7ce125973a3a16ed08fc75c">&#9670;&nbsp;</a></span>ConwayBromage()</h2>
 
@@ -152,11 +159,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
       </table>
 </div><div class="memdoc">
 
-<p>First <a class="el" href="class_conway_bromage.html">ConwayBromage</a> constructor : Build the <a class="el" href="class_conway_bromage.html">ConwayBromage</a> object based on the sd_vector in parameter and the <a class="el" href="class_kmer_manipulator.html">KmerManipulator</a>. </p>
+<p>Second <a class="el" href="class_conway_bromage.html" title="ConwayBromage : permits to store k-mers and apply two operations on them : &#39;contains&#39; and &#39;successors...">ConwayBromage</a> constructor : Build the <a class="el" href="class_conway_bromage.html" title="ConwayBromage : permits to store k-mers and apply two operations on them : &#39;contains&#39; and &#39;successors...">ConwayBromage</a> object based on the sd_vector in parameter and the <a class="el" href="class_kmer_manipulator.html" title="Abstract class : permits to apply operations on k-mers in two formats (see child classes)">KmerManipulator</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sdv</td><td>- An sd_vector which represents the sequence. </td></tr>
-    <tr><td class="paramname">km</td><td>- A <a class="el" href="class_kmer_manipulator.html">KmerManipulator</a>. </td></tr>
+    <tr><td class="paramname">km</td><td>- A <a class="el" href="class_kmer_manipulator.html" title="Abstract class : permits to apply operations on k-mers in two formats (see child classes)">KmerManipulator</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -187,8 +194,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the (k-1)-mer is present. False otherwise. </dd></dl>
-<h3><a class="anchor" id="autotoc_md5"></a>
+<dl class="section return"><dt>Returns</dt><dd>True if the (k-1)-mer is present. False otherwise. </dd></dl>
+<h3><a class="anchor" id="autotoc_md6"></a>
 Example</h3>
 <div class="fragment"><div class="line"><span class="keywordtype">bool</span> kmer_exists = cb.contains(230);</div>
 <div class="line"><a class="code" href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a> km(3);</div>
@@ -212,8 +219,8 @@ Example</h3>
       </table>
 </div><div class="memdoc">
 
-<p>Return the kmer manipulator. </p>
-<dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="class_kmer_manipulator.html">KmerManipulator</a> object </dd></dl>
+<p>Returns the kmer manipulator. </p>
+<dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="class_kmer_manipulator.html" title="Abstract class : permits to apply operations on k-mers in two formats (see child classes)">KmerManipulator</a> object. </dd></dl>
 
 </div>
 </div>
@@ -232,7 +239,7 @@ Example</h3>
       </table>
 </div><div class="memdoc">
 
-<p>Return the size of the sequence. </p>
+<p>Returns the size k of the k-mer that are stored. </p>
 <dl class="section return"><dt>Returns</dt><dd>an int </dd></dl>
 
 </div>
@@ -252,7 +259,7 @@ Example</h3>
       </table>
 </div><div class="memdoc">
 
-<p>Return the compressed sequence. </p>
+<p>Returns the compressed sequence. </p>
 <dl class="section return"><dt>Returns</dt><dd>an sd_vector </dd></dl>
 
 </div>
@@ -274,8 +281,8 @@ Example</h3>
 </div><div class="memdoc">
 
 <p>Returns the successors of a (k-1)-mer. </p>
-<p>The (k-1)-mer can either be canonical or not. A (k-1)-mer has at minimum 0 successors and maximum 8 successors. The function doesn't check if the (k-1)-mer is present. </p>
-<h3><a class="anchor" id="autotoc_md6"></a>
+<p>The (k-1)-mer can either be canonical or not. A (k-1)-mer has at minimum 0 successors and maximum 8 successors. </p>
+<h3><a class="anchor" id="autotoc_md7"></a>
 How it works ?</h3>
 <p>Let's say the function takes as a parameter the integer which represents the (k-1)-mer GTT and we assume we are in ACGT encoding. First, the method will generate the following k-mers : GTTA, GTTC, GTTG, GTTT, AGTT, CGTT, GGTT, TGTT. Then, it will check if the canonical version of these k-mers are present. Let's suppose that only the canonical version of these k-mers are present : GTTA, GTTT, CGTT, TGTT. GTTA and GTTT are, what we call next k-mers so we will store the information in the 4 left bits of the result (uint8_t). CGTT and TGTT are previous k-mers so, this time, the information will be stored in the 4 right bits of the result. Thus, the function will return 1001 0101 which corresponds to 149 in base 10. It means that, in this example, the successors of the (k-1)-mer GTT are TTA, TTT, CGT and TGT.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -285,7 +292,7 @@ How it works ?</h3>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a uint8_t which carry information about the presence/absence of the 8 potential successors of the (k-1)-mer. Read of the return : read the uint8_t under bit form : the first four elements are "next" k-mers, the last four are "previous" Always the same reading direction : A then C then G then T regardless of the encoding </dd></dl>
-<h3><a class="anchor" id="autotoc_md7"></a>
+<h3><a class="anchor" id="autotoc_md8"></a>
 Example</h3>
 <div class="fragment"><div class="line">uint8_t <a class="code" href="class_conway_bromage.html#ae8e1f4a7374002416e357af7a983f028">successors</a> = cb.successors(78);</div>
 <div class="line"><a class="code" href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a> km(3);</div>
@@ -341,7 +348,7 @@ Example</h3>
   <table class="params">
     <tr><td class="paramname">ratioIn</td><td>- represent the percentage of elements which are really present in the sd_vector </td></tr>
     <tr><td class="paramname">nbOfOnes</td><td>- the number of elements we want in the test row, typically we need 1000000 </td></tr>
-    <tr><td class="paramname">cb</td><td>- <a class="el" href="class_conway_bromage.html">ConwayBromage</a> object which contains the sd_vector and shows the encoding format </td></tr>
+    <tr><td class="paramname">cb</td><td>- <a class="el" href="class_conway_bromage.html" title="ConwayBromage : permits to store k-mers and apply two operations on them : &#39;contains&#39; and &#39;successors...">ConwayBromage</a> object which contains the sd_vector and shows the encoding format </td></tr>
   </table>
   </dd>
 </dl>
@@ -355,8 +362,8 @@ Example</h3>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_conway_bromage_html_ae8e1f4a7374002416e357af7a983f028"><div class="ttname"><a href="class_conway_bromage.html#ae8e1f4a7374002416e357af7a983f028">ConwayBromage::successors</a></div><div class="ttdeci">uint8_t successors(uint64_t Kmer) const</div><div class="ttdoc">Returns the successors of a (k-1)-mer.</div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.cpp:453</div></div>
-<div class="ttc" id="aclass_kmer_manipulator_a_c_g_t_html"><div class="ttname"><a href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a></div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.h:23</div></div>
+<div class="ttc" id="aclass_conway_bromage_html_ae8e1f4a7374002416e357af7a983f028"><div class="ttname"><a href="class_conway_bromage.html#ae8e1f4a7374002416e357af7a983f028">ConwayBromage::successors</a></div><div class="ttdeci">uint8_t successors(uint64_t Kmer) const</div><div class="ttdoc">Returns the successors of a (k-1)-mer.</div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.cpp:463</div></div>
+<div class="ttc" id="aclass_kmer_manipulator_a_c_g_t_html"><div class="ttname"><a href="class_kmer_manipulator_a_c_g_t.html">KmerManipulatorACGT</a></div><div class="ttdoc">KmerManipulator for ACGT encoding : permits to apply operations on k-mers in ACGT format.</div><div class="ttdef"><b>Definition:</b> ConwayBromageLib.h:24</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
