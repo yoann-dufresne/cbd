@@ -21,7 +21,8 @@ A successor of a k-mer ```x``` is any k-mer of the form ```a+x[1:k-1]``` or ```x
 CBL requires :<br>
 ``g++`` version 8.2.0 or higher.<br>
 ``cmake`` version 3.12 or higher (to build unit tests).<br>
-Mac OS and Linux (Ubuntu) are supported.
+Mac OS and Linux (Ubuntu) are supported.<br>
+K-mers that we want to store must be **canonical** and have a **size k <= 32**. This means that we can query at most 31-mers.
 
 ## Installation
 To download the library, use the following command : 
