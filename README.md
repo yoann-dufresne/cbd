@@ -6,7 +6,7 @@ CBL is developped for the assembling of larges genomes. It stores canonical k-me
 ## Method
 ConwayBromageLib is based on the [SDSL](https://github.com/simongog/sdsl-lite) library which provides succinct data structures. More precisely, CBL use the class ```sd_vector``` which implements a sparse bit vector (vector made of zeros and ones) in order to store the k-mers. <br>
 <br>
-CBL takes a list of canonical k-mers as input. The bit vector use to store these k-mers is of size 4^k. These latter are represented by an index/position in the bit vector. If an element of a specific position is set to one, then it means that the k-mer representing this position is present at least once in the sequence. Otherwise (set to 0) it is absent.<br>
+CBL takes a list of canonical k-mers as input. The bit vector use to store them has a size of 4^k. k-mers are represented by an index/position in the bit vector. If a specific position is set to one, it means that the k-mer representing this position is present at least once in the sequence. Otherwise (set to 0) it is absent.<br>
 <br>
 A succinct data structure is a data structure objects in memory-space close to the information-theoretic lower bounds and perform efficient query operations.
 
@@ -14,7 +14,8 @@ A succinct data structure is a data structure objects in memory-space close to t
 CBL stores genomes sequences. Once it is done, we can apply two query operations : <br>
 The query operation **contains** to know if a given (k-1)-mer is present or not.<br>
 The query operation **successors** to get the successors of a (k-1)-mer.<br>
-A successor of a k-mer ```x``` is any k-mer of the form ```a+x[1:k-1]``` or ```x[2:k]+a``` with ```a``` nucleotide. 
+A successor of a k-mer ```x``` is any k-mer of the form ```a+x[1:k-1]``` or ```x[2:k]+a``` with ```a``` nucleotide.<br>
+**Important** : elements of the query operations have always a size of (k-1) if we stored k-mers.
 
 ## Requirements
 CBL requires :<br>
@@ -42,42 +43,31 @@ Example of code, main.cpp :<br>
 using namespace std;
 
 int main(){
-    ifstream f("my_demo_test.txt");     // file which contains k-mers
+    ifstream f("my_demo_test.txt");     // file that contain k-mers
     KmerManipulatorACGT k4(4);          // to encode k-mers in ACGT format
     ConwayBromage cb(f, &k4);           // build of the bit vector with 4-mers (the bit vector will be of size 4^k, here k = 4)
 
     KmerManipulatorACGT k3(3);          // to encode (k-1)-mers in ACGT format
-    uint64_t node = k3.encode("ACG");   // gets the integer representing the (k-1)-mer
+    uint64_t node = k3.encode("ACG");   // get the integer representing the (k-1)-mer
 
-    cb.contains(node);                  // returns true if the (k-1)-mer is present, otherwise returns false
-    cb.successors(node);                // returns a uint8_t that represents carry information about the 8 potential successors 
-                                        // (see documentation below for more information)
+    cb.contains(node);                  // return true if the (k-1)-mer is present, otherwise returns false
+    cb.successors(node);                // return a uint8_t that represents carry information about the 8 potential successors 
+                                        // (see documentation for more information)
 
     return 0;
 }
 ```
-To compile modify the ``CMakeLists.txt``, for example with main.cpp above : 
+To compile call the CBl ``CMakeLists.txt`` in your own, for example with main.cpp above : 
 ```
-cmake_minimum_required(VERSION 3.12)    #The minimal version of cmake we need
-                                        #Here we need 3.12 or higher version
-project(example)               #The name of the projet, it will be the executable name
-                               #Can be renamed, renamed it in all the CM akeLists.txt
+cmake_minimum_required(VERSION 3.16)
+project(test)
 add_compile_options(-Wall -Wextra)      #basic compiler options
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -mavx2 -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -O3 -DNDEBUG") #Compilation flag
-#Variables which represents compilation elements
-#One for .cpp elements
 set(SRCS
-        main.cpp  #Our main.cpp file example, can be modify according to your work
-        ConwayBromageLib.cpp)
-#One for .h
-set(HEADERS
-        ConwayBromageLib.h)
-link_directories(example ./sdsl-lite/lib ./sdsl-lite/external/libdivsufsort/lib)    #Where we put .cpp from sdsl library
-add_executable(example ${SRCS} ${HEADERS}) #Create executable example
-add_subdirectory(external)      #Add subdirectories like sdsl and lest, call the CMakeLists.txt from external directory
-target_include_directories(example PUBLIC ./external/lest/include)   #Where we put .h from lest libraries : It needs to be after add_executable !!!
-target_link_libraries(example sdsl divsufsort divsufsort64)    #Specific flags from sdsl library
-
+        main.cpp)
+add_executable(test ${SRCS})
+add_subdirectory(ConwayBromageLib) #Where ConwayBromageLib contains CBl CMakeLists.txt 
+target_link_libraries(finaltest cbl)    #the name of the CBl library is cbl
 ```
 ## Bug reporting
 If there are bugs or mistakes in CBL please send us an issue on [CBL issue reports](https://github.com/yoann-dufresne/ConwayBromageLib/issues)
