@@ -34,7 +34,6 @@ git submodule init
 git submodule update
 ```
 ## How to use CBL ?
-The current ``CMakeLists.txt`` **is made for unit tests**.<br>
 To use CBL, please create a new C++ file.<br>
 Example of code, main.cpp :<br>
 ```
@@ -57,7 +56,7 @@ int main(){
     return 0;
 }
 ```
-To compile call the CBl ``CMakeLists.txt`` in your own, for example with main.cpp above : 
+To compile call the CBl ``CMakeLists.txt`` in your own project, for example with main.cpp above : 
 ```
 cmake_minimum_required(VERSION 3.16)
 project(test)
