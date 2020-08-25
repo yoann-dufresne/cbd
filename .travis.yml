@@ -8,10 +8,6 @@ python: "3.8"
 
 compiler: g++
 
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y doxygen 
-
 install:
   - cd ~/
   - mkdir include
@@ -26,7 +22,6 @@ install:
 
 script:
   - cd $TRAVIS_BUILD_DIR  #dossier où est contenu notre code
-  - doxygen Doxyfile      #génération de la documentation dans le dossier doc/
   - python3 involveGenerate_counts.py -k 4 -n 100 -f ACTG > unsortACTG.txt
   - python3 involveGenerate_counts.py -k 4 -n 100 -f ACGT > unsortACGT.txt
   - sort unsortACGT.txt > sortACGT.txt
