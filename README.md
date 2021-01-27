@@ -22,7 +22,7 @@ CBL requires :<br>
 ``g++`` version 8.2.0 or higher.<br>
 ``cmake`` version 3.12 or higher (to build unit tests).<br>
 Mac OS and Linux (Ubuntu) are supported.<br>
-K-mers that we want to store must be **canonical** and have a **size k <= 32**. This means that we can query at most 31-mers.
+K-mers that we want to store must be **canonical** and have a **size k <= 31**. This means that we can query at most 30-mers.
 
 ## Installation
 To download the library, use the following command : 
@@ -120,7 +120,7 @@ ConwayBromage cb(f, &km);
 f.close();
 ```
 **Requirements**
-- The k-mers in the istream must me **canonical** and have a **size k <= 32**.
+- The k-mers in the istream must me **canonical** and have a **size k <= 31**.
 - The istream must have at each line (if it's a file for example) **a unique k-mers**.
 - The k-mers in the istream must be sorted either in lexicographical order (A<C<G<T) or in A<C<T<G. It depends on the encoding format.
 ```
