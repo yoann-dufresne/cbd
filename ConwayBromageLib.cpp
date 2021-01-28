@@ -288,8 +288,7 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     kmerFlux.clear();
     kmerFlux.seekg(0, ios::beg);    //Return to the beginning of the file
     uint64_t one = 1;
-    uint64_t sdvSize = one << ((2*m_kmerManipulator->getSize()) - 1); //Creation of the total length to create the sd_vector_builder
-
+    uint64_t sdvSize = one << ((2*m_kmerManipulator->getSize())-1); //Creation of the total length to create the sd_vector_builder
     sd_vector_builder builder(sdvSize, numberOfKmer);
     uint64_t previousKmer(0);
     while(getline(kmerFlux, line)){
@@ -309,7 +308,7 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     }
     
     m_sequence = builder;
-    m_limit = (m_sequence.size() >> 2) - 1;
+    m_limit = (m_sequence.size() >> 1);
     
     //initialization of the cache
     int nbOfBitsToShift = 2 * (m_kmerManipulator->getSize()-1);
@@ -411,6 +410,8 @@ ConwayBromage::ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km){
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 bool ConwayBromage::contains(uint64_t Kmer) const{
+    cout << "value m_limit : " << m_limit << endl;
+    cout << "value k-mer : " << Kmer << endl;
     if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
         cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << m_limit << endl;
         return false; 
