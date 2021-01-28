@@ -410,8 +410,6 @@ ConwayBromage::ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km){
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 bool ConwayBromage::contains(uint64_t Kmer) const{
-    cout << "value m_limit : " << m_limit << endl;
-    cout << "value k-mer : " << Kmer << endl;
     if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
         cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << m_limit << endl;
         return false; 
