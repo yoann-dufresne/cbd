@@ -288,7 +288,7 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     kmerFlux.clear();
     kmerFlux.seekg(0, ios::beg);    //Return to the beginning of the file
     uint64_t one = 1;
-    uint64_t sdvSize = one << (2*m_kmerManipulator->getSize()); //Creation of the total length to create the sd_vector_builder
+    uint64_t sdvSize = one << ((2*m_kmerManipulator->getSize()) - 1); //Creation of the total length to create the sd_vector_builder
 
     sd_vector_builder builder(sdvSize, numberOfKmer);
     uint64_t previousKmer(0);
