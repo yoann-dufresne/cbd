@@ -1,2 +1,0 @@
-/usr/bin/ar qc libcbl.a CMakeFiles/cbl.dir/ConwayBromageLib.cpp.o
-/usr/bin/ranlib libcbl.a
