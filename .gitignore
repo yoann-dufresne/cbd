@@ -3,9 +3,13 @@ CMakeCache.txt
 CMakeFiles
 Makefile
 .idea
+*.a
 
 
 .vscode
 
 main
 unittests
+
+external/sdsl-lite
+external/lest

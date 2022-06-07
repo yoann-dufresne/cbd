@@ -7,4 +7,5 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11  -Dlest_FEATURE_AUTO_REGISTER
 
 add_subdirectory(external)
 add_subdirectory(cbd) #Where ConwayBromageLib contains CBl CMakeLists.txt 
+add_subdirectory(apps)
 add_subdirectory(tests)
