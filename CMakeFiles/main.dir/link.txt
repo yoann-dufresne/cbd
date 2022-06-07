@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++11  -Dlest_FEATURE_AUTO_REGISTER=1 -Dlest_FEATURE_COLOURISE=1 -Ofast -DNDEBUG CMakeFiles/main.dir/Tests.cpp.o -o main  cbl/libcbl.a cbl/external/sdsl-lite/lib/libsdsl.a cbl/external/sdsl-lite/external/libdivsufsort/lib/libdivsufsort.a cbl/external/sdsl-lite/external/libdivsufsort/lib/libdivsufsort64.a 
