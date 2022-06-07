@@ -1,0 +1,1746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Project" targetName="replace_int_vector_value" />
+      <config projectName="Project" targetName="select-support-test_bit-vec.CRAFTED-BLOCK-0" />
+      <config projectName="Project" targetName="lcp-construct-test_zarathustra.txt" />
+      <config projectName="Project" targetName="cst-int-test" />
+      <config projectName="Project" targetName="clean-test" />
+      <config projectName="Project" targetName="gtest_main" />
+      <config projectName="Project" targetName="test-sdsl" />
+      <config projectName="Project" targetName="divsufsort" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.12.1.0" />
+      <config projectName="Project" targetName="select-support-test_int-vec.12.1.0" />
+      <config projectName="Project" targetName="sorted-int-stack-test" />
+      <config projectName="Project" targetName="select-support-test_bit-vec.CRAFTED-32" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.9.1.1" />
+      <config projectName="Project" targetName="cst-byte-test_empty.txt" />
+      <config projectName="Project" targetName="csa-int-test_example01.txt_1" />
+      <config projectName="Project" targetName="csa-int-test_empty.txt_1" />
+      <config projectName="Project" targetName="sdsl" />
+      <config projectName="Project" targetName="rank-support-test" />
+      <config projectName="Project" targetName="int-vector-mapper-test" />
+      <config projectName="Project" targetName="k2-treap-test_k2-1000000.52.r.421000000.57.r.231000000.45.r.81" />
+      <config projectName="Project" targetName="sorted_int_stack_test" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.64.1.r.222" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.16.1.r.42" />
+      <config projectName="Project" targetName="sa-construct-test_empty.txt" />
+      <config projectName="Project" targetName="cst-int-test_100a.txt_1" />
+      <config projectName="Project" targetName="wt-int-test_int-vec.1023.1.0" />
+      <config projectName="Project" targetName="inv-perm-support-test" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.8.1.0" />
+      <config projectName="Project" targetName="search_bidirectional_test" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.11.1.1" />
+      <config projectName="Project" targetName="sa-construct-test_faust.txt" />
+      <config projectName="Project" targetName="select-support-test_int-vec.11.1.1" />
+      <config projectName="Project" targetName="select-support-test_int-vec.1000000.1.1" />
+      <config projectName="Project" targetName="select-support-test_int-vec.1000000.1.0" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.512.1.r.432" />
+      <config projectName="Project" targetName="sd_vector_test" />
+      <config projectName="Project" targetName="cst_int_test" />
+      <config projectName="Project" targetName="int_vector_buffer_test" />
+      <config projectName="Project" targetName="select-support-test_int-vec.7.1.1" />
+      <config projectName="Project" targetName="lcp-construct-test_faust.txt" />
+      <config projectName="Project" targetName="select-support-test_int-vec.1024.1.r.898" />
+      <config projectName="Project" targetName="lcp-construct-test_example01.txt" />
+      <config projectName="Project" targetName="sa-construct-test_one_byte.txt" />
+      <config projectName="Project" targetName="search-bidirectional-test" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.1000000.1.r.815" />
+      <config projectName="Project" targetName="int-vector-test" />
+      <config projectName="Project" targetName="wt-byte-test_all_symbols.txt" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.256.1.r.4887" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.1000000.1.1" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.7.1.1" />
+      <config projectName="Project" targetName="select-support-test" />
+      <config projectName="Project" targetName="k2-treap-test_k2-100000.39.r.42100000.47.r.23100000.35.r.81" />
+      <config projectName="Project" targetName="cst-int-test_int-vec-sa.100000.18.r_0" />
+      <config projectName="Project" targetName="select-support-test_int-vec.10.1.0" />
+      <config projectName="Project" targetName="inv_perm_support_test" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.32.1.r.111" />
+      <config projectName="Project" targetName="compile-test" />
+      <config projectName="Project" targetName="bit-vector-test" />
+      <config projectName="Project" targetName="bits_test" />
+      <config projectName="Project" targetName="select-support-test_int-vec.512.1.r.432" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.8192.1.r.1043" />
+      <config projectName="Project" targetName="select-support-test_int-vec.128.1.r.73" />
+      <config projectName="Project" targetName="rank_support_test" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.1.1.0" />
+      <config projectName="Project" targetName="csa_int_test" />
+      <config projectName="Project" targetName="k2_treap_test" />
+      <config projectName="Project" targetName="select-support-test_int-vec.16.1.r.42" />
+      <config projectName="Project" targetName="select-support-test_bit-vec.CRAFTED-SPARSE-1" />
+      <config projectName="Project" targetName="cst-byte-test_100a.txt" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.11.1.1" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.512.1.r.432" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.1024.1.r.898" />
+      <config projectName="Project" targetName="sorted_stack_support_test" />
+      <config projectName="Project" targetName="rank-support-test_bit-vec.CRAFTED-BLOCK-1" />
+      <config projectName="Project" targetName="rank-support-test_bit-vec.CRAFTED-BLOCK-0" />
+      <config projectName="Project" targetName="k2-100000.39.r.42100000.47.r.23100000.35.r.81" />
+      <config projectName="Project" targetName="lcp_construct_test" />
+      <config projectName="Project" targetName="select-support-test_int-vec.2048.1.r.5432" />
+      <config projectName="Project" targetName="int-vector-buffer-test" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.15.1.1" />
+      <config projectName="Project" targetName="cst-int-test_faust.txt_1" />
+      <config projectName="Project" targetName="wt-int-test_int-vec.100023.1.0" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.13.1.1" />
+      <config projectName="Project" targetName="bit-vector-test_bit-vec.CRAFTED-32" />
+      <config projectName="Project" targetName="int_vector_test" />
+      <config projectName="Project" targetName="sa-construct-test" />
+      <config projectName="Project" targetName="search-bidirectional-test_empty.txt" />
+      <config projectName="Project" targetName="rmq-test_int-vec.1000000.32.i.42" />
+      <config projectName="Project" targetName="csa-int-test_faust.txt_1" />
+      <config projectName="Project" targetName="csa-byte-test_example01.txt" />
+      <config projectName="Project" targetName="lcp-construct-test" />
+      <config projectName="Project" targetName="lcp-construct-test_100a.txt" />
+      <config projectName="Project" targetName="select_support_test" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.2048.1.r.5432" />
+      <config projectName="Project" targetName="select-support-test_int-vec.14.1.0" />
+      <config projectName="Project" targetName="bit_vector_test" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.8192.1.r.1043" />
+      <config projectName="Project" targetName="csa-byte-test_empty.txt" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.14.1.0" />
+      <config projectName="Project" targetName="csa-int-test_moby.int_8" />
+      <config projectName="Project" targetName="sa-construct-test_example01.txt" />
+      <config projectName="Project" targetName="select-support-test_bit-vec.CRAFTED-MAT-SELECT" />
+      <config projectName="Project" targetName="cst-byte-test_faust.txt" />
+      <config projectName="Project" targetName="select-support-test_int-vec.8192.1.r.1043" />
+      <config projectName="Project" targetName="wt-int-test_int-vec.100000.18.r" />
+      <config projectName="Project" targetName="gtest" />
+      <config projectName="Project" targetName="csa-byte-test_faust.txt" />
+      <config projectName="Project" targetName="cst-int-test_keeper.int_8" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.4096.1.r.793" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.8.1.r.17" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.9.1.1" />
+      <config projectName="Project" targetName="wt-byte-test_100a.txt" />
+      <config projectName="Project" targetName="moby.int" />
+      <config projectName="Project" targetName="wt-int-test" />
+      <config projectName="Project" targetName="wt-byte-test_example01.txt" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.13.1.1" />
+      <config projectName="Project" targetName="uninstall" />
+      <config projectName="Project" targetName="k2-10000.16.r.4210000.16.r.2310000.8.r.81" />
+      <config projectName="Project" targetName="rmq-test_int-vec.1000000.64.i" />
+      <config projectName="Project" targetName="rank-support-test_bit-vec.CRAFTED-SPARSE-1" />
+      <config projectName="Project" targetName="rank-support-test_bit-vec.CRAFTED-SPARSE-0" />
+      <config projectName="Project" targetName="search-bidirectional-test_faust.txt" />
+      <config projectName="Project" targetName="search-bidirectional-test_100a.txt" />
+      <config projectName="Project" targetName="select-support-test_bit-vec.CRAFTED-BLOCK-1" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.128.1.r.73" />
+      <config projectName="Project" targetName="faust.txt" />
+      <config projectName="Project" targetName="compile_test" />
+      <config projectName="Project" targetName="select-support-test_int-vec.15.1.1" />
+      <config projectName="Project" targetName="k2_tree_test" />
+      <config projectName="Project" targetName="select-support-test_int-vec.32.1.r.111" />
+      <config projectName="Project" targetName="wt-byte-test_faust.txt" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.8.1.0" />
+      <config projectName="Project" targetName="csa-int-test" />
+      <config projectName="Project" targetName="cst_byte_test" />
+      <config projectName="Project" targetName="rmq-test" />
+      <config projectName="Project" targetName="zarathustra.txt" />
+      <config projectName="Project" targetName="k2-treap-test_k2-100.16.r.42100.16.r.23100.8.r.81" />
+      <config projectName="Project" targetName="search-bidirectional-test_zarathustra.txt" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.12.1.0" />
+      <config projectName="Project" targetName="rank-support-test_bit-vec.CRAFTED-32" />
+      <config projectName="Project" targetName="csa-byte-test" />
+      <config projectName="Project" targetName="int_vector_generator" />
+      <config projectName="Project" targetName="lcp-construct-test_empty.txt" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.1000000.1.r.815" />
+      <config projectName="Project" targetName="bit_vector_generator" />
+      <config projectName="Project" targetName="wt_int_test" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.64.1.r.222" />
+      <config projectName="Project" targetName="rmq_test" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.16.1.r.42" />
+      <config projectName="Project" targetName="k2-treap-test" />
+      <config projectName="Project" targetName="k2-0.1.0.00.1.0.00.1.0.0" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.7.1.1" />
+      <config projectName="Project" targetName="sd-vector-test" />
+      <config projectName="Project" targetName="wt-int-test_int-vec.0.1.0" />
+      <config projectName="Project" targetName="dac-vector-test" />
+      <config projectName="Project" targetName="select-support-test_int-vec.1.1.0" />
+      <config projectName="Project" targetName="nn_dict_dynamic_test" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.2048.1.r.5432" />
+      <config projectName="Project" targetName="sa-construct-test_100a.txt" />
+      <config projectName="Project" targetName="cst-int-test_empty.txt_1" />
+      <config projectName="Project" targetName="csa-byte-test_100a.txt" />
+      <config projectName="Project" targetName="k2-1000000.52.r.421000000.57.r.231000000.45.r.81" />
+      <config projectName="Project" targetName="bit-vector-test_bit-vec.CRAFTED-MAT-SELECT" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.15.1.1" />
+      <config projectName="Project" targetName="coder_test" />
+      <config projectName="Project" targetName="rmq-test_int-vec.1.64.42" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.256.1.r.4887" />
+      <config projectName="Project" targetName="csa-byte-test_zarathustra.txt" />
+      <config projectName="Project" targetName="select-support-test_int-vec.64.1.r.222" />
+      <config projectName="Project" targetName="sa-construct-test_zarathustra.txt" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.1.1.0" />
+      <config projectName="Project" targetName="select-support-test_int-vec.8.1.r.17" />
+      <config projectName="Project" targetName="uninstall-sdsl" />
+      <config projectName="Project" targetName="nn-dict-dynamic-test" />
+      <config projectName="Project" targetName="divsufsort64" />
+      <config projectName="Project" targetName="select-support-test_int-vec.4096.1.r.793" />
+      <config projectName="Project" targetName="select-support-test_bit-vec.CRAFTED-SPARSE-0" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.128.1.r.73" />
+      <config projectName="Project" targetName="select-support-test_int-vec.256.1.r.4887" />
+      <config projectName="Project" targetName="select-support-test_int-vec.8.1.0" />
+      <config projectName="Project" targetName="select-support-test_int-vec.0.1.0" />
+      <config projectName="Project" targetName="bit-vector-test_bit-vec.CRAFTED-SPARSE-1" />
+      <config projectName="Project" targetName="bit-vector-test_bit-vec.CRAFTED-SPARSE-0" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.10.1.0" />
+      <config projectName="Project" targetName="k2-tree-test" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.8.1.r.17" />
+      <config projectName="Project" targetName="csa-int-test_keeper.int_8" />
+      <config projectName="Project" targetName="cst-byte-test" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.1000000.1.0" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.14.1.0" />
+      <config projectName="Project" targetName="sa_construct_test" />
+      <config projectName="Project" targetName="rmq-test_int-vec.1000000.64.i.17" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.10.1.0" />
+      <config projectName="Project" targetName="k2-treap-test_k2-0.1.0.00.1.0.00.1.0.0" />
+      <config projectName="Project" targetName="search-bidirectional-test_example01.txt" />
+      <config projectName="Project" targetName="wt-int-test_int-vec.64.2.0" />
+      <config projectName="Project" targetName="k2-100.16.r.42100.16.r.23100.8.r.81" />
+      <config projectName="Project" targetName="csa-int-test_zarathustra.txt_1" />
+      <config projectName="Project" targetName="int_vector_mapper_test" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.1024.1.r.898" />
+      <config projectName="Project" targetName="csa-int-test_100a.txt_1" />
+      <config projectName="Project" targetName="rmq-test_int-vec.0.1.0" />
+      <config projectName="Project" targetName="wt_byte_test" />
+      <config projectName="Project" targetName="dac_vector_test" />
+      <config projectName="Project" targetName="cst-byte-test_example01.txt" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.1000000.1.1" />
+      <config projectName="Project" targetName="csa_byte_test" />
+      <config projectName="Project" targetName="rank-support-test_int-vec.0.1.0" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.32.1.r.111" />
+      <config projectName="Project" targetName="bits-test" />
+      <config projectName="Project" targetName="k2-treap-test_k2-10000.16.r.4210000.16.r.2310000.8.r.81" />
+      <config projectName="Project" targetName="wt-byte-test_empty.txt" />
+      <config projectName="Project" targetName="select-support-test_int-vec.13.1.1" />
+      <config projectName="Project" targetName="cst-int-test_moby.int_8" />
+      <config projectName="Project" targetName="sorted-stack-support-test" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.4096.1.r.793" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.1000000.1.0" />
+      <config projectName="Project" targetName="bit-vector-test_bit-vec.CRAFTED-BLOCK-1" />
+      <config projectName="Project" targetName="bit-vector-test_bit-vec.CRAFTED-BLOCK-0" />
+      <config projectName="Project" targetName="select-support-test_int-vec.9.1.1" />
+      <config projectName="Project" targetName="coder-test" />
+      <config projectName="Project" targetName="bit-vector-test_int-vec.0.1.0" />
+      <config projectName="Project" targetName="select-support-test_int-vec.1000000.1.r.815" />
+      <config projectName="Project" targetName="rank-support-test_bit-vec.CRAFTED-MAT-SELECT" />
+      <config projectName="Project" targetName="wt-byte-test" />
+      <config projectName="Project" targetName="cst-int-test_example01.txt_1" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c8b06e01-6ad7-427f-b37c-537837e1b68a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Performances.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Performances.cpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1dOUnBnFnwR7cGA5gNmzJhH0gx4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/old" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Google Test.bit_vector_generator">
+    <configuration name="bit_vector_generator" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit_vector_generator" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="bit_vector_generator" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit_vector_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit_vector_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="bit_vector_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bits_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bits_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="bits_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="coder_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="coder_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="coder_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="compile_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="compile_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="compile_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa_byte_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa_byte_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="csa_byte_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa_int_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa_int_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="csa_int_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst_byte_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst_byte_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="cst_byte_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst_int_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst_int_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="cst_int_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="dac_vector_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="dac_vector_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="dac_vector_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="int_vector_buffer_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="int_vector_buffer_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="int_vector_buffer_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="int_vector_generator" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="int_vector_generator" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="int_vector_generator" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="int_vector_mapper_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="int_vector_mapper_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="int_vector_mapper_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="int_vector_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="int_vector_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="int_vector_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="inv_perm_support_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="inv_perm_support_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="inv_perm_support_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k2_treap_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="k2_treap_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="k2_treap_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k2_tree_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="k2_tree_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="k2_tree_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="lcp_construct_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="lcp_construct_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="lcp_construct_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="nn_dict_dynamic_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="nn_dict_dynamic_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="nn_dict_dynamic_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank_support_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank_support_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="rank_support_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="replace_int_vector_value" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="replace_int_vector_value" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="replace_int_vector_value" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rmq_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rmq_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="rmq_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sa_construct_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sa_construct_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="sa_construct_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sd_vector_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sd_vector_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="sd_vector_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="search_bidirectional_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="search_bidirectional_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="search_bidirectional_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select_support_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select_support_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="select_support_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sorted_int_stack_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sorted_int_stack_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="sorted_int_stack_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sorted_stack_support_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sorted_stack_support_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="sorted_stack_support_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wt_byte_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="wt_byte_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="wt_byte_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wt_int_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="wt_int_test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="wt_int_test" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_bit-vec.CRAFTED-32" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_bit-vec.CRAFTED-32" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_bit-vec.CRAFTED-BLOCK-0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_bit-vec.CRAFTED-BLOCK-0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_bit-vec.CRAFTED-BLOCK-1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_bit-vec.CRAFTED-BLOCK-1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_bit-vec.CRAFTED-MAT-SELECT" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_bit-vec.CRAFTED-MAT-SELECT" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_bit-vec.CRAFTED-SPARSE-0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_bit-vec.CRAFTED-SPARSE-0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_bit-vec.CRAFTED-SPARSE-1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_bit-vec.CRAFTED-SPARSE-1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.0.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.0.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.1000000.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.1000000.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.1000000.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.1000000.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.1000000.1.r.815" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.1000000.1.r.815" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.1024.1.r.898" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.1024.1.r.898" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.10.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.10.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.11.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.11.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.128.1.r.73" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.128.1.r.73" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.12.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.12.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.13.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.13.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.14.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.14.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.15.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.15.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.16.1.r.42" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.16.1.r.42" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.1.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.1.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.2048.1.r.5432" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.2048.1.r.5432" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.256.1.r.4887" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.256.1.r.4887" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.32.1.r.111" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.32.1.r.111" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.4096.1.r.793" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.4096.1.r.793" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.512.1.r.432" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.512.1.r.432" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.64.1.r.222" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.64.1.r.222" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.7.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.7.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.8192.1.r.1043" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.8192.1.r.1043" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.8.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.8.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.8.1.r.17" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.8.1.r.17" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bit-vector-test_int-vec.9.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bit-vector-test_int-vec.9.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bits-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="bits-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="clean-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="clean-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="coder-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="coder-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="compile-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="compile-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa-byte-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa-byte-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa-byte-test_100a.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa-byte-test_100a.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa-byte-test_empty.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa-byte-test_empty.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa-byte-test_example01.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa-byte-test_example01.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa-byte-test_faust.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa-byte-test_faust.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa-byte-test_zarathustra.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa-byte-test_zarathustra.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa-int-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa-int-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa-int-test_100a.txt_1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa-int-test_100a.txt_1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa-int-test_empty.txt_1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa-int-test_empty.txt_1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa-int-test_example01.txt_1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa-int-test_example01.txt_1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa-int-test_faust.txt_1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa-int-test_faust.txt_1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa-int-test_keeper.int_8" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa-int-test_keeper.int_8" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa-int-test_moby.int_8" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa-int-test_moby.int_8" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="csa-int-test_zarathustra.txt_1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="csa-int-test_zarathustra.txt_1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst-byte-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst-byte-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst-byte-test_100a.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst-byte-test_100a.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst-byte-test_empty.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst-byte-test_empty.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst-byte-test_example01.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst-byte-test_example01.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst-byte-test_faust.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst-byte-test_faust.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst-int-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst-int-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst-int-test_100a.txt_1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst-int-test_100a.txt_1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst-int-test_empty.txt_1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst-int-test_empty.txt_1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst-int-test_example01.txt_1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst-int-test_example01.txt_1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst-int-test_faust.txt_1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst-int-test_faust.txt_1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst-int-test_int-vec-sa.100000.18.r_0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst-int-test_int-vec-sa.100000.18.r_0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst-int-test_keeper.int_8" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst-int-test_keeper.int_8" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cst-int-test_moby.int_8" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="cst-int-test_moby.int_8" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="dac-vector-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="dac-vector-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="divsufsort" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="divsufsort" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="divsufsort64" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="divsufsort64" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="faust.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="faust.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="gtest" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="gtest" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="gtest_main" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="gtest_main" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="int-vector-buffer-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="int-vector-buffer-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="int-vector-mapper-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="int-vector-mapper-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="int-vector-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="int-vector-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="inv-perm-support-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="inv-perm-support-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k2-0.1.0.00.1.0.00.1.0.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="k2-0.1.0.00.1.0.00.1.0.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k2-1000000.52.r.421000000.57.r.231000000.45.r.81" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="k2-1000000.52.r.421000000.57.r.231000000.45.r.81" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k2-100000.39.r.42100000.47.r.23100000.35.r.81" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="k2-100000.39.r.42100000.47.r.23100000.35.r.81" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k2-10000.16.r.4210000.16.r.2310000.8.r.81" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="k2-10000.16.r.4210000.16.r.2310000.8.r.81" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k2-100.16.r.42100.16.r.23100.8.r.81" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="k2-100.16.r.42100.16.r.23100.8.r.81" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k2-treap-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="k2-treap-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k2-treap-test_k2-0.1.0.00.1.0.00.1.0.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="k2-treap-test_k2-0.1.0.00.1.0.00.1.0.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k2-treap-test_k2-1000000.52.r.421000000.57.r.231000000.45.r.81" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="k2-treap-test_k2-1000000.52.r.421000000.57.r.231000000.45.r.81" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k2-treap-test_k2-100000.39.r.42100000.47.r.23100000.35.r.81" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="k2-treap-test_k2-100000.39.r.42100000.47.r.23100000.35.r.81" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k2-treap-test_k2-10000.16.r.4210000.16.r.2310000.8.r.81" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="k2-treap-test_k2-10000.16.r.4210000.16.r.2310000.8.r.81" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k2-treap-test_k2-100.16.r.42100.16.r.23100.8.r.81" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="k2-treap-test_k2-100.16.r.42100.16.r.23100.8.r.81" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="k2-tree-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="k2-tree-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="lcp-construct-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="lcp-construct-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="lcp-construct-test_100a.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="lcp-construct-test_100a.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="lcp-construct-test_empty.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="lcp-construct-test_empty.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="lcp-construct-test_example01.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="lcp-construct-test_example01.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="lcp-construct-test_faust.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="lcp-construct-test_faust.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="lcp-construct-test_zarathustra.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="lcp-construct-test_zarathustra.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="moby.int" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="moby.int" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="nn-dict-dynamic-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="nn-dict-dynamic-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_bit-vec.CRAFTED-32" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_bit-vec.CRAFTED-32" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_bit-vec.CRAFTED-BLOCK-0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_bit-vec.CRAFTED-BLOCK-0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_bit-vec.CRAFTED-BLOCK-1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_bit-vec.CRAFTED-BLOCK-1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_bit-vec.CRAFTED-MAT-SELECT" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_bit-vec.CRAFTED-MAT-SELECT" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_bit-vec.CRAFTED-SPARSE-0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_bit-vec.CRAFTED-SPARSE-0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_bit-vec.CRAFTED-SPARSE-1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_bit-vec.CRAFTED-SPARSE-1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.0.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.0.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.1000000.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.1000000.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.1000000.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.1000000.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.1000000.1.r.815" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.1000000.1.r.815" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.1024.1.r.898" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.1024.1.r.898" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.10.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.10.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.11.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.11.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.128.1.r.73" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.128.1.r.73" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.12.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.12.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.13.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.13.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.14.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.14.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.15.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.15.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.16.1.r.42" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.16.1.r.42" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.1.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.1.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.2048.1.r.5432" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.2048.1.r.5432" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.256.1.r.4887" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.256.1.r.4887" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.32.1.r.111" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.32.1.r.111" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.4096.1.r.793" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.4096.1.r.793" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.512.1.r.432" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.512.1.r.432" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.64.1.r.222" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.64.1.r.222" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.7.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.7.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.8192.1.r.1043" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.8192.1.r.1043" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.8.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.8.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.8.1.r.17" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.8.1.r.17" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rank-support-test_int-vec.9.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rank-support-test_int-vec.9.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rmq-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rmq-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rmq-test_int-vec.0.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rmq-test_int-vec.0.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rmq-test_int-vec.1000000.32.i.42" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rmq-test_int-vec.1000000.32.i.42" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rmq-test_int-vec.1000000.64.i" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rmq-test_int-vec.1000000.64.i" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rmq-test_int-vec.1000000.64.i.17" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rmq-test_int-vec.1000000.64.i.17" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rmq-test_int-vec.1.64.42" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="rmq-test_int-vec.1.64.42" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sa-construct-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sa-construct-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sa-construct-test_100a.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sa-construct-test_100a.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sa-construct-test_empty.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sa-construct-test_empty.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sa-construct-test_example01.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sa-construct-test_example01.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sa-construct-test_faust.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sa-construct-test_faust.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sa-construct-test_one_byte.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sa-construct-test_one_byte.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sa-construct-test_zarathustra.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sa-construct-test_zarathustra.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sd-vector-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sd-vector-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sdsl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sdsl" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="search-bidirectional-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="search-bidirectional-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="search-bidirectional-test_100a.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="search-bidirectional-test_100a.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="search-bidirectional-test_empty.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="search-bidirectional-test_empty.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="search-bidirectional-test_example01.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="search-bidirectional-test_example01.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="search-bidirectional-test_faust.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="search-bidirectional-test_faust.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="search-bidirectional-test_zarathustra.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="search-bidirectional-test_zarathustra.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_bit-vec.CRAFTED-32" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_bit-vec.CRAFTED-32" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_bit-vec.CRAFTED-BLOCK-0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_bit-vec.CRAFTED-BLOCK-0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_bit-vec.CRAFTED-BLOCK-1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_bit-vec.CRAFTED-BLOCK-1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_bit-vec.CRAFTED-MAT-SELECT" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_bit-vec.CRAFTED-MAT-SELECT" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_bit-vec.CRAFTED-SPARSE-0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_bit-vec.CRAFTED-SPARSE-0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_bit-vec.CRAFTED-SPARSE-1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_bit-vec.CRAFTED-SPARSE-1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.0.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.0.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.1000000.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.1000000.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.1000000.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.1000000.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.1000000.1.r.815" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.1000000.1.r.815" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.1024.1.r.898" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.1024.1.r.898" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.10.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.10.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.11.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.11.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.128.1.r.73" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.128.1.r.73" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.12.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.12.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.13.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.13.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.14.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.14.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.15.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.15.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.16.1.r.42" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.16.1.r.42" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.1.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.1.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.2048.1.r.5432" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.2048.1.r.5432" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.256.1.r.4887" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.256.1.r.4887" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.32.1.r.111" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.32.1.r.111" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.4096.1.r.793" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.4096.1.r.793" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.512.1.r.432" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.512.1.r.432" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.64.1.r.222" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.64.1.r.222" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.7.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.7.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.8192.1.r.1043" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.8192.1.r.1043" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.8.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.8.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.8.1.r.17" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.8.1.r.17" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="select-support-test_int-vec.9.1.1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="select-support-test_int-vec.9.1.1" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sorted-int-stack-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sorted-int-stack-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sorted-stack-support-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="sorted-stack-support-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test-sdsl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="test-sdsl" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="uninstall-sdsl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="uninstall-sdsl" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="uninstall" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="uninstall" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wt-byte-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="wt-byte-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wt-byte-test_100a.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="wt-byte-test_100a.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wt-byte-test_all_symbols.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="wt-byte-test_all_symbols.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wt-byte-test_empty.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="wt-byte-test_empty.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wt-byte-test_example01.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="wt-byte-test_example01.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wt-byte-test_faust.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="wt-byte-test_faust.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wt-int-test" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="wt-int-test" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wt-int-test_int-vec.0.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="wt-int-test_int-vec.0.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wt-int-test_int-vec.100000.18.r" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="wt-int-test_int-vec.100000.18.r" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wt-int-test_int-vec.100023.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="wt-int-test_int-vec.100023.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wt-int-test_int-vec.1023.1.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="wt-int-test_int-vec.1023.1.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wt-int-test_int-vec.64.2.0" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="wt-int-test_int-vec.64.2.0" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="zarathustra.txt" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="zarathustra.txt" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Google Test.bit_vector_generator" />
+      <item itemvalue="Google Test.bit_vector_test" />
+      <item itemvalue="Google Test.bits_test" />
+      <item itemvalue="Google Test.coder_test" />
+      <item itemvalue="Google Test.compile_test" />
+      <item itemvalue="Google Test.csa_byte_test" />
+      <item itemvalue="Google Test.csa_int_test" />
+      <item itemvalue="Google Test.cst_byte_test" />
+      <item itemvalue="Google Test.cst_int_test" />
+      <item itemvalue="Google Test.dac_vector_test" />
+      <item itemvalue="Google Test.int_vector_buffer_test" />
+      <item itemvalue="Google Test.int_vector_generator" />
+      <item itemvalue="Google Test.int_vector_mapper_test" />
+      <item itemvalue="Google Test.int_vector_test" />
+      <item itemvalue="Google Test.inv_perm_support_test" />
+      <item itemvalue="Google Test.k2_treap_test" />
+      <item itemvalue="Google Test.k2_tree_test" />
+      <item itemvalue="Google Test.lcp_construct_test" />
+      <item itemvalue="Google Test.nn_dict_dynamic_test" />
+      <item itemvalue="Google Test.rank_support_test" />
+      <item itemvalue="Google Test.replace_int_vector_value" />
+      <item itemvalue="Google Test.rmq_test" />
+      <item itemvalue="Google Test.sa_construct_test" />
+      <item itemvalue="Google Test.sd_vector_test" />
+      <item itemvalue="Google Test.search_bidirectional_test" />
+      <item itemvalue="Google Test.select_support_test" />
+      <item itemvalue="Google Test.sorted_int_stack_test" />
+      <item itemvalue="Google Test.sorted_stack_support_test" />
+      <item itemvalue="Google Test.wt_byte_test" />
+      <item itemvalue="Google Test.wt_int_test" />
+      <item itemvalue="CMake Application.bit-vector-test" />
+      <item itemvalue="CMake Application.bit-vector-test_bit-vec.CRAFTED-32" />
+      <item itemvalue="CMake Application.bit-vector-test_bit-vec.CRAFTED-BLOCK-0" />
+      <item itemvalue="CMake Application.bit-vector-test_bit-vec.CRAFTED-BLOCK-1" />
+      <item itemvalue="CMake Application.bit-vector-test_bit-vec.CRAFTED-MAT-SELECT" />
+      <item itemvalue="CMake Application.bit-vector-test_bit-vec.CRAFTED-SPARSE-0" />
+      <item itemvalue="CMake Application.bit-vector-test_bit-vec.CRAFTED-SPARSE-1" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.0.1.0" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.1000000.1.0" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.1000000.1.1" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.1000000.1.r.815" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.1024.1.r.898" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.10.1.0" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.11.1.1" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.128.1.r.73" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.12.1.0" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.13.1.1" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.14.1.0" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.15.1.1" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.16.1.r.42" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.1.1.0" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.2048.1.r.5432" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.256.1.r.4887" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.32.1.r.111" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.4096.1.r.793" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.512.1.r.432" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.64.1.r.222" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.7.1.1" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.8192.1.r.1043" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.8.1.0" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.8.1.r.17" />
+      <item itemvalue="CMake Application.bit-vector-test_int-vec.9.1.1" />
+      <item itemvalue="CMake Application.bits-test" />
+      <item itemvalue="CMake Application.clean-test" />
+      <item itemvalue="CMake Application.coder-test" />
+      <item itemvalue="CMake Application.compile-test" />
+      <item itemvalue="CMake Application.csa-byte-test" />
+      <item itemvalue="CMake Application.csa-byte-test_100a.txt" />
+      <item itemvalue="CMake Application.csa-byte-test_empty.txt" />
+      <item itemvalue="CMake Application.csa-byte-test_example01.txt" />
+      <item itemvalue="CMake Application.csa-byte-test_faust.txt" />
+      <item itemvalue="CMake Application.csa-byte-test_zarathustra.txt" />
+      <item itemvalue="CMake Application.csa-int-test" />
+      <item itemvalue="CMake Application.csa-int-test_100a.txt_1" />
+      <item itemvalue="CMake Application.csa-int-test_empty.txt_1" />
+      <item itemvalue="CMake Application.csa-int-test_example01.txt_1" />
+      <item itemvalue="CMake Application.csa-int-test_faust.txt_1" />
+      <item itemvalue="CMake Application.csa-int-test_keeper.int_8" />
+      <item itemvalue="CMake Application.csa-int-test_moby.int_8" />
+      <item itemvalue="CMake Application.csa-int-test_zarathustra.txt_1" />
+      <item itemvalue="CMake Application.cst-byte-test" />
+      <item itemvalue="CMake Application.cst-byte-test_100a.txt" />
+      <item itemvalue="CMake Application.cst-byte-test_empty.txt" />
+      <item itemvalue="CMake Application.cst-byte-test_example01.txt" />
+      <item itemvalue="CMake Application.cst-byte-test_faust.txt" />
+      <item itemvalue="CMake Application.cst-int-test" />
+      <item itemvalue="CMake Application.cst-int-test_100a.txt_1" />
+      <item itemvalue="CMake Application.cst-int-test_empty.txt_1" />
+      <item itemvalue="CMake Application.cst-int-test_example01.txt_1" />
+      <item itemvalue="CMake Application.cst-int-test_faust.txt_1" />
+      <item itemvalue="CMake Application.cst-int-test_int-vec-sa.100000.18.r_0" />
+      <item itemvalue="CMake Application.cst-int-test_keeper.int_8" />
+      <item itemvalue="CMake Application.cst-int-test_moby.int_8" />
+      <item itemvalue="CMake Application.dac-vector-test" />
+      <item itemvalue="CMake Application.divsufsort64" />
+      <item itemvalue="CMake Application.divsufsort" />
+      <item itemvalue="CMake Application.faust.txt" />
+      <item itemvalue="CMake Application.gtest" />
+      <item itemvalue="CMake Application.gtest_main" />
+      <item itemvalue="CMake Application.int-vector-buffer-test" />
+      <item itemvalue="CMake Application.int-vector-mapper-test" />
+      <item itemvalue="CMake Application.int-vector-test" />
+      <item itemvalue="CMake Application.inv-perm-support-test" />
+      <item itemvalue="CMake Application.k2-0.1.0.00.1.0.00.1.0.0" />
+      <item itemvalue="CMake Application.k2-1000000.52.r.421000000.57.r.231000000.45.r.81" />
+      <item itemvalue="CMake Application.k2-100000.39.r.42100000.47.r.23100000.35.r.81" />
+      <item itemvalue="CMake Application.k2-10000.16.r.4210000.16.r.2310000.8.r.81" />
+      <item itemvalue="CMake Application.k2-100.16.r.42100.16.r.23100.8.r.81" />
+      <item itemvalue="CMake Application.k2-treap-test" />
+      <item itemvalue="CMake Application.k2-treap-test_k2-0.1.0.00.1.0.00.1.0.0" />
+      <item itemvalue="CMake Application.k2-treap-test_k2-1000000.52.r.421000000.57.r.231000000.45.r.81" />
+      <item itemvalue="CMake Application.k2-treap-test_k2-100000.39.r.42100000.47.r.23100000.35.r.81" />
+      <item itemvalue="CMake Application.k2-treap-test_k2-10000.16.r.4210000.16.r.2310000.8.r.81" />
+      <item itemvalue="CMake Application.k2-treap-test_k2-100.16.r.42100.16.r.23100.8.r.81" />
+      <item itemvalue="CMake Application.k2-tree-test" />
+      <item itemvalue="CMake Application.lcp-construct-test" />
+      <item itemvalue="CMake Application.lcp-construct-test_100a.txt" />
+      <item itemvalue="CMake Application.lcp-construct-test_empty.txt" />
+      <item itemvalue="CMake Application.lcp-construct-test_example01.txt" />
+      <item itemvalue="CMake Application.lcp-construct-test_faust.txt" />
+      <item itemvalue="CMake Application.lcp-construct-test_zarathustra.txt" />
+      <item itemvalue="CMake Application.moby.int" />
+      <item itemvalue="CMake Application.nn-dict-dynamic-test" />
+      <item itemvalue="CMake Application.rank-support-test" />
+      <item itemvalue="CMake Application.rank-support-test_bit-vec.CRAFTED-32" />
+      <item itemvalue="CMake Application.rank-support-test_bit-vec.CRAFTED-BLOCK-0" />
+      <item itemvalue="CMake Application.rank-support-test_bit-vec.CRAFTED-BLOCK-1" />
+      <item itemvalue="CMake Application.rank-support-test_bit-vec.CRAFTED-MAT-SELECT" />
+      <item itemvalue="CMake Application.rank-support-test_bit-vec.CRAFTED-SPARSE-0" />
+      <item itemvalue="CMake Application.rank-support-test_bit-vec.CRAFTED-SPARSE-1" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.0.1.0" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.1000000.1.0" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.1000000.1.1" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.1000000.1.r.815" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.1024.1.r.898" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.10.1.0" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.11.1.1" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.128.1.r.73" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.12.1.0" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.13.1.1" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.14.1.0" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.15.1.1" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.16.1.r.42" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.1.1.0" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.2048.1.r.5432" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.256.1.r.4887" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.32.1.r.111" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.4096.1.r.793" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.512.1.r.432" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.64.1.r.222" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.7.1.1" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.8192.1.r.1043" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.8.1.0" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.8.1.r.17" />
+      <item itemvalue="CMake Application.rank-support-test_int-vec.9.1.1" />
+      <item itemvalue="CMake Application.rmq-test" />
+      <item itemvalue="CMake Application.rmq-test_int-vec.0.1.0" />
+      <item itemvalue="CMake Application.rmq-test_int-vec.1000000.32.i.42" />
+      <item itemvalue="CMake Application.rmq-test_int-vec.1000000.64.i" />
+      <item itemvalue="CMake Application.rmq-test_int-vec.1000000.64.i.17" />
+      <item itemvalue="CMake Application.rmq-test_int-vec.1.64.42" />
+      <item itemvalue="CMake Application.sa-construct-test" />
+      <item itemvalue="CMake Application.sa-construct-test_100a.txt" />
+      <item itemvalue="CMake Application.sa-construct-test_empty.txt" />
+      <item itemvalue="CMake Application.sa-construct-test_example01.txt" />
+      <item itemvalue="CMake Application.sa-construct-test_faust.txt" />
+      <item itemvalue="CMake Application.sa-construct-test_one_byte.txt" />
+      <item itemvalue="CMake Application.sa-construct-test_zarathustra.txt" />
+      <item itemvalue="CMake Application.sd-vector-test" />
+      <item itemvalue="CMake Application.sdsl" />
+      <item itemvalue="CMake Application.search-bidirectional-test" />
+      <item itemvalue="CMake Application.search-bidirectional-test_100a.txt" />
+      <item itemvalue="CMake Application.search-bidirectional-test_empty.txt" />
+      <item itemvalue="CMake Application.search-bidirectional-test_example01.txt" />
+      <item itemvalue="CMake Application.search-bidirectional-test_faust.txt" />
+      <item itemvalue="CMake Application.search-bidirectional-test_zarathustra.txt" />
+      <item itemvalue="CMake Application.select-support-test" />
+      <item itemvalue="CMake Application.select-support-test_bit-vec.CRAFTED-32" />
+      <item itemvalue="CMake Application.select-support-test_bit-vec.CRAFTED-BLOCK-0" />
+      <item itemvalue="CMake Application.select-support-test_bit-vec.CRAFTED-BLOCK-1" />
+      <item itemvalue="CMake Application.select-support-test_bit-vec.CRAFTED-MAT-SELECT" />
+      <item itemvalue="CMake Application.select-support-test_bit-vec.CRAFTED-SPARSE-0" />
+      <item itemvalue="CMake Application.select-support-test_bit-vec.CRAFTED-SPARSE-1" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.0.1.0" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.1000000.1.0" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.1000000.1.1" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.1000000.1.r.815" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.1024.1.r.898" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.10.1.0" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.11.1.1" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.128.1.r.73" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.12.1.0" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.13.1.1" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.14.1.0" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.15.1.1" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.16.1.r.42" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.1.1.0" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.2048.1.r.5432" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.256.1.r.4887" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.32.1.r.111" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.4096.1.r.793" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.512.1.r.432" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.64.1.r.222" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.7.1.1" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.8192.1.r.1043" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.8.1.0" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.8.1.r.17" />
+      <item itemvalue="CMake Application.select-support-test_int-vec.9.1.1" />
+      <item itemvalue="CMake Application.sorted-int-stack-test" />
+      <item itemvalue="CMake Application.sorted-stack-support-test" />
+      <item itemvalue="CMake Application.test-sdsl" />
+      <item itemvalue="CMake Application.uninstall-sdsl" />
+      <item itemvalue="CMake Application.uninstall" />
+      <item itemvalue="CMake Application.wt-byte-test" />
+      <item itemvalue="CMake Application.wt-byte-test_100a.txt" />
+      <item itemvalue="CMake Application.wt-byte-test_all_symbols.txt" />
+      <item itemvalue="CMake Application.wt-byte-test_empty.txt" />
+      <item itemvalue="CMake Application.wt-byte-test_example01.txt" />
+      <item itemvalue="CMake Application.wt-byte-test_faust.txt" />
+      <item itemvalue="CMake Application.wt-int-test" />
+      <item itemvalue="CMake Application.wt-int-test_int-vec.0.1.0" />
+      <item itemvalue="CMake Application.wt-int-test_int-vec.100000.18.r" />
+      <item itemvalue="CMake Application.wt-int-test_int-vec.100023.1.0" />
+      <item itemvalue="CMake Application.wt-int-test_int-vec.1023.1.0" />
+      <item itemvalue="CMake Application.wt-int-test_int-vec.64.2.0" />
+      <item itemvalue="CMake Application.zarathustra.txt" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c8b06e01-6ad7-427f-b37c-537837e1b68a" name="Default Changelist" comment="" />
+      <created>1592295799007</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592295799007</updated>
+      <workItem from="1592295811718" duration="613000" />
+      <workItem from="1592309159325" duration="4020000" />
+      <workItem from="1592319196415" duration="1465000" />
+      <workItem from="1592385324235" duration="682000" />
+      <workItem from="1592467808622" duration="605000" />
+      <workItem from="1592469815081" duration="574000" />
+      <workItem from="1592472210443" duration="1912000" />
+      <workItem from="1592489409935" duration="1390000" />
+      <workItem from="1592490815057" duration="1517000" />
+      <workItem from="1592549253416" duration="8293000" />
+      <workItem from="1592571400827" duration="3658000" />
+      <workItem from="1592809368824" duration="6541000" />
+      <workItem from="1592894361095" duration="4034000" />
+      <workItem from="1592902401159" duration="4987000" />
+      <workItem from="1592913192459" duration="960000" />
+      <workItem from="1592980991311" duration="29000" />
+      <workItem from="1592981037830" duration="2289000" />
+      <workItem from="1593067120764" duration="1212000" />
+      <workItem from="1593091202034" duration="603000" />
+      <workItem from="1593155852744" duration="599000" />
+      <workItem from="1593157152887" duration="2547000" />
+      <workItem from="1593180228670" duration="597000" />
+      <workItem from="1593414390984" duration="147000" />
+      <workItem from="1593415162558" duration="5099000" />
+      <workItem from="1593429420565" duration="2244000" />
+      <workItem from="1593498391335" duration="600000" />
+      <workItem from="1593504886164" duration="1482000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="743" y="246" width="434" height="488" key="FileChooserDialogImpl" timestamp="1593440747693">
+      <screen x="0" y="27" width="1920" height="923" />
+    </state>
+    <state x="743" y="246" width="434" height="488" key="FileChooserDialogImpl/0.27.1920.923@0.27.1920.923" timestamp="1593440747693" />
+  </component>
+</project>

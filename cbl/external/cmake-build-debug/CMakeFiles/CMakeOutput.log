@@ -1,0 +1,894 @@
+The system is: Linux - 5.3.0-59-generic - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/cc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/c++ 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_fce66/fast && /usr/bin/make -f CMakeFiles/cmTC_fce66.dir/build.make CMakeFiles/cmTC_fce66.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_fce66.dir/testCCompiler.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_fce66.dir/testCCompiler.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_fce66
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fce66.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_fce66.dir/testCCompiler.c.o  -o cmTC_fce66 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_5fd30/fast && /usr/bin/make -f CMakeFiles/cmTC_5fd30.dir/build.make CMakeFiles/cmTC_5fd30.dir/build
+make[1]: Entering directory '/home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc   -v -o CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o   -c /home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/share/cmake-3.16/Modules/CMakeCCompilerABI.c
+Using built-in specs.
+COLLECT_GCC=/usr/bin/cc
+OFFLOAD_TARGET_NAMES=nvptx-none:hsa
+OFFLOAD_TARGET_DEFAULT=1
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.2.1-9ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none,hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 9.2.1 20191008 (Ubuntu 9.2.1-9ubuntu2) 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/9/cc1 -quiet -v -imultiarch x86_64-linux-gnu /home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/share/cmake-3.16/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccBxyyMP.s
+GNU C17 (Ubuntu 9.2.1-9ubuntu2) version 9.2.1 20191008 (x86_64-linux-gnu)
+	compiled by GNU C version 9.2.1 20191008, GMP version 6.1.2, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.21-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/lib/gcc/x86_64-linux-gnu/9/include
+ /usr/local/include
+ /usr/lib/gcc/x86_64-linux-gnu/9/include-fixed
+ /usr/include/x86_64-linux-gnu
+ /usr/include
+End of search list.
+GNU C17 (Ubuntu 9.2.1-9ubuntu2) version 9.2.1 20191008 (x86_64-linux-gnu)
+	compiled by GNU C version 9.2.1 20191008, GMP version 6.1.2, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.21-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: dd54e5384b34908287640134d9f8a49c
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+ as -v --64 -o CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o /tmp/ccBxyyMP.s
+GNU assembler version 2.33 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.33
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+Linking C executable cmTC_5fd30
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5fd30.dir/link.txt --verbose=1
+/usr/bin/cc     -v -rdynamic CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o  -o cmTC_5fd30 
+Using built-in specs.
+COLLECT_GCC=/usr/bin/cc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper
+OFFLOAD_TARGET_NAMES=nvptx-none:hsa
+OFFLOAD_TARGET_DEFAULT=1
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.2.1-9ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none,hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 9.2.1 20191008 (Ubuntu 9.2.1-9ubuntu2) 
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_5fd30' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccUuOVWe.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_5fd30 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/9 -L/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/9/../../.. CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_5fd30' '-mtune=generic' '-march=x86-64'
+make[1]: Leaving directory '/home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/lib/gcc/x86_64-linux-gnu/9/include]
+    add: [/usr/local/include]
+    add: [/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed]
+    add: [/usr/include/x86_64-linux-gnu]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/9/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/9/include]
+  collapse include dir [/usr/local/include] ==> [/usr/local/include]
+  collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed] ==> [/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed]
+  collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/lib/gcc/x86_64-linux-gnu/9/include;/usr/local/include;/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed;/usr/include/x86_64-linux-gnu;/usr/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_5fd30/fast && /usr/bin/make -f CMakeFiles/cmTC_5fd30.dir/build.make CMakeFiles/cmTC_5fd30.dir/build]
+  ignore line: [make[1]: Entering directory '/home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc   -v -o CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o   -c /home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/share/cmake-3.16/Modules/CMakeCCompilerABI.c]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/cc]
+  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:hsa]
+  ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.2.1-9ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 9.2.1 20191008 (Ubuntu 9.2.1-9ubuntu2) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/9/cc1 -quiet -v -imultiarch x86_64-linux-gnu /home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/share/cmake-3.16/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccBxyyMP.s]
+  ignore line: [GNU C17 (Ubuntu 9.2.1-9ubuntu2) version 9.2.1 20191008 (x86_64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 9.2.1 20191008  GMP version 6.1.2  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.21-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/9/include]
+  ignore line: [ /usr/local/include]
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/9/include-fixed]
+  ignore line: [ /usr/include/x86_64-linux-gnu]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C17 (Ubuntu 9.2.1-9ubuntu2) version 9.2.1 20191008 (x86_64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 9.2.1 20191008  GMP version 6.1.2  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.21-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: dd54e5384b34908287640134d9f8a49c]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [ as -v --64 -o CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o /tmp/ccBxyyMP.s]
+  ignore line: [GNU assembler version 2.33 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.33]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [Linking C executable cmTC_5fd30]
+  ignore line: [/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5fd30.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc     -v -rdynamic CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o  -o cmTC_5fd30 ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/cc]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper]
+  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:hsa]
+  ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.2.1-9ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 9.2.1 20191008 (Ubuntu 9.2.1-9ubuntu2) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_5fd30' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccUuOVWe.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_5fd30 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/9 -L/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/9/../../.. CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccUuOVWe.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-pie] ==> ignore
+    arg [-znow] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_5fd30] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crti.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o] ==> ignore
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib]
+    arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../..]
+    arg [CMakeFiles/cmTC_5fd30.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--push-state] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--pop-state] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--push-state] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--pop-state] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o] ==> ignore
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9] ==> [/usr/lib/gcc/x86_64-linux-gnu/9]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib] ==> [/usr/lib]
+  collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+  collapse library dir [/lib/../lib] ==> [/lib]
+  collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../..] ==> [/usr/lib]
+  implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+  implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/9;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
+  implicit fwks: []
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a9441/fast && /usr/bin/make -f CMakeFiles/cmTC_a9441.dir/build.make CMakeFiles/cmTC_a9441.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building CXX object CMakeFiles/cmTC_a9441.dir/testCXXCompiler.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTC_a9441.dir/testCXXCompiler.cxx.o -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_a9441
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a9441.dir/link.txt --verbose=1
+/usr/bin/c++       -rdynamic CMakeFiles/cmTC_a9441.dir/testCXXCompiler.cxx.o  -o cmTC_a9441 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7dc69/fast && /usr/bin/make -f CMakeFiles/cmTC_7dc69.dir/build.make CMakeFiles/cmTC_7dc69.dir/build
+make[1]: Entering directory '/home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++    -v -o CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o -c /home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp
+Using built-in specs.
+COLLECT_GCC=/usr/bin/c++
+OFFLOAD_TARGET_NAMES=nvptx-none:hsa
+OFFLOAD_TARGET_DEFAULT=1
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.2.1-9ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none,hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 9.2.1 20191008 (Ubuntu 9.2.1-9ubuntu2) 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/9/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccYk8dRL.s
+GNU C++14 (Ubuntu 9.2.1-9ubuntu2) version 9.2.1 20191008 (x86_64-linux-gnu)
+	compiled by GNU C version 9.2.1 20191008, GMP version 6.1.2, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.21-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/9"
+ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/include/c++/9
+ /usr/include/x86_64-linux-gnu/c++/9
+ /usr/include/c++/9/backward
+ /usr/lib/gcc/x86_64-linux-gnu/9/include
+ /usr/local/include
+ /usr/lib/gcc/x86_64-linux-gnu/9/include-fixed
+ /usr/include/x86_64-linux-gnu
+ /usr/include
+End of search list.
+GNU C++14 (Ubuntu 9.2.1-9ubuntu2) version 9.2.1 20191008 (x86_64-linux-gnu)
+	compiled by GNU C version 9.2.1 20191008, GMP version 6.1.2, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.21-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 0b9b8169e2ec34ea6760fe47bcd8139b
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ as -v --64 -o CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccYk8dRL.s
+GNU assembler version 2.33 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.33
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+Linking CXX executable cmTC_7dc69
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7dc69.dir/link.txt --verbose=1
+/usr/bin/c++      -v -rdynamic CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_7dc69 
+Using built-in specs.
+COLLECT_GCC=/usr/bin/c++
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper
+OFFLOAD_TARGET_NAMES=nvptx-none:hsa
+OFFLOAD_TARGET_DEFAULT=1
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.2.1-9ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none,hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 9.2.1 20191008 (Ubuntu 9.2.1-9ubuntu2) 
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_7dc69' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccLwezGe.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_7dc69 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/9 -L/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/9/../../.. CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_7dc69' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+make[1]: Leaving directory '/home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+
+Parsed CXX implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/include/c++/9]
+    add: [/usr/include/x86_64-linux-gnu/c++/9]
+    add: [/usr/include/c++/9/backward]
+    add: [/usr/lib/gcc/x86_64-linux-gnu/9/include]
+    add: [/usr/local/include]
+    add: [/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed]
+    add: [/usr/include/x86_64-linux-gnu]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/usr/include/c++/9] ==> [/usr/include/c++/9]
+  collapse include dir [/usr/include/x86_64-linux-gnu/c++/9] ==> [/usr/include/x86_64-linux-gnu/c++/9]
+  collapse include dir [/usr/include/c++/9/backward] ==> [/usr/include/c++/9/backward]
+  collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/9/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/9/include]
+  collapse include dir [/usr/local/include] ==> [/usr/local/include]
+  collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed] ==> [/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed]
+  collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/include/c++/9;/usr/include/x86_64-linux-gnu/c++/9;/usr/include/c++/9/backward;/usr/lib/gcc/x86_64-linux-gnu/9/include;/usr/local/include;/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed;/usr/include/x86_64-linux-gnu;/usr/include]
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_7dc69/fast && /usr/bin/make -f CMakeFiles/cmTC_7dc69.dir/build.make CMakeFiles/cmTC_7dc69.dir/build]
+  ignore line: [make[1]: Entering directory '/home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++    -v -o CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o -c /home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/c++]
+  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:hsa]
+  ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.2.1-9ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 9.2.1 20191008 (Ubuntu 9.2.1-9ubuntu2) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/9/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccYk8dRL.s]
+  ignore line: [GNU C++14 (Ubuntu 9.2.1-9ubuntu2) version 9.2.1 20191008 (x86_64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 9.2.1 20191008  GMP version 6.1.2  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.21-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/9"]
+  ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/include/c++/9]
+  ignore line: [ /usr/include/x86_64-linux-gnu/c++/9]
+  ignore line: [ /usr/include/c++/9/backward]
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/9/include]
+  ignore line: [ /usr/local/include]
+  ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/9/include-fixed]
+  ignore line: [ /usr/include/x86_64-linux-gnu]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C++14 (Ubuntu 9.2.1-9ubuntu2) version 9.2.1 20191008 (x86_64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 9.2.1 20191008  GMP version 6.1.2  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.21-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: 0b9b8169e2ec34ea6760fe47bcd8139b]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ as -v --64 -o CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccYk8dRL.s]
+  ignore line: [GNU assembler version 2.33 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.33]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [Linking CXX executable cmTC_7dc69]
+  ignore line: [/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7dc69.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++      -v -rdynamic CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_7dc69 ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/c++]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper]
+  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:hsa]
+  ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.2.1-9ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 9.2.1 20191008 (Ubuntu 9.2.1-9ubuntu2) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/9/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_7dc69' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/9/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/9/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccLwezGe.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_7dc69 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/9 -L/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/9/../../.. CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccLwezGe.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-pie] ==> ignore
+    arg [-znow] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_7dc69] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crti.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o] ==> ignore
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib]
+    arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/9/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../..]
+    arg [CMakeFiles/cmTC_7dc69.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o] ==> ignore
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9] ==> [/usr/lib/gcc/x86_64-linux-gnu/9]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib] ==> [/usr/lib]
+  collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+  collapse library dir [/lib/../lib] ==> [/lib]
+  collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/9/../../..] ==> [/usr/lib]
+  implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+  implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/9;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
+  implicit fwks: []
+
+
+Performing C++ SOURCE FILE Test HAVE_GCC_STD=C__11__WALL__WEXTRA__DNDEBUG succeeded with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ddd11/fast && /usr/bin/make -f CMakeFiles/cmTC_ddd11.dir/build.make CMakeFiles/cmTC_ddd11.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building CXX object CMakeFiles/cmTC_ddd11.dir/src.cxx.o
+/usr/bin/c++    -DHAVE_GCC_STD=C__11__WALL__WEXTRA__DNDEBUG -std=c++11 -Wall -Wextra -DNDEBUG   -o CMakeFiles/cmTC_ddd11.dir/src.cxx.o -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_ddd11
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ddd11.dir/link.txt --verbose=1
+/usr/bin/c++   -DHAVE_GCC_STD=C__11__WALL__WEXTRA__DNDEBUG -std=c++11 -Wall -Wextra -DNDEBUG    -rdynamic CMakeFiles/cmTC_ddd11.dir/src.cxx.o  -o cmTC_ddd11 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test HAVE_GCC_O3__FFAST_MATH__FUNROLL_LOOPS succeeded with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_851d6/fast && /usr/bin/make -f CMakeFiles/cmTC_851d6.dir/build.make CMakeFiles/cmTC_851d6.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building CXX object CMakeFiles/cmTC_851d6.dir/src.cxx.o
+/usr/bin/c++    -std=c++11 -Wall -Wextra -DNDEBUG -DHAVE_GCC_O3__FFAST_MATH__FUNROLL_LOOPS -O3 -ffast-math -funroll-loops   -o CMakeFiles/cmTC_851d6.dir/src.cxx.o -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_851d6
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_851d6.dir/link.txt --verbose=1
+/usr/bin/c++   -std=c++11 -Wall -Wextra -DNDEBUG -DHAVE_GCC_O3__FFAST_MATH__FUNROLL_LOOPS -O3 -ffast-math -funroll-loops    -rdynamic CMakeFiles/cmTC_851d6.dir/src.cxx.o  -o cmTC_851d6 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test HAVE_GCC_MSSE4.2__MARCH=NATIVE succeeded with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_42f21/fast && /usr/bin/make -f CMakeFiles/cmTC_42f21.dir/build.make CMakeFiles/cmTC_42f21.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building CXX object CMakeFiles/cmTC_42f21.dir/src.cxx.o
+/usr/bin/c++    -std=c++11 -Wall -Wextra -DNDEBUG -DHAVE_GCC_MSSE4.2__MARCH=NATIVE -msse4.2 -march=native   -o CMakeFiles/cmTC_42f21.dir/src.cxx.o -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx
+<command-line>: warning: ISO C++11 requires whitespace after the macro name
+Linking CXX executable cmTC_42f21
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_42f21.dir/link.txt --verbose=1
+/usr/bin/c++   -std=c++11 -Wall -Wextra -DNDEBUG -DHAVE_GCC_MSSE4.2__MARCH=NATIVE -msse4.2 -march=native    -rdynamic CMakeFiles/cmTC_42f21.dir/src.cxx.o  -o cmTC_42f21 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test HAVE_CLANG_MSSE4.2__MARCH=NATIVE succeeded with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d1683/fast && /usr/bin/make -f CMakeFiles/cmTC_d1683.dir/build.make CMakeFiles/cmTC_d1683.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building CXX object CMakeFiles/cmTC_d1683.dir/src.cxx.o
+/usr/bin/c++    -std=c++11 -Wall -Wextra -DNDEBUG -DHAVE_CLANG_MSSE4.2__MARCH=NATIVE -msse4.2 -march=native   -o CMakeFiles/cmTC_d1683.dir/src.cxx.o -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx
+<command-line>: warning: ISO C++11 requires whitespace after the macro name
+Linking CXX executable cmTC_d1683
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d1683.dir/link.txt --verbose=1
+/usr/bin/c++   -std=c++11 -Wall -Wextra -DNDEBUG -DHAVE_CLANG_MSSE4.2__MARCH=NATIVE -msse4.2 -march=native    -rdynamic CMakeFiles/cmTC_d1683.dir/src.cxx.o  -o cmTC_d1683 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test HAVE_CXA_DEMANGLE succeeded with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1aa84/fast && /usr/bin/make -f CMakeFiles/cmTC_1aa84.dir/build.make CMakeFiles/cmTC_1aa84.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building CXX object CMakeFiles/cmTC_1aa84.dir/src.cxx.o
+/usr/bin/c++    -std=c++11 -Wall -Wextra -DNDEBUG -DHAVE_CXA_DEMANGLE   -o CMakeFiles/cmTC_1aa84.dir/src.cxx.o -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx
+/home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx:6:11: warning: unused variable ‘demangled’ [-Wunused-variable]
+    6 |     char *demangled = abi::__cxa_demangle( foo, 0, 0, &status );
+      |           ^~~~~~~~~
+Linking CXX executable cmTC_1aa84
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1aa84.dir/link.txt --verbose=1
+/usr/bin/c++   -std=c++11 -Wall -Wextra -DNDEBUG -DHAVE_CXA_DEMANGLE    -rdynamic CMakeFiles/cmTC_1aa84.dir/src.cxx.o  -o cmTC_1aa84 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+Source file was:
+#include <cxxabi.h>
+int main(void){
+    int foobar = 0;
+    const char *foo = typeid(foobar).name();
+    int status;
+    char *demangled = abi::__cxa_demangle( foo, 0, 0, &status );
+}
+Performing C++ SOURCE FILE Test HAVE_GCC_DHAVE_CXA_DEMANGLE succeeded with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_8fe07/fast && /usr/bin/make -f CMakeFiles/cmTC_8fe07.dir/build.make CMakeFiles/cmTC_8fe07.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building CXX object CMakeFiles/cmTC_8fe07.dir/src.cxx.o
+/usr/bin/c++    -std=c++11 -Wall -Wextra -DNDEBUG -DHAVE_GCC_DHAVE_CXA_DEMANGLE -DHAVE_CXA_DEMANGLE   -o CMakeFiles/cmTC_8fe07.dir/src.cxx.o -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_8fe07
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8fe07.dir/link.txt --verbose=1
+/usr/bin/c++   -std=c++11 -Wall -Wextra -DNDEBUG -DHAVE_GCC_DHAVE_CXA_DEMANGLE -DHAVE_CXA_DEMANGLE    -rdynamic CMakeFiles/cmTC_8fe07.dir/src.cxx.o  -o cmTC_8fe07 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+Source file was:
+int main() { return 0; }
+Performing C SOURCE FILE Test HAVE_GCC_WALL succeeded with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4f47b/fast && /usr/bin/make -f CMakeFiles/cmTC_4f47b.dir/build.make CMakeFiles/cmTC_4f47b.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_4f47b.dir/src.c.o
+/usr/bin/cc   -DHAVE_GCC_WALL -Wall   -o CMakeFiles/cmTC_4f47b.dir/src.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_4f47b
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4f47b.dir/link.txt --verbose=1
+/usr/bin/cc  -DHAVE_GCC_WALL -Wall    -rdynamic CMakeFiles/cmTC_4f47b.dir/src.c.o  -o cmTC_4f47b 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+Source file was:
+int main() { return 0; }
+Performing C SOURCE FILE Test HAVE_GCC_FOMIT_FRAME_POINTER succeeded with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b0176/fast && /usr/bin/make -f CMakeFiles/cmTC_b0176.dir/build.make CMakeFiles/cmTC_b0176.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_b0176.dir/src.c.o
+/usr/bin/cc   -Wall -DHAVE_GCC_FOMIT_FRAME_POINTER -fomit-frame-pointer   -o CMakeFiles/cmTC_b0176.dir/src.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_b0176
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b0176.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall -DHAVE_GCC_FOMIT_FRAME_POINTER -fomit-frame-pointer    -rdynamic CMakeFiles/cmTC_b0176.dir/src.c.o  -o cmTC_b0176 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+Source file was:
+int main() { return 0; }
+Determining if the include file inttypes.h exists passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1bd68/fast && /usr/bin/make -f CMakeFiles/cmTC_1bd68.dir/build.make CMakeFiles/cmTC_1bd68.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_1bd68.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -Wall    -o CMakeFiles/cmTC_1bd68.dir/CheckIncludeFile.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_1bd68
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1bd68.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall     -rdynamic CMakeFiles/cmTC_1bd68.dir/CheckIncludeFile.c.o  -o cmTC_1bd68 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Determining if the include file memory.h exists passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0db41/fast && /usr/bin/make -f CMakeFiles/cmTC_0db41.dir/build.make CMakeFiles/cmTC_0db41.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_0db41.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -Wall    -o CMakeFiles/cmTC_0db41.dir/CheckIncludeFile.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_0db41
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0db41.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall     -rdynamic CMakeFiles/cmTC_0db41.dir/CheckIncludeFile.c.o  -o cmTC_0db41 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Determining if the include file stddef.h exists passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b7387/fast && /usr/bin/make -f CMakeFiles/cmTC_b7387.dir/build.make CMakeFiles/cmTC_b7387.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_b7387.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -Wall    -o CMakeFiles/cmTC_b7387.dir/CheckIncludeFile.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_b7387
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b7387.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall     -rdynamic CMakeFiles/cmTC_b7387.dir/CheckIncludeFile.c.o  -o cmTC_b7387 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_6064b/fast && /usr/bin/make -f CMakeFiles/cmTC_6064b.dir/build.make CMakeFiles/cmTC_6064b.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_6064b.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -Wall    -o CMakeFiles/cmTC_6064b.dir/CheckIncludeFile.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_6064b
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6064b.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall     -rdynamic CMakeFiles/cmTC_6064b.dir/CheckIncludeFile.c.o  -o cmTC_6064b 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Determining if the include file stdlib.h exists passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_62603/fast && /usr/bin/make -f CMakeFiles/cmTC_62603.dir/build.make CMakeFiles/cmTC_62603.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_62603.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -Wall    -o CMakeFiles/cmTC_62603.dir/CheckIncludeFile.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_62603
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_62603.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall     -rdynamic CMakeFiles/cmTC_62603.dir/CheckIncludeFile.c.o  -o cmTC_62603 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Determining if the include file string.h exists passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_850b4/fast && /usr/bin/make -f CMakeFiles/cmTC_850b4.dir/build.make CMakeFiles/cmTC_850b4.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_850b4.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -Wall    -o CMakeFiles/cmTC_850b4.dir/CheckIncludeFile.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_850b4
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_850b4.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall     -rdynamic CMakeFiles/cmTC_850b4.dir/CheckIncludeFile.c.o  -o cmTC_850b4 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Determining if the include file strings.h exists passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f60d1/fast && /usr/bin/make -f CMakeFiles/cmTC_f60d1.dir/build.make CMakeFiles/cmTC_f60d1.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_f60d1.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -Wall    -o CMakeFiles/cmTC_f60d1.dir/CheckIncludeFile.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_f60d1
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f60d1.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall     -rdynamic CMakeFiles/cmTC_f60d1.dir/CheckIncludeFile.c.o  -o cmTC_f60d1 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Determining if the include file sys/types.h exists passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_56c12/fast && /usr/bin/make -f CMakeFiles/cmTC_56c12.dir/build.make CMakeFiles/cmTC_56c12.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_56c12.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -Wall    -o CMakeFiles/cmTC_56c12.dir/CheckIncludeFile.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_56c12
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_56c12.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall     -rdynamic CMakeFiles/cmTC_56c12.dir/CheckIncludeFile.c.o  -o cmTC_56c12 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Performing C SOURCE FILE Test HAVE_INLINE succeeded with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c19a2/fast && /usr/bin/make -f CMakeFiles/cmTC_c19a2.dir/build.make CMakeFiles/cmTC_c19a2.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_c19a2.dir/src.c.o
+/usr/bin/cc   -Wall -DHAVE_INLINE   -o CMakeFiles/cmTC_c19a2.dir/src.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_c19a2
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c19a2.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall -DHAVE_INLINE    -rdynamic CMakeFiles/cmTC_c19a2.dir/src.c.o  -o cmTC_c19a2 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+Source file was:
+inline void func(); void func() { } int main() { func(); return 0; }
+Performing C SOURCE FILE Test HAVE___INLINE succeeded with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_46e68/fast && /usr/bin/make -f CMakeFiles/cmTC_46e68.dir/build.make CMakeFiles/cmTC_46e68.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_46e68.dir/src.c.o
+/usr/bin/cc   -Wall -DHAVE___INLINE   -o CMakeFiles/cmTC_46e68.dir/src.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_46e68
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_46e68.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall -DHAVE___INLINE    -rdynamic CMakeFiles/cmTC_46e68.dir/src.c.o  -o cmTC_46e68 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+Source file was:
+__inline void func(); void func() { } int main() { func(); return 0; }
+Performing C SOURCE FILE Test HAVE___INLINE__ succeeded with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9420d/fast && /usr/bin/make -f CMakeFiles/cmTC_9420d.dir/build.make CMakeFiles/cmTC_9420d.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_9420d.dir/src.c.o
+/usr/bin/cc   -Wall -DHAVE___INLINE__   -o CMakeFiles/cmTC_9420d.dir/src.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_9420d
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9420d.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall -DHAVE___INLINE__    -rdynamic CMakeFiles/cmTC_9420d.dir/src.c.o  -o cmTC_9420d 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+Source file was:
+__inline__ void func(); void func() { } int main() { func(); return 0; }
+Determining size of uint8_t passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_92322/fast && /usr/bin/make -f CMakeFiles/cmTC_92322.dir/build.make CMakeFiles/cmTC_92322.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_92322.dir/UINT8_T.c.o
+/usr/bin/cc   -Wall    -o CMakeFiles/cmTC_92322.dir/UINT8_T.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CheckTypeSize/UINT8_T.c
+Linking C executable cmTC_92322
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_92322.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall     -rdynamic CMakeFiles/cmTC_92322.dir/UINT8_T.c.o  -o cmTC_92322 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Determining size of int32_t passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_2b5b8/fast && /usr/bin/make -f CMakeFiles/cmTC_2b5b8.dir/build.make CMakeFiles/cmTC_2b5b8.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_2b5b8.dir/INT32_T.c.o
+/usr/bin/cc   -Wall    -o CMakeFiles/cmTC_2b5b8.dir/INT32_T.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CheckTypeSize/INT32_T.c
+Linking C executable cmTC_2b5b8
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2b5b8.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall     -rdynamic CMakeFiles/cmTC_2b5b8.dir/INT32_T.c.o  -o cmTC_2b5b8 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Determining if the PRId32 exist passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0109d/fast && /usr/bin/make -f CMakeFiles/cmTC_0109d.dir/build.make CMakeFiles/cmTC_0109d.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_0109d.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -Wall    -o CMakeFiles/cmTC_0109d.dir/CheckSymbolExists.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_0109d
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0109d.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall     -rdynamic CMakeFiles/cmTC_0109d.dir/CheckSymbolExists.c.o  -o cmTC_0109d 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+File /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <inttypes.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef PRId32
+  return ((int*)(&PRId32))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining size of int64_t passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a4075/fast && /usr/bin/make -f CMakeFiles/cmTC_a4075.dir/build.make CMakeFiles/cmTC_a4075.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_a4075.dir/INT64_T.c.o
+/usr/bin/cc   -Wall    -o CMakeFiles/cmTC_a4075.dir/INT64_T.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CheckTypeSize/INT64_T.c
+Linking C executable cmTC_a4075
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a4075.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall     -rdynamic CMakeFiles/cmTC_a4075.dir/INT64_T.c.o  -o cmTC_a4075 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Determining if the PRId64 exist passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_360db/fast && /usr/bin/make -f CMakeFiles/cmTC_360db.dir/build.make CMakeFiles/cmTC_360db.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_360db.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -Wall    -o CMakeFiles/cmTC_360db.dir/CheckSymbolExists.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_360db
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_360db.dir/link.txt --verbose=1
+/usr/bin/cc  -Wall     -rdynamic CMakeFiles/cmTC_360db.dir/CheckSymbolExists.c.o  -o cmTC_360db 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+File /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <inttypes.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef PRId64
+  return ((int*)(&PRId64))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d3031/fast && /usr/bin/make -f CMakeFiles/cmTC_d3031.dir/build.make CMakeFiles/cmTC_d3031.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_d3031.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_d3031.dir/CheckIncludeFile.c.o   -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_d3031
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d3031.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_d3031.dir/CheckIncludeFile.c.o  -o cmTC_d3031 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_07494/fast && /usr/bin/make -f CMakeFiles/cmTC_07494.dir/build.make CMakeFiles/cmTC_07494.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_07494.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_07494.dir/CheckFunctionExists.c.o   -c /home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_07494
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_07494.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_07494.dir/CheckFunctionExists.c.o  -o cmTC_07494  -lpthread 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+
+Determining if the include file cstdio exists passed with the following output:
+Change Dir: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_de36c/fast && /usr/bin/make -f CMakeFiles/cmTC_de36c.dir/build.make CMakeFiles/cmTC_de36c.dir/build
+make[1] : on entre dans le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+Building CXX object CMakeFiles/cmTC_de36c.dir/CheckIncludeFile.cxx.o
+/usr/bin/c++    -std=c++11 -Wall -Wextra -DNDEBUG    -o CMakeFiles/cmTC_de36c.dir/CheckIncludeFile.cxx.o -c /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx
+Linking CXX executable cmTC_de36c
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_de36c.dir/link.txt --verbose=1
+/usr/bin/c++   -std=c++11 -Wall -Wextra -DNDEBUG     -rdynamic CMakeFiles/cmTC_de36c.dir/CheckIncludeFile.cxx.o  -o cmTC_de36c 
+make[1] : on quitte le répertoire « /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug/CMakeFiles/CMakeTmp »
+
+
+

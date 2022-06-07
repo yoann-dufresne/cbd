@@ -1,0 +1,140 @@
+/home/alexa/Bureau/clion-2020.1.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/alexa/Bureau/ConwayBromageLib/external
+CMake Warning (dev) in CMakeLists.txt:
+  No project() command is present.  The top-level CMakeLists.txt file must
+  contain a literal, direct call to the project() command.  Add a line of
+  code such as
+
+    project(ProjectName)
+
+  near the top of the file, but after cmake_minimum_required().
+
+  CMake is pretending there is a "project(Project)" command on the first
+  line.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- The C compiler identification is GNU 9.2.1
+-- The CXX compiler identification is GNU 9.2.1
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Compiler is recent enough to support C++11.
+-- Performing Test HAVE_GCC_STD=C__11__WALL__WEXTRA__DNDEBUG
+-- Performing Test HAVE_GCC_STD=C__11__WALL__WEXTRA__DNDEBUG - Success
+-- Performing Test HAVE_GCC_O3__FFAST_MATH__FUNROLL_LOOPS
+-- Performing Test HAVE_GCC_O3__FFAST_MATH__FUNROLL_LOOPS - Success
+-- Performing Test HAVE_GCC_MSSE4.2__MARCH=NATIVE
+-- Performing Test HAVE_GCC_MSSE4.2__MARCH=NATIVE - Success
+-- Performing Test HAVE_CLANG_MSSE4.2__MARCH=NATIVE
+-- Performing Test HAVE_CLANG_MSSE4.2__MARCH=NATIVE - Success
+-- Performing Test HAVE_CXA_DEMANGLE
+-- Performing Test HAVE_CXA_DEMANGLE - Success
+-- Compiler supports DEMANGLE.
+-- Performing Test HAVE_GCC_DHAVE_CXA_DEMANGLE
+-- Performing Test HAVE_GCC_DHAVE_CXA_DEMANGLE - Success
+-- Found Git: /usr/bin/git (found version "2.20.1") 
+git found: /usr/bin/git
+Sous-module 'external/libdivsufsort' (https://github.com/simongog/libdivsufsort.git) enregistré pour le chemin 'external/libdivsufsort'
+Clonage dans '/home/alexa/Bureau/ConwayBromageLib/external/sdsl-lite/external/libdivsufsort'...
+CMake Warning (dev) at sdsl-lite/external/libdivsufsort/CMakeLists.txt:7 (project):
+  Policy CMP0048 is not set: project() command manages VERSION variables.
+  Run "cmake --help-policy CMP0048" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The following variable(s) would be set to empty:
+
+    PROJECT_VERSION
+    PROJECT_VERSION_MAJOR
+    PROJECT_VERSION_MINOR
+    PROJECT_VERSION_PATCH
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Performing Test HAVE_GCC_WALL
+-- Performing Test HAVE_GCC_WALL - Success
+-- Performing Test HAVE_GCC_FOMIT_FRAME_POINTER
+-- Performing Test HAVE_GCC_FOMIT_FRAME_POINTER - Success
+-- Looking for inttypes.h
+-- Looking for inttypes.h - found
+-- Looking for memory.h
+-- Looking for memory.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stdlib.h
+-- Looking for stdlib.h - found
+-- Looking for string.h
+-- Looking for string.h - found
+-- Looking for strings.h
+-- Looking for strings.h - found
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Performing Test HAVE_INLINE
+-- Performing Test HAVE_INLINE - Success
+-- Performing Test HAVE___INLINE
+-- Performing Test HAVE___INLINE - Success
+-- Performing Test HAVE___INLINE__
+-- Performing Test HAVE___INLINE__ - Success
+-- Performing Test HAVE___DECLSPEC_DLLEXPORT_
+-- Performing Test HAVE___DECLSPEC_DLLEXPORT_ - Failed
+-- Performing Test HAVE___DECLSPEC_DLLIMPORT_
+-- Performing Test HAVE___DECLSPEC_DLLIMPORT_ - Failed
+-- Check size of uint8_t
+-- Check size of uint8_t - done
+-- Check size of int32_t
+-- Check size of int32_t - done
+-- Looking for PRId32
+-- Looking for PRId32 - found
+-- Check size of int64_t
+-- Check size of int64_t - done
+-- Looking for PRId64
+-- Looking for PRId64 - found
+Sous-module 'external/googletest' (https://github.com/google/googletest.git) enregistré pour le chemin 'external/googletest'
+Clonage dans '/home/alexa/Bureau/ConwayBromageLib/external/sdsl-lite/external/googletest'...
+CMake Warning (dev) at sdsl-lite/external/googletest/googletest/CMakeLists.txt:47 (project):
+  Policy CMP0048 is not set: project() command manages VERSION variables.
+  Run "cmake --help-policy CMP0048" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The following variable(s) would be set to empty:
+
+    PROJECT_VERSION
+    PROJECT_VERSION_MAJOR
+    PROJECT_VERSION_MINOR
+    PROJECT_VERSION_PATCH
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found PythonInterp: /usr/bin/python (found version "2.7.17") 
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Looking for C++ include cstdio
+-- Looking for C++ include cstdio - found
+-- Could NOT find Doxygen (missing: DOXYGEN_EXECUTABLE) 
+CMake Warning (dev) in CMakeLists.txt:
+  No cmake_minimum_required command is present.  A line of code such as
+
+    cmake_minimum_required(VERSION 3.16)
+
+  should be added at the top of the file.  The version specified may be lower
+  if you wish to support older CMake versions for this project.  For more
+  information run "cmake --help-policy CMP0000".
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/alexa/Bureau/ConwayBromageLib/external/cmake-build-debug

@@ -1,0 +1,42 @@
+# Copyright 2013, 2014 by Martin Moene
+#
+# Distributed under the Boost Software License, Version 1.0. (See accompanying
+# file LICENSE.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+# -Dlest_FEATURE_LITERAL_SUFFIX=0
+# -Dlest_FEATURE_REGEX_SEARCH=0
+# -Dlest_FEATURE_TIME=1
+
+CXXFLAGS   := $(CXXFLAGS) -Wall -Wno-missing-braces -I../include
+CXXFLAGS03 := $(CXXFLAGS) -std=c++03
+CXXFLAGS11 := $(CXXFLAGS) -std=c++11
+
+vpath %.hpp ../include/lest
+
+all: test_lest test_lest_basic test_lest_decompose test_lest_cpp03_cpp11 test_lest_cpp03
+
+test: all
+
+test_lest: test_lest.cpp lest.hpp
+	$(CXX) $(CXXFLAGS11) -o test_lest test_lest.cpp
+	./test_lest
+
+test_lest_basic: test_lest_basic.cpp lest_basic.hpp
+	$(CXX) $(CXXFLAGS11) -o test_lest_basic test_lest_basic.cpp
+	./test_lest_basic
+
+test_lest_decompose: test_lest_decompose.cpp lest_decompose.hpp
+	$(CXX) $(CXXFLAGS11) -o test_lest_decompose test_lest_decompose.cpp
+	./test_lest_decompose
+
+test_lest_cpp03_cpp11: test_lest_cpp03.cpp lest_cpp03.hpp
+	$(CXX) $(CXXFLAGS11) -o test_lest_cpp03_cpp11 test_lest_cpp03.cpp
+	./test_lest_cpp03_cpp11
+
+test_lest_cpp03: test_lest_cpp03.cpp lest_cpp03.hpp
+	$(CXX) $(CXXFLAGS03) -o test_lest_cpp03 test_lest_cpp03.cpp
+	./test_lest_cpp03
+
+clean:
+	-rm test_lest test_lest_basic test_lest_decompose test_lest_cpp03_cpp11 test_lest_cpp03
+
