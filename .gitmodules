@@ -4,3 +4,6 @@
 [submodule "external/lest"]
 	path = external/lest
 	url = https://github.com/martinmoene/lest.git
+[submodule "external/bm"]
+	path = external/bm
+	url = https://github.com/tlk00/BitMagic.git
