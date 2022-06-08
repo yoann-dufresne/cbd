@@ -10,6 +10,57 @@
 using namespace std;
 using namespace sdsl;
 
+/**
+ * @brief eed to be used only for creating version of this object with the vector in it
+ * 
+ * @param km 
+ */
+ConwayBromage::ConwayBromage(KmerManipulator* km){
+    m_kmerManipulator = km;
+
+    string line("");
+    uint64_t one = 1;
+    uint64_t sdvSize = one << ((2*m_kmerManipulator->getSize())-1); //Creation of the total length to create the sd_vector_builder
+    //sd_vector_builder builder(sdvSize, numberOfKmer);
+    m_limit = (sdvSize >> 1);//changed from the original code source, otherwise it block contains and successor for some case
+
+    //initialization of the cache
+    int nbOfBitsToShift = 2 * (m_kmerManipulator->getSize()-1);
+    m_numberOfBitsToShift = nbOfBitsToShift;
+
+    m_RC[0] = km->reverseComplementOfNucleotide(0);
+    m_RC[1] = km->reverseComplementOfNucleotide(1);
+    m_RC[2] = km->reverseComplementOfNucleotide(2);
+    m_RC[3] = km->reverseComplementOfNucleotide(3);
+
+    m_RC_shifted[0] = m_RC[0] << nbOfBitsToShift;
+    m_RC_shifted[1] = m_RC[1] << nbOfBitsToShift;
+    m_RC_shifted[2] = m_RC[2] << nbOfBitsToShift;
+    m_RC_shifted[3] = m_RC[3] << nbOfBitsToShift;
+    
+    m_nucleotides_shifted[0] = 0 << nbOfBitsToShift;
+    m_nucleotides_shifted[1] = 1 << nbOfBitsToShift;
+    m_nucleotides_shifted[2] = 2 << nbOfBitsToShift;
+    m_nucleotides_shifted[3] = 3 << nbOfBitsToShift;
+
+    for(int i = 0; i < 4; i++){
+        //for next and previous pmers
+        char nucleotideOfI = m_kmerManipulator->decodeNucleotide(i);
+        if(nucleotideOfI == 'A'){ 
+            m_correspondingBitValueForNextPmers[i] = 128;
+            m_correspondingBitValueForPrevPmers[i] = 8;  
+        } else if(nucleotideOfI == 'C') {     
+            m_correspondingBitValueForNextPmers[i] = 64; 
+            m_correspondingBitValueForPrevPmers[i] = 4; 
+        } else if(nucleotideOfI == 'G') {
+            m_correspondingBitValueForNextPmers[i] = 32; 
+            m_correspondingBitValueForPrevPmers[i] = 2; 
+        } else {//'T'
+            m_correspondingBitValueForNextPmers[i] = 16; 
+            m_correspondingBitValueForPrevPmers[i] = 1; 
+        }
+    }
+}
 
 /**
  * First ConwayBromage constructor : Stores memory-efficiently k-mers coming from an istream in a specific format.  
@@ -27,8 +78,7 @@ using namespace sdsl;
  * @warning The istream must have at each line (if it's a file for example) a unique k-mers.
  * @warning The k-mers in the istream must be sorted either in lexicographical order (A<C<G<T) or in A<C<T<G. It depends on the encoding format.
  */
-ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
-    m_kmerManipulator = km;
+ConwayBromageSD::ConwayBromageSD(istream& kmerFlux, KmerManipulator* km): ConwayBromage(km){
 
     string line("");
     uint64_t numberOfKmer = 0;
@@ -39,6 +89,7 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     kmerFlux.seekg(0, ios::beg);    //Return to the beginning of the file
     uint64_t one = 1;
     uint64_t sdvSize = one << ((2*m_kmerManipulator->getSize())-1); //Creation of the total length to create the sd_vector_builder
+    //sdsl need a builder to manipulate the bit-vector at creation
     sd_vector_builder builder(sdvSize, numberOfKmer);
     uint64_t previousKmer(0);
     while(getline(kmerFlux, line)){
@@ -58,44 +109,6 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
     }
     
     m_sequence = builder;
-    m_limit = (m_sequence.size() >> 1);
-    std::cout<<sdvSize<<"\n"<<m_sequence.size()<<std::endl;
-    //initialization of the cache
-    int nbOfBitsToShift = 2 * (m_kmerManipulator->getSize()-1);
-    m_numberOfBitsToShift = nbOfBitsToShift;
-
-    m_RC[0] = km->reverseComplementOfNucleotide(0);
-    m_RC[1] = km->reverseComplementOfNucleotide(1);
-    m_RC[2] = km->reverseComplementOfNucleotide(2);
-    m_RC[3] = km->reverseComplementOfNucleotide(3);
-
-    m_RC_shifted[0] = m_RC[0] << nbOfBitsToShift;
-    m_RC_shifted[1] = m_RC[1] << nbOfBitsToShift;
-    m_RC_shifted[2] = m_RC[2] << nbOfBitsToShift;
-    m_RC_shifted[3] = m_RC[3] << nbOfBitsToShift;
-    
-    m_nucleotides_shifted[0] = 0 << nbOfBitsToShift;
-    m_nucleotides_shifted[1] = 1 << nbOfBitsToShift;
-    m_nucleotides_shifted[2] = 2 << nbOfBitsToShift;
-    m_nucleotides_shifted[3] = 3 << nbOfBitsToShift;
-
-    for(int i = 0; i < 4; i++){
-        //for next and previous pmers
-        char nucleotideOfI = m_kmerManipulator->decodeNucleotide(i);
-        if(nucleotideOfI == 'A'){ 
-            m_correspondingBitValueForNextPmers[i] = 128;
-            m_correspondingBitValueForPrevPmers[i] = 8;  
-        } else if(nucleotideOfI == 'C') {     
-            m_correspondingBitValueForNextPmers[i] = 64; 
-            m_correspondingBitValueForPrevPmers[i] = 4; 
-        } else if(nucleotideOfI == 'G') {
-            m_correspondingBitValueForNextPmers[i] = 32; 
-            m_correspondingBitValueForPrevPmers[i] = 2; 
-        } else {//'T'
-            m_correspondingBitValueForNextPmers[i] = 16; 
-            m_correspondingBitValueForPrevPmers[i] = 1; 
-        }
-    }
 }
 
 /**
@@ -103,47 +116,8 @@ ConwayBromage::ConwayBromage(istream& kmerFlux, KmerManipulator* km){
  * @param sdv - An sd_vector which represents the sequence.
  * @param km - A KmerManipulator.
  */
-ConwayBromage::ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km){
+ConwayBromageSD::ConwayBromageSD(sdsl::sd_vector<> const& sdv, KmerManipulator* km) : ConwayBromage(km){
     m_sequence = sdv; //copy of the sd_vector
-    m_kmerManipulator = km;
-    m_limit = (m_sequence.size() >> 2) - 1;
-    
-    //initialization of the cache
-    int nbOfBitsToShift = 2 * (m_kmerManipulator->getSize()-1);
-    m_numberOfBitsToShift = nbOfBitsToShift;
-
-    m_RC[0] = km->reverseComplementOfNucleotide(0);
-    m_RC[1] = km->reverseComplementOfNucleotide(1);
-    m_RC[2] = km->reverseComplementOfNucleotide(2);
-    m_RC[3] = km->reverseComplementOfNucleotide(3);
-
-    m_RC_shifted[0] = m_RC[0] << nbOfBitsToShift;
-    m_RC_shifted[1] = m_RC[1] << nbOfBitsToShift;
-    m_RC_shifted[2] = m_RC[2] << nbOfBitsToShift;
-    m_RC_shifted[3] = m_RC[3] << nbOfBitsToShift;
-    
-    m_nucleotides_shifted[0] = 0 << nbOfBitsToShift;
-    m_nucleotides_shifted[1] = 1 << nbOfBitsToShift;
-    m_nucleotides_shifted[2] = 2 << nbOfBitsToShift;
-    m_nucleotides_shifted[3] = 3 << nbOfBitsToShift;
-
-    for(int i = 0; i < 4; i++){
-        //for next and previous pmers
-        char nucleotideOfI = m_kmerManipulator->decodeNucleotide(i);
-        if(nucleotideOfI == 'A'){ 
-            m_correspondingBitValueForNextPmers[i] = 128;
-            m_correspondingBitValueForPrevPmers[i] = 8;  
-        } else if(nucleotideOfI == 'C') {     
-            m_correspondingBitValueForNextPmers[i] = 64; 
-            m_correspondingBitValueForPrevPmers[i] = 4; 
-        } else if(nucleotideOfI == 'G') {
-            m_correspondingBitValueForNextPmers[i] = 32; 
-            m_correspondingBitValueForPrevPmers[i] = 2; 
-        } else {//'T'
-            m_correspondingBitValueForNextPmers[i] = 16; 
-            m_correspondingBitValueForPrevPmers[i] = 1; 
-        }
-    }
 }
 
 /**
@@ -159,7 +133,7 @@ ConwayBromage::ConwayBromage(sdsl::sd_vector<> const& sdv, KmerManipulator* km){
  * bool GTT_exists = cb.contains(intGTT);
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
-bool ConwayBromage::contains(uint64_t Kmer) const{
+bool ConwayBromageSD::contains(uint64_t Kmer) const{
     if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
         cout << "The value of the kmer must be strictly inferior to 4^(P-1) i.e " << m_limit << endl;
         return false; 
@@ -210,7 +184,7 @@ bool ConwayBromage::contains(uint64_t Kmer) const{
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * @warning The method doesn't check the presence of the (k-1)-mer (so you have to do it on your own with the method contains for example).
  */
-uint8_t ConwayBromage::successors(uint64_t Kmer) const{
+uint8_t ConwayBromageSD::successors(uint64_t Kmer) const{
     if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
         cout << "The value of the kmer must be equal or inferior to 4^(P-1) i.e " << m_limit << endl;
         return 0; //empty
@@ -250,7 +224,7 @@ int ConwayBromage::getKmerSize(){
  * Returns the compressed sequence.
  * @return an sd_vector
  */
-sdsl::sd_vector<> ConwayBromage::getSequence(){
+sdsl::sd_vector<> ConwayBromageSD::getSequence(){
     return m_sequence;
 }
 

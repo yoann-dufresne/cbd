@@ -89,7 +89,7 @@ const test atTheEnd[] = {
             cout << "\t--> successors with ACGT encoding" << endl;
             sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
             KmerManipulatorACGT km(2);
-            ConwayBromage cb(sdv, &km);
+            ConwayBromageSD cb(sdv, &km);
             
             vector<uint8_t> TrueNext(4);
             TrueNext[0]  = 86;  //01010110
@@ -111,7 +111,7 @@ const test atTheEnd[] = {
             cout << "\t--> successors with ACTG encoding" << endl;
             sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
             KmerManipulatorACTG km(2);
-            ConwayBromage cb(sdv, &km);
+            ConwayBromageSD cb(sdv, &km);
             
             vector<uint8_t> TrueNext(4);
             TrueNext[0]  = 101;  //01100101
@@ -134,7 +134,7 @@ const test atTheEnd[] = {
             cout << "\t--> contains : 100 4-mers with ACGT encoding" << endl;
             ifstream f("./sortACGT.txt", ios::in);
             KmerManipulatorACGT km(4);
-            ConwayBromage cb(f, &km);
+            ConwayBromageSD cb(f, &km);
             f.close();
             ifstream file("./sortACGT.txt", ios::in);
             string line;
@@ -166,7 +166,7 @@ const test atTheEnd[] = {
             cout << "\t--> contains : 100 4-mers with ACTG encoding" << endl;
             ifstream f("./sortACTG.txt", ios::in);
             KmerManipulatorACTG km(4);
-            ConwayBromage cb(f, &km);
+            ConwayBromageSD cb(f, &km);
             f.close();
             ifstream file("./sortACTG.txt", ios::in);
             string line;
@@ -200,7 +200,7 @@ const test atTheEnd[] = {
             string call[4]{"A", "C", "G", "T"}; //build comrades manually
             KmerManipulatorACGT k(4);
             KmerManipulatorACGT k3(3);
-            ConwayBromage cb(f, &k);
+            ConwayBromageSD cb(f, &k);
             for(int i = 0 ; i < 64 ; i++){
                 bitset<8> bitForm((unsigned)cb.successors(i));  //uint8_t of successors, bit version
                 string uncompressedNex(k3.decode(i).erase(0,1));

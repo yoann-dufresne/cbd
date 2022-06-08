@@ -22,9 +22,9 @@ std::string toBinary(int n)
 int main(){
     KmerManipulatorACTG tmp = KmerManipulatorACTG(31);
     std::ifstream f("./test2", std::ios::in);
-    ConwayBromage test(f,&tmp);
+    ConwayBromageSD test(f,&tmp);
     KmerManipulatorACTG km(30);
-    uint64_t tmp3=km.encode("CACCTACCTGGCGATTATGCGCGGTTACGC");
+    uint64_t tmp3=km.encode("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     uint8_t test2=test.successors(tmp3);
     printf("%x\n",test2);
     std::string suc=toBinary(test2);
