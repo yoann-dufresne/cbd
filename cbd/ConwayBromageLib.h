@@ -1,58 +1,9 @@
 #include <sdsl/sd_vector.hpp>
 #include <immintrin.h>  //for AVX/AVX2 use
+#include "Kmanip.h"
 #ifndef CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 #define CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 
-///Abstract class : permits to apply operations on k-mers in two formats (see child classes)
-class KmerManipulator{  //abstract class
-protected:
-    uint64_t m_size;    //size of the k-mers
-public:
-    KmerManipulator(uint64_t size);
-    virtual ~KmerManipulator();  
-    //operations on k-mers
-    virtual uint64_t encode(const std::string &word) = 0;
-    virtual std::string decode(uint64_t kmer) = 0;
-    virtual uint64_t getCanonical(const uint64_t kmer) = 0;
-    virtual uint64_t reverseComplement(const  uint64_t kmer) = 0;
-    virtual uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide) = 0;
-    virtual char decodeNucleotide(const uint8_t nucleotide) = 0;
-    virtual int getSize() = 0;  
-};
-
-///KmerManipulator for ACGT encoding : permits to apply operations on k-mers in ACGT format
-class KmerManipulatorACGT : public KmerManipulator{
-private:
-    std::string m_format;   //always equal to "ACGT"
-public:
-    KmerManipulatorACGT(uint64_t size);
-    ~KmerManipulatorACGT();
-    //operations on k-mers
-    uint64_t encode(const std::string &word);
-    std::string decode(uint64_t kmer);
-    uint64_t getCanonical(const uint64_t kmer);
-    uint64_t reverseComplement(const uint64_t kmer);
-    uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide);
-    char decodeNucleotide(const uint8_t nucleotide);
-    int getSize();
-};
-
-///KmerManipulator for ACTG encoding : permits to apply operations on k-mers in ACTG format
-class KmerManipulatorACTG : public KmerManipulator{
-private:
-    std::string m_format; // always equal to "ACTG"
-public:
-    KmerManipulatorACTG(uint64_t size);
-    ~KmerManipulatorACTG();
-    //operations on k-mers
-    uint64_t encode(const std::string &word);
-    std::string decode(uint64_t kmer);
-    uint64_t getCanonical(const uint64_t kmer);
-    uint64_t reverseComplement(const u_int64_t kmer);
-    uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide);
-    char decodeNucleotide(const uint8_t nucleotide);
-    int getSize();
-};
 
 /// ConwayBromage : permits to store k-mers and apply two operations on them : 'contains' and 'successors'
 class ConwayBromage{

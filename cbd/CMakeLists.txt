@@ -11,10 +11,12 @@ project(ConwayBromageLib
 #Variables which represents compilation elements
 #One for .cpp elements
 set(SRCS
-        ConwayBromageLib.cpp)
+        ConwayBromageLib.cpp
+        Kmanip.cpp)
 #One for .h
 set(HEADERS
-        ConwayBromageLib.h)
+        ConwayBromageLib.h
+        Kmanip.h)
 
 
 
