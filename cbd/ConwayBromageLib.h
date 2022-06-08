@@ -1,6 +1,8 @@
 #include <sdsl/sd_vector.hpp>
 #include <immintrin.h>  //for AVX/AVX2 use
 #include "Kmanip.h"
+#include "bm.h"
+#include "bmundef.h" /* clear the pre-proc defines from BM */
 #ifndef CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 #define CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 
@@ -50,6 +52,29 @@ public:
      * Not needed for the global functioning
      */
     friend sdsl::int_vector<> ratioForIsPresent(int ratioIn, int nbOfOnes, ConwayBromageSD cb);
+    friend void metricForIsPresent();
+};
+
+/// ConwayBromage : permits to store k-mers and apply two operations on them : 'contains' and 'successors'
+class ConwayBromageBM : public ConwayBromage{
+private:
+    bm::bvector<> m_sequence;          //the sparse bit vector which stores the k-mers
+public:
+    //constructors
+    ConwayBromageBM(std::istream& kmerFlux, KmerManipulator* km);
+    ConwayBromageBM(bm::bvector<> const& sdv, KmerManipulator* km);
+    //principal functions
+    bool contains (uint64_t Kmer) const;
+    uint8_t successors(uint64_t Kmer) const;
+
+    //getters
+    bm::bvector<> getSequence();
+    /*
+     * Functions for isPresent performance tests
+     * Use them as friend of ConwayBromage to allow them to use attribute easily
+     * Not needed for the global functioning
+     */
+    friend bm::bvector<> ratioForIsPresent(int ratioIn, int nbOfOnes, ConwayBromageBM cb);
     friend void metricForIsPresent();
 };
 

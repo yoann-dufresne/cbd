@@ -5,6 +5,7 @@
 #include <fstream>
 #include <random>
 #include <chrono>
+#include <bm.h>
 #include <ConwayBromageLib.h>
 #include <vector>
 #include <bitset>
