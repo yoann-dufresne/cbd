@@ -1,6 +1,7 @@
 *.cmake
 CMakeCache.txt
 CMakeFiles
+CMakeDoxyfile.in
 Makefile
 .idea
 *.a
@@ -13,3 +14,4 @@ unittests
 
 external/sdsl-lite
 external/lest
+
