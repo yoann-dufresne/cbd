@@ -275,6 +275,7 @@ ConwayBromageBM::ConwayBromageBM(istream& kmerFlux, KmerManipulator* km) : Conwa
     uint64_t one = 1;
     uint64_t sdvSize = one << ((2*m_kmerManipulator->getSize())-1); //Creation of the total length to create the sd_vector_builder
     bm::bvector<> builder(sdvSize);
+    builder.set_new_blocks_strat(bm::BM_GAP);
     uint64_t previousKmer(0);
     while(getline(kmerFlux, line)){
         uint64_t k = m_kmerManipulator->encode(line);
@@ -291,7 +292,7 @@ ConwayBromageBM::ConwayBromageBM(istream& kmerFlux, KmerManipulator* km) : Conwa
         builder.set(k);   
         previousKmer = k;
     }
-    //builder.optimize();
+    builder.optimize();
     m_sequence = builder;
     m_limit = (sdvSize >> 1);//changed from the original code source, otherwise it block contains and successor for some case
 
