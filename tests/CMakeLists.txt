@@ -1,6 +1,8 @@
 
+
 add_executable(unittests
 	unittests.cpp
+    Tests.cpp
 )
 
 

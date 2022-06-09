@@ -25,35 +25,37 @@ const lest::test module[] =
         CASE("encode : ACGT encoding : "){    
             cout << "\t--> encode ACGT encoding" << endl;
                     KmerManipulatorACGT encoder(4);
-                    EXPECT(encoder.encode("GGTA") == 172);
+                    EXPECT(encoder.encode("GGTA") == 0b10101100);
         },
         CASE("encode : ACTG encoding : "){           
             cout << "\t--> encode ACTG encoding" << endl;
                     KmerManipulatorACTG encoder(4);
-                    EXPECT(encoder.encode("GGTA") == 248);
+                    EXPECT(encoder.encode("GGTA") == 0b11111000);
         },
         CASE("decode : ACGT encoding : "){    
             cout << "\t--> decode ACGT encoding" << endl;
                     KmerManipulatorACGT decoder(4);
-                    EXPECT(decoder.decode(172) == "GGTA");
+                    EXPECT(decoder.decode(0b10101100) == "GGTA");
         },
         CASE("decode : ACTG encoding : "){        
             cout << "\t--> decode ACTG encoding" << endl;
                     KmerManipulatorACTG decoder(4);
-                    EXPECT(decoder.decode(248) == "GGTA");
+                    EXPECT(decoder.decode(0b11111000) == "GGTA");
         },
 
         //reverseComplement unit tests
         CASE("reverse complement : ACGT encoding : "){ 
             cout << "\t--> ACGT encoding" << endl;
             KmerManipulatorACGT reverser(31);
+            //try to double reverse 100 000 possible kmer
             for(int i = 0 ; i < 1000000 ; i++){
-                        EXPECT(i == reverser.reverseComplement(reverser.reverseComplement(i)));
+                EXPECT(i == reverser.reverseComplement(reverser.reverseComplement(i)));
             }
         },
         CASE("reverse complement : ACTG encoding : "){   
             cout << "\t--> ACTG encoding" << endl;
             KmerManipulatorACTG reverser(31);
+            //try to double reverse 100 000 possible kmer
             for(int i = 0 ; i < 1000000 ; i++){
                 EXPECT(i == reverser.reverseComplement(reverser.reverseComplement(i)));
             }
@@ -84,17 +86,22 @@ const lest::test module[] =
         //successors unit tests on small sd_vectors
         CASE("successors with ACGT encoding : "){
             cout << "\t--> successors with ACGT encoding" << endl;
-            sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
+            //it contains                   AC    AT CA CC       GA
+            sd_vector<> sdv = bit_vector{0 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 };
             KmerManipulatorACGT km(2);
-            ConwayBromage cb(sdv, &km);
+            ConwayBromageSD cb(sdv, &km);
             
+            
+            //the result we have if successor function properly
             vector<uint8_t> TrueNext(4);
-            TrueNext[0]  = 86;  //01010110
-            TrueNext[1]  = 205; //11001101
-            TrueNext[2]  = 179; //10110011
-            TrueNext[3]  = 106; //01101010
+            TrueNext[0]  = 0b01010110;  
+            TrueNext[1]  = 0b11001101; 
+            TrueNext[2]  = 0b10110011; 
+            TrueNext[3]  = 0b01101010; 
+
             bool result = true;
-            for(int i(0); i < sdv.size()/4; i++){
+            //4 1-mers possible, so we check all of them
+            for(int i(0); i < 4; i++){
                 uint8_t succ = cb.successors(i);
                 //check if they are the same
                 if(TrueNext[i] != succ){
@@ -106,17 +113,19 @@ const lest::test module[] =
         },
         CASE("successors with ACTG encoding"){
             cout << "\t--> successors with ACTG encoding" << endl;
-            sd_vector<> sdv = bit_vector{0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0};
+            //it contains                   AC    AG CA CC       TA
+            sd_vector<> sdv = bit_vector{0 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 };
             KmerManipulatorACTG km(2);
-            ConwayBromage cb(sdv, &km);
+            ConwayBromageSD cb(sdv, &km);
             
             vector<uint8_t> TrueNext(4);
-            TrueNext[0]  = 101;  //01100101
-            TrueNext[1]  = 220;  //11011100
-            TrueNext[2]  = 166;  //10100110
-            TrueNext[3]  = 59;   //00111011
+            TrueNext[0]  = 0b01100101;  
+            TrueNext[1]  = 0b11011100;  
+            TrueNext[2]  = 0b10100110;  
+            TrueNext[3]  = 0b00111011;   
             bool result = true;
-            for(int i(0); i < sdv.size()/4; i++){
+            //4 1-mers possible, so we check all of them
+            for(int i(0); i < 4; i++){
                 uint8_t succ = cb.successors(i);
                 //check if they are the same
                 if(TrueNext[i] != succ){
@@ -129,9 +138,14 @@ const lest::test module[] =
         //contains unit tests
         CASE("contains : 100 4-mers with ACGT encoding : "){
             cout << "\t--> contains : 100 4-mers with ACGT encoding" << endl;
+            /*            
+            before launching test need to do that :
+            - python3 python_script/involveGenerate_counts.py -k 4 -n 100 -f ACGT > unsortACGT.txt
+            - sort unsortACGT.txt > sortACGT.txt
+            */
             ifstream f("./sortACGT.txt", ios::in);
             KmerManipulatorACGT km(4);
-            ConwayBromage cb(f, &km);
+            ConwayBromageSD cb(f, &km);
             f.close();
             ifstream file("./sortACGT.txt", ios::in);
             string line;
@@ -139,10 +153,12 @@ const lest::test module[] =
             string reverseComplement;
             bool isHere;
             KmerManipulatorACGT kmSize3(3);
+            //64<->4^3 3-mer possible so they are all tested
             for(int i = 0 ; i < 64 ; i++){
                 isHere = false;
-                unCompressedKMer = kmSize3.decode(i);
-                reverseComplement = kmSize3.decode(kmSize3.reverseComplement(i));
+                unCompressedKMer = kmSize3.decode(i);// to test the string version in  the file
+                reverseComplement = kmSize3.decode(kmSize3.reverseComplement(i));// same but for reversecomplement
+                //iterate on the whole file to find the kmer if it exist
                 while(getline(file,line)){
                     if(line.find(unCompressedKMer) != string::npos){ //if forward is present
                         isHere = true;
@@ -161,9 +177,14 @@ const lest::test module[] =
         },
         CASE("contains : 100 4-mers with ACTG encoding : "){
             cout << "\t--> contains : 100 4-mers with ACTG encoding" << endl;
+            /*            
+            before launching test need to do that :
+            - python3 python_script/involveGenerate_counts.py -k 4 -n 100 -f ACTG > unsortACTG.txt
+            - python3 python_script/sortACTG.py unsortACTG.txt > sortACTG.txt
+            */
             ifstream f("./sortACTG.txt", ios::in);
             KmerManipulatorACTG km(4);
-            ConwayBromage cb(f, &km);
+            ConwayBromageSD cb(f, &km);
             f.close();
             ifstream file("./sortACTG.txt", ios::in);
             string line;
@@ -171,10 +192,12 @@ const lest::test module[] =
             string reverseComplement;
             bool isHere;
             KmerManipulatorACGT kmSize3(3);
+            //64<->4^3 3-mer possible so they are all tested
             for(int i = 0 ; i < 64 ; i++){
                 isHere = false;
-                unCompressedKMer = kmSize3.decode(i);
-                reverseComplement = kmSize3.decode(kmSize3.reverseComplement(i));
+                unCompressedKMer = kmSize3.decode(i);// to test the string version in  the file
+                reverseComplement = kmSize3.decode(kmSize3.reverseComplement(i));// same but for reversecomplement
+                //iterate on the whole file to find the kmer if it exist
                 while(getline(file,line)){
                     if(line.find(unCompressedKMer) != string::npos){
                         isHere = true;
@@ -193,16 +216,23 @@ const lest::test module[] =
         },
         CASE("successors with the successors counter : "){ 
             cout << "\t--> successors : 100 4-mers (no differences for encoding)" << endl;
+            /* 
+            - python3 python_script/involveGenerate_counts.py -k 4 -n 100 -f ACGT > unsortACGT.txt
+            - sort unsortACGT.txt > sortACGT.txt
+            */
             ifstream f("./sortACGT.txt", ios::in);
             string call[4]{"A", "C", "G", "T"}; //build comrades manually
             KmerManipulatorACGT k(4);
             KmerManipulatorACGT k3(3);
-            ConwayBromage cb(f, &k);
+            ConwayBromageSD cb(f, &k);
+            //64<->4^3 3-mer possible so they are all tested
+
             for(int i = 0 ; i < 64 ; i++){
                 bitset<8> bitForm((unsigned)cb.successors(i));  //uint8_t of successors, bit version
                 string uncompressedNex(k3.decode(i).erase(0,1));
                 string uncompressedPre(k3.decode(i).erase(k3.decode(i).size()-1,1));
                 vector<uint64_t> potSucc;
+                //check if all the successor that have been detected really exist with contains
                 for(int j = 0 ; j < 8 ; j++){
                     if(bitForm[7-j] == 1){
                         if(j < 4){

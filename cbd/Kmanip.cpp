@@ -25,6 +25,7 @@ uint64_t KmerManipulatorACTG::encode(const std::string &word) {
     static const uint64_t caracterToValue[8] = {0, 0, 0, 1, 2, 0, 0, 3}; //declared and initialized only during the first call to this method
     //some 0 values in the array are never used because (word[i] & 0x7) will always produce one of the followind index : 1, 3, 4, or 7
     uint64_t res = 0;
+    //iterate only on the size of the kmer so if the string has more length its ignored
     for(uint i = 0 ; i < m_size ; i++){   //We go through the sequence to encode each nucleotides
         res = (res << 2) + caracterToValue[word[i] & 0x7];  
     }
@@ -152,6 +153,7 @@ uint64_t KmerManipulatorACGT::encode(const std::string &word) {
     static const int caracterToValue[8] = {0, 0, 0, 1, 3, 0, 0, 2}; //declared and initialized only during the first call to this method
     //some 0 values in the array are never used because (word[i] & 0x7) will always produce one of the followind index : 1, 3, 4, or 7
     uint64_t res = 0;
+    //iterate only on the size of the kmer so if the string has more length its ignored
     for(uint i = 0 ; i < m_size ; i++){   //We go through the sequence to encode each nucleotides
         res = (res << 2) + caracterToValue[word[i] & 0x7];
     }
