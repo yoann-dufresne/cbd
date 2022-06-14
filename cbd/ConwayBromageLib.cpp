@@ -242,6 +242,15 @@ sdsl::sd_vector<> ConwayBromageSD::getSequence(){
     return m_sequence;
 }
 
+int ConwayBromageSD::serialize(std::ostream& output){
+    m_sequence.serialize(output);
+    return 0;
+}
+ConwayBromageSD ConwayBromageSD::deserialize(std::istream& bitVector,KmerManipulator* km){
+    sdsl::sd_vector<> tmp;
+    tmp.load(bitVector);
+    return ConwayBromageSD(tmp,km);
+}
 
 //
 //  ConwayBromage object with a bit-magic succint bit-vector, to test the perfomance difference between the 2 implementation
@@ -442,22 +451,11 @@ int ConwayBromageBM::serialize(std::ostream& output){
 ConwayBromageBM ConwayBromageBM::deserialize(std::istream& bitVector,KmerManipulator* km){
     bm::serializer<bm::bvector<> >::buffer sbuf;
     bm::bvector<> bv;
-    std::vector<unsigned char> tmpvect;
-     char tmpchar;
-    unsigned int i=0;
-    do{
-        tmpchar=bitVector.get();
-        tmpvect.push_back((unsigned char)tmpchar);
-        i++;
-    }while(tmpchar!=EOF);
-    sbuf.resize(i,false);
-    bv.resize(i);
-    memcpy((void*)sbuf.buf(), tmpvect.data(), i);
-    /*unsigned len;
+    unsigned len;
     bitVector.read((char*) &len, std::streamsize(sizeof(len)));
     sbuf.resize(len, false); 
     bitVector.read((char*) sbuf.data(), std::streamsize(len));//this make an error if tested with bad() but return correctly the data from the file; if the function don't work at some point this is surely responsible
-    if(!bitVector.good()){
+    /*if(!bitVector.good()){
         std::cout<<"bloup"<<std::endl;
     }*/
     bm::deserialize(bv, sbuf.data()); 

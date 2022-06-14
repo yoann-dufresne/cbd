@@ -24,16 +24,16 @@ int main(int argc,char* argv[]){
     KmerManipulatorACGT tmp = KmerManipulatorACGT(31);
     KmerManipulatorACGT tmp2 = KmerManipulatorACGT(30);
     std::ifstream f(argv[1], std::ios::in);
-    ConwayBromageBM test(f,&tmp);
+    ConwayBromageSD test(f,&tmp);
     std::ofstream f2("/home/oceane/dev/test",std::ios::out|std::ios::binary);
     test.serialize(f2);
     std::ifstream f3("/home/oceane/dev/test",std::ios::in | std::ios::binary);
-    ConwayBromageBM test2=ConwayBromageBM::deserialize(f3,&tmp);
+    ConwayBromageSD test2=ConwayBromageSD::deserialize(f3,&tmp);
+    std::cout<<toBinary(test2.successors(tmp2.encode("AAAAACAAACATTGTTCGTTTAGTTGTTAA")));
+    /*
     for(int i=50;i<200000;i+=9){
-        if(test2.successors(i)!=test.successors(i))
-            std::cout<<i<<std::endl;
-
-    }
+        std::cout<<test.successors(i)<<"=?"<<test2.successors(i)<<std::endl;
+    }*/
 
     
 }
