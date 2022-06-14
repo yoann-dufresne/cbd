@@ -116,7 +116,8 @@ ConwayBromageSD::ConwayBromageSD(istream& kmerFlux, KmerManipulator* km): Conway
         uint64_t k = m_kmerManipulator->encode(line);
         //first chack : canonical elements expected
         if(k >  m_kmerManipulator->reverseComplement(k)){
-            cout << "The file is not completely canonical" << endl;
+            
+            cout << line<<"The file is not completely canonical" << endl;
             exit(1);
         }
         //second check : ascending order expected
@@ -406,6 +407,63 @@ uint8_t ConwayBromageBM::successors(uint64_t Kmer) const{
  */
 bm::bvector<> ConwayBromageBM::getSequence(){
     return m_sequence;
+}
+/**
+ * @brief serialize the CBBM object 
+ * 
+ * @param output 
+ * @return int 
+ */
+int ConwayBromageBM::serialize(std::ostream& output){
+    unsigned char* buf = 0;
+    try{
+        bm::serializer<bm::bvector<> > bvs;
+        bvs.byte_order_serialization(true);
+        bvs.gap_length_serialization(true);
+        bm::serializer<bm::bvector<> >::buffer sbuf;
+        {
+            bvs.serialize(m_sequence, sbuf);
+            buf = sbuf.data();
+            auto sz = sbuf.size();
+            cout << "BV Serialized size:" << sz << endl;
+            output.write((const char*)sbuf.data(),sz);
+
+        }
+    }catch(std::exception& ex){
+        std::cerr << ex.what() << std::endl;
+        delete [] buf;
+        return 1;
+    }
+
+
+    return 0;
+}
+
+ConwayBromageBM ConwayBromageBM::deserialize(std::istream& bitVector,KmerManipulator* km){
+    bm::serializer<bm::bvector<> >::buffer sbuf;
+    bm::bvector<> bv;
+    std::vector<unsigned char> tmpvect;
+     char tmpchar;
+    unsigned int i=0;
+    do{
+        tmpchar=bitVector.get();
+        tmpvect.push_back((unsigned char)tmpchar);
+        i++;
+    }while(tmpchar!=EOF);
+    sbuf.resize(i,false);
+    bv.resize(i);
+    memcpy((void*)sbuf.buf(), tmpvect.data(), i);
+    /*unsigned len;
+    bitVector.read((char*) &len, std::streamsize(sizeof(len)));
+    sbuf.resize(len, false); 
+    bitVector.read((char*) sbuf.data(), std::streamsize(len));//this make an error if tested with bad() but return correctly the data from the file; if the function don't work at some point this is surely responsible
+    if(!bitVector.good()){
+        std::cout<<"bloup"<<std::endl;
+    }*/
+    bm::deserialize(bv, sbuf.data()); 
+    ConwayBromageBM ret(bv,km);
+    std::cout<<std::hex<<ret.successors(10)<<std::endl;
+    return ret;
 }
 
 

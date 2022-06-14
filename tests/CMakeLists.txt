@@ -2,7 +2,8 @@
 
 add_executable(unittests
 	unittests.cpp
-    Tests.cpp
+    #Tests.cpp
+    serializeTest.cpp
 )
 
 

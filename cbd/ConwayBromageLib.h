@@ -2,6 +2,7 @@
 #include <immintrin.h>  //for AVX/AVX2 use
 #include "Kmanip.h"
 #include "bm.h"
+#include "bmserial.h"
 #include "bmundef.h" /* clear the pre-proc defines from BM */
 #ifndef CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 #define CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
@@ -46,6 +47,9 @@ public:
 
     //getters
     sdsl::sd_vector<> getSequence();
+    int serialize();
+    ConwayBromageSD deserialize(std::istream& bitVector,KmerManipulator* km);
+
     /*
      * Functions for isPresent performance tests
      * Use them as friend of ConwayBromage to allow them to use attribute easily
@@ -58,7 +62,7 @@ public:
 /// ConwayBromage : permits to store k-mers and apply two operations on them : 'contains' and 'successors'
 class ConwayBromageBM : public ConwayBromage{
 private:
-    bm::bvector<> m_sequence;          //the sparse bit vector which stores the k-mers
+    bm::bvector<> m_sequence;          //the succint bit vector which stores the k-mers
 public:
     //constructors
     ConwayBromageBM(std::istream& kmerFlux, KmerManipulator* km);
@@ -69,6 +73,9 @@ public:
 
     //getters
     bm::bvector<> getSequence();
+    //serializer
+    int serialize(std::ostream& output);
+    static ConwayBromageBM deserialize(std::istream& bitVector,KmerManipulator* km);
     /*
      * Functions for isPresent performance tests
      * Use them as friend of ConwayBromage to allow them to use attribute easily
@@ -76,6 +83,7 @@ public:
      */
     friend bm::bvector<> ratioForIsPresent(int ratioIn, int nbOfOnes, ConwayBromageBM cb);
     friend void metricForIsPresent();
+
 };
 
 #endif //CONWAYBROMAGELIB_CONWAYBROMAGELIB_H

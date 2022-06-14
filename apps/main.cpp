@@ -20,19 +20,20 @@ std::string toBinary(int n)
     return r;
 }
 
-int main(){
-    KmerManipulatorACTG tmp = KmerManipulatorACTG(31);
-    std::ifstream f("./test2", std::ios::in);
-    ConwayBromageSD test(f,&tmp);
-    KmerManipulatorACTG km(30);
-    uint64_t tmp3=km.encode("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-    uint8_t test2=test.successors(tmp3);
-    printf("%x\n",test2);
-    std::string suc=toBinary(test2);
-    std::cout<< suc<<std::endl;
-    std::cout<<std::hex<<(unsigned int)test2<<std::endl;
-    std::cout<<test.contains(km.getCanonical(km.encode("CACCTACCTGGCGATTATGCGCGGTTACGC")))<<std::endl;
+int main(int argc,char* argv[]){
+    KmerManipulatorACGT tmp = KmerManipulatorACGT(31);
+    KmerManipulatorACGT tmp2 = KmerManipulatorACGT(30);
+    std::ifstream f(argv[1], std::ios::in);
+    ConwayBromageBM test(f,&tmp);
+    std::ofstream f2("/home/oceane/dev/test",std::ios::out|std::ios::binary);
+    test.serialize(f2);
+    std::ifstream f3("/home/oceane/dev/test",std::ios::in | std::ios::binary);
+    ConwayBromageBM test2=ConwayBromageBM::deserialize(f3,&tmp);
+    for(int i=50;i<200000;i+=9){
+        if(test2.successors(i)!=test.successors(i))
+            std::cout<<i<<std::endl;
 
-    //std::cout<<tmp.decode(tmp.getCanonical(tmp.encode("GAAA")))<<std::endl;
+    }
 
+    
 }
