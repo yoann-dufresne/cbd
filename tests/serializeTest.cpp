@@ -18,7 +18,7 @@ const lest::test module[] =
         KmerManipulatorACGT k3(30);
         ConwayBromageBM cb(f, &k);
 
-        std::ofstream o("/home/oceane/dev/test3",std::ios::out|std::ios::binary);
+        std::ofstream o("/home/oceane/dev/test3",std::ios::out);
         cb.serialize(o);
         std::ifstream f2("/home/oceane/dev/test3", ios::in);
         ConwayBromageBM cb2=ConwayBromageBM::deserialize(f2, &k);

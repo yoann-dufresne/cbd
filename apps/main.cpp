@@ -26,10 +26,11 @@ int main(int argc,char* argv[]){
     std::ifstream f(argv[1], std::ios::in);
     ConwayBromageSD test(f,&tmp);
     std::ofstream f2("/home/oceane/dev/test",std::ios::out|std::ios::binary);
+    std::cout<<test.getSequence().size()<<std::endl;
     test.serialize(f2);
-    std::ifstream f3("/home/oceane/dev/test",std::ios::in | std::ios::binary);
+    std::ifstream f3("/home/oceane/dev/test",std::ios::in);
     ConwayBromageSD test2=ConwayBromageSD::deserialize(f3,&tmp);
-    std::cout<<toBinary(test2.successors(tmp2.encode("AAAAACAAACATTGTTCGTTTAGTTGTTAA")));
+    //std::cout<<toBinary(test2.successors(tmp2.encode("AAAAACAAACATTGTTCGTTTAGTTGTTAA")));
     /*
     for(int i=50;i<200000;i+=9){
         std::cout<<test.successors(i)<<"=?"<<test2.successors(i)<<std::endl;

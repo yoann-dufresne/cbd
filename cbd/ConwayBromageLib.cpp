@@ -138,7 +138,7 @@ ConwayBromageSD::ConwayBromageSD(istream& kmerFlux, KmerManipulator* km): Conway
  * @param km - A KmerManipulator.
  */
 ConwayBromageSD::ConwayBromageSD(sdsl::sd_vector<> const& sdv, KmerManipulator* km) : ConwayBromage(km){
-    m_sequence = sdv; //copy of the sd_vector
+    m_sequence=sd_vector(sdv); //copy of the sd_vector
 }
 
 /**
@@ -246,10 +246,11 @@ int ConwayBromageSD::serialize(std::ostream& output){
     m_sequence.serialize(output);
     return 0;
 }
-ConwayBromageSD ConwayBromageSD::deserialize(std::istream& bitVector,KmerManipulator* km){
+ConwayBromageSD ConwayBromageSD::deserialize(std::istream& bitVector,KmerManipulator* km){  
     sdsl::sd_vector<> tmp;
     tmp.load(bitVector);
-    return ConwayBromageSD(tmp,km);
+    ConwayBromageSD ret(tmp,km);
+    return ret;
 }
 
 //
