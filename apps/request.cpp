@@ -48,8 +48,19 @@ void linearsuccessorsrequest(int nb,ConwayBromageSD cb,int start=0,int jump=1){
 
 
 
-//./request k file nb           with k the length of the kmer in the file, nb the number of request
+/*
+./ request file k nb succesive firstkmer
+k the length of the kmer
+nb the number of the request to test
+file the file with the kmer(for now only the one needed to make the object, add the serialized version later)
+successive, a boolean that indicate the type of request tested(0 random 1 successive)
+firstkmer the first kmer to test and for successive its the one that is used as a base for the next one 
+
+
+
+*/
 int main(int argc, char* argv[]){
+
     std::cout<<atoi(argv[1])<<std::endl;
     KmerManipulatorACGT tmp(31);
     std::ifstream f(argv[2], std::ios::in);
