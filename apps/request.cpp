@@ -140,7 +140,7 @@ int main(int argc, char* argv[]){
         std::cout<<"k the length of the kmer\n";
         std::cout<<"nb the number of the request to test\n";
         std::cout<<"successive, a boolean that indicate the type of request tested(0 random 1 successive)\n";
-        std::cout<<"type, contain or successor(0 random,1 successive)\n";
+        std::cout<<"type, contain or successor\n";
         std::cout<<"library BM or SDSL\n";
         std::cout<<"firstkmer optional the first kmer to test and for successive its the one that is used as a base for the next one ";
         std::cout<<std::endl;

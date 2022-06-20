@@ -15,3 +15,11 @@ unittests
 external/sdsl-lite
 external/lest
 
+.nextflow
+work
+*.log
+.nextflow.*
+
+sorted
+data
+result
