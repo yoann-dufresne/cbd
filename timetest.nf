@@ -1,21 +1,28 @@
 #!/usr/bin/env nextflow
 data=Channel.fromPath('./sorted/*')
-rand = ['0','1']
+rand = ['random','successive']
 type = ['contain','successor']
 library = ['BM','SDSL']
-
-process testcontainsBM{
+number= ['1','10','100','1000','1000000','1000000000']
+process_number= Channel.of(1..10000)
+data 
+    .combine(number)
+    .combine(rand)
+    .combine(type)
+    .combine(library)
+    .set{data}
+process test{
     publishDir "./result", mode: 'link' 
     input :
-    file kmer from data
-    each r from rand
-    each t from type
-    each lib from library
+    tuple file(kmer),val(x),val(r),val(t),val(lib) from data
+
+    val pn from process_number
     output :
-    file "result_${r}_${t}_${lib}"
+    file "result${pn}"
     script :
     """
-    main ${kmer} 31 10 ${r} ${t} ${lib} > result_${r}_${t}_${lib}
+    echo "${kmer}\nk=31\n${x}\n${r}\n${t}\n${lib}">result${pn}
+    timerequest ${kmer} 31 ${x} ${r} ${t} ${lib} >> result${pn}
     """ 
 }
 

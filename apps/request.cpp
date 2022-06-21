@@ -126,20 +126,16 @@ successive, a boolean that indicate the type of request tested(0 random 1 succes
 type contains or successor to test
 library BM or SDSL
 firstkmer the first kmer to test and for successive its the one that is used as a base for the next one 
-
-
-
-
 */
 int main(int argc, char* argv[]){
     std::string first("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     if((argc!=8)&&(argc!=7)){
         std::cout<<argc<<std::endl;
-        std::cout<<"./main file k nb successive type library first\n";
+        std::cout<<"./main file k nb random type library first\n";
         std::cout<<"file the file wherer the kmer are\n";
         std::cout<<"k the length of the kmer\n";
         std::cout<<"nb the number of the request to test\n";
-        std::cout<<"successive, a boolean that indicate the type of request tested(0 random 1 successive)\n";
+        std::cout<<"random or successive kmer to test\n";
         std::cout<<"type, contain or successor\n";
         std::cout<<"library BM or SDSL\n";
         std::cout<<"firstkmer optional the first kmer to test and for successive its the one that is used as a base for the next one ";
@@ -156,7 +152,7 @@ int main(int argc, char* argv[]){
     if(argv[7]=="BM"){
         ConwayBromageBM cbd(f,&km);
         auto start = std::chrono::steady_clock::now();
-        if(atoi(argv[4])!=0){
+        if(argv[4]=="successive"){
             if(argv[5]=="contains"){
                 successivecontainsrequest(atoi(argv[3]),cbd,first1);
             }else{
@@ -175,7 +171,7 @@ int main(int argc, char* argv[]){
     }else{
         ConwayBromageSD cbd(f,&km);
         auto start = std::chrono::steady_clock::now();
-        if(atoi(argv[4])!=0){
+        if(argv[4]=="successive"){
             if(argv[5]=="contains"){
                 successivecontainsrequest(atoi(argv[3]),cbd,first1);
             }else{
