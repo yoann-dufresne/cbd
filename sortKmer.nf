@@ -13,7 +13,7 @@ process countKmer {
     script:
     """
     mkdir bloup
-    kmc -fm -ci1 ${dataentry} ${dataentry.baseName} .
+    kmc -k31 -fm -ci1 ${dataentry} ${dataentry.baseName} .
     """
 }
 
