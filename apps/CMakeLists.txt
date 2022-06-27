@@ -1,6 +1,6 @@
 
 add_executable(main
-	main.cpp
+	requestnext.cpp
 )
 add_executable(timerequest
     request.cpp

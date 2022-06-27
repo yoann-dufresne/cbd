@@ -60,9 +60,6 @@ void successivecontainsrequest(int nb,ConwayBromageSD cb,uint64_t kmer){
         kmer=(kmer<<2)&mask;
         int r=rand()%4;
         kmer+=r;
-        bitset<64> tmp(kmer);
-        std::cout<<tmp<<std::endl;
-           
     }
     
 }
