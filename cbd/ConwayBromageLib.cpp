@@ -242,13 +242,13 @@ sdsl::sd_vector<> ConwayBromageSD::getSequence(){
     return m_sequence;
 }
 
-int ConwayBromageSD::serialize(std::ostream& output){
-    m_sequence.serialize(output);
+int ConwayBromageSD::serialize(std::string filename){
+    store_to_file(m_sequence,filename);
     return 0;
 }
-ConwayBromageSD ConwayBromageSD::deserialize(std::istream& bitVector,KmerManipulator* km){  
+ConwayBromageSD ConwayBromageSD::deserialize(std::string filename,KmerManipulator* km){  
     sdsl::sd_vector<> tmp;
-    tmp.load(bitVector);
+    load_from_file(tmp,filename);
     ConwayBromageSD ret(tmp,km);
     return ret;
 }

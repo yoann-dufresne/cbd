@@ -47,8 +47,8 @@ public:
 
     //getters
     sdsl::sd_vector<> getSequence();
-    int serialize(std::ostream& output);
-    static ConwayBromageSD deserialize(std::istream& bitVector,KmerManipulator* km);
+    int serialize(std::string filename);
+    static ConwayBromageSD deserialize(std::string filename,KmerManipulator* km);
 
     /*
      * Functions for isPresent performance tests
