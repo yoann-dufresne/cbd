@@ -232,7 +232,6 @@ uint8_t ConwayBromageSD::successors(uint64_t Kmer) const{
     return res;
 }
 
-
 /**
  * Returns the compressed sequence.
  * @return an sd_vector
@@ -334,15 +333,27 @@ bool ConwayBromageBM::contains(uint64_t Kmer) const{
     for(int i = 0; i < 4; i++){ 
         //next
         RC_PmerNext = RC_Kmer + m_RC_shifted[i]; //YX where X is the reverse complement of the kmer and Y is the reverse complement of the last nucleotide of the pmer
-        if(m_sequence[(PmerNext < RC_PmerNext)?PmerNext:RC_PmerNext]) return true;
+        
+        if(m_sequence[(PmerNext < RC_PmerNext)?PmerNext:RC_PmerNext]){
+            std::cout<<((PmerNext < RC_PmerNext)?PmerNext:RC_PmerNext)<<std::endl;
+            return true;
+        } 
+
         //previous
         PmerPrev = Kmer + m_nucleotides_shifted[i]; //equals to AX then CX then GX then TX where X is the Kmer
         RC_PmerPrev = RC_Kmer_ShiftedOf2Bits + m_RC[i];
-        if(m_sequence[(PmerPrev < RC_PmerPrev)?PmerPrev:RC_PmerPrev]) return true;
+        if(m_sequence[(PmerPrev < RC_PmerPrev)?PmerPrev:RC_PmerPrev]){ 
+            std::cout<<((PmerPrev < RC_PmerPrev)?PmerPrev:RC_PmerPrev)<<std::endl;
+            return true;
+        }
         
         PmerNext++; //equals to XA then XC then XG then XT
     }
     return false;
+}
+int ConwayBromageBM::test(){
+    return m_sequence[(uint64_t)1282791291025434];
+
 }
 
 /**
