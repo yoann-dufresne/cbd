@@ -38,10 +38,10 @@ ConwayBromage::ConwayBromage(KmerManipulator* km){
     m_RC_shifted[2] = m_RC[2] << nbOfBitsToShift;
     m_RC_shifted[3] = m_RC[3] << nbOfBitsToShift;
     
-    m_nucleotides_shifted[0] = 0 << nbOfBitsToShift;
-    m_nucleotides_shifted[1] = 1 << nbOfBitsToShift;
-    m_nucleotides_shifted[2] = 2 << nbOfBitsToShift;
-    m_nucleotides_shifted[3] = 3 << nbOfBitsToShift;
+    m_nucleotides_shifted[0] = (uint64_t) 0 << nbOfBitsToShift;
+    m_nucleotides_shifted[1] = (uint64_t)1 << nbOfBitsToShift;
+    m_nucleotides_shifted[2] = (uint64_t)2 << nbOfBitsToShift;
+    m_nucleotides_shifted[3] = (uint64_t)3 << nbOfBitsToShift;
 
     for(int i = 0; i < 4; i++){
         //for next and previous pmers
@@ -222,6 +222,8 @@ uint8_t ConwayBromageSD::successors(uint64_t Kmer) const{
             res ^= m_correspondingBitValueForNextPmers[i];
         }
         PmerPrev = Kmer + m_nucleotides_shifted[i]; //equals to AX then CX then GX then TX where X is the Kmer
+        bitset<64> tmp=m_nucleotides_shifted[i];
+        std::cout<<tmp<<std::endl;
         RC_PmerPrev = RC_Kmer_ShiftedOf2Bits + m_RC[i];
         if(m_sequence[(PmerPrev < RC_PmerPrev)?PmerPrev:RC_PmerPrev]){
             res ^= m_correspondingBitValueForPrevPmers[i];
@@ -291,6 +293,7 @@ ConwayBromageBM::ConwayBromageBM(istream& kmerFlux, KmerManipulator* km) : Conwa
         builder.set(k);   
         previousKmer = k;
     }
+    std::cout<<bm::id_max<<std::endl;
     builder.optimize();
     m_sequence = builder;
     m_limit = (sdvSize >> 1);//changed from the original code source, otherwise it block contains and successor for some case
@@ -352,7 +355,7 @@ bool ConwayBromageBM::contains(uint64_t Kmer) const{
     return false;
 }
 int ConwayBromageBM::test(){
-    return m_sequence[(uint64_t)1282791291025434];
+    return m_sequence[4603702991759849472];
 
 }
 

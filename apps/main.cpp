@@ -21,22 +21,11 @@ std::string toBinary(int n)
 }
 
 int main(int argc, char* argv[]){
-    std::cout<<"bloup"<<std::endl;
     KmerManipulatorACGT tmp = KmerManipulatorACGT(31);
     std::ifstream f(argv[1], std::ios::in);
-    ConwayBromageBM testBM(f,&tmp);
+    ConwayBromageSD test(f,&tmp);
     f.close();
-    // std::ifstream f2(argv[1], std::ios::in);
-    // ConwayBromageSD testSD(f2,&tmp);
-    // f2.close();
-    // KmerManipulatorACGT km(30);
-    std::cout<<testBM.test()<<std::endl;
-    // for(int i=0;i<100000;i++){
-    //     if(testBM.contains(i)!=testSD.contains(i)){
-    //         std::cout<<"error BM="<<testBM.contains(i)<<"and SD ="<<testSD.contains(i)<<std::endl;
-    //         std::cout<<km.decode(i)<<std::endl;
-    //         std::cout<<i<<std::endl;
-    //     }
-    // }
+    KmerManipulatorACGT km(30);
+    std::cout<<toBinary(test.successors(km.encode("AAAAAGTCTGCTACTCGAAAAAAGTCTGCA")))<<std::endl;
 
 }
