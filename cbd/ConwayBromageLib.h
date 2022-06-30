@@ -1,8 +1,8 @@
 #include <sdsl/sd_vector.hpp>
 #include <immintrin.h>  //for AVX/AVX2 use
 #include "Kmanip.h"
-#include "bmserial.h"
 #include "bm64.h"
+#include "bmserial.h"
 #include "bmundef.h" /* clear the pre-proc defines from BM */
 #ifndef CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 #define CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
@@ -58,24 +58,36 @@ public:
     friend sdsl::int_vector<> ratioForIsPresent(int ratioIn, int nbOfOnes, ConwayBromageSD cb);
     friend void metricForIsPresent();
 };
+class Intermediate{
+    private :
+        uint64_t mask=0b1111111111111111000000000000000000000000000000000000000000000000; // mask to separe the 16 first bits from the 48 other
+        uint64_t mask2=0b0000000000000000111111111111111111111111111111111111111111111111;
+    public :
+    unsigned int nbv;
+    std::vector<bm::bvector<>> vbv;
+    Intermediate();
+    Intermediate(int nb);
+    void set(uint64_t id);
+    int present(uint64_t id)const;
+    void optimize();
+};
 
 /// ConwayBromage : permits to store k-mers and apply two operations on them : 'contains' and 'successors'
 class ConwayBromageBM : public ConwayBromage{
 private:
-    bm::bvector<> m_sequence;          //the succint bit vector which stores the k-mers
+    Intermediate m_sequence;          //the succint bit vector which stores the k-mers
 public:
     //constructors
     ConwayBromageBM(std::istream& kmerFlux, KmerManipulator* km);
-    ConwayBromageBM(bm::bvector<> const& sdv, KmerManipulator* km);
+    ConwayBromageBM(Intermediate&  sdv, KmerManipulator* km);
     //principal functions
     bool contains (uint64_t Kmer) const;
     uint8_t successors(uint64_t Kmer) const;
-    int test();
     //getters
-    bm::bvector<> getSequence();
+    Intermediate getSequence();
     //serializer
-    int serialize(std::ostream& output);
-    static ConwayBromageBM deserialize(std::istream& bitVector,KmerManipulator* km);
+    /*int serialize(std::ostream& output);
+    static ConwayBromageBM deserialize(std::istream& bitVector,KmerManipulator* km);*/
     /*
      * Functions for isPresent performance tests
      * Use them as friend of ConwayBromage to allow them to use attribute easily
