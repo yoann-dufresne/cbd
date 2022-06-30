@@ -1,8 +1,8 @@
 #include <sdsl/sd_vector.hpp>
 #include <immintrin.h>  //for AVX/AVX2 use
 #include "Kmanip.h"
-#include "bm.h"
 #include "bmserial.h"
+#include "bm64.h"
 #include "bmundef.h" /* clear the pre-proc defines from BM */
 #ifndef CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 #define CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
@@ -70,7 +70,7 @@ public:
     //principal functions
     bool contains (uint64_t Kmer) const;
     uint8_t successors(uint64_t Kmer) const;
-
+    int test();
     //getters
     bm::bvector<> getSequence();
     //serializer
@@ -81,6 +81,7 @@ public:
      * Use them as friend of ConwayBromage to allow them to use attribute easily
      * Not needed for the global functioning
      */
+
     friend bm::bvector<> ratioForIsPresent(int ratioIn, int nbOfOnes, ConwayBromageBM cb);
     friend void metricForIsPresent();
 

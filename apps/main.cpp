@@ -20,15 +20,13 @@ std::string toBinary(int n)
     return r;
 }
 
-int main(int argc,char* argv[]){
+
+int main(int argc, char* argv[]){
     KmerManipulatorACGT tmp = KmerManipulatorACGT(31);
-    KmerManipulatorACGT tmp2 = KmerManipulatorACGT(30);
     std::ifstream f(argv[1], std::ios::in);
     ConwayBromageSD test(f,&tmp);
-    std::cout<<test.getSequence().size()<<std::endl;
-    test.serialize("./bloup");
-    ConwayBromageSD test2=ConwayBromageSD::deserialize("./bloup",&tmp);
-    std::cout<<test2.contains(tmp2.encode("AAAAACACTATTAGCATAAGCAGTTGTGGC"))<<std::endl;
-
+    f.close();
+    KmerManipulatorACGT km(30);
+    std::cout<<toBinary(test.successors(km.encode("AAAAAGTCTGCTACTCGAAAAAAGTCTGCA")))<<std::endl;
     
 }
