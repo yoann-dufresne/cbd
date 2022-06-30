@@ -20,6 +20,7 @@ std::string toBinary(int n)
     return r;
 }
 
+
 int main(int argc, char* argv[]){
     KmerManipulatorACGT tmp = KmerManipulatorACGT(31);
     std::ifstream f(argv[1], std::ios::in);
@@ -27,5 +28,5 @@ int main(int argc, char* argv[]){
     f.close();
     KmerManipulatorACGT km(30);
     std::cout<<toBinary(test.successors(km.encode("AAAAAGTCTGCTACTCGAAAAAAGTCTGCA")))<<std::endl;
-
+    
 }
