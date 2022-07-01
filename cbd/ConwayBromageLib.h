@@ -4,6 +4,7 @@
 #include "bm64.h"
 #include "bmserial.h"
 #include "bmundef.h" /* clear the pre-proc defines from BM */
+#include <filesystem>
 #ifndef CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 #define CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 
@@ -67,6 +68,7 @@ class Intermediate{
     std::vector<bm::bvector<>> vbv;
     Intermediate();
     Intermediate(int nb);
+    Intermediate(std::vector<bm::bvector<>>& tmp2,int a);
     void set(uint64_t id);
     int present(uint64_t id)const;
     void optimize();
@@ -76,6 +78,8 @@ class Intermediate{
 class ConwayBromageBM : public ConwayBromage{
 private:
     Intermediate m_sequence;          //the succint bit vector which stores the k-mers
+    static int serializeaux(std::ostream& output, bm::bvector<>& sequence);
+    static bm::bvector<> deserializeaux(std::istream& bitVector);
 public:
     //constructors
     ConwayBromageBM(std::istream& kmerFlux, KmerManipulator* km);
@@ -86,8 +90,8 @@ public:
     //getters
     Intermediate getSequence();
     //serializer
-    /*int serialize(std::ostream& output);
-    static ConwayBromageBM deserialize(std::istream& bitVector,KmerManipulator* km);*/
+    int serialize(std::string dirpath);
+    static ConwayBromageBM deserialize(std::string dirpath,KmerManipulator* km);
     /*
      * Functions for isPresent performance tests
      * Use them as friend of ConwayBromage to allow them to use attribute easily

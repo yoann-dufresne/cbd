@@ -264,6 +264,7 @@ ConwayBromageSD ConwayBromageSD::deserialize(std::string filename,KmerManipulato
  */
 Intermediate::Intermediate(int nb){
     std::vector<bm::bvector<>> tmp2;
+    nbv=nb;
     vbv=tmp2;
     vbv.resize(nb);
     for(int i=0;i<nb;i++){
@@ -276,6 +277,10 @@ Intermediate::Intermediate(int nb){
 }
 Intermediate::Intermediate(){
     Intermediate(1);
+}
+Intermediate::Intermediate(std::vector<bm::bvector<>>& tmp2,int a){
+    vbv=tmp2;
+    nbv=a;
 }
 void Intermediate::set(uint64_t id){
     uint64_t i=id & mask;
@@ -480,7 +485,16 @@ Intermediate ConwayBromageBM::getSequence(){
  * @return int 
  */
 //TODO:serialization need to be redo after change
-/*int ConwayBromageBM::serialize(std::ostream& output){
+int ConwayBromageBM::serialize(std::string dirpath){
+        std::filesystem::create_directory(dirpath);
+
+    for(int i=0;i<m_sequence.nbv;i++){
+        std::ofstream tmp(dirpath+"/"+std::to_string(i));
+        serializeaux(tmp,m_sequence.vbv.at(i));
+        tmp.close();
+    }
+}
+int ConwayBromageBM::serializeaux(std::ostream& output, bm::bvector<>& sequence){
     unsigned char* buf = 0;
     try{
         bm::serializer<bm::bvector<> > bvs;
@@ -488,10 +502,9 @@ Intermediate ConwayBromageBM::getSequence(){
         bvs.gap_length_serialization(true);
         bm::serializer<bm::bvector<> >::buffer sbuf;
         {
-            bvs.serialize(m_sequence, sbuf);
+            bvs.serialize(sequence, sbuf);
             buf = sbuf.data();
             auto sz = sbuf.size();
-            cout << "BV Serialized size:" << sz << endl;
             output.write((const char*)sbuf.data(),sz);
 
         }
@@ -503,20 +516,34 @@ Intermediate ConwayBromageBM::getSequence(){
 
 
     return 0;
-}*/
-/*
-ConwayBromageBM ConwayBromageBM::deserialize(std::istream& bitVector,KmerManipulator* km){
+}
+ConwayBromageBM ConwayBromageBM::deserialize(std::string dirpath,KmerManipulator* km){
+    int tmp=std::pow(2,(km->getSize()-24)*2);
+    std::vector<bm::bvector<>> tmp2;
+    for(int i=0;i<tmp;i++){
+        std::ifstream ftmp(dirpath+"/"+std::to_string(i));
+        bm::bvector bmtmp=deserializeaux(ftmp);
+        std::cout<<bmtmp[50]<<std::endl;
+        tmp2.push_back(bmtmp);
+        ftmp.close();
+    }
+    Intermediate i(tmp2,tmp);
+    return ConwayBromageBM(i,km);
+    
+
+
+}
+
+bm::bvector<> ConwayBromageBM::deserializeaux(std::istream& bitVector){
     bm::serializer<bm::bvector<> >::buffer sbuf;
     bm::bvector<> bv;
     unsigned len;
     bitVector.read((char*) &len, std::streamsize(sizeof(len)));
     sbuf.resize(len, false); 
     bitVector.read((char*) sbuf.data(), std::streamsize(len));//this make an error if tested with bad() but return correctly the data from the file; if the function don't work at some point this is surely responsible
-    
     bm::deserialize(bv, sbuf.data()); 
-    ConwayBromageBM ret(bv,km);
-    return ret;
-}*/
+    return bv;
+}
 
 
 
