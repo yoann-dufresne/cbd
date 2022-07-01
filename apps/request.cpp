@@ -3,51 +3,51 @@
 #include <sdsl/vectors.hpp>
 #include <bitset>
 
-void randomcontainsrequest(int nb,ConwayBromageBM cb){
+void randomcontainsrequest(int nb,ConwayBromage& cb){
     for(int i=0;i<nb;i++){
         cb.contains(rand()%((uint64_t)(std::pow(4,(cb.getKmerManipulator()->getSize()-1) ) ) ) );
     }
 }
-void randomcontainsrequest(int nb,ConwayBromageSD cb){
+void randomcontainsrequest(int nb,ConwayBromage& cb){
     for(int i=0;i<nb;i++){
         cb.contains(rand()%((uint64_t)(std::pow(4,(cb.getKmerManipulator()->getSize()-1) ) ) ) );
     }
 }
 
-void linearcontainsrequest(int nb,ConwayBromageBM cb,int start=0,int jump=1){
+void linearcontainsrequest(int nb,ConwayBromage& cb,int start=0,int jump=1){
     for(int i=start;i<nb+start*jump;i+=jump){
         cb.contains(i);
     }
 }
-void linearcontainsrequest(int nb,ConwayBromageSD cb,int start=0,int jump=1){
+void linearcontainsrequest(int nb,ConwayBromage& cb,int start=0,int jump=1){
     for(int i=start;i<nb+start*jump;i+=jump){
         cb.contains(i);
     }
 }
 
-void randomsuccessorsrequest(int nb,ConwayBromageBM cb){
+void randomsuccessorsrequest(int nb,ConwayBromage& cb){
     for(int i=0;i<nb;i++){
         cb.successors(rand()%((uint64_t)(std::pow(4,(cb.getKmerManipulator()->getSize()-1) ) ) ) );
     }
 }
-void randomsuccessorsrequest(int nb,ConwayBromageSD cb){
+void randomsuccessorsrequest(int nb,ConwayBromage& cb){
     for(int i=0;i<nb;i++){
         cb.successors(rand()%((uint64_t)(std::pow(4,(cb.getKmerManipulator()->getSize()-1) ) ) ) );
     }
 }
 
-void linearsuccessorsrequest(int nb,ConwayBromageBM cb,int start=0,int jump=1){
+void linearsuccessorsrequest(int nb,ConwayBromage& cb,int start=0,int jump=1){
     for(int i=start;i<nb+start*jump;i+=jump){
         cb.contains(i);
     }
 }
 
-void linearsuccessorsrequest(int nb,ConwayBromageSD cb,int start=0,int jump=1){
+void linearsuccessorsrequest(int nb,ConwayBromage& cb,int start=0,int jump=1){
     for(int i=start;i<nb+start*jump;i+=jump){
         cb.contains(i);
     }
 }
-void successivecontainsrequest(int nb,ConwayBromageSD cb,uint64_t kmer){
+void successivecontainsrequest(int nb,ConwayBromage& cb,uint64_t kmer){
     std::cout<<"test"<<std::endl;
     uint64_t mask=0;
     for(int i=0;i<cb.getKmerManipulator()->getSize()-1;i++){
@@ -66,7 +66,7 @@ void successivecontainsrequest(int nb,ConwayBromageSD cb,uint64_t kmer){
     }
     
 }
-void successivecontainsrequest(int nb,ConwayBromageBM cb,uint64_t kmer){
+void successivecontainsrequest(int nb,ConwayBromage& cb,uint64_t kmer){
     uint64_t mask=0;
     for(int i=0;i<cb.getKmerManipulator()->getSize()-1;i++){
         mask=mask|(uint64_t)1<<i*2|(uint64_t)1<<i*2+1;
@@ -81,7 +81,7 @@ void successivecontainsrequest(int nb,ConwayBromageBM cb,uint64_t kmer){
     }
 }
 
-void successivesuccessorrequest(int nb,ConwayBromageBM cb,uint64_t kmer){
+void successivesuccessorrequest(int nb,ConwayBromage& cb,uint64_t kmer){
     uint64_t mask=0;
     for(int i=0;i<cb.getKmerManipulator()->getSize()-1;i++){
         mask=mask|(uint64_t)1<<i*2|(uint64_t)1<<i*2+1;
@@ -95,7 +95,7 @@ void successivesuccessorrequest(int nb,ConwayBromageBM cb,uint64_t kmer){
         kmer+=r;
     }
 }
-void successivesuccessorrequest(int nb,ConwayBromageSD cb,uint64_t kmer){
+void successivesuccessorrequest(int nb,ConwayBromage& cb,uint64_t kmer){
     uint64_t mask=0;
     for(int i=0;i<cb.getKmerManipulator()->getSize()-1;i++){
         mask=mask|(uint64_t)1<<i*2|(uint64_t)1<<i*2+1;
@@ -109,6 +109,33 @@ void successivesuccessorrequest(int nb,ConwayBromageSD cb,uint64_t kmer){
         kmer+=r;
     }
 }
+/**
+ * @brief 
+ * 
+ * @param percent the percent of random km from the file you want in your test
+ * @param f a file of random kmer that we know are in cb(just scramble the original file)
+ */
+void percenttest(int nb,int percent,istream& f,ConwayBromage& cb, bool contains){
+    int nbt=(nb*percent)/100;
+    auto a=cb.getKmerManipulator();
+    std::string tmp;
+
+    for(int i=0;i<nbt;i++){
+        if(contains){
+            getline(f,tmp);
+            cb.contains(a->encode(tmp));
+        }else{
+            getline(f,tmp);
+            cb.successors(a->encode(tmp));
+        }
+    }
+    if(contains){
+        randomcontainsrequest((nb-nbt),cb);
+    }else{
+        randomsuccessorsrequest((nb-nbt),cb);
+    }
+}
+
 
 std::string toBinary(int n)
 {
