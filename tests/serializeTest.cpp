@@ -13,7 +13,7 @@
 const lest::test module[] =
 {
     CASE("serialize and deserialize from a ConwayBromage CBD" "[serialize]"){
-        std::ifstream f("/home/oceane/dev/sortedcovid31", ios::in);
+        /*std::ifstream f("/home/oceane/dev/sortedcovid31", ios::in);
         KmerManipulatorACGT k(31);
         KmerManipulatorACGT k3(30);
         ConwayBromageBM cb(f, &k);
@@ -30,7 +30,7 @@ const lest::test module[] =
                 }
                 EXPECT(bitForm==bitForm2);
             }
-        
+        */
     }
 };
 
