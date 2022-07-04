@@ -326,9 +326,7 @@ ConwayBromageBM::ConwayBromageBM(istream& kmerFlux, KmerManipulator* km) : Conwa
     m_sequence=builder;
     if(km->getSize()>24){
         uint64_t number=0;
-        for(int i=0;i<(((km->getSize()-24)*2));i++){
-           number=number|(uint64_t)1<<i;
-        }
+        number=(uint64_t)1<<((km->getSize()-24)*2);// the number of bvector needed to have the equivalent of one bvector with the  range we need
         Intermediate builder(number);
         m_sequence=builder;
     }
@@ -471,6 +469,7 @@ uint8_t ConwayBromageBM::successors(uint64_t Kmer) const{
 }
 
 
+
 /**
  * Returns the compressed sequence.
  * @return an sd_vector
@@ -478,6 +477,10 @@ uint8_t ConwayBromageBM::successors(uint64_t Kmer) const{
 Intermediate ConwayBromageBM::getSequence(){
     return m_sequence;
 }
+
+
+
+
 /**
  * @brief serialize the CBBM object 
  * 
@@ -486,8 +489,7 @@ Intermediate ConwayBromageBM::getSequence(){
  */
 //TODO:serialization need to be redo after change
 int ConwayBromageBM::serialize(std::string dirpath){
-        std::filesystem::create_directory(dirpath);
-
+    std::filesystem::create_directory(dirpath);
     for(int i=0;i<m_sequence.nbv;i++){
         std::ofstream tmp(dirpath+"/"+std::to_string(i));
         serializeaux(tmp,m_sequence.vbv.at(i));
@@ -505,6 +507,7 @@ int ConwayBromageBM::serializeaux(std::ostream& output, bm::bvector<>& sequence)
             bvs.serialize(sequence, sbuf);
             buf = sbuf.data();
             auto sz = sbuf.size();
+            std::cout<<sz<<std::endl;
             output.write((const char*)sbuf.data(),sz);
 
         }
@@ -521,9 +524,11 @@ ConwayBromageBM ConwayBromageBM::deserialize(std::string dirpath,KmerManipulator
     int tmp=std::pow(2,(km->getSize()-24)*2);
     std::vector<bm::bvector<>> tmp2;
     for(int i=0;i<tmp;i++){
-        std::ifstream ftmp(dirpath+"/"+std::to_string(i));
-        bm::bvector bmtmp=deserializeaux(ftmp);
-        std::cout<<bmtmp[50]<<std::endl;
+        std::ifstream ftmp(dirpath+"/"+std::to_string(i),std::ios::binary);
+
+        bm::bvector bmtmp;//=deserializeaux(ftmp);
+        bm::serializer<bm::bvector<> >::buffer sbuf;
+        read_bvector(ftmp,bmtmp,sbuf);
         tmp2.push_back(bmtmp);
         ftmp.close();
     }
@@ -534,16 +539,30 @@ ConwayBromageBM ConwayBromageBM::deserialize(std::string dirpath,KmerManipulator
 
 }
 
-bm::bvector<> ConwayBromageBM::deserializeaux(std::istream& bitVector){
-    bm::serializer<bm::bvector<> >::buffer sbuf;
-    bm::bvector<> bv;
-    unsigned len;
-    bitVector.read((char*) &len, std::streamsize(sizeof(len)));
-    sbuf.resize(len, false); 
-    bitVector.read((char*) sbuf.data(), std::streamsize(len));//this make an error if tested with bad() but return correctly the data from the file; if the function don't work at some point this is surely responsible
-    bm::deserialize(bv, sbuf.data()); 
-    return bv;
+int ConwayBromageBM::read_bvector(std::ifstream& bv_file,
+                  bm::bvector<>& bv,
+                  bm::serializer<bm::bvector<> >::buffer& sbuf)
+{
+    if (!bv_file.good())
+        return -1;
+    bv_file.seekg(0, ios::end);
+    unsigned int len = bv_file.tellg();
+    bv_file.seekg(ios::beg);
+    if (!bv_file.good())
+        return -3;
+    if (!len)
+        return -2; // 0-len detected (broken file)
+    std::cout<<len<<std::endl;
+    sbuf.resize(len, false); // resize without content preservation
+    bv_file.read((char*) sbuf.data(), std::streamsize(len));
+    if (!bv_file.good())
+        return -4;
+    
+    bm::deserialize(bv, sbuf.data());
+ 
+    return 0;
 }
+
 
 
 

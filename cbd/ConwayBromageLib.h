@@ -91,6 +91,8 @@ public:
     Intermediate getSequence();
     //serializer
     int serialize(std::string dirpath);
+        static int read_bvector(std::ifstream& bv_file, bm::bvector<>& bv, bm::serializer<bm::bvector<> >::buffer& sbuf);
+
     static ConwayBromageBM deserialize(std::string dirpath,KmerManipulator* km);
     /*
      * Functions for isPresent performance tests
