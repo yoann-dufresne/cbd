@@ -22,19 +22,6 @@ std::string toBinary(int n)
 
 
 int main(int argc, char* argv[]){
-    std::vector<bm::bvector<>> test;
-    bm::bvector<> tmp;
-    test.push_back(tmp);
-    test[0].set(50);
-    bm::bvector<> tmp2;
-    test.push_back(tmp2);
-    std::cout<<test[0][50]<<std::endl;
-    std::cout<<test[1][50]<<std::endl;
-    test.resize(50);
-    Intermediate a(1);
-    a.set(50);
-
-    std::cout<<a.present(50)<<std::endl;
     KmerManipulatorACGT tmpkm = KmerManipulatorACGT(31);
     std::ifstream f(argv[1], std::ios::in);
     ConwayBromageBM test2(f,&tmpkm);
