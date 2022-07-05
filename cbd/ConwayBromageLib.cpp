@@ -276,7 +276,9 @@ Intermediate::Intermediate(int nb){
     
 }
 Intermediate::Intermediate(){
-    Intermediate(1);
+    std::vector<bm::bvector<>> tmp2;
+    vbv=tmp2;
+    nbv=0;
 }
 Intermediate::Intermediate(std::vector<bm::bvector<>>& tmp2,int a){
     vbv=tmp2;
@@ -300,6 +302,10 @@ void Intermediate::optimize(){
         vbv[i].optimize();
     }
 }
+void Intermediate::push_back(bm::bvector<>& bmv){
+    vbv.push_back(bmv);
+    nbv++;
+}
 //
 //  ConwayBromage object with a bit-magic succint bit-vector, to test the perfomance difference between the 2 implementation
 //
@@ -322,14 +328,14 @@ void Intermediate::optimize(){
  * @warning The k-mers in the istream must be sorted either in lexicographical order (A<C<G<T) or in A<C<T<G. It depends on the encoding format.
  */
 ConwayBromageBM::ConwayBromageBM(istream& kmerFlux, KmerManipulator* km) : ConwayBromage(km){
-    Intermediate builder(1);
+    Intermediate builder;
     m_sequence=builder;
-    if(km->getSize()>24){
+    /*if(km->getSize()>24){
         uint64_t number=0;
         number=(uint64_t)1<<((km->getSize()-24)*2);// the number of bvector needed to have the equivalent of one bvector with the  range we need
         Intermediate builder(number);
         m_sequence=builder;
-    }
+    }*/
 
     string line("");
     uint64_t numberOfKmer = 0;
@@ -341,6 +347,12 @@ ConwayBromageBM::ConwayBromageBM(istream& kmerFlux, KmerManipulator* km) : Conwa
     uint64_t one = 1;
     uint64_t sdvSize = one << ((2*m_kmerManipulator->getSize())-1); //Creation of the total length to create the sd_vector_builder
     uint64_t previousKmer(0);
+    uint64_t previousvector(0);
+    uint64_t ivec;
+    uint64_t mask=0b1111111111111111000000000000000000000000000000000000000000000000; // mask to separe the 16 first bits from the 48 other
+    uint64_t mask2=0b0000000000000000111111111111111111111111111111111111111111111111;
+    bm::bvector<> currentvector;
+
     while(getline(kmerFlux, line)){
         uint64_t k = m_kmerManipulator->encode(line);
         //first chack : canonical elements expected
@@ -353,10 +365,34 @@ ConwayBromageBM::ConwayBromageBM(istream& kmerFlux, KmerManipulator* km) : Conwa
             cout << "The file is not sort in the ascending order" << endl;
             exit(1);
         }
-        m_sequence.set(k);   
+        ivec=(k&mask)>>48;
+        if(ivec>previousvector){
+            currentvector.optimize();
+            m_sequence.push_back(currentvector);
+            //creation of all the empty bvector when necessary;
+            for(int i=previousvector+1;i<ivec;i++){
+                bm::bvector<> tmp;
+                tmp.set(0,false);
+                tmp.set_new_blocks_strat(bm::BM_GAP);
+                m_sequence.push_back(tmp);
+                std::cout<<ivec<<std::endl;
+
+            }
+            currentvector=bm::bvector<>();
+            currentvector.set_new_blocks_strat(bm::BM_GAP);
+            currentvector.set(k&mask2);
+        }else{
+            currentvector.set(k&mask2);
+
+        }
+        
         previousKmer = k;
+        previousvector=ivec;
+
     }
-    m_sequence.optimize();
+    currentvector.optimize();
+    m_sequence.push_back(currentvector);
+    //m_sequence.optimize();
     m_limit = (sdvSize >> 1);//changed from the original code source, otherwise it block contains and successor for some case
 
 }

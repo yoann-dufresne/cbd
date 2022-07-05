@@ -72,6 +72,7 @@ class Intermediate{
     void set(uint64_t id);
     int present(uint64_t id)const;
     void optimize();
+    void push_back(bm::bvector<>& bmv);
 };
 
 /// ConwayBromage : permits to store k-mers and apply two operations on them : 'contains' and 'successors'
