@@ -3,7 +3,7 @@ data=Channel.fromPath('./sorted/*')
 rand = ['random','successive']
 type = ['contain','successor']
 library = ['SDSL']
-number= ['1','10']
+number= ['1000','1000000','1000000000']
 iteration=Channel.of(1..10)
 process_number= Channel.of(1..10000)
 data 
@@ -11,7 +11,7 @@ data
     .combine(rand)
     .combine(type)
     .combine(library)
-    .combine(iteration)
+    .combine(iteration)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
     .set{data}
 process test{
     publishDir "./result", mode: 'link' 
@@ -23,7 +23,7 @@ process test{
     file "result${pn}"
 
     cpus 1
-    memory 10.GB
+    memory 13.GB
     script :
     """
     echo "${kmer}\nk=31\n${x}\n${r}\n${t}\n${lib}\n iteration number ${i}">result${pn}
