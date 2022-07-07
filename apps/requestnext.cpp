@@ -25,17 +25,20 @@ void requestnext(int range, ConwayBromage& cb, uint64_t kmer){
         mask=mask|(uint64_t)1<<i*2|(uint64_t)1<<i*2+1;
     }
 
-    if(range){
-        
+    if(range){  
         uint8_t tmp=cb.successors(kmer);
-        std::cout<<(unsigned int)tmp<<std::endl;
         uint64_t kmertmp=kmer;
-        for(int i=0;i<4;i++){
-            if(tmp&(1<<(7-i))){
-                kmertmp=kmertmp<<2&mask;
-                kmertmp+=i;
-                requestnext(range-1,cb,kmertmp);
-                kmertmp=kmer;
+        for(int i=0;i<8;i++){
+            if(i<4){
+                if(tmp&(1<<i)){
+                    uint64_t newkmer=kmer+(uint64_t)i<<cb.getKmerManipulator()->getSize()*2;
+                    prev.push(kmerRange(newkmer,1));
+                }  
+            }else{
+                if(tmp&(1<<7-i)){
+                    uint64_t newkmer=(kmer<<2)+i-4;
+                    prev.push(kmerRange(newkmer,1));
+                }
             }
         }
     }
