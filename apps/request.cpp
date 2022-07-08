@@ -2,6 +2,7 @@
 #include <sdsl/sd_vector.hpp>
 #include <sdsl/vectors.hpp>
 #include <bitset>
+#include <list>
 
 void randomcontainsrequest(int nb,ConwayBromage& cb){
     for(int i=0;i<nb;i++){
@@ -62,31 +63,45 @@ void successivesuccessorrequest(int nb,ConwayBromage& cb,uint64_t kmer){
         kmer+=r;
     }
 }
+
+list<uint64_t> buffer(int nb,istream& f,KmerManipulator* a){
+    list<uint64_t> buff;
+    for(int i=0;i<nb;i++){
+        std::string tmp;
+        getline(f,tmp);
+        buff.push_back(a->encode(tmp));
+    }
+    return buff;
+}
  /**
  * @brief 
  * 
  * @param percent the percent of random km from the file you want in your test
  * @param f a file of random kmer that we know are in cb(just shufle the original file)
  */
-void percenttest(int nb,int percent,istream& f,ConwayBromage& cb, bool contains){
-    int nbt=(nb*percent)/100;
-    auto a=cb.getKmerManipulator();
-    std::string tmp;
-
-    for(int i=0;i<nbt;i++){
-        if(contains){
-            getline(f,tmp);
-            cb.contains(a->encode(tmp));
+void percenttest(int nb,int percent,list<uint64_t> buffer,ConwayBromage& cb, bool contains){
+    std::list<uint64_t>::iterator it =buffer.begin();
+    for(int i=0;i<nb;i++){
+        int p=rand()%100;
+        auto a=cb.getKmerManipulator();
+        std::string tmp;
+        if(p>percent){
+            if(contains){
+                randomcontainsrequest(1,cb);
+            }else{
+                randomsuccessorsrequest(1,cb);
+            }
         }else{
-            getline(f,tmp);
-            cb.successors(a->encode(tmp));
+            if(contains){
+                cb.contains(*it);
+                it++;
+            }else{
+                cb.successors(*it);
+                it++;
+            }
         }
     }
-    if(contains){
-        randomcontainsrequest((nb-nbt),cb);
-    }else{
-        randomsuccessorsrequest((nb-nbt),cb);
-    }
+
 }
 
 
@@ -120,6 +135,7 @@ int main(int argc, char* argv[]){
     ConwayBromageSD cbd(f,&km);
     auto start = std::chrono::steady_clock::now();
     if(argv[4]=="successive"){
+        auto start = std::chrono::steady_clock::now();
         if(argv[5]=="contains"){
             successivecontainsrequest(atoi(argv[3]),cbd,first1);
         }else{
@@ -128,8 +144,11 @@ int main(int argc, char* argv[]){
     }else{
         if(argc!=6&&atoi(argv[6])>0){
             std::ifstream fs(argv[7]);
-            percenttest(atoi(argv[3]),atoi(argv[6]),fs,cbd,(argv[5]=="contains"));
+            auto tmp=buffer((atoi(argv[3])*2*atoi(argv[6]))/100,fs,&k1);
+            auto start = std::chrono::steady_clock::now();
+            percenttest(atoi(argv[3]),atoi(argv[6]),tmp,cbd,(argv[5]=="contains"));
         }else{
+                auto start = std::chrono::steady_clock::now();
             if(argv[5]=="contains"){
                 randomcontainsrequest(atoi(argv[3]),cbd);
             }else{
