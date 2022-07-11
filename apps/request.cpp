@@ -80,13 +80,8 @@ list<uint64_t> buffer(int nb,istream& f,KmerManipulator* a){
     }
     return buff;
 }
- /**
- * @brief 
- * 
- * @param percent the percent of random km from the file you want in your test
- * @param f a file of random kmer that we know are in cb(just shufle the original file)
- */
-void percenttest(int nb,int percent,list<uint64_t> buffer,ConwayBromage& cb, bool contains){
+
+void percenttest(int nb,int percent,list<uint64_t>& buffer,ConwayBromage& cb, bool contains){
     std::list<uint64_t>::iterator it =buffer.begin();
     for(int i=0;i<nb;i++){
         int p=rand()%100;
@@ -108,6 +103,29 @@ void percenttest(int nb,int percent,list<uint64_t> buffer,ConwayBromage& cb, boo
                 cb.successors(*it);
                 //std::cout<<a->decode(*it)<<std::endl;
                 it++;
+            }
+        }
+    }
+
+}
+void sequencetest(list<uint64_t>& buffer,ConwayBromage& cb,bool contains){
+    for(uint64_t a: buffer){
+        if(contains){
+            cb.contains(a);
+        }else{
+            cb.successors(a);
+        }
+    }
+}
+void percentsequencetest(int percent,list<list<uint64_t>>& sequences,ConwayBromage& cb,bool contains){
+    for(list<uint64_t> tmp:sequences){
+        if(rand()%100>=percent){
+            sequencetest(tmp,cb,contains);
+        }else{
+            if(contains){
+                successivecontainsrequest(tmp.size(),cb);
+            }else{
+                successivesuccessorrequest(tmp.size(),cb);
             }
         }
     }
