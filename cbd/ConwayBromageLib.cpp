@@ -223,8 +223,8 @@ uint8_t ConwayBromageSD::successors(uint64_t Kmer) const{
             res ^= m_correspondingBitValueForNextPmers[i];
         }
         PmerPrev = Kmer + m_nucleotides_shifted[i]; //equals to AX then CX then GX then TX where X is the Kmer
-        bitset<64> tmp=m_nucleotides_shifted[i];
-        std::cout<<tmp<<std::endl;
+        // bitset<64> tmp=m_nucleotides_shifted[i];
+        // std::cout<<tmp<<std::endl;
         RC_PmerPrev = RC_Kmer_ShiftedOf2Bits + m_RC[i];
         if(m_sequence[(PmerPrev < RC_PmerPrev)?PmerPrev:RC_PmerPrev]){
             res ^= m_correspondingBitValueForPrevPmers[i];

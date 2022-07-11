@@ -27,10 +27,16 @@ void linearsuccessorsrequest(int nb,ConwayBromage& cb,int start=0,int jump=1){
         cb.contains(i);
     }
 }
+uint64_t random64bit(){
+    uint32_t km1=rand();
+    uint32_t km2=rand();
+    return  km1|(km2<<32);
+
+}
 
 
-void successivecontainsrequest(int nb,ConwayBromage& cb,uint64_t kmer){
-    std::cout<<"test"<<std::endl;
+void successivecontainsrequest(int nb,ConwayBromage& cb){
+    uint64_t kmer=random64bit();
     uint64_t mask=0;
     for(int i=0;i<cb.getKmerManipulator()->getSize()-1;i++){
         mask=mask|(uint64_t)1<<i*2|(uint64_t)1<<i*2+1;
@@ -42,14 +48,15 @@ void successivecontainsrequest(int nb,ConwayBromage& cb,uint64_t kmer){
         kmer=(kmer<<2)&mask;
         int r=rand()%4;
         kmer+=r;
-        bitset<64> tmp(kmer);
-        std::cout<<tmp<<std::endl;
+        // bitset<64> tmp(kmer);
+        // std::cout<<tmp<<std::endl;
            
     }
     
 }
 
-void successivesuccessorrequest(int nb,ConwayBromage& cb,uint64_t kmer){
+void successivesuccessorrequest(int nb,ConwayBromage& cb){
+    uint64_t kmer=random64bit();
     uint64_t mask=0;
     for(int i=0;i<cb.getKmerManipulator()->getSize()-1;i++){
         mask=mask|(uint64_t)1<<i*2|(uint64_t)1<<i*2+1;
@@ -85,11 +92,13 @@ void percenttest(int nb,int percent,list<uint64_t> buffer,ConwayBromage& cb, boo
         int p=rand()%100;
         auto a=cb.getKmerManipulator();
         std::string tmp;
-        if(p>percent){
+        if(p>=percent){
             if(contains){
                 randomcontainsrequest(1,cb);
             }else{
                 randomsuccessorsrequest(1,cb);
+                //std::cout<<"random"<<std::endl;
+
             }
         }else{
             if(contains){
@@ -97,6 +106,7 @@ void percenttest(int nb,int percent,list<uint64_t> buffer,ConwayBromage& cb, boo
                 it++;
             }else{
                 cb.successors(*it);
+                //std::cout<<a->decode(*it)<<std::endl;
                 it++;
             }
         }
@@ -114,7 +124,6 @@ std::string toBinary(int n)
 
 
 int main(int argc, char* argv[]){
-    std::string first("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     if((argc!=8)&&(argc!=7)&&(argc!=6)){
         std::cout<<argc<<std::endl;
         std::cout<<"./main file k nb random type percent sfile\n";
@@ -126,29 +135,38 @@ int main(int argc, char* argv[]){
         std::cout<<"percent the percentage of kmer that exist to be tested\n";
         std::cout<<"sfile the shuffled file with kmer";
         std::cout<<std::endl;
+        std::ifstream f(argv[1], std::ios::in);
+        KmerManipulatorACGT km(31);
+        KmerManipulatorACGT km2(30);        
+        ConwayBromageSD cbd(f,&km);
+        std::ifstream f2(argv[2], std::ios::in);
+        auto buff=buffer(200,f2,&km2);
+        percenttest(200,90,buff,cbd,0);
+        std::cout<<"bloup";
+
+
         exit(1);
     }
     std::ifstream f(argv[1], std::ios::in);
     KmerManipulatorACGT km(atoi(argv[2]));    
     KmerManipulatorACGT k1(atoi(argv[2])-1);
-    uint64_t first1=k1.encode(first);
     ConwayBromageSD cbd(f,&km);
     auto start = std::chrono::steady_clock::now();
     if(argv[4]=="successive"){
-        auto start = std::chrono::steady_clock::now();
+        start = std::chrono::steady_clock::now();
         if(argv[5]=="contains"){
-            successivecontainsrequest(atoi(argv[3]),cbd,first1);
+            successivecontainsrequest(atoi(argv[3]),cbd);
         }else{
-            successivesuccessorrequest(atoi(argv[3]),cbd,first1);
+            successivesuccessorrequest(atoi(argv[3]),cbd);
         }
     }else{
         if(argc!=6&&atoi(argv[6])>0){
             std::ifstream fs(argv[7]);
             auto tmp=buffer((atoi(argv[3])*2*atoi(argv[6]))/100,fs,&k1);
-            auto start = std::chrono::steady_clock::now();
+            start = std::chrono::steady_clock::now();
             percenttest(atoi(argv[3]),atoi(argv[6]),tmp,cbd,(argv[5]=="contains"));
         }else{
-                auto start = std::chrono::steady_clock::now();
+            start = std::chrono::steady_clock::now();
             if(argv[5]=="contains"){
                 randomcontainsrequest(atoi(argv[3]),cbd);
             }else{
