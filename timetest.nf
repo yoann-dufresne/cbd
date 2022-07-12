@@ -1,6 +1,6 @@
 #!/usr/bin/env nextflow
 data=Channel.fromPath('./sorted/*')
-rand = ['random','successive']
+rand = ['random','sequence']
 type = ['contain','successor']
 percent = ['5','10','20','50','100']
 number= ['1000','1000000','10000000']
@@ -47,16 +47,14 @@ data2
     .combine(number)
     .combine(type)
     .combine(percent)
+    .combine(shuf)
     .set{data2}
 
 
 process percent {
     publishDir "./resultpercent", mode: 'link' 
     input :    
-    tuple file(kmer),val(x),val(t),val(percent) from data2
-
-    file shuf from shuf
-
+    tuple file(kmer),val(x),val(t),val(percent),file(shuf) from data2
     val pn from process_number
     output :
     file "result${pn}"
@@ -67,6 +65,37 @@ process percent {
     timerequest ${kmer} 31 ${x} random ${t} ${percent} ${shuf} >> result${pn}
 
     """
+
+
+}
+data3=Channel.fromPath('./sorted/*')
+type = ['contain','successor']
+percent = ['5','10','20','50','100']
+number= ['1000','1000000','10000000']
+process_number= Channel.of(1..10000)
+
+data3
+    .combine(number)
+    .combine(type)
+    .combine(percent)
+    .set{data3}
+
+
+process percentsequence{
+    publishDir "./resultpercent", mode 'link'
+    input:
+    tuple file(kmer),val(x),val(t),val(percent) from data3
+    val pn from process_number
+
+    output:
+    file "result${pn}"
+
+    script:
+    """
+    echo "${kmer}\nk=31\n${x}\nrandom\n${t}\n${percent}">result${pn}
+    timerequest ${kmer} 31 ${x} sequence ${t} ${percent} ${shuf} >> result${pn}
+    """
+
 
 
 }

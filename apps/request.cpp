@@ -117,21 +117,30 @@ void sequencetest(list<uint64_t>& buffer,ConwayBromage& cb,bool contains){
         }
     }
 }
-void percentsequencetest(int percent,list<list<uint64_t>>& sequences,ConwayBromage& cb,bool contains){
-    for(list<uint64_t> tmp:sequences){
+void percentsequencetest(int nb,int percent,list<list<uint64_t>>& sequences,ConwayBromage& cb,bool contains){
+    auto it=sequences.begin();
+    for(int i=0;i<nb;i++){
         if(rand()%100>=percent){
-            sequencetest(tmp,cb,contains);
+            sequencetest(*it,cb,contains);
+            it++;
         }else{
             if(contains){
-                successivecontainsrequest(tmp.size(),cb);
+                successivecontainsrequest((*it).size(),cb);
             }else{
-                successivesuccessorrequest(tmp.size(),cb);
+                successivesuccessorrequest((*it).size(),cb);
             }
         }
     }
 
 }
-
+list<list<uint64_t>> loadseqbuff(istream& f,KmerManipulator* a){
+    std::string tmp;
+    list<list<uint64_t>> seqbuff;
+    while(getline(f,tmp)){
+        seqbuff.push_back(a->encodesequence(tmp));
+    }
+    return seqbuff;
+}
 
 std::string toBinary(int n)
 {
@@ -148,21 +157,11 @@ int main(int argc, char* argv[]){
         std::cout<<"file the file wherer the kmer sorted are\n";
         std::cout<<"k the length of the kmer\n";
         std::cout<<"nb the number of the request to test\n";
-        std::cout<<"random or successive kmer to test\n";
+        std::cout<<"random or  kmer sequence to test\n";
         std::cout<<"type, contain or successor\n";
-        std::cout<<"percent the percentage of kmer that exist to be tested\n";
-        std::cout<<"sfile the shuffled file with kmer";
+        std::cout<<"percent the percentage of kmer/sequence that exist to be tested\n";
+        std::cout<<"sfile the shuffled file with kmer or a file containing sequence we know exist(not formally necessary but its the point of it)";
         std::cout<<std::endl;
-        std::ifstream f(argv[1], std::ios::in);
-        KmerManipulatorACGT km(31);
-        KmerManipulatorACGT km2(30);        
-        ConwayBromageSD cbd(f,&km);
-        std::ifstream f2(argv[2], std::ios::in);
-        auto buff=buffer(200,f2,&km2);
-        percenttest(200,90,buff,cbd,0);
-        std::cout<<"bloup";
-
-
         exit(1);
     }
     std::ifstream f(argv[1], std::ios::in);
@@ -170,12 +169,19 @@ int main(int argc, char* argv[]){
     KmerManipulatorACGT k1(atoi(argv[2])-1);
     ConwayBromageSD cbd(f,&km);
     auto start = std::chrono::steady_clock::now();
-    if(argv[4]=="successive"){
-        start = std::chrono::steady_clock::now();
-        if(argv[5]=="contains"){
-            successivecontainsrequest(atoi(argv[3]),cbd);
+    if(argv[4]=="sequence"){
+        if(argc!=6&&atoi(argv[6])>0){
+            std::ifstream fs(argv[7]);
+            auto seqbuff=loadseqbuff(fs,&k1);
+            start = std::chrono::steady_clock::now();
+            percentsequencetest(atoi(argv[3]),atoi(argv[6]),seqbuff,cbd,(argv[5]=="contains"));
         }else{
-            successivesuccessorrequest(atoi(argv[3]),cbd);
+            start = std::chrono::steady_clock::now();
+            if(argv[5]=="contains"){
+                successivecontainsrequest(atoi(argv[3]),cbd);
+            }else{
+                successivesuccessorrequest(atoi(argv[3]),cbd);
+            }
         }
     }else{
         if(argc!=6&&atoi(argv[6])>0){
