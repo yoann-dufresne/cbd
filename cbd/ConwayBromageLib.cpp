@@ -38,7 +38,8 @@ ConwayBromage::ConwayBromage(KmerManipulator* km){
     m_RC_shifted[2] = m_RC[2] << nbOfBitsToShift;
     m_RC_shifted[3] = m_RC[3] << nbOfBitsToShift;
     
-    m_nucleotides_shifted[0] = (uint64_t) 0 << nbOfBitsToShift;
+
+    m_nucleotides_shifted[0] = (uint64_t)0 << nbOfBitsToShift;
     m_nucleotides_shifted[1] = (uint64_t)1 << nbOfBitsToShift;
     m_nucleotides_shifted[2] = (uint64_t)2 << nbOfBitsToShift;
     m_nucleotides_shifted[3] = (uint64_t)3 << nbOfBitsToShift;
