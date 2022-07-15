@@ -1,9 +1,12 @@
 
 add_executable(main
-	requestnext.cpp
+	main.cpp
 )
 add_executable(timerequest
     request.cpp
+)
+add_executable(nextrequest
+    requestnext.cpp
 )
 target_link_libraries(main
 	cbd
@@ -11,7 +14,14 @@ target_link_libraries(main
 target_link_libraries(timerequest
 	cbd
 )
+target_link_libraries(nextrequest
+	cbd
+)
 set_target_properties( timerequest
+    PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+set_target_properties( nextrequest
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )

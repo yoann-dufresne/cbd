@@ -116,6 +116,14 @@ void multnextrequest(int range,ConwayBromage& cb,list<uint64_t> kmers){
         requestnext(range,cb,tmp);
     }
 }
+list<uint64_t> buffer(istream& f,KmerManipulator* a){
+    list<uint64_t> buff;
+    std::string tmp;
+    while(getline(f,tmp)){
+        buff.push_back(a->encode(tmp));
+    }
+    return buff;
+}
 /*
 ./main file k range mult mfile/first
 file the file with sorted kmer to be inserted
@@ -135,7 +143,9 @@ int main(int argc,char* argv[]){
     ConwayBromageSD test(f,&tmp);
     KmerManipulatorACGT km(atoi(argv[2])-1);
     if(atoi(argv[4])){
-        multnextrequest(atoi(argv[3]),test,)
+        std::ifstream fs(argv[5], std::ios::in);
+        auto a=buffer(fs,&km);
+        multnextrequest(atoi(argv[3]),test,a);
     }else{
         requestnext(atoi(argv[3]),test,km.encode(argv[5]));
     }
