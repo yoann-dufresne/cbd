@@ -53,6 +53,8 @@ std::string KmerManipulatorACTG::decode(uint64_t kmer) {
     return res;
 }
 
+
+
 /**
  * Returns the canonical version of a k-mer in ACTG format.
  * @param kmer - a uint64_t which represents the compressed kmer we want to study.
@@ -124,6 +126,16 @@ char KmerManipulatorACTG::decodeNucleotide(const uint8_t nucleotide){
  */
 int KmerManipulatorACTG::getSize(){
     return m_size;
+}
+/**
+ * @brief take a sequence and return the list of the encoded kmer in it (this is for "little" sequence don't use it to generate list of kmer for a genome)
+ */
+list<uint64_t> KmerManipulatorACTG::encodesequence(const std::string &word){
+    list<uint64_t> tmp;
+    for(int i=m_size;i<word.length();i++){
+        tmp.push_back(encode(word.substr(i-m_size,m_size)));
+    }
+    return tmp;
 }
 
 //class KmerManipulatorACGT
@@ -251,4 +263,12 @@ char KmerManipulatorACGT::decodeNucleotide(const uint8_t nucleotide){
  */
 int KmerManipulatorACGT::getSize(){
     return m_size;
+}
+
+list<uint64_t> KmerManipulatorACGT::encodesequence(const std::string &word){
+    list<uint64_t> tmp;
+    for(int i=m_size;i<word.length();i++){
+        tmp.push_back(encode(word.substr(i-m_size,m_size)));
+    }
+    return tmp;
 }

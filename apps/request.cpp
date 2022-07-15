@@ -2,53 +2,43 @@
 #include <sdsl/sd_vector.hpp>
 #include <sdsl/vectors.hpp>
 #include <bitset>
+#include <list>
 
-void randomcontainsrequest(int nb,ConwayBromageBM& cb){
+
+void randomcontainsrequest(int nb,ConwayBromage& cb){
     for(int i=0;i<nb;i++){
         cb.contains(rand()%((uint64_t)(std::pow(4,(cb.getKmerManipulator()->getSize()-1) ) ) ) );
     }
 }
-void randomcontainsrequest(int nb,ConwayBromageSD& cb){
-    for(int i=0;i<nb;i++){
-        cb.contains(rand()%((uint64_t)(std::pow(4,(cb.getKmerManipulator()->getSize()-1) ) ) ) );
-    }
-}
 
-void linearcontainsrequest(int nb,ConwayBromageBM& cb,int start=0,int jump=1){
-    for(int i=start;i<nb+start*jump;i+=jump){
-        cb.contains(i);
-    }
-}
-void linearcontainsrequest(int nb,ConwayBromageSD& cb,int start=0,int jump=1){
+void linearcontainsrequest(int nb,ConwayBromage& cb,int start=0,int jump=1){
     for(int i=start;i<nb+start*jump;i+=jump){
         cb.contains(i);
     }
 }
 
-void randomsuccessorsrequest(int nb,ConwayBromageBM& cb){
+
+void randomsuccessorsrequest(int nb,ConwayBromage& cb){
     for(int i=0;i<nb;i++){
         cb.successors(rand()%((uint64_t)(std::pow(4,(cb.getKmerManipulator()->getSize()-1) ) ) ) );
     }
-}
-void randomsuccessorsrequest(int nb,ConwayBromageSD& cb){
-    for(int i=0;i<nb;i++){
-        cb.successors(rand()%((uint64_t)(std::pow(4,(cb.getKmerManipulator()->getSize()-1) ) ) ) );
-    }
-}
 
-void linearsuccessorsrequest(int nb,ConwayBromageBM& cb,int start=0,int jump=1){
+void linearsuccessorsrequest(int nb,ConwayBromage& cb,int start=0,int jump=1){
     for(int i=start;i<nb+start*jump;i+=jump){
         cb.contains(i);
     }
 }
+uint64_t random64bit(){
+    uint32_t km1=rand();
+    uint32_t km2=rand();
+    return  km1|(km2<<32);
 
-void linearsuccessorsrequest(int nb,ConwayBromageSD& cb,int start=0,int jump=1){
-    for(int i=start;i<nb+start*jump;i+=jump){
-        cb.contains(i);
-    }
 }
-void successivecontainsrequest(int nb,ConwayBromageSD& cb,uint64_t kmer){
-    std::cout<<"test"<<std::endl;
+
+
+void successivecontainsrequest(int nb,ConwayBromage& cb){
+    uint64_t kmer=random64bit();
+
     uint64_t mask=0;
     for(int i=0;i<cb.getKmerManipulator()->getSize()-1;i++){
         mask=mask|(uint64_t)1<<i*2|(uint64_t)1<<i*2+1;
@@ -59,26 +49,13 @@ void successivecontainsrequest(int nb,ConwayBromageSD& cb,uint64_t kmer){
         cb.contains(kmer);
         kmer=(kmer<<2)&mask;
         int r=rand()%4;
-        kmer+=r;
+        kmer+=r;          
     }
     
 }
-void successivecontainsrequest(int nb,ConwayBromageBM& cb,uint64_t kmer){
-    uint64_t mask=0;
-    for(int i=0;i<cb.getKmerManipulator()->getSize()-1;i++){
-        mask=mask|(uint64_t)1<<i*2|(uint64_t)1<<i*2+1;
-    }
 
-    //choose randomly one of the next successor to 
-    for(int i=0;i<nb;i++){
-        cb.contains(kmer);
-        kmer=(kmer<<2)&mask;
-        int r=rand()%4;
-        kmer+=r;
-    }
-}
-
-void successivesuccessorrequest(int nb,ConwayBromageBM& cb,uint64_t kmer){
+void successivesuccessorrequest(int nb,ConwayBromage& cb){
+    uint64_t kmer=random64bit();
     uint64_t mask=0;
     for(int i=0;i<cb.getKmerManipulator()->getSize()-1;i++){
         mask=mask|(uint64_t)1<<i*2|(uint64_t)1<<i*2+1;
@@ -92,19 +69,77 @@ void successivesuccessorrequest(int nb,ConwayBromageBM& cb,uint64_t kmer){
         kmer+=r;
     }
 }
-void successivesuccessorrequest(int nb,ConwayBromageSD& cb,uint64_t kmer){
-    uint64_t mask=0;
-    for(int i=0;i<cb.getKmerManipulator()->getSize()-1;i++){
-        mask=mask|(uint64_t)1<<i*2|(uint64_t)1<<i*2+1;
+
+
+list<uint64_t> buffer(int nb,istream& f,KmerManipulator* a){
+    list<uint64_t> buff;
+    for(int i=0;i<nb;i++){
+        std::string tmp;
+        getline(f,tmp);
+        buff.push_back(a->encode(tmp));
+    }
+    return buff;
+}
+
+void percenttest(int nb,int percent,list<uint64_t>& buffer,ConwayBromage& cb, bool contains){
+    std::list<uint64_t>::iterator it =buffer.begin();
+    for(int i=0;i<nb;i++){
+        int p=rand()%100;
+        auto a=cb.getKmerManipulator();
+        std::string tmp;
+        if(p>=percent){
+            if(contains){
+                randomcontainsrequest(1,cb);
+            }else{
+                randomsuccessorsrequest(1,cb);
+                //std::cout<<"random"<<std::endl;
+
+            }
+        }else{
+            if(contains){
+                cb.contains(*it);
+                it++;
+            }else{
+                cb.successors(*it);
+                //std::cout<<a->decode(*it)<<std::endl;
+                it++;
+            }
+        }
     }
 
-    //choose randomly one of the next successor to 
-    for(int i=0;i<nb;i++){
-        cb.successors(kmer);
-        kmer=(kmer<<2)&mask;
-        int r=rand()%4;
-        kmer+=r;
+}
+void sequencetest(list<uint64_t>& buffer,ConwayBromage& cb,bool contains){
+    for(uint64_t a: buffer){
+        if(contains){
+            cb.contains(a);
+        }else{
+            cb.successors(a);
+        }
     }
+}
+void percentsequencetest(int nb,int percent,list<list<uint64_t>>& sequences,ConwayBromage& cb,bool contains){
+    auto it=sequences.begin();
+    for(int i=0;i<nb;i++){
+        if(rand()%100>=percent){
+            sequencetest(*it,cb,contains);
+            it++;
+        }else{
+            if(contains){
+                successivecontainsrequest((*it).size(),cb);
+            }else{
+                successivesuccessorrequest((*it).size(),cb);
+            }
+        }
+    }
+
+}
+list<list<uint64_t>> loadseqbuff(istream& f,KmerManipulator* a){
+    std::string tmp;
+    list<list<uint64_t>> seqbuff;
+    while(getline(f,tmp)){
+        seqbuff.push_back(a->encodesequence(tmp));
+    }
+    return seqbuff;
 }
 
 std::string toBinary(int n)
@@ -114,78 +149,60 @@ std::string toBinary(int n)
     return r;
 }
 
-/*
-./ request file k nb succesive type firstkmer
-file the file with the kmer(for now only the one needed to make the object, add the serialized version later)
-k the length of the kmer(max31)
-nb the number of the request to test
-successive, a boolean that indicate the type of request tested(0 random 1 successive)
-type contains or successor to test
-library BM or SDSL
-firstkmer the first kmer to test and for successive its the one that is used as a base for the next one 
-*/
+
 int main(int argc, char* argv[]){
-    std::string first("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-    if((argc!=8)&&(argc!=7)){
+    if((argc!=8)&&(argc!=7)&&(argc!=6)){
         std::cout<<argc<<std::endl;
-        std::cout<<"./main file k nb random type library first\n";
-        std::cout<<"file the file wherer the kmer are\n";
+        std::cout<<"./main file k nb random type percent sfile\n";
+        std::cout<<"file the file wherer the kmer sorted are\n";
         std::cout<<"k the length of the kmer\n";
         std::cout<<"nb the number of the request to test\n";
-        std::cout<<"random or successive kmer to test\n";
+        std::cout<<"random or  kmer sequence to test\n";
         std::cout<<"type, contain or successor\n";
-        std::cout<<"library BM or SDSL\n";
-        std::cout<<"firstkmer optional the first kmer to test and for successive its the one that is used as a base for the next one ";
+        std::cout<<"percent the percentage of kmer/sequence that exist to be tested\n";
+        std::cout<<"sfile the shuffled file with kmer or a file containing sequence we know exist(not formally necessary but its the point of it)";
         std::cout<<std::endl;
         exit(1);
-    }
-    if(argc!=7){
-        first=argv[8];
     }
     std::ifstream f(argv[1], std::ios::in);
     KmerManipulatorACGT km(atoi(argv[2]));    
     KmerManipulatorACGT k1(atoi(argv[2])-1);
-    uint64_t first1=k1.encode(first);
-    if(argv[7]=="BM"){
-        ConwayBromageBM cbd(f,&km);
-        auto start = std::chrono::steady_clock::now();
-        if(argv[4]=="successive"){
-            if(argv[5]=="contains"){
-                successivecontainsrequest(atoi(argv[3]),cbd,first1);
-            }else{
-                successivesuccessorrequest(atoi(argv[3]),cbd,first1);
-            }
+    ConwayBromageSD cbd(f,&km);
+    auto start = std::chrono::steady_clock::now();
+    if(argv[4]=="sequence"){
+        if(argc!=6&&atoi(argv[6])>0){
+            std::ifstream fs(argv[7]);
+            auto seqbuff=loadseqbuff(fs,&k1);
+            start = std::chrono::steady_clock::now();
+            percentsequencetest(atoi(argv[3]),atoi(argv[6]),seqbuff,cbd,(argv[5]=="contains"));
         }else{
+            start = std::chrono::steady_clock::now();
             if(argv[5]=="contains"){
-                randomcontainsrequest(atoi(argv[3]),cbd);
+                successivecontainsrequest(atoi(argv[3]),cbd);
             }else{
-                randomsuccessorsrequest(atoi(argv[3]),cbd);
+                successivesuccessorrequest(atoi(argv[3]),cbd);
             }
         }
-        auto end = std::chrono::steady_clock::now();
-        std::chrono::duration<double> elapsed_seconds = end-start;
-        std::cout<<elapsed_seconds.count()<<std::endl;
     }else{
-        ConwayBromageSD cbd(f,&km);
-        auto start = std::chrono::steady_clock::now();
-        if(argv[4]=="successive"){
-            if(argv[5]=="contains"){
-                successivecontainsrequest(atoi(argv[3]),cbd,first1);
-            }else{
-                successivesuccessorrequest(atoi(argv[3]),cbd,first1);
-            }
+        if(argc!=6&&atoi(argv[6])>0){
+            std::ifstream fs(argv[7]);
+            auto tmp=buffer((atoi(argv[3])*2*atoi(argv[6]))/100,fs,&k1);
+            start = std::chrono::steady_clock::now();
+            percenttest(atoi(argv[3]),atoi(argv[6]),tmp,cbd,(argv[5]=="contains"));
         }else{
+            start = std::chrono::steady_clock::now();
             if(argv[5]=="contains"){
                 randomcontainsrequest(atoi(argv[3]),cbd);
             }else{
                 randomsuccessorsrequest(atoi(argv[3]),cbd);
             }
-        }
-        auto end = std::chrono::steady_clock::now();
-        std::chrono::duration<double> elapsed_seconds = end-start;
-        std::cout<<elapsed_seconds.count()<<std::endl;
 
+        }
     }
+    auto end = std::chrono::steady_clock::now();
+    std::chrono::duration<double> elapsed_seconds = end-start;
+    std::cout<<elapsed_seconds.count()<<std::endl;
+
     
 
 }

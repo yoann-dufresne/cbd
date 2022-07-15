@@ -2,6 +2,7 @@
 #define KMANIP_H
 #include <cstdlib>
 #include <string>
+#include <list>
 using namespace std;
 class KmerManipulator{  //abstract class
 protected:
@@ -17,6 +18,7 @@ public:
     virtual uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide) = 0;
     virtual char decodeNucleotide(const uint8_t nucleotide) = 0;
     virtual int getSize() = 0;  
+    virtual list<uint64_t> encodesequence(const std::string &word)=0;
 };
 
 ///KmerManipulator for ACGT encoding : permits to apply operations on k-mers in ACGT format
@@ -34,6 +36,7 @@ public:
     uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide);
     char decodeNucleotide(const uint8_t nucleotide);
     int getSize();
+    list<uint64_t> encodesequence(const std::string &word);
 };
 
 ///KmerManipulator for ACTG encoding : permits to apply operations on k-mers in ACTG format
@@ -51,5 +54,6 @@ public:
     uint8_t reverseComplementOfNucleotide(const uint8_t nucleotide);
     char decodeNucleotide(const uint8_t nucleotide);
     int getSize();
+    list<uint64_t> encodesequence(const std::string &word);
 };
 #endif //KMANIP_H
