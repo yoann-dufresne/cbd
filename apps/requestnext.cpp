@@ -5,7 +5,7 @@
 #include <queue>
 #include <stack>
 #include <unordered_set>
-
+#include <list>
 
 
 unordered_set<uint64_t> requestnext(int range, ConwayBromage& cb, uint64_t kmer){
@@ -108,16 +108,36 @@ unordered_set<uint64_t> requestnext(int range, ConwayBromage& cb, uint64_t kmer)
     return viewed;
 
 }
+/**
+ * @brief iterate over the list of kmer and call next on each of them
+ */
+void multnextrequest(int range,ConwayBromage& cb,list<uint64_t> kmers){
+    for(uint64_t tmp : kmers){
+        requestnext(range,cb,tmp);
+    }
+}
+/*
+./main file k range mult mfile/first
+file the file with sorted kmer to be inserted
+range the range wanted for next request
+mult a boolean indicating if we want multiple request or just one, 1 mean multiple
+mfile/first either the file who contain all the kmer to test next on, or a kmer in the case of only one request
 
-int main(){
-    KmerManipulatorACGT tmp = KmerManipulatorACGT(31);
-    std::ifstream f("./sorted/sorted_covid", std::ios::in);
+
+
+
+
+*/
+
+int main(int argc,char* argv[]){
+    KmerManipulatorACGT tmp = KmerManipulatorACGT(atoi(argv[2]));
+    std::ifstream f(argv[1], std::ios::in);
     ConwayBromageSD test(f,&tmp);
-    KmerManipulatorACGT km(30);
-    uint64_t tmp3=km.encode("GTCCAAATTTTGTATTTCCCTTAAATTCCA");
-    auto a=requestnext(2,test,tmp3);
-    unordered_set<uint64_t> :: iterator itr;
-    for (itr = a.begin(); itr != a.end(); itr++)
-        cout << km.decode(*itr) << endl;
+    KmerManipulatorACGT km(atoi(argv[2])-1);
+    if(atoi(argv[4])){
+        multnextrequest(atoi(argv[3]),test,)
+    }else{
+        requestnext(atoi(argv[3]),test,km.encode(argv[5]));
+    }
     
 }
