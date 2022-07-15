@@ -39,6 +39,7 @@ unordered_set<uint64_t> requestnext(int range, ConwayBromage& cb, uint64_t kmer)
     }
 
     for(int i=1;i<range;i++){
+        std::cout<<i<<std::endl;
         if(i%2==0){
             while(!kmerstack2.empty()){
                 kmertmp=kmerstack2.top();
@@ -95,6 +96,15 @@ unordered_set<uint64_t> requestnext(int range, ConwayBromage& cb, uint64_t kmer)
  
         }
     }
+    while(!kmerstack1.empty()){
+        kmertmp=kmerstack1.top();
+        viewed.insert(kmertmp);
+        kmerstack1.pop();
+    }while(!kmerstack2.empty()){
+        kmertmp=kmerstack2.top();
+        viewed.insert(kmertmp);
+        kmerstack2.pop();
+    }
     return viewed;
 
 }
@@ -105,7 +115,7 @@ int main(){
     ConwayBromageSD test(f,&tmp);
     KmerManipulatorACGT km(30);
     uint64_t tmp3=km.encode("GTCCAAATTTTGTATTTCCCTTAAATTCCA");
-    auto a=requestnext(50,test,tmp3);
+    auto a=requestnext(2,test,tmp3);
     unordered_set<uint64_t> :: iterator itr;
     for (itr = a.begin(); itr != a.end(); itr++)
         cout << km.decode(*itr) << endl;
