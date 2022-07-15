@@ -22,7 +22,7 @@ void randomsuccessorsrequest(int nb,ConwayBromage& cb){
     for(int i=0;i<nb;i++){
         cb.successors(rand()%((uint64_t)(std::pow(4,(cb.getKmerManipulator()->getSize()-1) ) ) ) );
     }
-
+}
 void linearsuccessorsrequest(int nb,ConwayBromage& cb,int start=0,int jump=1){
     for(int i=start;i<nb+start*jump;i+=jump){
         cb.contains(i);
