@@ -22,8 +22,6 @@ process test{
     output :
     file "result${pn}"
 
-    cpus 1
-    memory 13.GB
     script :
     """
     echo "${kmer}\nk=31\n${x}\n${r}\n${t}\n">result${pn}

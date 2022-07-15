@@ -25,3 +25,10 @@ data
 result
 
 bin/timerequest
+bin/nextrequest
+
+result*
+sequences*
+shuffled
+
+*.png
