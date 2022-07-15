@@ -38,7 +38,8 @@ ConwayBromage::ConwayBromage(KmerManipulator* km){
     m_RC_shifted[2] = m_RC[2] << nbOfBitsToShift;
     m_RC_shifted[3] = m_RC[3] << nbOfBitsToShift;
     
-    m_nucleotides_shifted[0] = (uint64_t) 0 << nbOfBitsToShift;
+
+    m_nucleotides_shifted[0] = (uint64_t)0 << nbOfBitsToShift;
     m_nucleotides_shifted[1] = (uint64_t)1 << nbOfBitsToShift;
     m_nucleotides_shifted[2] = (uint64_t)2 << nbOfBitsToShift;
     m_nucleotides_shifted[3] = (uint64_t)3 << nbOfBitsToShift;
@@ -223,8 +224,6 @@ uint8_t ConwayBromageSD::successors(uint64_t Kmer) const{
             res ^= m_correspondingBitValueForNextPmers[i];
         }
         PmerPrev = Kmer + m_nucleotides_shifted[i]; //equals to AX then CX then GX then TX where X is the Kmer
-        // bitset<64> tmp=m_nucleotides_shifted[i];
-        // std::cout<<tmp<<std::endl;
         RC_PmerPrev = RC_Kmer_ShiftedOf2Bits + m_RC[i];
         if(m_sequence[(PmerPrev < RC_PmerPrev)?PmerPrev:RC_PmerPrev]){
             res ^= m_correspondingBitValueForPrevPmers[i];
@@ -254,6 +253,54 @@ ConwayBromageSD ConwayBromageSD::deserialize(std::string filename,KmerManipulato
     return ret;
 }
 
+
+//
+//  an Intermediate object to contain a vector of bitvector to circumvent the fact that the max of bm is 2^48
+//
+
+/**
+ * @brief 
+ * 
+ * @param nb the number of bvector we want in our vector
+ */
+Intermediate::Intermediate(int nb){
+    std::vector<bm::bvector<>> tmp2;
+    nbv=nb;
+    vbv=tmp2;
+    vbv.resize(nb);
+    for(int i=0;i<nb;i++){
+        bm::bvector<> tmp;
+        tmp.set(0,false);
+        tmp.set_new_blocks_strat(bm::BM_GAP);
+        vbv.push_back(tmp);
+    }
+    
+}
+Intermediate::Intermediate(){
+    Intermediate(1);
+}
+Intermediate::Intermediate(std::vector<bm::bvector<>>& tmp2,int a){
+    vbv=tmp2;
+    nbv=a;
+}
+void Intermediate::set(uint64_t id){
+    uint64_t i=id & mask;
+    i=i>>48;
+    id=id&mask2;
+    vbv.at(i).set(id);
+}
+
+int Intermediate::present(uint64_t id)const{
+    uint64_t i=id & mask;
+    i=i>>48;
+    id=id&mask2;
+    return vbv.at(i)[id];
+}
+void Intermediate::optimize(){
+    for(int i=0;i<vbv.size();i++){
+        vbv[i].optimize();
+    }
+}
 //
 //  ConwayBromage object with a bit-magic succint bit-vector, to test the perfomance difference between the 2 implementation
 //
@@ -276,6 +323,14 @@ ConwayBromageSD ConwayBromageSD::deserialize(std::string filename,KmerManipulato
  * @warning The k-mers in the istream must be sorted either in lexicographical order (A<C<G<T) or in A<C<T<G. It depends on the encoding format.
  */
 ConwayBromageBM::ConwayBromageBM(istream& kmerFlux, KmerManipulator* km) : ConwayBromage(km){
+    Intermediate builder(1);
+    m_sequence=builder;
+    if(km->getSize()>24){
+        uint64_t number=0;
+        number=(uint64_t)1<<((km->getSize()-24)*2);// the number of bvector needed to have the equivalent of one bvector with the  range we need
+        Intermediate builder(number);
+        m_sequence=builder;
+    }
 
     string line("");
     uint64_t numberOfKmer = 0;
@@ -286,8 +341,6 @@ ConwayBromageBM::ConwayBromageBM(istream& kmerFlux, KmerManipulator* km) : Conwa
     kmerFlux.seekg(0, ios::beg);    //Return to the beginning of the file
     uint64_t one = 1;
     uint64_t sdvSize = one << ((2*m_kmerManipulator->getSize())-1); //Creation of the total length to create the sd_vector_builder
-    bm::bvector<> builder(sdvSize);
-    builder.set_new_blocks_strat(bm::BM_GAP);
     uint64_t previousKmer(0);
     while(getline(kmerFlux, line)){
         uint64_t k = m_kmerManipulator->encode(line);
@@ -301,12 +354,10 @@ ConwayBromageBM::ConwayBromageBM(istream& kmerFlux, KmerManipulator* km) : Conwa
             cout << "The file is not sort in the ascending order" << endl;
             exit(1);
         }
-        builder.set(k);   
+        m_sequence.set(k);   
         previousKmer = k;
     }
-    std::cout<<bm::id_max<<std::endl;
-    builder.optimize();
-    m_sequence = builder;
+    m_sequence.optimize();
     m_limit = (sdvSize >> 1);//changed from the original code source, otherwise it block contains and successor for some case
 
 }
@@ -316,7 +367,7 @@ ConwayBromageBM::ConwayBromageBM(istream& kmerFlux, KmerManipulator* km) : Conwa
  * @param sdv - An sd_vector which represents the sequence.
  * @param km - A KmerManipulator.
  */
-ConwayBromageBM::ConwayBromageBM(bm::bvector<> const& sdv, KmerManipulator* km) : ConwayBromage(km){
+ConwayBromageBM::ConwayBromageBM(Intermediate&  sdv, KmerManipulator* km) : ConwayBromage(km){
     m_sequence = sdv; //copy of the sd_vector
 }
 
@@ -348,26 +399,20 @@ bool ConwayBromageBM::contains(uint64_t Kmer) const{
         //next
         RC_PmerNext = RC_Kmer + m_RC_shifted[i]; //YX where X is the reverse complement of the kmer and Y is the reverse complement of the last nucleotide of the pmer
         
-        if(m_sequence[(PmerNext < RC_PmerNext)?PmerNext:RC_PmerNext]){
-            std::cout<<((PmerNext < RC_PmerNext)?PmerNext:RC_PmerNext)<<std::endl;
+        if(m_sequence.present((PmerNext < RC_PmerNext)?PmerNext:RC_PmerNext)){
             return true;
         } 
 
         //previous
         PmerPrev = Kmer + m_nucleotides_shifted[i]; //equals to AX then CX then GX then TX where X is the Kmer
         RC_PmerPrev = RC_Kmer_ShiftedOf2Bits + m_RC[i];
-        if(m_sequence[(PmerPrev < RC_PmerPrev)?PmerPrev:RC_PmerPrev]){ 
-            std::cout<<((PmerPrev < RC_PmerPrev)?PmerPrev:RC_PmerPrev)<<std::endl;
+        if(m_sequence.present((PmerPrev < RC_PmerPrev)?PmerPrev:RC_PmerPrev)){ 
             return true;
         }
         
         PmerNext++; //equals to XA then XC then XG then XT
     }
     return false;
-}
-int ConwayBromageBM::test(){
-    return m_sequence[4603702991759849472];
-
 }
 
 /**
@@ -410,12 +455,12 @@ uint8_t ConwayBromageBM::successors(uint64_t Kmer) const{
 
     for(int i = 0; i < 4; i++){ 
         RC_PmerNext = RC_Kmer + m_RC_shifted[i]; //YX where X is the reverse complement of the kmer and Y is the reverse complement of the last nucleotide of the pmer
-        if(m_sequence[(PmerNext < RC_PmerNext)?PmerNext:RC_PmerNext]){ //if the pmer is present 
+        if(m_sequence.present((PmerNext < RC_PmerNext)?PmerNext:RC_PmerNext)){ //if the pmer is present 
             res ^= m_correspondingBitValueForNextPmers[i];
         }
         PmerPrev = Kmer + m_nucleotides_shifted[i]; //equals to AX then CX then GX then TX where X is the Kmer
         RC_PmerPrev = RC_Kmer_ShiftedOf2Bits + m_RC[i];
-        if(m_sequence[(PmerPrev < RC_PmerPrev)?PmerPrev:RC_PmerPrev]){
+        if(m_sequence.present((PmerPrev < RC_PmerPrev)?PmerPrev:RC_PmerPrev)){
             res ^= m_correspondingBitValueForPrevPmers[i];
         }
         PmerNext++; //equals to XA then XC then XG then XT
@@ -425,20 +470,34 @@ uint8_t ConwayBromageBM::successors(uint64_t Kmer) const{
 }
 
 
+
 /**
  * Returns the compressed sequence.
  * @return an sd_vector
  */
-bm::bvector<> ConwayBromageBM::getSequence(){
+Intermediate ConwayBromageBM::getSequence(){
     return m_sequence;
 }
+
+
+
+
 /**
  * @brief serialize the CBBM object 
  * 
  * @param output 
  * @return int 
  */
-int ConwayBromageBM::serialize(std::ostream& output){
+//TODO:serialization need to be redo after change
+int ConwayBromageBM::serialize(std::string dirpath){
+    std::filesystem::create_directory(dirpath);
+    for(int i=0;i<m_sequence.nbv;i++){
+        std::ofstream tmp(dirpath+"/"+std::to_string(i));
+        serializeaux(tmp,m_sequence.vbv.at(i));
+        tmp.close();
+    }
+}
+int ConwayBromageBM::serializeaux(std::ostream& output, bm::bvector<>& sequence){
     unsigned char* buf = 0;
     try{
         bm::serializer<bm::bvector<> > bvs;
@@ -446,10 +505,10 @@ int ConwayBromageBM::serialize(std::ostream& output){
         bvs.gap_length_serialization(true);
         bm::serializer<bm::bvector<> >::buffer sbuf;
         {
-            bvs.serialize(m_sequence, sbuf);
+            bvs.serialize(sequence, sbuf);
             buf = sbuf.data();
             auto sz = sbuf.size();
-            cout << "BV Serialized size:" << sz << endl;
+            std::cout<<sz<<std::endl;
             output.write((const char*)sbuf.data(),sz);
 
         }
@@ -462,22 +521,49 @@ int ConwayBromageBM::serialize(std::ostream& output){
 
     return 0;
 }
+ConwayBromageBM ConwayBromageBM::deserialize(std::string dirpath,KmerManipulator* km){
+    int tmp=std::pow(2,(km->getSize()-24)*2);
+    std::vector<bm::bvector<>> tmp2;
+    for(int i=0;i<tmp;i++){
+        std::ifstream ftmp(dirpath+"/"+std::to_string(i),std::ios::binary);
 
-ConwayBromageBM ConwayBromageBM::deserialize(std::istream& bitVector,KmerManipulator* km){
-    bm::serializer<bm::bvector<> >::buffer sbuf;
-    bm::bvector<> bv;
-    unsigned len;
-    bitVector.read((char*) &len, std::streamsize(sizeof(len)));
-    sbuf.resize(len, false); 
-    bitVector.read((char*) sbuf.data(), std::streamsize(len));//this make an error if tested with bad() but return correctly the data from the file; if the function don't work at some point this is surely responsible
-    /*if(!bitVector.good()){
-        std::cout<<"bloup"<<std::endl;
-    }*/
-    bm::deserialize(bv, sbuf.data()); 
-    ConwayBromageBM ret(bv,km);
-    std::cout<<std::hex<<ret.successors(10)<<std::endl;
-    return ret;
+        bm::bvector bmtmp;//=deserializeaux(ftmp);
+        bm::serializer<bm::bvector<> >::buffer sbuf;
+        read_bvector(ftmp,bmtmp,sbuf);
+        tmp2.push_back(bmtmp);
+        ftmp.close();
+    }
+    Intermediate i(tmp2,tmp);
+    return ConwayBromageBM(i,km);
+    
+
+
 }
+
+int ConwayBromageBM::read_bvector(std::ifstream& bv_file,
+                  bm::bvector<>& bv,
+                  bm::serializer<bm::bvector<> >::buffer& sbuf)
+{
+    if (!bv_file.good())
+        return -1;
+    bv_file.seekg(0, ios::end);
+    unsigned int len = bv_file.tellg();
+    bv_file.seekg(ios::beg);
+    if (!bv_file.good())
+        return -3;
+    if (!len)
+        return -2; // 0-len detected (broken file)
+    std::cout<<len<<std::endl;
+    sbuf.resize(len, false); // resize without content preservation
+    bv_file.read((char*) sbuf.data(), std::streamsize(len));
+    if (!bv_file.good())
+        return -4;
+    
+    bm::deserialize(bv, sbuf.data());
+ 
+    return 0;
+}
+
 
 
 

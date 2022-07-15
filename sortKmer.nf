@@ -1,6 +1,6 @@
 #!/usr/bin/env nextflow
 
-data=Channel.fromPath('./data/*.fasta')
+data=Channel.fromPath('/home/oceane/dev/data/*.fasta')
 
 
 process countKmer {         
@@ -9,11 +9,13 @@ process countKmer {
     
     output :
     tuple file("${dataentry.baseName}.kmc_pre"), file("${dataentry.baseName}.kmc_suf") into bin
+    
+    memory 5.GB
 
     script:
     """
     mkdir bloup
-    kmc -fm -ci1 ${dataentry} ${dataentry.baseName} .
+    kmc -k31 -fm -ci1 ${dataentry} ${dataentry.baseName} .
     """
 }
 
@@ -22,6 +24,8 @@ process convert {
     tuple file(pre), file(suf) from bin
     output :
     file("dataout/${pre.baseName}") into txt
+
+    memory 5.GB
 
     script :
     """
@@ -32,15 +36,18 @@ process convert {
 
 //sort les kmer après qu'ils ait été mis en forme 
 process sortKmer { 
-    publishDir "./sorted/", mode: 'link' 
+    publishDir "/home/oceane/dev/sorted/", mode: 'link' 
                                                                                                                    
     input:
     file convert from txt
     output:
     file "sorted_${convert.baseName}"
+
+    memory 5.GB
+    cpus 4
     
     """
-    sort ${convert} > sorted_${convert.baseName}
+    sort --parallel=4 ${convert} > sorted_${convert.baseName}
     """
 
 

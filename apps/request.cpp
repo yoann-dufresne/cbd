@@ -4,6 +4,7 @@
 #include <bitset>
 #include <list>
 
+
 void randomcontainsrequest(int nb,ConwayBromage& cb){
     for(int i=0;i<nb;i++){
         cb.contains(rand()%((uint64_t)(std::pow(4,(cb.getKmerManipulator()->getSize()-1) ) ) ) );
@@ -16,11 +17,11 @@ void linearcontainsrequest(int nb,ConwayBromage& cb,int start=0,int jump=1){
     }
 }
 
+
 void randomsuccessorsrequest(int nb,ConwayBromage& cb){
     for(int i=0;i<nb;i++){
         cb.successors(rand()%((uint64_t)(std::pow(4,(cb.getKmerManipulator()->getSize()-1) ) ) ) );
     }
-}
 
 void linearsuccessorsrequest(int nb,ConwayBromage& cb,int start=0,int jump=1){
     for(int i=start;i<nb+start*jump;i+=jump){
@@ -37,6 +38,7 @@ uint64_t random64bit(){
 
 void successivecontainsrequest(int nb,ConwayBromage& cb){
     uint64_t kmer=random64bit();
+
     uint64_t mask=0;
     for(int i=0;i<cb.getKmerManipulator()->getSize()-1;i++){
         mask=mask|(uint64_t)1<<i*2|(uint64_t)1<<i*2+1;
@@ -47,10 +49,7 @@ void successivecontainsrequest(int nb,ConwayBromage& cb){
         cb.contains(kmer);
         kmer=(kmer<<2)&mask;
         int r=rand()%4;
-        kmer+=r;
-        // bitset<64> tmp(kmer);
-        // std::cout<<tmp<<std::endl;
-           
+        kmer+=r;          
     }
     
 }
@@ -70,6 +69,7 @@ void successivesuccessorrequest(int nb,ConwayBromage& cb){
         kmer+=r;
     }
 }
+
 
 list<uint64_t> buffer(int nb,istream& f,KmerManipulator* a){
     list<uint64_t> buff;

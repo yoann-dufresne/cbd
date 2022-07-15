@@ -5,7 +5,7 @@
 #include <fstream>
 #include <random>
 #include <chrono>
-#include <bm.h>
+#include <bm64.h>
 #include <ConwayBromageLib.h>
 #include <vector>
 #include <bitset>
@@ -22,11 +22,11 @@ std::string toBinary(int n)
 
 
 int main(int argc, char* argv[]){
-    KmerManipulatorACGT tmp = KmerManipulatorACGT(31);
+    KmerManipulatorACGT tmpkm = KmerManipulatorACGT(31);
     std::ifstream f(argv[1], std::ios::in);
-    ConwayBromageSD test(f,&tmp);
+    ConwayBromageSD test2(f,&tmpkm);
     f.close();
     KmerManipulatorACGT km(30);
-    std::cout<<toBinary(test.successors(km.encode("AAAAAGTCTGCTACTCGAAAAAAGTCTGCA")))<<std::endl;
+    //std::cout<<toBinary(test.successors(km.encode("AAAAAGTCTGCTACTCGAAAAAAGTCTGCA")))<<std::endl;
     
 }

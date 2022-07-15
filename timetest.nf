@@ -17,10 +17,13 @@ process test{
     publishDir "./result", mode: 'link' 
     input :
     tuple file(kmer),val(x),val(r),val(t) from data
-
+    
     val pn from process_number
     output :
     file "result${pn}"
+
+    cpus 1
+    memory 13.GB
     script :
     """
     echo "${kmer}\nk=31\n${x}\n${r}\n${t}\n">result${pn}
