@@ -3,6 +3,13 @@
 #include <sdsl/vectors.hpp>
 #include <bitset>
 #include <list>
+uint64_t random64bit(){
+    uint32_t km1=rand();
+    uint32_t km2=rand();
+    return  km1|(km2<<30);
+
+}
+
 list<uint64_t> randomskmer(int nb){
     list<uint64_t> ret;
     for(int i=0;i<nb;i++){
@@ -39,13 +46,7 @@ void linearsuccessorsrequest(int nb,ConwayBromage& cb,int start=0,int jump=1){
         cb.contains(i);
     }
 }
-uint64_t random64bit(){
-    uint32_t km1=rand();
-    uint32_t km2=rand();
-    return  km1|(km2<<30);
-
-}
-list<uint64_t> randomsequenc(int nb){
+list<uint64_t> randomsequenc(int size){
     uint64_t kmer=random64bit();
 
     uint64_t mask=0;
@@ -54,16 +55,16 @@ list<uint64_t> randomsequenc(int nb){
     }
 
     //choose randomly one of the next successor to 
-    for(int i=0;i<nb;i++){
+    for(int i=0;i<size;i++){
         kmer=(kmer<<2)&mask;
         int r=rand()%4;
         kmer+=r;          
     }
 }
-list<list<uint64_t>> randomlistseq(int nb,int nb2){
+list<list<uint64_t>> randomlistseq(int sizeseq,int nbseq){
     list<list<uint64_t>> ret;
-    for(int i=0;i<nb2;i++){
-        ret.push_back(randomsequenc(nb));
+    for(int i=0;i<nbseq;i++){
+        ret.push_back(randomsequenc(sizeseq));
     }
     return ret;
 }
@@ -71,11 +72,11 @@ list<list<uint64_t>> randomlistseq(int nb,int nb2){
 
 
 
-list<uint64_t> buffer(int nb,istream& f,KmerManipulator* a){
+list<uint64_t> buffer(int nb,istream& existkmer,KmerManipulator* a){
     list<uint64_t> buff;
     for(int i=0;i<nb;i++){
         std::string tmp;
-        getline(f,tmp);
+        getline(existkmer,tmp);
         buff.push_back(a->encode(tmp));
     }
     return buff;
@@ -132,6 +133,11 @@ void percentsequencetest(int nb,int percent,list<list<uint64_t>>& sequences,Conw
     }
 
 }
+void multiplesequencetest(list<list<uint64_t>>& buffer,ConwayBromage& cb,bool contains){
+    for(auto tmp : buffer){
+        sequencetest(tmp,cb,contains);
+    }
+}
 list<list<uint64_t>> loadseqbuff(istream& f,KmerManipulator* a){
     std::string tmp;
     list<list<uint64_t>> seqbuff;
@@ -176,19 +182,19 @@ int main(int argc, char* argv[]){
             start = std::chrono::steady_clock::now();
             percentsequencetest(atoi(argv[3]),atoi(argv[6]),seqbuff,cbd,(argv[5]=="contains"),rs);
         }else{
-            auto rs=randomsequenc(atoi(argv[3]));
+            auto rs=randomlistseq(64,atoi(argv[3]));
             start = std::chrono::steady_clock::now();
-            sequencetest(rs,cbd,(argv[5]=="contains"));
+            multiplesequencetest(rs,cbd,(argv[5]=="contains"));
         }
     }else{
         auto rk=randomskmer(atoi(argv[3]));
+
         if(argc!=6&&atoi(argv[6])>0){
             std::ifstream fs(argv[7]);
             auto tmp=buffer((atoi(argv[3])*2*atoi(argv[6]))/100,fs,&k1);
             start = std::chrono::steady_clock::now();
             percenttest(atoi(argv[3]),atoi(argv[6]),tmp,cbd,(argv[5]=="contains"),rk);
         }else{
-            auto rk=randomskmer(atoi(argv[3]));
             start = std::chrono::steady_clock::now();
             if(argv[5]=="contains"){
                 randomcontainsrequest(atoi(argv[3]),cbd,rk);
