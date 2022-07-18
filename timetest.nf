@@ -2,7 +2,6 @@
 data=Channel.fromPath('./sorted/*')
 rand = ['random','sequence']
 type = ['contain','successor']
-percent = ['5','10','20','50','100']
 number= ['1000']
 process_number= Channel.of(1..10000)
 
@@ -54,7 +53,7 @@ data2
 
 
 process percent {
-    publishDir "./resultpercentseq", mode: 'link' 
+    publishDir "./resultpercent", mode: 'link' 
     input :    
     tuple file(kmer),val(x),val(t),val(percent),file(shuf) from data2
     val pn from process_number
@@ -85,7 +84,7 @@ data3
 
 
 process percentsequence{
-    publishDir "./resultpercent", mode: 'link'
+    publishDir "./resultpercentseq", mode: 'link'
     input:
     tuple file(kmer),val(x),val(t),val(percent),val(s) from data3
     val pn from process_number
@@ -95,7 +94,7 @@ process percentsequence{
 
     script:
     """
-    echo "${kmer}\nk=31\n${x}\nrandom\n${t}\n${percent}%">result${pn}
+    echo "${kmer}\nk=31\n${x}\nsequence\n${t}\n${percent}%">result${pn}
     timerequest ${kmer} 31 ${x} sequence ${t} ${percent} ${s} >> result${pn}
     """
 
