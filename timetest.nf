@@ -4,7 +4,6 @@ rand = ['random','sequence']
 type = ['contain','successor']
 number= ['1000']
 process_number= Channel.of(1..10000)
-
 data 
     .combine(number)
     .combine(rand)
@@ -40,8 +39,8 @@ process shuffle{
 }
 data2=Channel.fromPath('./sorted/*')
 type = ['contain','successor']
-percent = ['5','10','20','50','100']
-number= ['1000']
+percent = ['5','10','15','20','25','30','35','40','45','50','55','60','65','70','75','80','85','90','95','100']
+number= ['1000000']
 process_number= Channel.of(1..10000)
 
 data2
@@ -62,7 +61,7 @@ process percent {
 
     script:
     """
-    echo "${kmer}\nk=31\n${x}\nrandom\n${t}\n${percent}%">result${pn}
+    echo "${kmer}\nk=31\n${x}\nrandom\n${t}\n${percent}">result${pn}
     timerequest ${kmer} 31 ${x} random ${t} ${percent} ${shuf} >> result${pn}
 
     """
@@ -71,8 +70,8 @@ process percent {
 }
 data3=Channel.fromPath('./sorted/*')
 type = ['contain','successor']
-percent = ['5','10','20','50','100']
-number= ['10']
+percent = ['5','10','15','20','25','30','35','40','45','50','55','60','65','70','75','80','85','90','95','100']
+number= ['100']
 process_number= Channel.of(1..10000)
 sequences=Channel.fromPath('./sequences/*')
 data3
@@ -94,7 +93,7 @@ process percentsequence{
 
     script:
     """
-    echo "${kmer}\nk=31\n${x}\nsequence\n${t}\n${percent}%">result${pn}
+    echo "${kmer}\nk=31\n${x}\nsequence\n${t}\n${percent}">result${pn}
     timerequest ${kmer} 31 ${x} sequence ${t} ${percent} ${s} >> result${pn}
     """
 
