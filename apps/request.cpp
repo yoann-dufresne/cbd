@@ -191,7 +191,7 @@ int main(int argc, char* argv[]){
 
         if(argc!=6&&atoi(argv[6])>0){
             std::ifstream fs(argv[7]);
-            auto tmp=buffer((atoi(argv[3])*2*atoi(argv[6]))/100,fs,&k1);
+            auto tmp=buffer(atoi(argv[3]),fs,&k1);
             start = std::chrono::steady_clock::now();
             percenttest(atoi(argv[3]),atoi(argv[6]),tmp,cbd,(argv[5]=="contains"),rk);
         }else{

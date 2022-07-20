@@ -1,12 +1,13 @@
 import os
 import matplotlib.pyplot as plt
+import sys
 
 def main():
-    a,b=dataFromRep("resultpercentseq")
+    a,b=dataFromRep("resultpercent")
     
     plt.plot(a,b)
     plt.minorticks_on()
-    plt.show()
+    plt.savefig(sys.argv[1])
 
 
 def dataFromFile(path):
