@@ -87,15 +87,15 @@ void percenttest(int nb,int percent,list<uint64_t>& buffer,ConwayBromage& cb, bo
     auto r=random.begin();
     for(int i=0;i<nb;i++){
         int p=rand()%100;
-        auto a=cb.getKmerManipulator();
         std::string tmp;
         if(p>=percent){
             if(contains){
                 cb.contains(*r);
+                r++;
             }else{
                 cb.successors(*r);
                 //std::cout<<"random"<<std::endl;
-
+                r++;
             }
         }else{
             if(contains){
