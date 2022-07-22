@@ -241,11 +241,21 @@ uint8_t ConwayBromageSD::successors(uint64_t Kmer) const{
 sdsl::sd_vector<> ConwayBromageSD::getSequence(){
     return m_sequence;
 }
-
+/**
+ * @brief serialize the datastructure 
+ * 
+ * @param filename the path to where serialize
+ */
 int ConwayBromageSD::serialize(std::string filename){
     store_to_file(m_sequence,filename);
     return 0;
 }
+/**
+ * @brief deserialize from a file to a CBD
+ * 
+ * @param filename the path where the serialized data is
+ * @param km the kmer manipulator to create the CBD object direcly
+ */
 ConwayBromageSD ConwayBromageSD::deserialize(std::string filename,KmerManipulator* km){  
     sdsl::sd_vector<> tmp;
     load_from_file(tmp,filename);
