@@ -139,7 +139,7 @@ ConwayBromageSD::ConwayBromageSD(istream& kmerFlux, KmerManipulator* km): Conway
  * @param km - A KmerManipulator.
  */
 ConwayBromageSD::ConwayBromageSD(sdsl::sd_vector<> const& sdv, KmerManipulator* km) : ConwayBromage(km){
-    m_sequence=sd_vector(sdv); //copy of the sd_vector
+    m_sequence=sdv; //copy of the sd_vector
 }
 
 /**
