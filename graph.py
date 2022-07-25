@@ -1,21 +1,51 @@
 import os
 import matplotlib.pyplot as plt
 import sys
+import plotly.graph_objects as go
+
 
 def main():
     spercent,stime,cpercent,ctime=dataFromRep(sys.argv[1])
-    a,b=average(spercent,stime)
-    c,d=average(cpercent,ctime)
-    print(a,b)
-    plt.plot(a,b,label="successor")
-    plt.plot(c,d,label="contain")
-    plt.legend(loc='upper center')
-    plt.minorticks_on()
-    plt.title("for 100000 test with kmer")
-    plt.xlabel("percentage")
-    plt.ylabel("time(s)")
-    plt.savefig(sys.argv[2])
+    fig = go.Figure()
+    fig.add_trace(go.Box(
+        y=stime,
+        x=spercent,
+        name='successor',
+        marker_color='#3D9970',
+        boxpoints=False, # no data points to force whisker to go to the extreme value
+    ))
+    fig.add_trace(go.Box(
+        y=ctime,
+        x=cpercent,
+        name='contains',
+        marker_color='#FF4136',
+        boxpoints=False, 
+    ))
+    fig.update_layout(
+    yaxis_title='time',
+    boxmode='group' # group together boxes of each percent
+    )
+    fig.show()
+    
 
+def processdata(percent,time):
+    ptmp=percent[0]
+    epercent=[]
+    atime=[]
+    i=0
+    tmptime=[]
+    for p in percent:
+        if p==ptmp:
+            tmptime.append(time[i])
+        else:
+            epercent.append(ptmp)
+            atime.append(tmptime)
+            tmptime=[time[i]]
+            ptmp=p
+        i+=1
+    epercent.append(ptmp)
+    atime.append(tmptime)
+    return epercent,atime
 # take two list(sorted) that contain a percentage and a time and average the time for each percentage present
 def average(percent,time):
     ptmp=percent[0]
