@@ -42,6 +42,7 @@ public:
     //constructors
     ConwayBromageSD(std::istream& kmerFlux, KmerManipulator* km);
     ConwayBromageSD(sdsl::sd_vector<> const& sdv, KmerManipulator* km);
+    ConwayBromageSD(KmerManipulator* km);
     //principal functions
     bool contains (uint64_t Kmer) const;
     uint8_t successors(uint64_t Kmer) const;

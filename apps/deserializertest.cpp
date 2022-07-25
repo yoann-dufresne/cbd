@@ -17,7 +17,5 @@
 
 int main(int argc, char* argv[]){
     KmerManipulatorACGT tmpkm = KmerManipulatorACGT(31);
-    sdsl::sd_vector<> tmp;
-    load_from_file(tmp,argv[1]);
-    //auto a=ConwayBromageSD::deserialize(argv[1],&tmpkm);
+    auto a=ConwayBromageSD::deserialize(argv[1],&tmpkm);
 }
