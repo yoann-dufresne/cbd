@@ -139,9 +139,9 @@ ConwayBromageSD::ConwayBromageSD(istream& kmerFlux, KmerManipulator* km): Conway
  * @param km - A KmerManipulator.
  */
 ConwayBromageSD::ConwayBromageSD(sdsl::sd_vector<> const& sdv, KmerManipulator* km) : ConwayBromage(km){
-    m_sequence=sd_vector(sdv); //copy of the sd_vector
+    m_sequence=sdv; //copy of the sd_vector
 }
-
+ConwayBromageSD::ConwayBromageSD(KmerManipulator* km):ConwayBromage(km){}
 /**
  * Check if the given (k-1)-mer is present. The (k-1)-mer can either be canonical or not.
  * @param Kmer - An uint64_t representing the (k-1)-mer.
@@ -241,15 +241,24 @@ uint8_t ConwayBromageSD::successors(uint64_t Kmer) const{
 sdsl::sd_vector<> ConwayBromageSD::getSequence(){
     return m_sequence;
 }
-
+/**
+ * @brief serialize the datastructure 
+ * 
+ * @param filename the path to where serialize
+ */
 int ConwayBromageSD::serialize(std::string filename){
     store_to_file(m_sequence,filename);
     return 0;
 }
+/**
+ * @brief deserialize from a file to a CBD
+ * 
+ * @param filename the path where the serialized data is
+ * @param km the kmer manipulator to create the CBD object direcly
+ */
 ConwayBromageSD ConwayBromageSD::deserialize(std::string filename,KmerManipulator* km){  
-    sdsl::sd_vector<> tmp;
-    load_from_file(tmp,filename);
-    ConwayBromageSD ret(tmp,km);
+    ConwayBromageSD ret(km);
+    load_from_file(ret.m_sequence,filename);
     return ret;
 }
 
