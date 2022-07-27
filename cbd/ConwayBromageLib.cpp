@@ -132,7 +132,6 @@ ConwayBromageSD::ConwayBromageSD(istream& kmerFlux, KmerManipulator* km): Conway
     
     m_sequence = builder;
 }
-ConwayBromageSD::ConwayBromageSD(KmerManipulator* km) : ConwayBromage(km){}
 
 /**
  * Second ConwayBromageSD constructor : Build the ConwayBromage object based on the sd_vector in parameter and the KmerManipulator.
@@ -248,8 +247,9 @@ int ConwayBromageSD::serialize(std::string filename){
     return 0;
 }
 ConwayBromageSD ConwayBromageSD::deserialize(std::string filename,KmerManipulator* km){  
-    ConwayBromageSD ret(km);
-    load_from_file(ret.m_sequence,filename);
+    sdsl::sd_vector<> tmp;
+    load_from_file(tmp,filename);
+    ConwayBromageSD ret(tmp,km);
     return ret;
 }
 

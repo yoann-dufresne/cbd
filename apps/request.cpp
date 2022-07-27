@@ -161,7 +161,7 @@ int main(int argc, char* argv[]){
     if((argc!=8)&&(argc!=7)&&(argc!=6)){
         std::cout<<argc<<std::endl;
         std::cout<<"./main file k nb random type percent sfile\n";
-        std::cout<<"file a serialized version of CBD(to avoid using a lot of time to construct it)\n";
+        std::cout<<"file the file wherer the kmer sorted are\n";
         std::cout<<"k the length of the kmer\n";
         std::cout<<"nb the number of the request to test\n";
         std::cout<<"random or  kmer sequence to test\n";
@@ -171,9 +171,10 @@ int main(int argc, char* argv[]){
         std::cout<<std::endl;
         exit(1);
     }
+    std::ifstream f(argv[1], std::ios::in);
     KmerManipulatorACGT km(atoi(argv[2]));    
     KmerManipulatorACGT k1(atoi(argv[2])-1);
-    ConwayBromageSD cbd=ConwayBromageSD::deserialize(argv[1],&km);
+    ConwayBromageSD cbd(f,&km);
     auto start = std::chrono::steady_clock::now();
     if(argv[4]=="sequence"){
         if(argc!=6&&atoi(argv[6])>0){
