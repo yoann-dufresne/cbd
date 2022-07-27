@@ -5,7 +5,8 @@ import plotly.graph_objects as go
 
 
 def main():
-    spercent,stime,cpercent,ctime=dataFromRep(sys.argv[1])
+    divider=testnumber(sys.argv[1])
+    spercent,stime,cpercent,ctime=dataFromRep(sys.argv[1],divider)
     fig = go.Figure()
     fig.add_trace(go.Box(
         y=stime,
@@ -27,62 +28,26 @@ def main():
     )
     fig.show()
     
+def testnumber(path):
+    files = os.listdir(path)
+    file = open(path+"/"+files[0], "r")
+    for i in range(2):
+        file.readline()
+    return int(file.readline())
 
-def processdata(percent,time):
-    ptmp=percent[0]
-    epercent=[]
-    atime=[]
-    i=0
-    tmptime=[]
-    for p in percent:
-        if p==ptmp:
-            tmptime.append(time[i])
-        else:
-            epercent.append(ptmp)
-            atime.append(tmptime)
-            tmptime=[time[i]]
-            ptmp=p
-        i+=1
-    epercent.append(ptmp)
-    atime.append(tmptime)
-    return epercent,atime
-# take two list(sorted) that contain a percentage and a time and average the time for each percentage present
-def average(percent,time):
-    ptmp=percent[0]
-    sum=0
-    nb=0
-    avepercent=[]
-    avetime=[]
-    i=0
-    for p in percent:
-        if p==ptmp:
-            sum+=time[i]
-            nb+=1
-        else:
-            avepercent.append(ptmp)
-            avetime.append(sum/nb)
-            sum=time[i]
-            nb=1
-            ptmp=p
-            print(p)
-        i+=1
-    avepercent.append(ptmp)
-    avetime.append(sum/nb)
-
-    return avepercent,avetime
 
 
 #return the usefull data from one file
-def dataFromFile(path):
+def dataFromFile(path,divider):
     file = open(path, "r")
     for i in range(4):
         file.readline()
     cs=(file.readline())
     percent=int(file.readline())
-    time=float(file.readline())
+    time=float(float(file.readline())/divider)
     return (percent, time,cs)
 #return all the sorted data from a directory
-def dataFromRep(dirpath):
+def dataFromRep(dirpath,divider):
     files = os.listdir(dirpath)
     spercent=[]
     stime=[]
@@ -91,7 +56,7 @@ def dataFromRep(dirpath):
     successor=[]
     contain=[]
     for name in files:
-        a=dataFromFile(dirpath+"/"+name)
+        a=dataFromFile(dirpath+"/"+name,divider)
         if(a[2]=='successor\n'):  
             successor.append((a[0],a[1]))
         else:

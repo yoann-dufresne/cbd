@@ -71,18 +71,20 @@ number= ['1000']
 process_number= Channel.of(1..10000)
 iteration=Channel.of(1..10)
 shufsequence=Channel.fromPath('./sequencegen.py')
+fasta=Channel.fromPath("./data")
 data3
     .combine(number)
     .combine(type)
     .combine(percent)
     .combine(iteration)
     .combine(shufsequence)
+    .combine(fasta)
     .set{data3}
 
 process percentsequence{
     publishDir "./resultpercentseq", mode: 'link'
     input:
-    tuple file(kmer),val(x),val(t),val(percent),val(i),file(shufsequence) from data3
+    tuple file(kmer),val(x),val(t),val(percent),val(i),file(shufsequence),file(fasta) from data3
     val pn from process_number
 
     output:
@@ -92,7 +94,7 @@ process percentsequence{
     cpus 1
     script:
     """
-    python3 ${shufsequence} ${kmer} >shuf
+    python3 ${shufsequence} ${fasta} >shuf
     echo "${kmer}\nk=31\n${x}\nsequence\n${t}\n${percent}">result${pn}
     timerequest ${kmer} 31 ${x} sequence ${t} ${percent} shuf >> result${pn}
     echo "${i}">>result${pn}
