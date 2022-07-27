@@ -16,6 +16,14 @@
 
 
 int main(int argc, char* argv[]){
+
     KmerManipulatorACGT tmpkm = KmerManipulatorACGT(31);
     auto a=ConwayBromageSD::deserialize(argv[1],&tmpkm);
+    std::ifstream f(argv[2]);
+    ConwayBromageSD b(f,&tmpkm);
+    for(uint64_t i=0;i<5000000;i++){ 
+        if(a.contains(i)!=b.contains(i)){
+            std::cout<<"error"<<std::endl;
+        }
+    }
 }

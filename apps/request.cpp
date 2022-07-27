@@ -169,10 +169,9 @@ int main(int argc, char* argv[]){
         std::cout<<std::endl;
         exit(1);
     }
-    std::ifstream f(argv[1], std::ios::in);
     KmerManipulatorACGT km(atoi(argv[2]));    
     KmerManipulatorACGT k1(atoi(argv[2])-1);
-    ConwayBromageSD cbd(f,&km);
+    ConwayBromageSD cbd=ConwayBromageSD::deserialize(argv[1],&km);
     auto start = std::chrono::steady_clock::now();
     if(argv[4]=="sequence"){
         if(argc!=6&&atoi(argv[6])>0){
