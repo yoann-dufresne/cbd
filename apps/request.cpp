@@ -82,20 +82,21 @@ list<uint64_t> buffer(int nb,istream& existkmer,KmerManipulator* a){
     return buff;
 }
 
+//do nb test with  a percentage that we know are in the structure
 void percenttest(int nb,int percent,list<uint64_t>& buffer,ConwayBromage& cb, bool contains,list<uint64_t>& random){
     std::list<uint64_t>::iterator it =buffer.begin();
     auto r=random.begin();
     for(int i=0;i<nb;i++){
         int p=rand()%100;
-        auto a=cb.getKmerManipulator();
         std::string tmp;
         if(p>=percent){
             if(contains){
                 cb.contains(*r);
+                r++;
             }else{
                 cb.successors(*r);
                 //std::cout<<"random"<<std::endl;
-
+                r++;
             }
         }else{
             if(contains){
@@ -119,6 +120,7 @@ void sequencetest(list<uint64_t>& buffer,ConwayBromage& cb,bool contains){
         }
     }
 }
+//do nb test with  a percentage that we know are in the structure
 void percentsequencetest(int nb,int percent,list<list<uint64_t>>& sequences,ConwayBromage& cb,bool contains,list<list<uint64_t>>& randomseq){
     auto it=sequences.begin();
     auto it2=randomseq.begin();
@@ -178,11 +180,11 @@ int main(int argc, char* argv[]){
             std::ifstream fs(argv[7]);
             auto seqbuff=loadseqbuff(fs,&k1);
             auto rs=randomlistseq((*seqbuff.begin()).size(),seqbuff.size());
-            start = std::chrono::steady_clock::now();
+            start = std::chrono::steady_clock::now();//start the chrono
             percentsequencetest(atoi(argv[3]),atoi(argv[6]),seqbuff,cbd,(argv[5]=="contains"),rs);
         }else{
             auto rs=randomlistseq(64,atoi(argv[3]));
-            start = std::chrono::steady_clock::now();
+            start = std::chrono::steady_clock::now();//start the chrono
             multiplesequencetest(rs,cbd,(argv[5]=="contains"));
         }
     }else{
@@ -190,7 +192,7 @@ int main(int argc, char* argv[]){
 
         if(argc!=6&&atoi(argv[6])>0){
             std::ifstream fs(argv[7]);
-            auto tmp=buffer((atoi(argv[3])*2*atoi(argv[6]))/100,fs,&k1);
+            auto tmp=buffer(atoi(argv[3]),fs,&k1);
             start = std::chrono::steady_clock::now();
             percenttest(atoi(argv[3]),atoi(argv[6]),tmp,cbd,(argv[5]=="contains"),rk);
         }else{

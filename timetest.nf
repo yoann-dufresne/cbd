@@ -1,101 +1,110 @@
 #!/usr/bin/env nextflow
 data=Channel.fromPath('./sorted/*')
+serial=Channel.fromPath('./serial/*')
 rand = ['random','sequence']
 type = ['contain','successor']
 number= ['1000']
 process_number= Channel.of(1..10000)
-
 data 
     .combine(number)
     .combine(rand)
     .combine(type)
+    .combine(serial)
     .set{data}
 
 
 process test{
     publishDir "./result", mode: 'link' 
     input :
-    tuple file(kmer),val(x),val(r),val(t) from data
+    tuple file(kmer),val(x),val(r),val(t),file(serial) from data
     
     val pn from process_number
     output :
     file "result${pn}"
 
+    memory 1.GB
+    cpus 1
     script :
     """
     echo "${kmer}\nk=31\n${x}\n${r}\n${t}\n">result${pn}
-    timerequest ${kmer} 31 ${x} ${r} ${t}  >> result${pn}
+    timerequest ${serial} 31 ${x} ${r} ${t}  >> result${pn}
     """ 
 }
-data4=Channel.fromPath('./sorted/*')
-process shuffle{
-    input :
-    file a from data4
-    output :
-    file "shuffled_tmp" into shuf
-    script:
-    """
-    shuf ${a} > shuffled_tmp
-    """
-}
+
 data2=Channel.fromPath('./sorted/*')
 type = ['contain','successor']
-percent = ['5','10','20','50','100']
-number= ['1000']
+percent = ['5','10','15','20','25','30','35','40','45','50','55','60','65','70','75','80','85','90','95','100']
+number= ['100000']
+serial=Channel.fromPath('./serial/*')
+iteration=channel.of(1..10)
 process_number= Channel.of(1..10000)
 
 data2
     .combine(number)
     .combine(type)
     .combine(percent)
-    .combine(shuf)
+    .combine(iteration)
+    .combine(serial)
     .set{data2}
 
 
 process percent {
     publishDir "./resultpercent", mode: 'link' 
     input :    
-    tuple file(kmer),val(x),val(t),val(percent),file(shuf) from data2
+    tuple file(kmer),val(x),val(t),val(percent),val(i),file(serial) from data2
     val pn from process_number
     output :
     file "result${pn}"
 
+    memory 1.GB
+    cpus 1
     script:
     """
-    echo "${kmer}\nk=31\n${x}\nrandom\n${t}\n${percent}%">result${pn}
-    timerequest ${kmer} 31 ${x} random ${t} ${percent} ${shuf} >> result${pn}
-
+    shuf ${kmer} -n ${x} > tmpshuf
+    echo "${kmer}\nk=31\n${x}\nrandom\n${t}\n${percent}">result${pn}
+    timerequest ${serial} 31 ${x} random ${t} ${percent} tmpshuf >> result${pn}
+    echo "${i}">>result${pn}
     """
 
 
 }
+serial=Channel.fromPath('./serial/*')
+
 data3=Channel.fromPath('./sorted/*')
 type = ['contain','successor']
-percent = ['5','10','20','50','100']
-number= ['10']
+percent = ['5','10','15','20','25','30','35','40','45','50','55','60','65','70','75','80','85','90','95','100']
+number= ['1000']
 process_number= Channel.of(1..10000)
-sequences=Channel.fromPath('./sequences/*')
+iteration=Channel.of(1..10)
+shufsequence=Channel.fromPath('./sequencegen.py')
+fasta=Channel.fromPath("./data/*")
 data3
     .combine(number)
     .combine(type)
     .combine(percent)
-    .combine(sequences)
+    .combine(iteration)
+    .combine(shufsequence)
+    .combine(fasta)
+    .combine(serial)
     .set{data3}
-
 
 process percentsequence{
     publishDir "./resultpercentseq", mode: 'link'
     input:
-    tuple file(kmer),val(x),val(t),val(percent),val(s) from data3
+    tuple file(kmer),val(x),val(t),val(percent),val(i),file(shufsequence),file(fasta),file(serial) from data3
     val pn from process_number
 
     output:
     file "result${pn}"
 
+    memory 1.GB
+    cpus 1
     script:
     """
-    echo "${kmer}\nk=31\n${x}\nsequence\n${t}\n${percent}%">result${pn}
-    timerequest ${kmer} 31 ${x} sequence ${t} ${percent} ${s} >> result${pn}
+    python3 ${shufsequence} ${fasta} >shuf
+    echo "${kmer}\nk=31\n${x}\nsequence\n${t}\n${percent}">result${pn}
+    timerequest ${serial} 31 ${x} sequence ${t} ${percent} shuf >> result${pn}
+    echo "${i}">>result${pn}
     """
 
 

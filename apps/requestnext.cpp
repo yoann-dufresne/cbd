@@ -7,7 +7,13 @@
 #include <unordered_set>
 #include <list>
 
-
+/**
+ * @brief return a set of all kmer in the range given,
+ * it work by pushing all neighbour kmer in a stack, then pop them and put all the neighbour of the neighbour in another stack, etc for the range given, 
+ * it check the set of all kmer already checked to don't have cycle
+ * 
+ * 
+ */
 unordered_set<uint64_t> requestnext(int range, ConwayBromage& cb, uint64_t kmer){
     unordered_set<uint64_t> viewed;
     stack<uint64_t> kmerstack1;
@@ -20,7 +26,7 @@ unordered_set<uint64_t> requestnext(int range, ConwayBromage& cb, uint64_t kmer)
     }
 
 
-    if(range){  
+    if(range){  //the init part
         uint8_t tmp=cb.successors(kmer);
         bitset<8> bloup=tmp;
         for(int i=0;i<8;i++){
@@ -37,8 +43,8 @@ unordered_set<uint64_t> requestnext(int range, ConwayBromage& cb, uint64_t kmer)
             }
         }
     }
-
-    for(int i=1;i<range;i++){
+    
+    for(int i=1;i<range;i++){ //alternate with 2 stack to explore the equivalent of the graphe
         std::cout<<i<<std::endl;
         if(i%2==0){
             while(!kmerstack2.empty()){
@@ -75,7 +81,7 @@ unordered_set<uint64_t> requestnext(int range, ConwayBromage& cb, uint64_t kmer)
                 for(int i=0;i<8;i++){
                     if(i<4){
                         if(succ&(1<<i)){
-                            uint64_t newkmer=(kmertmp>>2)+((uint64_t)(3-i)<<(cb.getKmerManipulator()->getSize()-2)*2);
+                            uint64_t newkmer=(kmertmp>>2)+((uint64_t)(3-i)<<(cb.getKmerManipulator()->getSize()-2)*2);//the new kmer 
                             
                             if(viewed.find(newkmer) == viewed.end()){//this check if the kmer has not already been seen 
                                 kmerstack2.push(newkmer);
