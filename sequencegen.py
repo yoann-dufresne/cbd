@@ -2,7 +2,7 @@ from Bio import SeqIO
 import random
 import sys
 def main():
-    print(test(500,1000))
+    printlist(test(500,1000))
 
 def test(size,number):
     list=[]
@@ -11,7 +11,10 @@ def test(size,number):
             x=random.randrange(len(seq_record))
             list.append(str(seq_record.seq[x:x+size]))
     return list
-
+def printlist(list):
+    for a in list:
+        print(a+"\n")
+    return 0
 
 
 if __name__ == "__main__":

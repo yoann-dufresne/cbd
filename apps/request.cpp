@@ -5,7 +5,7 @@
 #include <list>
 uint64_t random64bit(){
     uint32_t km1=rand();
-    uint32_t km2=rand();
+    uint64_t km2=rand();
     return  km1|(km2<<30);
 
 }
@@ -47,19 +47,22 @@ void linearsuccessorsrequest(int nb,ConwayBromage& cb,int start=0,int jump=1){
     }
 }
 list<uint64_t> randomsequenc(int size){
+    list<uint64_t> ret;
     uint64_t kmer=random64bit();
-
     uint64_t mask=0;
     for(int i=0;i<30;i++){
         mask=mask|(uint64_t)1<<i*2|(uint64_t)1<<i*2+1;
     }
-
+    kmer=kmer&mask;
+    ret.push_back(kmer);
     //choose randomly one of the next successor to 
     for(int i=0;i<size;i++){
         kmer=(kmer<<2)&mask;
         int r=rand()%4;
-        kmer+=r;          
+        kmer+=r;
+        ret.push_back(kmer);       
     }
+    return ret;
 }
 list<list<uint64_t>> randomlistseq(int sizeseq,int nbseq){
     list<list<uint64_t>> ret;
@@ -112,7 +115,7 @@ void percenttest(int nb,int percent,list<uint64_t>& buffer,ConwayBromage& cb, bo
 
 }
 void sequencetest(list<uint64_t>& buffer,ConwayBromage& cb,bool contains){
-    for(uint64_t a: buffer){
+    for(uint64_t a : buffer){
         if(contains){
             cb.contains(a);
         }else{
@@ -158,6 +161,7 @@ std::string toBinary(int n)
 
 
 int main(int argc, char* argv[]){
+    srand(time(NULL));
     if((argc!=8)&&(argc!=7)&&(argc!=6)){
         std::cout<<argc<<std::endl;
         std::cout<<"./main file k nb random type percent sfile\n";
@@ -175,17 +179,17 @@ int main(int argc, char* argv[]){
     KmerManipulatorACGT k1(atoi(argv[2])-1);
     ConwayBromageSD cbd=ConwayBromageSD::deserialize(argv[1],&km);
     auto start = std::chrono::steady_clock::now();
-    if(argv[4]=="sequence"){
+    if(std::string(argv[4])=="sequence"){
         if(argc!=6&&atoi(argv[6])>0){
             std::ifstream fs(argv[7]);
             auto seqbuff=loadseqbuff(fs,&k1);
             auto rs=randomlistseq((*seqbuff.begin()).size(),seqbuff.size());
             start = std::chrono::steady_clock::now();//start the chrono
-            percentsequencetest(atoi(argv[3]),atoi(argv[6]),seqbuff,cbd,(argv[5]=="contains"),rs);
+            percentsequencetest(atoi(argv[3]),atoi(argv[6]),seqbuff,cbd,(std::string(argv[5])=="contains"),rs);
         }else{
-            auto rs=randomlistseq(64,atoi(argv[3]));
+            auto rs=randomlistseq(500,atoi(argv[3]));
             start = std::chrono::steady_clock::now();//start the chrono
-            multiplesequencetest(rs,cbd,(argv[5]=="contains"));
+            multiplesequencetest(rs,cbd,(std::string(argv[5])=="contains"));
         }
     }else{
         auto rk=randomskmer(atoi(argv[3]));
@@ -194,10 +198,10 @@ int main(int argc, char* argv[]){
             std::ifstream fs(argv[7]);
             auto tmp=buffer(atoi(argv[3]),fs,&k1);
             start = std::chrono::steady_clock::now();
-            percenttest(atoi(argv[3]),atoi(argv[6]),tmp,cbd,(argv[5]=="contains"),rk);
+            percenttest(atoi(argv[3]),atoi(argv[6]),tmp,cbd,(std::string(argv[5])=="contains"),rk);
         }else{
             start = std::chrono::steady_clock::now();
-            if(argv[5]=="contains"){
+            if(std::string(argv[5])=="contains"){
                 randomcontainsrequest(atoi(argv[3]),cbd,rk);
             }else{
                 randomsuccessorsrequest(atoi(argv[3]),cbd,rk);
