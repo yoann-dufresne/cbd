@@ -6,14 +6,16 @@
 uint64_t random64bit(){
     uint32_t km1=rand();
     uint64_t km2=rand();
-    return  km1|(km2<<30);
+    return  km1|(km2<<29);
 
 }
 
 list<uint64_t> randomskmer(int nb){
     list<uint64_t> ret;
     for(int i=0;i<nb;i++){
+        auto a=random64bit();
         ret.push_back(random64bit());
+        std::cout<<(bitset<64>)a<<std::endl;
     }
     return ret;
 }
