@@ -131,11 +131,11 @@ void percentsequencetest(int nb,int percent,list<list<uint64_t>>& sequences,Conw
     auto it2=randomseq.begin();
     for(int i=0;i<nb;i++){
         if(rand()%100>=percent){
-            sequencetest(*it,cb,contains);
-            it++;
-        }else{
             sequencetest(*it2,cb,contains);
             it2++;
+        }else{
+            sequencetest(*it,cb,contains);
+            it++;
         }
     }
 
@@ -182,7 +182,7 @@ int main(int argc, char* argv[]){
     ConwayBromageSD cbd=ConwayBromageSD::deserialize(argv[1],&km);
     auto start = std::chrono::steady_clock::now();
     if(std::string(argv[4])=="sequence"){
-        if(argc!=6&&atoi(argv[6])>0){
+        if(argc!=6){
             std::ifstream fs(argv[7]);
             auto seqbuff=loadseqbuff(fs,&k1);
             auto rs=randomlistseq((*seqbuff.begin()).size(),seqbuff.size());
@@ -196,7 +196,7 @@ int main(int argc, char* argv[]){
     }else{
         auto rk=randomskmer(atoi(argv[3]));
 
-        if(argc!=6&&atoi(argv[6])>0){
+        if(argc!=6){
             std::ifstream fs(argv[7]);
             auto tmp=buffer(atoi(argv[3]),fs,&k1);
             start = std::chrono::steady_clock::now();
