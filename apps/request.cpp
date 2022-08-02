@@ -15,7 +15,6 @@ list<uint64_t> randomskmer(int nb){
     for(int i=0;i<nb;i++){
         auto a=random64bit();
         ret.push_back(random64bit());
-        std::cout<<(bitset<64>)a<<std::endl;
     }
     return ret;
 }
