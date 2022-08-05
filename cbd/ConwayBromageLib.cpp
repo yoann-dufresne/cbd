@@ -181,7 +181,7 @@ bool ConwayBromageSD::contains(uint64_t Kmer) const{
 }
 
 /**
- * Returns the successors of a (k-1)-mer. The (k-1)-mer can either be canonical or not. A (k-1)-mer has at minimum 0 successors and maximum 8 successors.
+ * Returns the neighbours of a (k-1)-mer. The (k-1)-mer can either be canonical or not. A (k-1)-mer has at minimum 0 neighbours and maximum 8 neighbours.
  * ### How it works ? 
  * Let's say the function takes as a parameter the integer which represents the (k-1)-mer GTT and we assume we are in ACGT encoding.
  * First, the method will generate the following k-mers : GTTA, GTTC, GTTG, GTTT, AGTT, CGTT, GGTT, TGTT.
@@ -190,29 +190,29 @@ bool ConwayBromageSD::contains(uint64_t Kmer) const{
  * GTTA and GTTT are, what we call next k-mers so we will store the information in the 4 left bits of the result (uint8_t).
  * CGTT and TGTT are previous k-mers so, this time, the information will be stored in the 4 right bits of the result.
  * Thus, the function will return 1001 0101 which corresponds to 149 in base 10.
- * It means that, in this example, the successors of the (k-1)-mer GTT are TTA, TTT, CGT and TGT.
+ * It means that, in this example, the neighbours of the (k-1)-mer GTT are TTA, TTT, CGT and TGT.
  *
  * @param Kmer : a (k-1)-mer.
- * @return a uint8_t which carry information about the presence/absence of the 8 potential successors of the (k-1)-mer.
+ * @return a uint8_t which carry information about the presence/absence of the 8 potential neighbours of the (k-1)-mer.
  * Read of the return : 
  * read the uint8_t under bit form : the first four elements are "next" k-mers, the last four are "previous"
  * Always the same reading direction : A then C then G then T regardless of the encoding
  * ### Example
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.cpp
- * uint8_t successors = cb.successors(78);
+ * uint8_t neighbours = cb.neighbours(78);
  * KmerManipulatorACGT km(3);
  * uint64_t intGTT = km.encode("GTT");
- * uint8_t successorsOfGTT = cb.successors(intGTT);
+ * uint8_t successorsOfGTT = cb.neighbours(intGTT);
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * @warning The method doesn't check the presence of the (k-1)-mer (so you have to do it on your own with the method contains for example).
  */
-uint8_t ConwayBromageSD::successors(uint64_t Kmer) const{
+uint8_t ConwayBromageSD::neighbours(uint64_t Kmer) const{
     if(Kmer > m_limit) { //we must have nonCompressedKmer < 4^(P-1)
         cout << "The value of the kmer must be equal or inferior to 4^(P-1) i.e " << m_limit << endl;
         return 0; //empty
     }
     uint8_t res = 0;
-    //we build the eight possible successors    
+    //we build the eight possible neighbours    
     uint64_t PmerPrev, RC_PmerNext, RC_PmerPrev;
     uint64_t PmerNext = Kmer << 2; //<-> XA where X is the Kmer
     uint64_t RC_Kmer = m_kmerManipulator->reverseComplement(Kmer) >> 2;

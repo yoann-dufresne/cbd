@@ -22,7 +22,7 @@ list<uint64_t> randomskmer(int nb){
 void randomcontainsrequest(int nb,ConwayBromage& cb,list<uint64_t> kmer){
     auto it=kmer.begin();
     for(int i=0;i<nb;i++){
-        cb.successors(*it);
+        cb.neighbours(*it);
         it++;
     }
 }
@@ -38,7 +38,7 @@ void linearcontainsrequest(int nb,ConwayBromage& cb,int start=0,int jump=1){
 void randomsuccessorsrequest(int nb,ConwayBromage& cb,list<uint64_t> kmer){
     auto it=kmer.begin();
     for(int i=0;i<nb;i++){
-        cb.successors(*it);
+        cb.neighbours(*it);
         it++;
     }
 }
@@ -98,7 +98,7 @@ void percenttest(int nb,int percent,list<uint64_t>& buffer,ConwayBromage& cb, bo
                 cb.contains(*r);
                 r++;
             }else{
-                cb.successors(*r);
+                cb.neighbours(*r);
                 //std::cout<<"random"<<std::endl;
                 r++;
             }
@@ -107,7 +107,7 @@ void percenttest(int nb,int percent,list<uint64_t>& buffer,ConwayBromage& cb, bo
                 cb.contains(*it);
                 it++;
             }else{
-                cb.successors(*it);
+                cb.neighbours(*it);
                 //std::cout<<a->decode(*it)<<std::endl;
                 it++;
             }
@@ -120,7 +120,7 @@ void sequencetest(list<uint64_t>& buffer,ConwayBromage& cb,bool contains){
         if(contains){
             cb.contains(a);
         }else{
-            cb.successors(a);
+            cb.neighbours(a);
         }
     }
 }

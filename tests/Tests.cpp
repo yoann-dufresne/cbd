@@ -83,9 +83,9 @@ const lest::test module[] =
                     EXPECT(canonicaler.getCanonical(172) == 144);
         },
 
-        //successors unit tests on small sd_vectors
-        CASE("successors with ACGT encoding : "){
-            cout << "\t--> successors with ACGT encoding" << endl;
+        //neighbours unit tests on small sd_vectors
+        CASE("neighbours with ACGT encoding : "){
+            cout << "\t--> neighbours with ACGT encoding" << endl;
             //it contains                   AC    AT CA CC       GA
             sd_vector<> sdv = bit_vector{0 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 };
             KmerManipulatorACGT km(2);
@@ -102,7 +102,7 @@ const lest::test module[] =
             bool result = true;
             //4 1-mers possible, so we check all of them
             for(int i(0); i < 4; i++){
-                uint8_t succ = cb.successors(i);
+                uint8_t succ = cb.neighbours(i);
                 //check if they are the same
                 if(TrueNext[i] != succ){
                     result = false;
@@ -111,8 +111,8 @@ const lest::test module[] =
             }
             EXPECT(result);
         },
-        CASE("successors with ACTG encoding"){
-            cout << "\t--> successors with ACTG encoding" << endl;
+        CASE("neighbours with ACTG encoding"){
+            cout << "\t--> neighbours with ACTG encoding" << endl;
             //it contains                   AC    AG CA CC       TA
             sd_vector<> sdv = bit_vector{0 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 };
             KmerManipulatorACTG km(2);
@@ -126,7 +126,7 @@ const lest::test module[] =
             bool result = true;
             //4 1-mers possible, so we check all of them
             for(int i(0); i < 4; i++){
-                uint8_t succ = cb.successors(i);
+                uint8_t succ = cb.neighbours(i);
                 //check if they are the same
                 if(TrueNext[i] != succ){
                     result = false;
@@ -214,8 +214,8 @@ const lest::test module[] =
             }
             file.close();
         },
-        CASE("successors with the successors counter : "){ 
-            cout << "\t--> successors : 100 4-mers (no differences for encoding)" << endl;
+        CASE("neighbours with the neighbours counter : "){ 
+            cout << "\t--> neighbours : 100 4-mers (no differences for encoding)" << endl;
             /* 
             - python3 python_script/involveGenerate_counts.py -k 4 -n 100 -f ACGT > unsortACGT.txt
             - sort unsortACGT.txt > sortACGT.txt
@@ -228,7 +228,7 @@ const lest::test module[] =
             //64<->4^3 3-mer possible so they are all tested
 
             for(int i = 0 ; i < 64 ; i++){
-                bitset<8> bitForm((unsigned)cb.successors(i));  //uint8_t of successors, bit version
+                bitset<8> bitForm((unsigned)cb.neighbours(i));  //uint8_t of neighbours, bit version
                 string uncompressedNex(k3.decode(i).erase(0,1));
                 string uncompressedPre(k3.decode(i).erase(k3.decode(i).size()-1,1));
                 vector<uint64_t> potSucc;
@@ -272,7 +272,7 @@ MODULE( specification(), module )
 //         return failures;
 //     }
 //     cout << "*** Third tests passed ! ***\n" << endl;
-//     cout << "*** Fourth tests : successors and contains ***" << endl;
+//     cout << "*** Fourth tests : neighbours and contains ***" << endl;
 //     if (failures = run(atTheEnd)){
 //         return failures;
 //     }

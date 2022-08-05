@@ -24,9 +24,11 @@ def main():
     ))
     fig.update_layout(
     yaxis_title='time',
-    boxmode='group' # group together boxes of each percent
+    xaxis_title='pourcentage de sequence connus',
+    boxmode='group', # group together boxes of each percent
+    title="temps en seconde pour un kmer"
     )
-    fig.show()
+    fig.write_image(sys.argv[1]+".png", width=1000, height=500, scale=2)
     
 def testnumber(path):
     files = os.listdir(path)

@@ -14,7 +14,7 @@ protected:
     KmerManipulator* m_kmerManipulator;    //carry information about the k-mers
     uint64_t m_limit;
 
-    //cache used in contains and successors functions in order to go faster
+    //cache used in contains and neighbours functions in order to go faster
     int m_correspondingBitValueForNextPmers[4];
     int m_correspondingBitValueForPrevPmers[4];
     int m_numberOfBitsToShift;
@@ -27,14 +27,14 @@ public:
     ConwayBromage(KmerManipulator* km);
     //principal functions
     virtual bool contains (uint64_t Kmer) const=0;
-    virtual uint8_t successors(uint64_t Kmer) const=0;
+    virtual uint8_t neighbours(uint64_t Kmer) const=0;
 
     //getters
     virtual int getKmerSize();
     virtual KmerManipulator* getKmerManipulator();
 };
 
-/// ConwayBromage : permits to store k-mers and apply two operations on them : 'contains' and 'successors'
+/// ConwayBromage : permits to store k-mers and apply two operations on them : 'contains' and 'neighbours'
 class ConwayBromageSD : public ConwayBromage{
 private:
     sdsl::sd_vector<> m_sequence;          //the sparse bit vector which stores the k-mers        
@@ -46,7 +46,7 @@ public:
 
     //principal functions
     bool contains (uint64_t Kmer) const;
-    uint8_t successors(uint64_t Kmer) const;
+    uint8_t neighbours(uint64_t Kmer) const;
 
     //getters
     sdsl::sd_vector<> getSequence();

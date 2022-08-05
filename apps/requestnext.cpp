@@ -27,7 +27,7 @@ unordered_set<uint64_t> requestnext(int range, ConwayBromage& cb, uint64_t kmer)
 
 
     if(range){  //the init part
-        uint8_t tmp=cb.successors(kmer);
+        uint8_t tmp=cb.neighbours(kmer);
         bitset<8> bloup=tmp;
         for(int i=0;i<8;i++){
             if(i<4){
@@ -49,7 +49,7 @@ unordered_set<uint64_t> requestnext(int range, ConwayBromage& cb, uint64_t kmer)
         if(i%2==0){
             while(!kmerstack2.empty()){
                 kmertmp=kmerstack2.top();
-                uint8_t succ=cb.successors(kmertmp);
+                uint8_t succ=cb.neighbours(kmertmp);
                 viewed.insert(kmertmp);
                 for(int i=0;i<8;i++){
                     if(i<4){
@@ -75,7 +75,7 @@ unordered_set<uint64_t> requestnext(int range, ConwayBromage& cb, uint64_t kmer)
         }else{
             while(!kmerstack1.empty()){
                 kmertmp=kmerstack1.top();
-                uint8_t succ=cb.successors(kmertmp);
+                uint8_t succ=cb.neighbours(kmertmp);
                 bitset<8> bloup=succ;
                 viewed.insert(kmertmp);
                 for(int i=0;i<8;i++){

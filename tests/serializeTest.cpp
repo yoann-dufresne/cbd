@@ -23,8 +23,8 @@ const lest::test module[] =
         std::ifstream f2("/home/oceane/dev/test3", ios::in);
         ConwayBromageBM cb2=ConwayBromageBM::deserialize(f2, &k);
         for(int i =1  ; i < 50000000 ; i++){
-                bitset<8> bitForm((unsigned)cb.successors(i));  //uint8_t of successors, bit version
-                bitset<8> bitForm2((unsigned)cb2.successors(i));
+                bitset<8> bitForm((unsigned)cb.neighbours(i));  //uint8_t of neighbours, bit version
+                bitset<8> bitForm2((unsigned)cb2.neighbours(i));
                 if(bitForm!=0){
                     std::cout<<bitForm<<"=?"<<bitForm2<<std::endl;
                 }
