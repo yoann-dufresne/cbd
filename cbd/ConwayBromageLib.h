@@ -1,9 +1,6 @@
 #include <sdsl/sd_vector.hpp>
 #include <immintrin.h>  //for AVX/AVX2 use
 #include "Kmanip.h"
-#include "bm64.h"
-#include "bmserial.h"
-#include "bmundef.h" /* clear the pre-proc defines from BM */
 #include <filesystem>
 #ifndef CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
 #define CONWAYBROMAGELIB_CONWAYBROMAGELIB_H
