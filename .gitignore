@@ -32,3 +32,7 @@ sequences*
 shuffled
 
 *.png
+serial/*
+apps/test
+apps/timerequest
+bin/*
