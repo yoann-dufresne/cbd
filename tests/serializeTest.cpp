@@ -7,7 +7,7 @@
 #include <istream>
 #include <ostream>
 
-#include "ConwayBromageLib.h"
+#include "ConwayBromageDatastructure.h"
 #include "lest.hpp"
 
 const lest::test module[] =

@@ -6,7 +6,7 @@
 #include <random>
 #include <chrono>
 #include "Functions.hpp"
-#include "ConwayBromage.hpp"
+#include "ConwayBromageDatastructure.h"
 #include <lest/lest_basic.hpp>
 #include <vector>
 #include <bitset>

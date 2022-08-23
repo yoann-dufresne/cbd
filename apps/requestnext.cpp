@@ -1,4 +1,4 @@
-#include <ConwayBromageLib.h>
+#include <ConwayBromageDatastructure.h>
 #include <sdsl/sd_vector.hpp>
 #include <sdsl/vectors.hpp>
 #include <bitset>

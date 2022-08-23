@@ -1,10 +1,10 @@
 #include <cstdlib>
 #include <string>
 #include <bitset>
-//#include "ConwayBromageLib.h"
+#include "ConwayBromageDatastructure.h"
 #include "lest.hpp"
-//#include <sdsl/sd_vector.hpp>
-//#include <sdsl/vectors.hpp>
+#include <sdsl/sd_vector.hpp>
+#include <sdsl/vectors.hpp>
 
 using namespace std;
 //using namespace sdsl;

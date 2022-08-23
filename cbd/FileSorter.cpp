@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include <chrono>
-#include "ConwayBromageLib.h"
+#include "ConwayBromageDatastructure.h"
 
 using namespace std;
 

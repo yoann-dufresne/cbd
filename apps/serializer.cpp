@@ -5,7 +5,7 @@
 #include <fstream>
 #include <random>
 #include <chrono>
-#include <ConwayBromageLib.h>
+#include <ConwayBromageDatastructure.h>
 #include <vector>
 #include <bitset>
 #include <sdsl/sd_vector.hpp>

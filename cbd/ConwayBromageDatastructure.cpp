@@ -4,7 +4,7 @@
 #include <bitset>
 #include <sdsl/sd_vector.hpp>
 #include <sdsl/vectors.hpp>
-#include "ConwayBromageLib.h"
+#include "ConwayBromageDatastructure.h"
 #include <immintrin.h>  //need -mavx2
 
 using namespace std;
