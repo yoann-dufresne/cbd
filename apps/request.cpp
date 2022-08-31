@@ -165,12 +165,12 @@ int main(int argc, char* argv[]){
     srand(time(NULL));
     if((argc!=8)&&(argc!=7)&&(argc!=6)){
         std::cout<<argc<<std::endl;
-        std::cout<<"./main file k nb random type percent sfile\n";
-        std::cout<<"file the file wherer the kmer sorted are\n";
+        std::cout<<"./main graph k nb random type percent sfile\n";
+        std::cout<<"graph the serialized file where the Cbd is";
         std::cout<<"k the length of the kmer\n";
         std::cout<<"nb the number of the request to test\n";
         std::cout<<"random or  kmer sequence to test\n";
-        std::cout<<"type, contain or successor\n";
+        std::cout<<"type, contain or neighbours\n";
         std::cout<<"percent the percentage of kmer/sequence that exist to be tested\n";
         std::cout<<"sfile the shuffled file with kmer or a file containing sequence we know exist(not formally necessary but its the point of it)";
         std::cout<<std::endl;

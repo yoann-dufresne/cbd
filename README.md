@@ -16,6 +16,8 @@ The query operation **neighbours** to get the successors of a (k-1)-mer.<br>
 A successor of a k-mer ```x``` is any k-mer of the form ```a+x[1:k-1]``` or ```x[2:k]+a``` with ```a``` nucleotide.<br>
 **Important** : elements of the query operations have always a size of (k-1) if we stored k-mers.
 
+
+
 ## Requirements
 CBD requires :<br>
 ``g++`` version ? or higher.<br>
@@ -32,6 +34,12 @@ you can now compile it with :
 ```
 cmake . & make -j
 ```
+after compilation you have 2 executable you can use(the other 2 are not documented and have testing purpose but feel free to check the source code in the apps rep if you want to use them)
+
+first it is serializer that build the CBD and serialize to a file
+
+the second is timerequest that take a serialized CBD object and some parameter to test the speed of the execution
+
 otherwise if you want to use the library in you project you can add cbd as a submodule with :
 ```
 git submodule add https://github.com/yoann-dufresne/cbd

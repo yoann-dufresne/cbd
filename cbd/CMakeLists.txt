@@ -11,11 +11,11 @@ cmake_minimum_required(VERSION 3.19)    #The minimal version of cmake we need
 #Variables which represents compilation elements
 #One for .cpp elements
 set(SRCS
-        ConwayBromageLib.cpp
+        ConwayBromageDatastructure.cpp
         Kmanip.cpp)
 #One for .h
 set(HEADERS
-        ConwayBromageLib.h
+        ConwayBromageDatastructure.h
         Kmanip.h
 )
 
