@@ -264,7 +264,10 @@ char KmerManipulatorACGT::decodeNucleotide(const uint8_t nucleotide){
 int KmerManipulatorACGT::getSize(){
     return m_size;
 }
-
+/**
+ * @brief take a sequence and return the list of all kmer(uint64) in it
+ * 
+ */
 list<uint64_t> KmerManipulatorACGT::encodesequence(const std::string &word){
     list<uint64_t> tmp;
     for(int i=m_size;i<word.length();i++){

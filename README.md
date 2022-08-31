@@ -116,17 +116,18 @@ AAGC	1
 **Note** : The presence of the counts doesn't affect building, they are automatically ignored by CBD.
 
 ### ConwayBromageSD ConwayBromageSD::deserialize(std::string filename, kmerFlux,KmerManipulator* km)
-another way of constructing the objet is to deserialize it from a file
+Another way of constructing the objet is to deserialize it from a file.
 ```
 KmerManipulatorACGT km = KmerManipulatorACGT(31);
 ConwayBromageSD cb=ConwayBromageSD::deserialize(filename,&km);
 ```
 
-### ConwayBromageSD ConwayBromageSD::serialize(std::string filename)
+### ConwayBromageSD ConwayBromageSD::serialize(std::string filename) 
+Serialize the Object to a file for later use. 
+
 ```
 ConwayBromageSD cb,
 cb.serialize(filename)
-
 ```
 
 ### bool ConwayBromage::contains(uint64_t Kmer)
