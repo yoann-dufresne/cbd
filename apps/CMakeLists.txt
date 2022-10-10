@@ -1,51 +1,32 @@
+add_executable(buildIndex
+    buildIndex.cpp
+)
+add_executable(loadIndex
+    loadIndex.cpp
+)
+add_executable(queryIndex
+    queryIndex.cpp
+)
 
-add_executable(main
-	main.cpp
-)
-add_executable(timerequest
-    request.cpp
-)
-add_executable(nextrequest
-    requestnext.cpp
-)
-add_executable(serializer
-    serializer.cpp
-)
-add_executable(deserializertest
-    deserializertest.cpp
-)
-target_link_libraries(main
+target_link_libraries(buildIndex
 	cbd
 )
-target_link_libraries(timerequest
+target_link_libraries(loadIndex
 	cbd
 )
-target_link_libraries(nextrequest
+target_link_libraries(queryIndex
 	cbd
 )
-target_link_libraries(serializer
-	cbd
-)
-target_link_libraries(deserializertest
-	cbd
-)
-set_target_properties( timerequest
+
+set_target_properties(buildIndex
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
-set_target_properties( nextrequest
+set_target_properties(loadIndex
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
-set_target_properties( serializer
+set_target_properties(queryIndex
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
-set_target_properties(deserializertest
-    PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
-target_include_directories(main
-    PUBLIC
-    "${PROJECT_SOURCE_DIR}/external/bm/src"
 )
