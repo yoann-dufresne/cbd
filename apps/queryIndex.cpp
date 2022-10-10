@@ -72,18 +72,19 @@ int main(int argc, char* argv[]) {
   }
 
   // Deserialize index
-  KmerManipulatorACGT km = KmerManipulatorACGT(31);
-  auto index = ConwayBromageSD::deserialize(args.index_filename, &km);
+  KmerManipulatorACGT km_index = KmerManipulatorACGT(31);
+  auto index = ConwayBromageSD::deserialize(args.index_filename, &km_index);
 
   // Query index
   string line;
   std::ifstream kmers(args.kmers_filename);
+  KmerManipulatorACGT km_query = KmerManipulatorACGT(30);
   if (args.successor) {
 
     int neighbors = 0;
     int total = 0;
     while (getline(kmers, line)) {
-      auto query = km.encode(line);
+      auto query = km_query.encode(line);
       auto n = index.neighbours(query);
       if (n != 0) {
         neighbors++;
@@ -100,13 +101,13 @@ int main(int argc, char* argv[]) {
     int total = 0;
 
     while (getline(kmers, line)) {
-      auto query = km.getCanonical(km.encode(line));
+      auto query = km_query.encode(line);
       present += index.contains(query);
       total++;
     }
 
     float_t percent = float(present) / float(total);
-    std::cout << present << " / " << total << " (" << percent
+    std::cout << present << " / " << total << " (" << 100.0 * percent
               << "%) queried kmers present." << std::endl;
   }
 
